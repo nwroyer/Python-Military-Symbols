@@ -15,4 +15,4 @@ if __name__ == '__main__':
     symbol.create_from_sidc(TEST_SIDC)
 
     with open(os.path.join(working_dir, f'{symbol.get_name()} ({symbol.get_sidc()}).svg'), 'w') as output:
-        output.write(symbol.get_svg(expand_to_fit=False))
+        output.write(symbol.get_svg(expand_to_fit=True, pixel_padding=4))

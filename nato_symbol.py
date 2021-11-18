@@ -318,6 +318,8 @@ class NATOSymbol:
 
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
+        old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
+
         if expand_to_fit:
             # Expand the bounding box to fit if that option is selected
             svg_tmp_name = os.path.join(os.getcwd(), 'svg.tmp')
@@ -339,7 +341,6 @@ class NATOSymbol:
             print(bbox)
             os.remove(svg_tmp_name)
 
-            old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
             print(old_viewbox)
 
             scaling = [float(symbol_svg.attrib['width']) / old_viewbox[2],
@@ -353,6 +354,9 @@ class NATOSymbol:
 
             new_image_size = [scaling[0] * new_viewbox[2], scaling[1] * new_viewbox[3]]
         else:
+            new_image_size = [float(symbol_svg.attrib['width']) + pixel_padding*2,
+                              float(symbol_svg.attrib['height']) + pixel_padding*2]
+            new_viewbox = old_viewbox
             pass #new_image_size =
 
         print(new_image_size)
