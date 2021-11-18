@@ -97,7 +97,7 @@
 			},
 			"6": {
 				"name": "hostile",
-				"alt name": "faker",
+				"alt names": ["enemy" ,"faker"],
 				"colors": {
 					"light": "#ff8080",
 					"medium": "#ff3031",

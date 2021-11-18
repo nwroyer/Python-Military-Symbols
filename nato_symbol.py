@@ -338,10 +338,7 @@ class NATOSymbol:
                     if bb[i] > bbox[i]:
                         bbox[i] = bb[i]
 
-            print(bbox)
             os.remove(svg_tmp_name)
-
-            print(old_viewbox)
 
             scaling = [float(symbol_svg.attrib['width']) / old_viewbox[2],
                        float(symbol_svg.attrib['height']) / old_viewbox[2]]
@@ -358,9 +355,7 @@ class NATOSymbol:
                               float(symbol_svg.attrib['height']) + pixel_padding*2]
             new_viewbox = old_viewbox
 
-        print(new_image_size)
-
-        if (expand_to_fit or pixel_padding > 0):
+        if expand_to_fit or pixel_padding > 0:
             symbol_svg.attrib["width"] = str(int(new_image_size[0]))
             symbol_svg.attrib["height"] = str(int(new_image_size[1]))
             symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)
