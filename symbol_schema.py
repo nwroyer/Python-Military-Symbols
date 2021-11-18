@@ -14,9 +14,14 @@ class SymbolSchema:
                 self.name = 'reality'
                 self.id_code = 0
 
+        def get_names(self):
+            ret = self.alt_names.copy()
+            ret.append(self.name)
+            return ret
+
         def __init__(self):  # Init for StandardIdentity class
             self.name = 'undefined'
-            self.alt_name = ''
+            self.alt_names = []
             self.id_code = 0
             self.frame_set = 0
 
@@ -34,13 +39,16 @@ class SymbolSchema:
             }
 
         def __str__(self):
-            ret = '#%s (%s)%s [%s]' % (self.id_code, self.name,
+            ret = '#%s (%s)%s [%s]' % (self.id_code,
+                                       self.name + ('/' + '/'.join(self.alt_names) if len(self.alt_names) > 0 else ''),
                                        '+c' if self.standard_colorset != self.civilian_colorset else '',
                                        self.frame_set)
 
             ret += ' - colors %s' % self.standard_colorset
             ret += ' - civ colors %s' % self.civilian_colorset
             return ret
+        def __repr__(self):
+            return str(self)
 
     class Status:
         def __init__(self):
@@ -526,7 +534,12 @@ class SymbolSchema:
             new_si = SymbolSchema.StandardIdentity()
             new_si.id_code = str(sd_key)
             new_si.name = sd_value['name']
-            new_si.alt_name = sd_value['alt name'] if 'alt name' in sd_value.keys() else ''
+            new_si.alt_names = []
+            if 'alt name' in sd_value.keys():
+                new_si.alt_names.append(sd_value['alt name'])
+            if 'alt names' in sd_value.keys():
+                for alt_name in sd_value['alt names']:
+                    new_si.alt_names.append(alt_name)
 
             new_si.uses_dashed_frame = sd_value['uses dashed frame'] if 'uses dashed frame' in sd_value.keys() \
                 else False
