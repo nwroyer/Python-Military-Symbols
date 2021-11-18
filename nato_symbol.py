@@ -357,18 +357,15 @@ class NATOSymbol:
             new_image_size = [float(symbol_svg.attrib['width']) + pixel_padding*2,
                               float(symbol_svg.attrib['height']) + pixel_padding*2]
             new_viewbox = old_viewbox
-            pass #new_image_size =
 
         print(new_image_size)
 
-        symbol_svg.attrib["width"] = str(int(new_image_size[0]))
-        symbol_svg.attrib["height"] = str(int(new_image_size[1]))
-
-        symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)
+        if (expand_to_fit or pixel_padding > 0):
+            symbol_svg.attrib["width"] = str(int(new_image_size[0]))
+            symbol_svg.attrib["height"] = str(int(new_image_size[1]))
+            symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)
         # TODO account for stroke width
-        print("Replacing")
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
-        print("Replacing")
 
         return svg_string
 
