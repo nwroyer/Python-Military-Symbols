@@ -208,8 +208,8 @@
 				"4": ["platoon", "detachment"],
 				"5": ["company", "battery", "troop"],
 				"6": ["battalion", "squadron"],
-				"7": ["regiment", "group", "MEU"],
-				"8": ["brigade", "MEB"]
+				"7": ["regiment", "group", "MEU", "RCT"],
+				"8": ["brigade", "MEB", "BCT"]
 			}
 		},
 		"2": {
@@ -302,7 +302,7 @@
 								"11": "* reconnaissance",
 								"12": "* trainer",
 								"13": {"name": "* utility", "modcats-additional": ["cargo/transport capacity"]},
-								"14": "short / vertical take off and landing *",
+								"14": ["short / vertical take off and landing *", "SVTOL", "VTOL"],
 								"15": "* airborne command post",
 								"16": "* airborne early warning",
 								"17": "anti-surface warfare *",
@@ -621,21 +621,21 @@
 							}
 						},
 						"05": {
-							"names": ["armor", "tanks","armored", "mechanized", "self-propelled", "tracked"],
+							"names": ["armor", "tanks","armored", "mechanized", "tracked"],
 							"entity subtypes": {
-								"01": {"name": "reconnaissance / cavalry / scout *", "type": "ff", "overlay": ["120500", "121300"]},
-								"02": {"name": "amphibious *", "type": "ff", "overlay": ["120500", "120300"]}
+								"01": {"names": ["armored reconnaissance", "armored cavalry", "armored scout"], "type": "ff", "overlay": ["120500", "121300"]},
+								"02": {"names": ["amphibious *", "ACV", "AAV"], "type": "ff", "overlay": ["120500", "120300"]}
 							}
 						},
 						"06": {
-							"names": ["army aviation", "aviation rotary wing", "rotary wing"],
+							"names": ["army aviation", "aviation rotary wing", "rotary wing", "rotary-wing"],
 							"entity subtypes": {
 								"01": {"name": "* reconnaissance", "type": "ff", "overlay": ["120600", "121300"]}
 							}
 						},
 						"07": "aviation composite",
 						"08": {
-							"name": "aviation fixed wing",
+							"names": ["aviation fixed wing", "fixed-wing", "fixed wing"],
 							"entity subtypes": {
 								"01": {"name": "* reconnaissance", "type": "ff", "overlay": ["120800", "121300"]}
 							}
@@ -645,12 +645,13 @@
 						"11": {
 							"name": "infantry",
 							"type": "ff",
+							"match weight": 2,
 							"entity subtypes": {
 								"01": {"name": "amphibious *", "type": "ff", "overlay": ["121100", "120300"]},
-								"02": {"names": ["armored *", "mechanized *", "tracked *"], "type": "ff", "overlay": ["121100", "120500"]},
+								"02": {"names": ["armored *", "mechanized *", "mechanized", "tracked *"], "type": "ff", "overlay": ["121100", "120500"], "match weight":  2},
 								"03": {"name": "main gun system *", "type": "ff", "overlay": ["121100", "121106"]},
 								"04": {"name": "motorized *", "type": "ff", "overlay": ["121100", "0XMotorized"]},
-								"05": {"name": "infantry fighting vehicle", "type": "ff", "overlay": ["121103", "120500"]},
+								"05": {"names": ["infantry fighting vehicle", "IFV"], "type": "ff", "overlay": ["121103", "120500"]},
 								"06": {
 									"name": "main gun system",
 									"alt names": ["heavy weapon"],
@@ -710,7 +711,7 @@
 								"02": {"name": "* target acquisition", "type": "ff", "overlay": ["130301", "121300"]}
 							}
 						},
-						"04": "field artillery observer",
+						"04": ["field artillery observer", "FO", "forward observer"],
 						"05": "joint fire support",
 						"06": "meteorological",
 						"07": "missile",
@@ -1088,10 +1089,10 @@
 							"name": "service/branch",
 							"type": "nn",
 							"entity subtypes": {
-								"01": {"name":  "infantry", "type":  "ff"},
-								"02": {"name":  "medical", "type":  "ff"},
+								"01": {"names":  ["infantry", "rifleman"], "type":  "ff"},
+								"02": {"names":  ["medical", "corpsman", "doc", "medic"], "type":  "ff"},
 								"03": {"name":  "reconnaissance", "type":  "ff"},
-								"04": {"name":  "signal", "type": "ff"}
+								"04": {"names":  ["signal", "RO", "RTO", "radioman", "radio operator"], "type": "ff"}
 							}
 						},
 						"02": {
@@ -1818,7 +1819,7 @@
 			"modifier set 1": {
 				"01": {"name": "biological", "cat": "sensor type"},
 				"02": {"name": "chemical", "cat": "sensor type"},
-				"03": {"name": "early warning radar", "cat": "sensor type"},
+				"03": {"names": ["early warning radar", "early warning"], "cat": "sensor type"},
 				"04": {"name": "intrusion", "cat": "sensor type"},
 				"05": {"name": "nuclear", "cat": "sensor type"},
 				"06": {"name": "radiological", "cat": "sensor type"},
@@ -1930,7 +1931,7 @@
 									"name": "commercial food distribution center", 
 									"type": "ff", "overlay": ["10-163400", "0XFoodCenter", "0XTopCOM"]
 								},
-								"04": {"name": "farm/ranch", "type": "fo"},
+								"04": {"names": ["farm", "ranch"], "type": "fo"},
 								"05": {"name": "food distribution", "type": "ff", "overlay": ["10-163400", "0XFoodCenter"]},
 								"06": {
 									"name": "food production center",
@@ -1940,7 +1941,7 @@
 									"name": "food retail",
 									"type": "ff", "overlay": ["10-163400", "0XFoodCenter", "0XTopRTL"]
 								},
-								"08": {"name": "grain storage", "type": "fo"}
+								"08": {"names": ["grain storage", "silo"], "type": "fo"}
 							}
 						},
 						"02": {
@@ -2452,7 +2453,7 @@
 						"02": {
 							"name": "service craft/yard",
 							"entity subtypes": {
-								"01": "barge, not self-propelled",
+								"01": ["barge, not self-propelled", "barge"],
 								"02": "barge, self-propelled",
 								"03": "tug, harbor",
 								"04": "launch"

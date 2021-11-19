@@ -3,12 +3,11 @@ try:
 except:
     from svg_tools import *
 
-import os, io
+import os
 import sys
 import xml.etree.ElementTree as ET
-import svgelements
+
 import svgpathtools
-import xml
 
 
 class NATOSymbol:
@@ -31,7 +30,11 @@ class NATOSymbol:
 
         self.extra_ten_digits = ''  # Ignored for the purposes of this application
 
-    def get_sidc(self):
+    def get_sidc(self) -> str:
+        """
+        Returns the SIDC of the symbol.
+        :return: A string containing the SICC of the symbol
+        """
         return ''.join([
             self.version_code,
             self.context.id_code if self.context is not None else '0',
@@ -46,6 +49,11 @@ class NATOSymbol:
         ])
 
     def get_name(self):
+        """
+        Returns the name of the symbol in the format "[symbol set] - [standard identity]
+        [mod1] [mod2] [entity] [amplifier] ([HQTFD])"
+        :return:
+        """
         ret = ''
         ret += self.symbol_set.name + ' - ' if self.symbol_set is not None else ''
         ret += self.standard_identity.name + ' ' if self.standard_identity is not None else ''
@@ -60,7 +68,13 @@ class NATOSymbol:
 
         return ret
 
-    def create_from_sidc(self, sidc_raw, verbose=False):
+    def create_from_sidc(self, sidc_raw, verbose=False) -> bool:
+        """
+        Initializes the SIC from the given symbol
+        :param sidc_raw: The string containing the SIDC to initialize from
+        :param verbose: Whether to print output information
+        :return: Whether initialization was successful
+        """
         # Strip all non-digit characters
         sidc = ''.join(c for c in sidc_raw if c.isnumeric())
         if len(sidc) < 20:
@@ -175,11 +189,11 @@ class NATOSymbol:
                 return True
         return False
 
-    def get_svg(self, fill_type='light', expand_to_fit=False, pixel_padding = 8, use_variants=False):
+    def get_svg(self, fill_type='light', expand_to_fit=False, pixel_padding=8, use_variants=False):
         """
         Gets an SVG as a string representing this object
         :param: fill_type: Can be "light" (default), "medium", "dark", or 'unfilled'
-        :return:
+        :return: A string containing the SVG of the object
         """
         # Sanity check fill type
         if fill_type not in ['light', 'medium', 'dark', 'unfilled']:
@@ -247,7 +261,6 @@ class NATOSymbol:
                 if fill_type == 'unfilled':
                     make_unfilled(overlay, fill_color)
 
-                import xml
                 # print(f'Overlay: {xml.etree.ElementTree.tostring(overlay)}')
                 layer_svg(symbol_svg, overlay)
 
@@ -358,12 +371,12 @@ class NATOSymbol:
             os.remove(svg_tmp_name)
 
             scaling = [float(symbol_svg.attrib['width']) / old_viewbox[2],
-                       float(symbol_svg.attrib['height']) / old_viewbox[2]]
+                       float(symbol_svg.attrib['height']) / old_viewbox[3]]
 
-            new_viewbox = [bbox[0] - (pixel_padding / scaling[0])*0.5,
-                           bbox[2] - (pixel_padding / scaling[1])*0.5,
-                           bbox[1] - bbox[0] + (pixel_padding*2 / scaling[0]),
-                           bbox[3] - bbox[2] + (pixel_padding*2 / scaling[1])
+            new_viewbox = [bbox[0] - (pixel_padding / scaling[0]),
+                           bbox[2] - (pixel_padding / scaling[1]),
+                           (bbox[1] - bbox[0]) + (pixel_padding*2 / scaling[0]),
+                           (bbox[3] - bbox[2]) + (pixel_padding*2 / scaling[1])
                            ]
 
             new_image_size = [scaling[0] * new_viewbox[2], scaling[1] * new_viewbox[3]]
@@ -376,6 +389,7 @@ class NATOSymbol:
             symbol_svg.attrib["width"] = str(int(new_image_size[0]))
             symbol_svg.attrib["height"] = str(int(new_image_size[1]))
             symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)
+
         # TODO account for stroke width
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
