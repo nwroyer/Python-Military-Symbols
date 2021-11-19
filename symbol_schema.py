@@ -52,20 +52,21 @@ class SymbolSchema:
 
     class Status:
         def __init__(self):
-            self.name = ''
+            self.names = []
             self.id_code = 0
             self.applies_to_all = True
             self.applies_to_list = []
             self.makes_frame_dashed = False
+            self.variants = []
 
         def __str__(self):
-            return '#%i (%s) - applies to %s' % (self.id_code, self.name,
+            return '#%i (%s) - applies to %s' % (self.id_code, self.names[0],
                                                  'all' if self.applies_to_all else str(self.applies_to_list))
 
     class HQTFDCode:
         # Note that HQTFD codes apply only to land units
         def __init__(self):
-            self.name = ''
+            self.names = []
             self.id_code = 0
             self.overlay_elements = []
             self.offsets = {}
@@ -86,7 +87,7 @@ class SymbolSchema:
             return symbol_set.id_code in self.applies_to_symbol_sets
 
         def __str__(self):
-            ret = '#%i (%s)' % (self.id_code, self.name)
+            ret = '#%i (%s)' % (self.id_code, self.names[0])
             if self.is_overlay():
                 ret += ' - composition of %s' % self.overlay_elements
             if len(self.offsets) > 0:
@@ -512,7 +513,12 @@ class SymbolSchema:
                     if isinstance(mod_json, str):
                         new_modifier.name = mod_json
                     else:
-                        new_modifier.name = mod_json['name']
+                        if 'name' in mod_json.keys():
+                            new_modifier.name = mod_json['name']
+                        elif 'names' in mod_json.keys():
+                            print(f"Mod with alt names: {mod_json['names']}")
+                            new_modifier.name = mod_json['names'][0]
+                            new_modifier.alt_names = mod_json['names'][1:]
                         new_modifier.mod_category = mod_json['cat'] if 'cat' in mod_json.keys() else ''
                         new_modifier.type = mod_json['type'] if 'type' in mod_json.keys() else 'mn'
 
@@ -611,9 +617,12 @@ class SymbolSchema:
 
         for status_json_code in [st for st in statuses_json if st != 'notes']:
             status_data = statuses_json[status_json_code]
-            new_status = SymbolSchema.Status()
+            new_status: SymbolSchema.Status = SymbolSchema.Status()
             new_status.id_code = str(status_json_code)
-            new_status.name = status_data['name']
+            if 'name' in status_data.keys():
+                new_status.names = [status_data['name']]
+            else:
+                new_status.names = status_data['names']
 
             if 'applies to' in status_data.keys():
                 new_status.applies_to_all = False
@@ -621,6 +630,9 @@ class SymbolSchema:
                     new_status.applies_to_list.append(applies_to_item)
             else:
                 new_status.applies_to_all = True
+
+            if 'variants' in status_data.keys():
+                new_status.variants = status_data['variants']
 
             new_status.makes_frame_dashed = status_data['makes frame dashed'] if 'makes frame dashed' in \
                 status_data.keys() else False
@@ -637,7 +649,10 @@ class SymbolSchema:
             hqtfd_value = hqtfd_codes_json[hqtfd_code_key]
             new_hqtfd_code = SymbolSchema.HQTFDCode()
             new_hqtfd_code.id_code = str(hqtfd_code_key)
-            new_hqtfd_code.name = hqtfd_value['name']
+            if 'names' in hqtfd_value.keys():
+                new_hqtfd_code.names = hqtfd_value['names']
+            else:
+                new_hqtfd_code.names = [hqtfd_value['name']]
             if 'offsets' in hqtfd_value.keys():
                 for offset_key in hqtfd_value['offsets']:
                     new_hqtfd_code.offsets[offset_key] = hqtfd_value['offsets'][offset_key]
@@ -706,6 +721,7 @@ class SymbolSchema:
             return None
         return self.symbol_sets[symbol_set].get_modifier(mod_index, mod_code)
 
+
     def get_svg_string(self, svg_name, verbose=False):
         if verbose:
             print(f'Loaded "{svg_name}"')
@@ -715,11 +731,12 @@ class SymbolSchema:
                 return raw_string_data
         except:
             return None
+
     def get_svg_by_filename(self, svg_name):
         raw_string_data = self.get_svg_string(svg_name)
         return read_string_into_etree(raw_string_data)
 
-    def get_svg_filename_by_code(self, code, standard_identity):
+    def get_svg_filename_by_code(self, code, standard_identity, use_variants=False):
         if code is None:
             return None
         code = ''.join([c for c in code if c.isalnum()])
@@ -824,11 +841,33 @@ class SymbolSchema:
             else:
                 path_name = os.path.join(path_name, self.symbol_folders['hqtfd'],
                                          hqtfd_code + '-' + standard_identity.frame_set + '.svg')
+        elif svg_type == 'S':
+            # Status
+            # Format S-0
+            status_code = code[1]
+            if status_code not in self.statuses.keys():
+                print(f"Unrecognized status code \"{status_code}\"")
+                return ''
 
+            status = self.statuses[status_code]
 
+            if not use_variants:
+                status_code = status_code + '-' + standard_identity.frame_set
+            elif len(status.variants) > 0:
+                if status.variants[0] == 'nn':
+                    return ''
+                elif status.variants[0] == 'mn':
+                    status_code = status_code + "-V1"
+
+            path_name = os.path.join(path_name, self.symbol_folders['statuses'],
+                                     status_code + '.svg')
+            return path_name
+        else:
+            print(f"Unrecognized status code \"{svg_type}\"")
+            return ''
 
         # print(path_name)
         return path_name
 
-    def get_svg_by_code(self, code, standard_identity):
-        return self.get_svg_by_filename(self.get_svg_filename_by_code(code, standard_identity))
+    def get_svg_by_code(self, code, standard_identity, use_variants=False):
+        return self.get_svg_by_filename(self.get_svg_filename_by_code(code, standard_identity, use_variants))

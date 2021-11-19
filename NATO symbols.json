@@ -8,6 +8,7 @@
 		"frames": "Frames",
 		"hqtfd": "HQTFD",
 		"symbol sets": "Symbol sets",
+		"statuses": "Statuses",
 
 		"within symbol set": {
 			"entities": "Entities",
@@ -114,31 +115,35 @@
 			"name": "present"
 		},
 		"1": {
-			"name": "planned / anticipated / suspected",
+			"names": ["planned", "anticipated", "suspected"],
 			"makes frame dashed": true
 		},
 		"2": {
-			"name": "present / fully capable",
-			"applies to": [1, 2, 5, 6, 15, 20, 30, 35]
+			"names": ["present / fully capable", "ready", "capable", "intact"],
+			"applies to": [1, 2, 5, 6, 10, 15, 20, 30, 35],
+			"variants": ["nn"]
 		},
 		"3": {
-			"name": "present / damaged",
-			"applies to": [1, 2, 5, 6, 15, 20, 30, 35]
+			"names": ["present / damaged", "damaged"],
+			"applies to": [1, 2, 5, 6, 10, 15, 20, 30, 35],
+			"variants": ["mn"]
 		},
 		"4": {
-			"name": "present / destroyed",
-			"applies to": [1, 2, 5, 6, 15, 20, 30, 35]
+			"names": ["present / destroyed", "destroyed"],
+			"applies to": [1, 2, 5, 6, 10, 15, 20, 30, 35],
+			"variants": ["mn"]
 		},
 		"5": {
-			"name": "present / full to capacity",
-			"applies to": [1, 2, 5, 6, 15, 20, 30, 35]
+			"names": ["present / full to capacity", "full"],
+			"applies to": [1, 2, 5, 6, 15, 20, 30, 35],
+			"variants": ["nn"]
 		}
 	},
 
 	"HQTFD codes": {
 		"notes": "Digit 8",
 		"1": {
-			"name": "feint / dummy",
+			"names": ["feint", "dummy"],
 			"offsets": {
 				"1": [0, -8.995827],
 				"3": [0, -3.175003],
@@ -151,16 +156,17 @@
 			]
 		},
 		"2": {
-			"name": "headquarters",
+			"names": ["headquarters", "HQ"],
 			"applies to": ["10"]
 		},
 		"3": {
-			"name": "feint/dummy headquarters",
+			"names": ["feint headquarters", "dummy headquarters",
+					  "feint HQ", "dummy HQ"],
 			"overlay": ["1", "2"],
 			"applies to": ["10"]
 		},
 		"4": {
-			"name": "task force",
+			"names": ["task force", "TF"],
 			"offsets": {
 				"1": [0, -7.0140406],
 				"3": [0, 0],
@@ -170,17 +176,20 @@
 			"applies to": ["10"]
 		},
 		"5": {
-			"name": "feint/dummy task force",
+			"names": ["feint task force", "dummy task force", "feint TF", "dummy TF"],
 			"overlay": ["1", "4"],
 			"applies to": ["10"]
 		},
 		"6": {
-			"name": "task force headquarters",
+			"names": ["task force headquarters", "task force HQ", "TF headquarters", "TF HQ"],
 			"overlay": ["2", "4"],
 			"applies to": ["10"]
 		},
 		"7": {
-			"name": "feint/dummy task force headquarters",
+			"names": ["feint task force headquarters", "dummy task force headquarters",
+					  "feint task force HQ", "dummy task force HQ",
+					  "feint TF headquarters", "dummy TF headquarters",
+					  "feint TF HQ", "dummy TF HQ"],
 			"overlay": ["1", "2", "4"],
 			"applies to": ["10"]
 		}
@@ -199,8 +208,8 @@
 				"4": ["platoon", "detachment"],
 				"5": ["company", "battery", "troop"],
 				"6": ["battalion", "squadron"],
-				"7": ["regiment", "group"],
-				"8": "brigade"
+				"7": ["regiment", "group", "MEU"],
+				"8": ["brigade", "MEB"]
 			}
 		},
 		"2": {
@@ -325,6 +334,7 @@
 				},
 				"12": {
 					"name": "civilian",
+					"match weight": -1,
 					"uses-civilian-coloring": true,
 					"civilian-coloring-inherit": true,
 					"modcats": ["mission area", "aircraft type", "range", "cargo/transport capacity", "crime"],
@@ -486,6 +496,7 @@
 					"name": "civilian",
 					"uses-civilian-coloring": true,
 					"civilian-coloring-inherit": true,
+					"match weight": -1,
 					"modcats": ["orbit"],
 					"entity types": {
 						"01": "orbiter shuttle",
@@ -602,7 +613,7 @@
 						"02": "air traffic services / airfield operations",
 						"03": {"name": "amphibious", "type": "ff"},
 						"04": {
-							"name": "anti-tank / anti-armor",
+							"names": ["anti-tank", "antitank", "anti-armor", "antiarmor"],
 							"type": "ff",
 							"entity subtypes": {
 								"01": {"name": "armored *", "type": "ff", "overlay": ["120400", "120500"]},
@@ -610,7 +621,7 @@
 							}
 						},
 						"05": {
-							"names": ["armor", "armored", "mechanized", "self-propelled", "tracked"],
+							"names": ["armor", "tanks","armored", "mechanized", "self-propelled", "tracked"],
 							"entity subtypes": {
 								"01": {"name": "reconnaissance / cavalry / scout *", "type": "ff", "overlay": ["120500", "121300"]},
 								"02": {"name": "amphibious *", "type": "ff", "overlay": ["120500", "120300"]}
@@ -704,10 +715,10 @@
 						"06": "meteorological",
 						"07": "missile",
 						"08": {
-							"name": "mortar",
+							"names": ["mortar", "mortars"],
 							"entity subtypes": {
-								"01": {"name": "armored / mechanized / tracked *", "type": "fo"},
-								"02": {"name": "self-propelled wheeled *", "type": "fo"},
+								"01": {"names": ["armored *", "mechanized *", "tracked *"], "type": "fo"},
+								"02": {"names": ["self-propelled wheeled *", "wheeled *", "motorized *"], "type": "fo"},
 								"03": {"name": "towed *", "type": "fo"}
 							}
 						},
@@ -911,7 +922,7 @@
 				"98": {"name": "theater/echelons above corps support", "type": "ff"}
 			},
 			"modifier set 1": {
-				"01": {"name": "air mobile / air assault", "cat": "mobility"},
+				"01": {"names": ["air mobile", "air assault"], "cat": "mobility"},
 				"02": {"name": "area", "cat": "capability"},
 				"03": {"name": "attack", "cat": "capability"},
 				"04": {"name": "biological", "cat": "capability"},
@@ -998,8 +1009,8 @@
 				"94": {"name": "theater", "cat": "capability"},
 				"95": {"name": "army or theater corps", "cat": "capability"},
 				"96": {"name": "corps", "cat": "capability"},
-				"97": {"name": "brigade", "cat": "capability"},
-				"98": {"name": "headquarters (element)", "cat": "capability", "type": "ff"}
+				"97": {"names": ["brigade", "MEF"], "cat": "capability"},
+				"98": {"name": "headquarters element", "cat": "capability", "type": "ff"}
 
 			},
 			"modifier set 2": {
@@ -1639,7 +1650,7 @@
 					"modcats-inherit": true,
 					"entity types": {
 						"01": {
-							"name": "automobile",
+							"name": "civilian automobile",
 							"type": "fo",
 							"entity subtypes": {
 								"01": {"name": "compact *", "type": "fo", "overlay": ["160100", "0XCivilianLight"]},
@@ -1648,10 +1659,10 @@
 							}
 						},
 						"02": {
-							"name": "open-bed truck",
+							"names": ["open-bed civilian truck", "civilian truck"],
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"name": "pickup truck", "type": "fo", "overlay": ["160200", "0XCivilianLight"]},
+								"01": {"names": ["pickup truck", "civilian pickup truck"], "type": "fo", "overlay": ["160200", "0XCivilianLight"]},
 								"02": {"name": "small *", "type": "fo", "overlay": ["160200", "0XCivilianMedium"]},
 								"03": {"name": "large *", "type": "fo", "overlay": ["160200", "0XCivilianHeavy"]}
 							}
@@ -1660,9 +1671,9 @@
 							"name": "multiple passenger vehicle",
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"name": "van", "type": "fo", "overlay": ["160300", "0XCivilianLight"]},
-								"02": {"name": "small bus", "type": "fo", "overlay": ["160300", "0XCivilianMedium"]},
-								"03": {"name": "large bus", "type": "fo", "overlay": ["160300", "0XCivilianHeavy"]}
+								"01": {"names": ["van", "civilian van"], "type": "fo", "overlay": ["160300", "0XCivilianLight"]},
+								"02": {"names": ["small bus", "small civilian bus", "civilian bus"], "type": "fo", "overlay": ["160300", "0XCivilianMedium"]},
+								"03": {"names": ["large bus", "large civilian bus"], "type": "fo", "overlay": ["160300", "0XCivilianHeavy"]}
 							}
 						},
 						"04": {
@@ -1670,17 +1681,17 @@
 							"type": "fo",
 							"entity subtypes": {
 								"01": {"name": "Sport Utility Vehicle (SUV)", "type": "fo", "overlay": ["160400", "0XCivilianLight"]},
-								"02": {"name": "small box truck", "type": "fo", "overlay": ["160400", "0XCivilianMedium"]},
-								"03": {"name": "large box truck", "type": "fo", "overlay": ["160400", "0XCivilianHeavy"]}
+								"02": {"names": ["small box truck", "small civilian box truck", "civilian box truck"], "type": "fo", "overlay": ["160400", "0XCivilianMedium"]},
+								"03": {"names": ["large box truck", "large civilian box truck"], "type": "fo", "overlay": ["160400", "0XCivilianHeavy"]}
 							}
 						},
 						"05": {
-							"name": "jeep-type vehicle",
+							"names": ["jeep-type vehicle", "jeep", "civilian jeep"],
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"name": "small/light *", "type": "fo", "overlay": ["160500", "0XCivilianLight"]},
-								"02": {"name": "medium *", "type": "fo", "overlay": ["160500", "0XCivilianMedium"]},
-								"03": {"name": "large/heavy *", "type": "fo", "overlay": ["160500", "0XCivilianHeavy"]}
+								"01": {"names": ["small/light *", "small civilian jeep", "light civilian jeep"], "type": "fo", "overlay": ["160500", "0XCivilianLight"]},
+								"02": {"names": ["medium *", "medium civilian jeep"], "type": "fo", "overlay": ["160500", "0XCivilianMedium"]},
+								"03": {"names": ["large/heavy *", "large civilian jeep", "heavy civilian jeep"], "type": "fo", "overlay": ["160500", "0XCivilianHeavy"]}
 							}
 						},
 						"06": {
@@ -1974,7 +1985,7 @@
 							"modcats": ["operation"],
 							"modcats-inherit": true,								
 							"entity subtypes": {
-								"01": "college / university",
+								"01": ["college", "university"],
 								"02": "school"
 							}
 						},
@@ -2002,8 +2013,8 @@
 							"modcats": ["operation"],
 							"modcats-inherit": true,							
 							"entity subtypes": {
-								"01": {"name": "medical", "type": "ff", "overlay": ["10-161300"]},
-								"02": {"name": "medical treatment facility / hospital", "type": "ff", "overlay": ["10-161300", "10-0XHospital"]}
+								"01": {"names": ["medical", "clinic"], "type": "ff", "overlay": ["10-161300"]},
+								"02": {"names": ["medical treatment facility / hospital", "hospital"], "type": "ff", "overlay": ["10-161300", "10-0XHospital"]}
 							}
 						},
 						"08": {

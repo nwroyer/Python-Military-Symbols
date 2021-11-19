@@ -8,7 +8,7 @@ def main():
 	current_working_directory = os.getcwd()
 
 	clean_only = False
-	subdir = 'Amplifiers'
+	subdir = 'HQTFD'
 
 	svg_directory = os.path.join(current_working_directory, 'svgs')
 	if subdir != '':
@@ -34,7 +34,6 @@ def main():
 	FNULL = open(os.devnull, 'w')
 
 	# # Export from Inkscape to standard svg
-
 
 	if not clean_only:
 		inkscape_processes = []

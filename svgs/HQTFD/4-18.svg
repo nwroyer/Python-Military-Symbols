@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="318.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="4-18.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    id="svg8"
    version="1.1"
    viewBox="0 0 67.733332 67.733332"
    height="256"
-   width="256">
+   width="256"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <style
-     id="style847"></style>
+     id="style847" />
   <title
      id="title856">MIL-STD-2525D Icon</title>
   <defs
@@ -53,16 +53,16 @@
      inkscape:pagecheckerboard="true"
      units="px"
      inkscape:window-maximized="0"
-     inkscape:window-y="27"
+     inkscape:window-y="32"
      inkscape:window-x="1722"
-     inkscape:window-height="1385"
+     inkscape:window-height="1380"
      inkscape:window-width="1718"
      showgrid="false"
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
-     inkscape:cy="118.34354"
-     inkscape:cx="252.11018"
+     inkscape:cy="86.875004"
+     inkscape:cx="163.87501"
      inkscape:zoom="3.9999998"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
@@ -139,8 +139,8 @@
      inkscape:label="Symbol">
     <path
        sodipodi:nodetypes="cccc"
-       d="m 30.691663,16.933335 0,-6.036125 h 6.350002 l 0,6.036125"
-       style="fill:none;stroke:#000000;stroke-width:1.05833;stroke-linejoin:round;stop-color:#000000"
+       d="M 24.341661,16.933335 V -1.17504 h 19.050006 v 18.108375"
+       style="fill:none;stroke:#000000;stroke-width:3.17499;stroke-linejoin:round;stop-color:#000000"
        id="rect860" />
   </g>
   <g

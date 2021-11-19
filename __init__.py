@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     symbol.create_from_sidc(new_sidc)
 
-    symbol = name_to_symbol("enemy airborne infantry company", symbol_schema)
+    symbol = name_to_symbol("friendly amphibious infantry MEU TF headquarters", symbol_schema)
     if symbol is not None:
         with open(os.path.join(working_dir, 'examples', f'{symbol.get_name()} ({symbol.get_sidc()}).svg'), 'w') as output:
             output.write(symbol.get_svg(expand_to_fit=False, pixel_padding=4))

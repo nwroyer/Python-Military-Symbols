@@ -6,10 +6,12 @@ import re
 
 def get_names_list(item) -> list:
     candidate_members = dir(item)
-    if 'get_names' in candidate_members:
-        return item.get_names()
-    elif 'name' in candidate_members:
-        return [item.name]
+
+    if 'name' in candidate_members:
+        ret = [item.name]
+        if 'alt_names' in candidate_members:
+            ret.extend(item.alt_names)
+        return ret
     elif 'names' in candidate_members:
         return item.names
     return []
@@ -28,152 +30,154 @@ def get_match_weights(name_string, candidates, match_type='partial_token_sort_ra
         matches.append((candidate, max_ratio))
     return matches
 
-def fuzzy_match(symbol_schema, name_string, candidate_list, match_threshold=50):
+
+def split_into_words(in_str:str) -> list:
+    in_str = re.sub('[/ \t\n]+', ' ', in_str).strip().lower()
+    in_str = ''.join([c for c in in_str if c.isalpha() or c == ' '])
+    return [word.strip() for word in in_str.strip().split(' ') if len(word) > 0]
+
+
+def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
     # Step 1: calculate the number of words in candidate_list_of_lists
     matches = [] # Set of (candidate, weight) pairs
+    name_string_words = split_into_words(name_string)
     for candidate in candidate_list:
         # Iterate over the possible names
         for candidate_name in get_names_list(candidate):
-            name_sanitized = re.sub('[/ \t\n]+', ' ', candidate_name).strip().lower()
-            name_sanitized = ''.join([c for c in name_sanitized if c.isalpha() or c == ' '])
-            candidate_name_words = [word for word in name_sanitized.split(' ') if len(word) > 0]
-            #print(candidate_name_words)
+            candidate_name_words = split_into_words(candidate_name)
 
-    return None
-    # matches = get_match_weights(name_string, candidate_list_of_lists)
-    #
-    # if len(matches) < 1:
-    #     # print("No matches")
-    #     return None
-    #
-    # max_match_score = max(matches, key=lambda match: match[1])[1]
-    # if max_match_score < match_threshold:
-    #     # print(f"ERROR: No match for \"{name_string}\": \"{[get_names_list(item) for item in candidates]}")
-    #     return None
-    #
-    # max_match_candidates = [match for match in matches if match[1] == max_match_score]
-    # if len(max_match_candidates) < 2:
-    #     # print(f'Match {max_match_candidates[0][0]}: {max_match_candidates[0][1]}')
-    #     return max_match_candidates[0][0]
-    # else:
-    #     # Try searching for a full match
-    #     # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
-    #     # else ""}\" [{can[1]}]' for can in max_match_candidates])
-    #     matches = get_match_weights(name_string, candidate_list_of_lists, 'ratio')
-    #     max_match_score = max(matches, key=lambda match: match[1])[1]
-    #     max_match_candidates = [match for match in matches if match[1] == max_match_score]
-    #
-    #     # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
-    #     # else ""}\" [{can[1]}]' for can in max_match_candidates])
-    #
-    # weighted_max_candidates = [[can[0], can[0].match_weight] for can in max_match_candidates]
-    #
-    # # Pick most extreme of symbol set and individual match weight
-    # if 'symbol_set' in dir(max_match_candidates[0][0]):
-    #     for weight_can in weighted_max_candidates:
-    #         sym_set = symbol_schema.symbol_sets[weight_can[0].symbol_set]
-    #         if abs(sym_set.match_weight) > abs(weight_can[0].match_weight):
-    #             weight_can[1] = sym_set.match_weight
-    #
-    # weighted_max_candidates = sorted(weighted_max_candidates, key=lambda item: item[1])
-    # # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
-    # # else ""}\" [{can[1]}]' for can in max_match_candidates])
-    #
-    # max_weight = max(can[1] for can in weighted_max_candidates)
-    # weighted_max_candidates = [can for can in weighted_max_candidates if can[1] == max_weight]
-    # # print(f'Max weight: {max_weight} / {weighted_max_candidates}')
-    #
-    # if len(weighted_max_candidates) <  2:
-    #     return weighted_max_candidates[0][0]
-    # else:
-    #     # Front and back have same weight; pick the shortest-named one
-    #     length_sorted_candidates = sorted(weighted_max_candidates, key=lambda item: len(get_names_list(item[0])[0]))
-    #     # print(f'Weighted by length: {length_sorted_candidates}')
-    #     return length_sorted_candidates[0][0]
+            # print(candidate_name_words)
+
+            matching = False
+
+            for start_i in range(len(name_string_words) - len(candidate_name_words) + 1):
+                matching_count = 0
+                for i in range(len(candidate_name_words)):
+                    if name_string_words[start_i + i] != candidate_name_words[i]:
+                        break
+                    else:
+                        matching_count += 1
+                        if matching_count == len(candidate_name_words):
+                            matching = True
+                            break
+                if matching:
+                    break
+
+            if matching:
+                matches.append([str(candidate_name), candidate])
+                continue
+            else:
+                pass
+
+    if len(matches) < 1:
+        return None, None
+    elif len(matches) == 1:
+        return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
+
+    # Sort matches by match weight
+    for match in matches:
+        match_weight = 0
+        if 'symbol_set' in dir(match[1]):
+            sym_set_weight = symbol_schema.symbol_sets[match[1].symbol_set].match_weight
+            match_weight = sym_set_weight if abs(sym_set_weight) > abs(match[1].match_weight) else match[1].match_weight
+        elif 'match_weight' in dir(match[1]):
+            match_weight = match[1].match_weight
+        match.append(match_weight)
+
+    matches = sorted(matches, key=lambda item: item[2])
+    max_match_weight = max(item[2] for item in matches)
+    matches = [match for match in matches if match[2] == max_match_weight]
+    if len(matches) == 1:
+        return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
+
+    # Sort matches by string length name
+    matches = sorted(matches, key=lambda item: len(item[0]))
+    match_index = -1 if match_longest else 0
+    return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
+
 
 def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
+    proc_name_string = name_string
     EMPTY_SIDC = ''
 
     # Sanitize string
     # Remove extra white spaces
-    name_string = name_string.lower()
-    name_string = re.sub('[ \t\n]+', ' ', name_string).strip()
-    print(f'Matching "{name_string}"')
+    proc_name_string = proc_name_string.lower()
+    proc_name_string = re.sub('[ \t\n]+', ' ', proc_name_string).strip()
+    print(f'Matching "{proc_name_string}"')
 
     # Step 1: Detect standard identity
-    standard_identity = fuzzy_match(symbol_schema, name_string, symbol_schema.standard_identities.values(), 50)
+    standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string,
+                                                 symbol_schema.standard_identities.values(), match_longest=True)
 
     if standard_identity is None:
-        print("Unable to determine standard identity; assuming friendly")
-        standard_identity = [si for si in symbol_schema.standard_identities.values() if si.name == 'friendly'][0]
+        print("Unable to determine standard identity; assuming unknown")
+        standard_identity = [si for si in symbol_schema.standard_identities.values() if si.name == 'unknown'][0]
     else:
-        # Detect where the standard identity is in the string - modifiers go before, amplifiers go after
-        si_splits = [0, len(name_string)-1]
-        for name in standard_identity.get_names():
-            matches = re.finditer(name, name_string)
-            for match in matches:
-                if match.start() > si_splits[0]:
-                    si_splits[0] = match.start()
-                if match.end() < si_splits[1]:
-                    si_splits[1] = match.end()
-        # Excise the standard identity from the string
-        name_string = (name_string[:si_splits[0]] + name_string[si_splits[1]+1:]).strip()
-        print(name_string)
+        proc_name_string = new_name_string
 
-    print(f'Assuming standard identity "{standard_identity.name}"')
-
-    # mod_entity_combos, mod_entity_indexes = get_modifier_entity_combinations(symbol_schema)
+    print(f'Assuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
 
     # Step 2: Detect entity type
-    entity_type = fuzzy_match(symbol_schema, name_string, symbol_schema.get_flat_entities(), 50)
+    entity_type, proc_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
+                                           match_longest=True)
 
     if entity_type is None:
-        print("Unable to determine entity type")
-        return None
+        print("Unable to determine entity type; defaulting to land unit")
+        ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
+        ret_symbol.entity = None
+        ret_symbol.symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
+        ret_symbol.standard_identity = standard_identity
+        return ret_symbol
 
+    print(f'Assuming entity "{entity_type.name}" -> "{proc_name_string}"')
     symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
-    print(f'Assuming entity "{entity_type.name}" from symbol set "{symbol_set.name}"')
-
-    # Detect where the entity is in the string - modifiers go before, amplifiers go after
-    entity_splits = [0, len(name_string)-1]
-    for name in entity_type.get_names():
-        matches = re.finditer(name, name_string)
-        for match in matches:
-            if match.start() > entity_splits[0]:
-                entity_splits[0] = match.start()
-            if match.end() < entity_splits[1]:
-                entity_splits[1] = match.end()
-
-    post_entity_string = name_string[entity_splits[1]+1:].strip()
-    pre_entity_string = name_string[:entity_splits[0]].strip()
 
     candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(symbol_set.id_code)]
-    amplifier = fuzzy_match(symbol_schema, post_entity_string, candidate_amplifiers, 50)
+    amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
     if amplifier is not None:
-        print(f'Assuming amplifier "{amplifier.names[0]}"')
-
-        # Excise amplifier name from post-entity string
-        amplifier_splits = [0, len(post_entity_string) - 1]
-        for name in get_names_list(amplifier):
-            matches = re.finditer(name, post_entity_string)
-            for match in matches:
-                if match.start() > entity_splits[0]:
-                    amplifier_splits[0] = match.start()
-                if match.end() < entity_splits[1]:
-                    amplifier_splits[1] = match.end()
-
-        post_entity_string = (post_entity_string[:amplifier_splits[0]] + post_entity_string[amplifier_splits[1]+1:]).strip()
+        proc_name_string = new_name_string
+        print(f'Assuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
     else:
         print("Assuming no amplifier")
 
-    name_string = pre_entity_string.strip() + ' ' + post_entity_string.strip()
+    # Find task force / headquarters / dummy
+    hqtfd, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
+                                         [code for code in symbol_schema.hqtfd_codes.values() if code.applies_to_symbol_set(symbol_set)],
+                                         match_longest=True)
+    if hqtfd is not None:
+        proc_name_string = new_name_string
+        print(f'Assuming HQTFD code "{hqtfd.names[0]}" -> "{proc_name_string}"')
+
+    # Find status code
+    # print([status.names for status in symbol_schema.statuses.values()])
+    status_code, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
+                                               [code for code in symbol_schema.statuses.values()],
+                                               match_longest=True)
+    if status_code is not None:
+        proc_name_string = new_name_string
+        print(f'Assuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
 
     # Find modifiers
+    mods = [None, None]
+    for mod_set in [1, 2]:
+        modifier_candidates = list(symbol_set.modifiers[mod_set].values())
+        # print([get_names_list(mod) for mod in modifier_candidates])
+        mod, new_name_string = fuzzy_match(symbol_schema, proc_name_string, modifier_candidates, match_longest=True)
+        if mod is not None:
+            proc_name_string = new_name_string
+
+            print(f'Assuming modifier "{mod.name}" -> "{proc_name_string}"')
+            mods[mod_set - 1] = mod
 
     ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
     ret_symbol.standard_identity = standard_identity
     ret_symbol.symbol_set = symbol_set
     ret_symbol.entity = entity_type
     ret_symbol.amplifier = amplifier
+    ret_symbol.modifiers[1] = mods[0]
+    ret_symbol.modifiers[2] = mods[1]
+    ret_symbol.hqtfd = hqtfd
+    ret_symbol.status = status_code
 
     return ret_symbol

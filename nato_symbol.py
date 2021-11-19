@@ -53,7 +53,7 @@ class NATOSymbol:
         ret += self.modifiers[2].name + ' ' if self.modifiers[2] is not None else ''
         ret += self.entity.name + ' ' if self.entity is not None else ''
         ret += self.amplifier.names[0] + ' ' if self.amplifier is not None else ''
-        ret += '(%s) ' % self.hqtfd.name if self.hqtfd is not None else ''
+        ret += '(%s) ' % self.hqtfd.names[0] if self.hqtfd is not None else ''
 
         ret = ret.title()
         ret = ret.replace('/', 'or')
@@ -175,7 +175,7 @@ class NATOSymbol:
                 return True
         return False
 
-    def get_svg(self, fill_type='light', expand_to_fit=False, pixel_padding = 8):
+    def get_svg(self, fill_type='light', expand_to_fit=False, pixel_padding = 8, use_variants=False):
         """
         Gets an SVG as a string representing this object
         :param: fill_type: Can be "light" (default), "medium", "dark", or 'unfilled'
@@ -190,8 +190,6 @@ class NATOSymbol:
 
         frame_svg_filename = self.symbol_schema.get_svg_filename_by_code('F-%s' % self.symbol_set.frame_set, self.standard_identity)
         symbol_svg = self.symbol_schema.get_svg_by_filename(frame_svg_filename)
-
-        # bounding_box = svgelements.b
 
         # Apply dashed outline to frame if appropriate
         uses_dashed_frame = self.standard_identity.uses_dashed_frame or \
@@ -244,9 +242,13 @@ class NATOSymbol:
             # print('Overlay: %s' % str(overlay_svgs))
             for overlay in overlay_svgs:
                 if overlay is None:
+                    print('ERROR: Null value overlay')
                     continue
                 if fill_type == 'unfilled':
                     make_unfilled(overlay, fill_color)
+
+                import xml
+                # print(f'Overlay: {xml.etree.ElementTree.tostring(overlay)}')
                 layer_svg(symbol_svg, overlay)
 
         # Adding entity done; add amplifiers
@@ -283,8 +285,6 @@ class NATOSymbol:
                     make_unfilled(overlay_svg, fill_color)
                 layer_svg(symbol_svg, overlay_svg)
 
-            # Done adding HQTFD codes
-
         # Add modifiers
         if self.entity is not None and self.entity.icon_type != 'fo' or self.entity is None:
             overlay_svgs = []
@@ -313,6 +313,23 @@ class NATOSymbol:
                 if fill_type == 'unfilled':
                     make_unfilled(mod_svg, fill_color)
                 layer_svg(symbol_svg, mod_svg)
+
+        # Done adding HQTFD codes; add status code
+        if self.status is not None and (not(use_variants) or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
+            print(self.status.names[0])
+            overlays = []
+
+            overlays.append(self.status.id_code)
+
+            for overlay_code in overlays:
+                overlay_svg = self.symbol_schema.get_svg_by_code(f'S-{overlay_code}', self.standard_identity,
+                                                                 use_variants=use_variants)
+                if overlay_svg is None:
+                    print(f"Error applying status overlay {overlay_code} -> {self.symbol_schema.get_svg_filename_by_code(f'S-{overlay_code}', self.standard_identity)}")
+                    continue
+                if fill_type == 'unfilled':
+                    make_unfilled(overlay_svg, fill_color)
+                layer_svg(symbol_svg, overlay_svg)
 
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
 
