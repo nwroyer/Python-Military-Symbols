@@ -52,7 +52,7 @@ class NATOSymbol:
         ret += self.modifiers[1].name + ' ' if self.modifiers[1] is not None else ''
         ret += self.modifiers[2].name + ' ' if self.modifiers[2] is not None else ''
         ret += self.entity.name + ' ' if self.entity is not None else ''
-        ret += self.amplifier.name + ' ' if self.amplifier is not None else ''
+        ret += self.amplifier.names[0] + ' ' if self.amplifier is not None else ''
         ret += '(%s) ' % self.hqtfd.name if self.hqtfd is not None else ''
 
         ret = ret.title()
@@ -328,7 +328,7 @@ class NATOSymbol:
 
             paths, attributes = svgpathtools.svg2paths(svg_tmp_name)
 
-            bbox = [10000, -10000, 10000, -10000]
+            bbox = [float('inf'), -float('inf'), float('inf'), -float('inf')]
             for path in paths:
                 bb = path.bbox()
                 for i in [0, 2]:

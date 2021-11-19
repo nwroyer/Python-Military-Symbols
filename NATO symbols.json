@@ -193,13 +193,13 @@
 			"name": "echelon at brigade and below",
 			"applies to": [10, 11],
 			"second digit": {
-				"1": "team / crew",
+				"1": ["team, crew"],
 				"2": "squad",
 				"3": "section",
-				"4": "platoon / detachment",
-				"5": "company / battery/ troop",
-				"6": "battalion / squadron",
-				"7": "regiment / group",
+				"4": ["platoon", "detachment"],
+				"5": ["company", "battery", "troop"],
+				"6": ["battalion", "squadron"],
+				"7": ["regiment", "group"],
 				"8": "brigade"
 			}
 		},
@@ -208,10 +208,10 @@
 			"applies to": [10, 11],
 			"second digit": {
 				"1": "division",
-				"2": "corps / MEF",
+				"2": ["corps", "MEF"],
 				"3": "army",
-				"4": "army group / front",
-				"5": "region / theater",
+				"4": ["army group", "front"],
+				"5": ["region", "theater"],
 				"6": "command"
 			}
 		},
@@ -220,7 +220,7 @@
 			"equipment mobility": true,
 			"applies to": [15],
 			"second digit": {
-				"1": "wheeled (limited cross-country)",
+				"1": ["wheeled" ,"wheeled (limited cross-country)"],
 				"2": "wheeled (cross-country)",
 				"3": "tracked",
 				"4": "wheeled and tracked combination",
@@ -556,6 +556,7 @@
 		"10": {
 			"name": "land unit",
 			"frame set": "10",
+			"match weight": 1,
 			"entities" : {
 				"11": {
 					"name": "command and control",
@@ -609,14 +610,14 @@
 							}
 						},
 						"05": {
-							"name": "armor / mechanized / self-propelled / tracked",
+							"names": ["armor", "armored", "mechanized", "self-propelled", "tracked"],
 							"entity subtypes": {
 								"01": {"name": "reconnaissance / cavalry / scout *", "type": "ff", "overlay": ["120500", "121300"]},
 								"02": {"name": "amphibious *", "type": "ff", "overlay": ["120500", "120300"]}
 							}
 						},
 						"06": {
-							"name": "army aviation / aviation rotary wing",
+							"names": ["army aviation", "aviation rotary wing", "rotary wing"],
 							"entity subtypes": {
 								"01": {"name": "* reconnaissance", "type": "ff", "overlay": ["120600", "121300"]}
 							}
@@ -635,7 +636,7 @@
 							"type": "ff",
 							"entity subtypes": {
 								"01": {"name": "amphibious *", "type": "ff", "overlay": ["121100", "120300"]},
-								"02": {"name": "armored / mechanized / tracked *", "type": "ff", "overlay": ["121100", "120500"]},
+								"02": {"names": ["armored *", "mechanized *", "tracked *"], "type": "ff", "overlay": ["121100", "120500"]},
 								"03": {"name": "main gun system *", "type": "ff", "overlay": ["121100", "121106"]},
 								"04": {"name": "motorized *", "type": "ff", "overlay": ["121100", "0XMotorized"]},
 								"05": {"name": "infantry fighting vehicle", "type": "ff", "overlay": ["121103", "120500"]},
@@ -648,7 +649,7 @@
 						},
 						"12": "observer",
 						"13": {
-							"name": "reconnaissance / cavalry / scout",
+							"names": ["reconnaissance", "cavalry", "scout"],
 							"type": "ff",
 							"entity subtypes": {
 								"01": {"name": "reconnaissance and surveillance", "type": "ff", "overlay": ["121300", "121600"]},
@@ -683,7 +684,7 @@
 					"modcats-inherit": true,
 					"entity types": {
 						"01": {
-							"name": "air defense",
+							"names": ["air defense", "anti-air"],
 							"type": "ff",
 							"entity subtypes": {
 								"01": {"name": "main gun system *", "type": "ff", "overlay": ["130100", "121106"]},
@@ -692,7 +693,7 @@
 						},
 						"02": {"name": "air / land naval gunfire liaison", "type": "ff", "overlay": ["0XSeaport", "130300", "120600", "121300"]},
 						"03": {
-							"name": "field artillery",
+							"names": ["field artillery", "artillery"],
 							"entity subtypes": {
 								"01": {"name": "self-propelled *", "overlay": ["130300", "120500"]},
 								"02": {"name": "* target acquisition", "type": "ff", "overlay": ["130301", "121300"]}
@@ -1064,6 +1065,7 @@
 		"27": {
 			"name": "dismounted individual",
 			"frame set": "27",
+			"match weight": -1,
 			"entities": {
 				"11": {
 					"name": "military",
@@ -1545,7 +1547,7 @@
 							}
 						},
 						"08": {
-							"name": "earthmover",
+							"names": ["earthmover", "bulldozer"],
 							"type": "fo",
 							"entity subtypes": {
 								"01": {"name": "mutlifunctional */ digger", "type": "fo", "overlay": ["130800", "0XCenterMF"]}
@@ -1603,7 +1605,7 @@
 								"03": {"name": "heavy *", "type": "fo", "overlay": ["140600", "0XTruckHeavy"]}
 							}
 						},
-						"07": {"name": "limited cross country truck", "type": "fo"},
+						"07": {"names": ["truck","limited cross country truck"], "type": "fo"},
 						"08": {"name": "cross country truck", "type": "fo"},
 						"09": {"name": "petroleum, oil, and lubricant truck", "type": "fo", "overlay": ["140100", "0XPOL"]},
 						"10": {"name": "water truck", "type": "fo", "overlay": ["140100", "0XWater"]},

@@ -15,8 +15,8 @@ class SymbolSchema:
                 self.id_code = 0
 
         def get_names(self):
-            ret = self.alt_names.copy()
-            ret.append(self.name)
+            ret = [self.name]
+            ret.extend(self.alt_names.copy())
             return ret
 
         def __init__(self):  # Init for StandardIdentity class
@@ -96,7 +96,8 @@ class SymbolSchema:
     class Amplifier:
         def __init__(self):
             self.id_code = 0
-            self.name = ''
+            self.names = ['']
+            self.match_weight = 0
             self.applies_to_list = []
             self.category = ''
 
@@ -129,6 +130,12 @@ class SymbolSchema:
                 self.use_with_unfilled_frames = False
                 self.variants = 0
                 self.alt_names = []
+                self.match_weight = 0
+
+            def get_names(self) -> list:
+                ret = [self.name]
+                ret.extend(self.alt_names)
+                return ret
 
             def get_flat_entities(self):
                 ret = [self]
@@ -211,6 +218,7 @@ class SymbolSchema:
             self.special_entity_subtypes = {}
             self.modifiers = {1: {}, 2: {}}
             self.frame_set = ''
+            self.match_weight = 0
 
         def __str__(self):
             ret = '#%s (%s) [%s] %s' % (self.id_code, self.name, self.frame_set,
@@ -319,6 +327,9 @@ class SymbolSchema:
             else:
                 new_symbol_set.implemented = True
 
+            if 'match weight' in symbol_set_json.keys():
+                new_symbol_set.match_weight = int(symbol_set_json['match weight'])
+
             # Load notes and frame set
             new_symbol_set.notes = symbol_set_json['notes'] if 'notes' in symbol_set_json.keys() else ''
 
@@ -356,7 +367,12 @@ class SymbolSchema:
                     created_entity.use_with_unfilled_frames = inherited_use_with_unfilled_frames
                     created_entity.variants = variants_to_inherit
                 else:  # Complex entity with entity types or more information
-                    created_entity.name = entity_json['name']
+
+                    if 'name' in entity_json.keys():
+                        created_entity.name = entity_json['name']
+                    elif 'names' in entity_json.keys():
+                        created_entity.name = entity_json['names'][0]
+                        created_entity.alt_names = entity_json['names'][1:]
                     created_entity.icon_type = entity_json['type'] if 'type' in entity_json.keys() else icon_type_to_inherit
                     type_inherit = entity_json['type-inherit'] if 'type-inherit' in entity_json.keys() else inherit_icon_type
                     modcat_inherit = entity_json['modcats-inherit'] if 'modcats-inherit' in entity_json.keys() \
@@ -439,6 +455,12 @@ class SymbolSchema:
                                     # Child doesn't use a name substitution
                                     new_child_entity.short_subtype_name = new_child_entity.name
 
+                                new_alt_names = []
+                                for alt_name in new_child_entity.alt_names:
+                                    if '*' in alt_name:
+                                        new_alt_names.append(alt_name.replace('*', created_entity.name))
+                                new_child_entity.alt_names = new_alt_names
+
                                 # Remove duplicate categories
                                 new_child_entity.modifier_categories = list(
                                     dict.fromkeys(new_child_entity.modifier_categories))
@@ -450,6 +472,8 @@ class SymbolSchema:
                         for modcat in entity_json['modcats-additional']:
                             created_entity.modifier_categories.append(modcat)
 
+                    if 'match weight' in entity_json.keys():
+                        created_entity.match_weight = int(entity_json['match weight'])
                     # Done with simple category
                     # Load modifier categories
 
@@ -645,9 +669,16 @@ class SymbolSchema:
 
                 specific_data = amplifier_groups_json[amplifier_first_digit]['second digit'][amplifier_second_digit]
                 if isinstance(specific_data, str):
-                    new_amplifier.name = specific_data
-                else:
-                    new_amplifier.name = specific_data['name']
+                    new_amplifier.names = [specific_data]
+                elif isinstance(specific_data, list):
+                    new_amplifier.names = specific_data
+                elif isinstance(specific_data, dict):
+                    if 'names' in specific_data:
+                        new_amplifier.names = specific_data['names']
+                    elif 'name' in specific_data:
+                        new_amplifier.names = [specific_data['name']]
+                    if 'match weight' in specific_data.keys():
+                        new_amplifier.match_weight = int(specific_data['match weight'])
 
                 if verbose:
                     print('\t' + str(new_amplifier))

@@ -1,7 +1,7 @@
 # test
 from symbol_schema import  SymbolSchema
 from nato_symbol import NATOSymbol
-from name_to_sidc import name_to_sidc
+from name_to_sidc import name_to_symbol
 
 if __name__ == '__main__':
     # Get current working directory
@@ -12,9 +12,11 @@ if __name__ == '__main__':
     symbol = NATOSymbol(symbol_schema)
 
     TEST_SIDC = '10061000141100000508'
+    new_sidc = TEST_SIDC
 
-    symbol.create_from_sidc(TEST_SIDC)
-    new_sidc = name_to_sidc("friendly   infantry platoon", symbol_schema)
+    symbol.create_from_sidc(new_sidc)
 
-    with open(os.path.join(working_dir, f'{symbol.get_name()} ({symbol.get_sidc()}).svg'), 'w') as output:
-        output.write(symbol.get_svg(expand_to_fit=True, pixel_padding=4))
+    symbol = name_to_symbol("enemy airborne infantry company", symbol_schema)
+
+    with open(os.path.join(working_dir, 'examples', f'{symbol.get_name()} ({symbol.get_sidc()}).svg'), 'w') as output:
+        output.write(symbol.get_svg(expand_to_fit=False, pixel_padding=4))
