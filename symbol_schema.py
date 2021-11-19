@@ -516,7 +516,7 @@ class SymbolSchema:
                         if 'name' in mod_json.keys():
                             new_modifier.name = mod_json['name']
                         elif 'names' in mod_json.keys():
-                            print(f"Mod with alt names: {mod_json['names']}")
+                            # print(f"Mod with alt names: {mod_json['names']}")
                             new_modifier.name = mod_json['names'][0]
                             new_modifier.alt_names = mod_json['names'][1:]
                         new_modifier.mod_category = mod_json['cat'] if 'cat' in mod_json.keys() else ''

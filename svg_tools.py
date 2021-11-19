@@ -66,6 +66,9 @@ def replace_color(svg, from_color, to_color, type='both'):
 
 
 def apply_offset(svg_ele, offset, offset_children=True):
+    if svg_ele is None:
+        return
+
     if 'd' in svg_ele.keys():
         path = svg_ele.attrib['d']
         # Identify 'm' attribute
@@ -101,6 +104,8 @@ def apply_offset(svg_ele, offset, offset_children=True):
 
 
 def layer_svg(svg_bottom, svg_top, offset=[0.0, 0.0]):
+    if svg_top is None:
+        return
     # print(svg_top.tag)
     for child in list(svg_top):
         apply_offset(child, offset, offset_children=True)

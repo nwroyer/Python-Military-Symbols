@@ -96,7 +96,7 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
     return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
 
 
-def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
+def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=False) -> NATOSymbol:
     proc_name_string = name_string
     EMPTY_SIDC = ''
 
@@ -104,42 +104,44 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
     # Remove extra white spaces
     proc_name_string = proc_name_string.lower()
     proc_name_string = re.sub('[ \t\n]+', ' ', proc_name_string).strip()
-    print(f'Matching "{proc_name_string}"')
+    if verbose:
+        print(f'Matching "{proc_name_string}"')
 
     # Step 1: Detect standard identity
     standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string,
                                                  symbol_schema.standard_identities.values(), match_longest=True)
 
     if standard_identity is None:
-        print("Unable to determine standard identity; assuming unknown")
+        print("\tUnable to determine standard identity; assuming unknown")
         standard_identity = [si for si in symbol_schema.standard_identities.values() if si.name == 'unknown'][0]
     else:
         proc_name_string = new_name_string
 
-    print(f'Assuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
+    if verbose:
+        print(f'\tAssuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
 
     # Step 2: Detect entity type
     entity_type, proc_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
                                            match_longest=True)
 
     if entity_type is None:
-        print("Unable to determine entity type; defaulting to land unit")
+        print("\tWarning: Unable to determine entity type; defaulting to land unit")
         ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
         ret_symbol.entity = None
         ret_symbol.symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
         ret_symbol.standard_identity = standard_identity
         return ret_symbol
 
-    print(f'Assuming entity "{entity_type.name}" -> "{proc_name_string}"')
+    if verbose:
+        print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
     symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
 
     candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(symbol_set.id_code)]
     amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
     if amplifier is not None:
         proc_name_string = new_name_string
-        print(f'Assuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
-    else:
-        print("Assuming no amplifier")
+        if verbose:
+            print(f'\tAssuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
 
     # Find task force / headquarters / dummy
     hqtfd, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
@@ -147,7 +149,8 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
                                          match_longest=True)
     if hqtfd is not None:
         proc_name_string = new_name_string
-        print(f'Assuming HQTFD code "{hqtfd.names[0]}" -> "{proc_name_string}"')
+        if verbose:
+            print(f'\tAssuming HQTFD code "{hqtfd.names[0]}" -> "{proc_name_string}"')
 
     # Find status code
     # print([status.names for status in symbol_schema.statuses.values()])
@@ -156,7 +159,8 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
                                                match_longest=True)
     if status_code is not None:
         proc_name_string = new_name_string
-        print(f'Assuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
+        if verbose:
+            print(f'Assuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
 
     # Find modifiers
     mods = [None, None]
@@ -167,7 +171,8 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
         if mod is not None:
             proc_name_string = new_name_string
 
-            print(f'Assuming modifier "{mod.name}" -> "{proc_name_string}"')
+            if verbose:
+                print(f'Assuming modifier "{mod.name}" -> "{proc_name_string}"')
             mods[mod_set - 1] = mod
 
     ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
