@@ -28,95 +28,68 @@ def get_match_weights(name_string, candidates, match_type='partial_token_sort_ra
         matches.append((candidate, max_ratio))
     return matches
 
-def fuzzy_match(symbol_schema, name_string, candidate_list_of_lists, match_threshold=50):
-    matches = get_match_weights(name_string, candidate_list_of_lists)
+def fuzzy_match(symbol_schema, name_string, candidate_list, match_threshold=50):
+    # Step 1: calculate the number of words in candidate_list_of_lists
+    matches = [] # Set of (candidate, weight) pairs
+    for candidate in candidate_list:
+        # Iterate over the possible names
+        for candidate_name in get_names_list(candidate):
+            name_sanitized = re.sub('[/ \t\n]+', ' ', candidate_name).strip().lower()
+            name_sanitized = ''.join([c for c in name_sanitized if c.isalpha() or c == ' '])
+            candidate_name_words = [word for word in name_sanitized.split(' ') if len(word) > 0]
+            #print(candidate_name_words)
 
-    if len(matches) < 1:
-        # print("No matches")
-        return None
-
-    max_match_score = max(matches, key=lambda match: match[1])[1]
-    if max_match_score < match_threshold:
-        # print(f"ERROR: No match for \"{name_string}\": \"{[get_names_list(item) for item in candidates]}")
-        return None
-
-    max_match_candidates = [match for match in matches if match[1] == max_match_score]
-    if len(max_match_candidates) < 2:
-        # print(f'Match {max_match_candidates[0][0]}: {max_match_candidates[0][1]}')
-        return max_match_candidates[0][0]
-    else:
-        # Try searching for a full match
-        # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
-        # else ""}\" [{can[1]}]' for can in max_match_candidates])
-        matches = get_match_weights(name_string, candidate_list_of_lists, 'ratio')
-        max_match_score = max(matches, key=lambda match: match[1])[1]
-        max_match_candidates = [match for match in matches if match[1] == max_match_score]
-
-        # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
-        # else ""}\" [{can[1]}]' for can in max_match_candidates])
-
-    weighted_max_candidates = [[can[0], can[0].match_weight] for can in max_match_candidates]
-
-    # Pick most extreme of symbol set and individual match weight
-    if 'symbol_set' in dir(max_match_candidates[0][0]):
-        for weight_can in weighted_max_candidates:
-            sym_set = symbol_schema.symbol_sets[weight_can[0].symbol_set]
-            if abs(sym_set.match_weight) > abs(weight_can[0].match_weight):
-                weight_can[1] = sym_set.match_weight
-
-    weighted_max_candidates = sorted(weighted_max_candidates, key=lambda item: item[1])
-    # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
-    # else ""}\" [{can[1]}]' for can in max_match_candidates])
-
-    max_weight = max(can[1] for can in weighted_max_candidates)
-    weighted_max_candidates = [can for can in weighted_max_candidates if can[1] == max_weight]
-    # print(f'Max weight: {max_weight} / {weighted_max_candidates}')
-
-    if len(weighted_max_candidates) <  2:
-        return weighted_max_candidates[0][0]
-    else:
-        # Front and back have same weight; pick the shortest-named one
-        length_sorted_candidates = sorted(weighted_max_candidates, key=lambda item: len(get_names_list(item[0])[0]))
-        # print(f'Weighted by length: {length_sorted_candidates}')
-        return length_sorted_candidates[0][0]
-
-def get_modifier_entity_combinations(symbol_schema:SymbolSchema):
-    configurations = [] # Items of {"entity", "mod1", "mod2"}
-    entity_index = {}
-
-    for symbol_set in symbol_schema.symbol_sets.values():
-        for entity in symbol_set.get_flat_entities():
-            mod1_list = [None]
-            mod1_list.extend(symbol_set.modifiers[1].values())
-            for mod1 in mod1_list:
-                mod2_list = [None]
-                mod2_list.extend(symbol_set.modifiers[2].values())
-                for mod2 in mod2_list:
-                    new_config_id = len(configurations)
-                    configurations.append({'entity': entity, 'mod1': mod1, 'mod2': mod2})
-
-                    search_strings = []
-
-                    for ent_name in get_names_list(entity):
-                        mod_names = []
-                        if mod1 is not None:
-                            mod_names.append(mod1.name)
-                        if mod2 is not None:
-                            mod_names.append(mod2.name)
-
-                        if len(mod_names) == 0:
-                            search_strings.append(ent_name)
-                        elif len(mod_names) == 1:
-                            search_strings.append(mod_names[0] + ' ' + ent_name)
-                        elif len(mod_names) == 2:
-                            search_strings.append(mod_names[0] + " " + mod_names[1] + " " + ent_name)
-                            search_strings.append(mod_names[1] + " " + mod_names[0] + " " + ent_name)
-
-                    for search_string in search_strings:
-                        entity_index[search_string] = new_config_id
-
-
-    return configurations, entity_index
+    return None
+    # matches = get_match_weights(name_string, candidate_list_of_lists)
+    #
+    # if len(matches) < 1:
+    #     # print("No matches")
+    #     return None
+    #
+    # max_match_score = max(matches, key=lambda match: match[1])[1]
+    # if max_match_score < match_threshold:
+    #     # print(f"ERROR: No match for \"{name_string}\": \"{[get_names_list(item) for item in candidates]}")
+    #     return None
+    #
+    # max_match_candidates = [match for match in matches if match[1] == max_match_score]
+    # if len(max_match_candidates) < 2:
+    #     # print(f'Match {max_match_candidates[0][0]}: {max_match_candidates[0][1]}')
+    #     return max_match_candidates[0][0]
+    # else:
+    #     # Try searching for a full match
+    #     # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
+    #     # else ""}\" [{can[1]}]' for can in max_match_candidates])
+    #     matches = get_match_weights(name_string, candidate_list_of_lists, 'ratio')
+    #     max_match_score = max(matches, key=lambda match: match[1])[1]
+    #     max_match_candidates = [match for match in matches if match[1] == max_match_score]
+    #
+    #     # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
+    #     # else ""}\" [{can[1]}]' for can in max_match_candidates])
+    #
+    # weighted_max_candidates = [[can[0], can[0].match_weight] for can in max_match_candidates]
+    #
+    # # Pick most extreme of symbol set and individual match weight
+    # if 'symbol_set' in dir(max_match_candidates[0][0]):
+    #     for weight_can in weighted_max_candidates:
+    #         sym_set = symbol_schema.symbol_sets[weight_can[0].symbol_set]
+    #         if abs(sym_set.match_weight) > abs(weight_can[0].match_weight):
+    #             weight_can[1] = sym_set.match_weight
+    #
+    # weighted_max_candidates = sorted(weighted_max_candidates, key=lambda item: item[1])
+    # # print([f'Match scores: {get_names_list(can[0])[0]} from \"{can[0].symbol_set if "symbol_set" in dir(can[0])
+    # # else ""}\" [{can[1]}]' for can in max_match_candidates])
+    #
+    # max_weight = max(can[1] for can in weighted_max_candidates)
+    # weighted_max_candidates = [can for can in weighted_max_candidates if can[1] == max_weight]
+    # # print(f'Max weight: {max_weight} / {weighted_max_candidates}')
+    #
+    # if len(weighted_max_candidates) <  2:
+    #     return weighted_max_candidates[0][0]
+    # else:
+    #     # Front and back have same weight; pick the shortest-named one
+    #     length_sorted_candidates = sorted(weighted_max_candidates, key=lambda item: len(get_names_list(item[0])[0]))
+    #     # print(f'Weighted by length: {length_sorted_candidates}')
+    #     return length_sorted_candidates[0][0]
 
 def name_to_symbol(name_string:str, symbol_schema:SymbolSchema) -> NATOSymbol:
     EMPTY_SIDC = ''

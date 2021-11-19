@@ -16,7 +16,7 @@ class SymbolSchema:
 
         def get_names(self):
             ret = [self.name]
-            ret.extend(self.alt_names.copy())
+            ret.extend(self.alt_names)
             return ret
 
         def __init__(self):  # Init for StandardIdentity class
@@ -355,12 +355,17 @@ class SymbolSchema:
                 :param variants_to_inherit: How many variants this entity inherits from its parent
                 :return:
                 """
-                created_entity = SymbolSchema.SymbolSet.Entity()
+                created_entity:SymbolSchema.SymbolSet.Entity = SymbolSchema.SymbolSet.Entity()
                 created_entity.id_code = new_id_code
                 created_entity.symbol_set = symbol_set.id_code
 
-                if isinstance(entity_json, str):  # simple string entity
-                    created_entity.name = entity_json
+                if isinstance(entity_json, str) or isinstance(entity_json, list):  # simple string entity
+                    if isinstance(entity_json, str):
+                        created_entity.name = entity_json
+                    else:
+                        created_entity.name = entity_json[0]
+                        created_entity.alt_names = entity_json[1:]
+
                     created_entity.modifier_categories = modcats_to_inherit
                     created_entity.icon_type = icon_type_to_inherit
                     created_entity.uses_civilian_coloring = inherited_civilian_coloring
@@ -454,12 +459,6 @@ class SymbolSchema:
                                 else:
                                     # Child doesn't use a name substitution
                                     new_child_entity.short_subtype_name = new_child_entity.name
-
-                                new_alt_names = []
-                                for alt_name in new_child_entity.alt_names:
-                                    if '*' in alt_name:
-                                        new_alt_names.append(alt_name.replace('*', created_entity.name))
-                                new_child_entity.alt_names = new_alt_names
 
                                 # Remove duplicate categories
                                 new_child_entity.modifier_categories = list(
