@@ -15,7 +15,7 @@ class NATOSymbol:
         if symbol_schema is None:
             print('ERROR: symbol schema must not be None for NATO symbol creation', file=sys.stderr)
 
-        self.version_code = '00'
+        self.version_code = '10'
         self.symbol_schema = symbol_schema
 
         # SIDC component codes
@@ -56,7 +56,7 @@ class NATOSymbol:
         :return:
         """
         ret = ''
-        ret += self.symbol_set.name + ' - ' if self.symbol_set is not None else ''
+        ret += self.symbol_set.name.capitalize() + ' - ' if self.symbol_set is not None else ''
         ret += self.standard_identity.name + ' ' if self.standard_identity is not None else ''
         ret += self.modifiers[1].name + ' ' if self.modifiers[1] is not None else ''
         ret += self.modifiers[2].name + ' ' if self.modifiers[2] is not None else ''
@@ -64,8 +64,7 @@ class NATOSymbol:
         ret += self.amplifier.names[0] + ' ' if self.amplifier is not None else ''
         ret += '(%s) ' % self.hqtfd.names[0] if self.hqtfd is not None else ''
 
-        ret = ret.title()
-        ret = ret.replace('/', 'or')
+        ret = ret.replace('/', ' or ')
 
         return ret
 
@@ -85,6 +84,8 @@ class NATOSymbol:
             if len(sidc) >= 30:
                 self.extra_ten_digits = sidc[20:30]
             print('Ignoring extra digits from SIDC; only using first 20')
+
+        # TODO handle special entity subtypes
 
         # Sanity check SIDC code
         self.version_code = sidc[0:2]
@@ -386,7 +387,6 @@ class NATOSymbol:
             symbol_svg.attrib["height"] = str(int(new_image_size[1]))
             symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)
 
-        # TODO account for stroke width
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
         return svg_string

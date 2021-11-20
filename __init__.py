@@ -9,22 +9,17 @@ if __name__ == '__main__':
     import os
     working_dir = os.getcwd()
 
-    symbol_schema = SymbolSchema.load_symbol_schema_from_file(os.path.join(working_dir, 'NATO symbols.json'))
+    symbol_schema:SymbolSchema = SymbolSchema.load_symbol_schema_from_file(os.path.join(working_dir, 'NATO symbols.json'))
 
     symbol_temp:SymbolTemplateSet = SymbolTemplateSet(symbol_schema)
     symbol_temp.load_from_file(os.path.join(working_dir, 'templates.json'))
+    symbol_schema.add_template_set(symbol_temp)
 
     test_lines = [
-        "friendly infantry platoon headquarters",
-        "friendly infantry squad",
-        "enemy self-propelled artillery battery",
-        "friendly forward observer section",
-        "friendly class I",
-        "friendly amphibious infantry company",
-        "friendly combat camera section",
-        "enemy PSYOP company",
-        "enemy HIMARS",
-        "friendly comm battalion"
+        "friendly airborne infantry platoon headquarters",
+        "HIMARS battery",
+        "suspected enemy PSYOP company",
+        "friendly VTOL rotary-wing squadron"
     ]
 
     for symbol_name in test_lines:

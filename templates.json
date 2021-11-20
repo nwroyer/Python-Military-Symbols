@@ -6,6 +6,14 @@
       "ACV": {
         "alt names": ["AAV"],
         "sidc": "10*3 10 **** 120502 0000"
+      },
+      "VMM": {
+        "alt names": ["Osprey squadron"],
+        "sidc": "10*3 10 **16 120600 0049"
+      },
+      "VMFA": {
+        "alt names": [],
+        "sidc": "10*3 10 **16 120600 0049"
       }
     }
   }

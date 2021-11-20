@@ -1,17 +1,16 @@
 import json
 
 from nato_symbol import NATOSymbol
-from symbol_schema import SymbolSchema
 
 
 class SymbolTemplate:
 
-    def __init__(self, symbol_schema:SymbolSchema):
+    def __init__(self, symbol_schema):
         self.name: str = ''
         self.alt_names: list = []
         self.symbol: NATOSymbol = None
         self.template_sidc:str = ''
-        self.symbol_schema:SymbolSchema = symbol_schema
+        self.symbol_schema = symbol_schema
 
         # Digits 0-1: Version code
         self.context_fixed: bool = False  # Digit 2
@@ -46,29 +45,27 @@ class SymbolTemplate:
             template_sidc[18:20] != '**'
         ]
 
-        print(f"Created template \"{self.name}\": \"{self.symbol.get_name()}\"{'' if len(self.alt_names) < 1 else ' (' + ' / '.join(self.alt_names) + ')'}")
+        # print(f"Created template \"{self.name}\": \"{self.symbol.get_name()}\"{'' if len(self.alt_names) < 1 else ' (' + ' / '.join(self.alt_names) + ')'}")
 
 
 class SymbolTemplateSet:
 
-    def __init__(self, symbol_schema):
-        self.symbol_schema:SymbolSchema = symbol_schema
+    def __init__(self, symbol_schem):
+        self.symbol_schema = symbol_schem
         self.name = ''
         self.subsets = {}
         self.templates = {}
 
     def load_from_dict(self, dict_val):
-        tab_stops = ''
-        template_list:dict = None
 
         if 'name' in dict_val.keys():
             self.name = dict_val['name']
 
-        print(f'Loading template set \"{self.name}\"')
+        # print(f'Loading template set \"{self.name}\"')
 
         if 'subsets' in dict_val.keys():
             for tmp_name, template in dict_val['subsets'].items():
-                print(tab_stops + f'\tSubset {self.name} >> {tmp_name}')
+                # print(tab_stops + f'\tSubset {self.name} >> {tmp_name}')
                 subset = SymbolTemplateSet(self.symbol_schema)
                 subset.name = tmp_name
                 subset.load_from_dict(template)
@@ -76,7 +73,7 @@ class SymbolTemplateSet:
 
         if 'templates' in dict_val.keys():
             for template_name, template_sidc in dict_val['templates'].items():
-                print(f'\t{template_name} -> {template_sidc}')
+                # print(f'\t{template_name} -> {template_sidc}')
                 new_template = SymbolTemplate(self.symbol_schema)
                 new_template.name = template_name
                 new_template.create_from_sidc(template_sidc)
@@ -97,11 +94,28 @@ class SymbolTemplateSet:
             self.templates[new_template.name] = new_template
 
     def get_template(self, template_name):
+
+        # TODO template search
         if template_name in self.templates.keys():
             return self.templates[template_name]
 
+        for subset in self.subsets:
+            ret = subset.get_template(template_name)
+            if ret is not None:
+                return ret
+
+        return None
+
+    def get_template_list(self):
+        ret = []
+        ret.extend(self.templates.values())
+
+        for subset in self.subsets.values():
+            ret.extend(subset.get_template_list())
+
+        return ret
+
     def load_from_file(self, json_filepath):
-        json_data = {}
         with open(json_filepath, 'r') as json_file:
             json_data = json.load(json_file)  # TODO load from string instead
             self.load_from_dict(json_data)

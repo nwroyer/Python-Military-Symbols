@@ -293,12 +293,23 @@ class SymbolSchema:
         self.symbol_root_folder = ''
         self.symbol_folders = {}
         self.symbol_fill_placeholder = ''
+        self.template_sets = {}
         pass
 
     def get_flat_entities(self):
         ret = []
         for sym_set in self.symbol_sets.values():
             ret += sym_set.get_flat_entities()
+        return ret
+
+    def add_template_set(self, template):
+        if template is not None:
+            self.template_sets[template.name] = template
+
+    def get_template_list(self):
+        ret = []
+        for template_set in self.template_sets.values():
+            ret.extend(template_set.get_template_list())
         return ret
 
     @classmethod

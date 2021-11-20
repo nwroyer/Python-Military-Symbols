@@ -570,7 +570,7 @@
 			"match weight": 1,
 			"entities" : {
 				"11": {
-					"name": "command and control",
+					"names": ["command and control", "C2"],
 					"modcats": ["capability", "mobility", "composite loss", "operation"],
 					"modcats-inherit": true,
 					"entity types": {
@@ -925,7 +925,7 @@
 
 			},
 			"special entity subtypes": {
-				"95": {"name": "headquarters element", "type": "ff"},
+				"95": {"names": ["headquarters element"], "type": "ff"},
 				"96": {"name": "division and below support", "type": "ff"},
 				"97": {"name": "corps support", "type": "ff"},
 				"98": {"name": "theater/echelons above corps support", "type": "ff"}
@@ -940,7 +940,7 @@
 				"07": {"name": "chemical", "cat": "capability"},
 				"08": {"name": "close protection", "cat": "capability"},
 				"09": {"name": "combat", "cat": "capability"},
-				"10": {"name": "command and control", "cat": "capability"},
+				"10": {"names": ["command and control", "C2"], "cat": "capability"},
 				"11": {"name": "communications contingency package", "cat": "capability"},
 				"12": {"name": "construction", "cat": "capability"},
 				"13": {"name": "cross-cultural communication", "cat": "capability"},
@@ -971,7 +971,7 @@
 				"38": {"name": "movement control center", "cat": "capability"},
 				"39": {"name": "multinational", "cat": "capability"},
 				"40": {"name": "multinational specialized unit", "cat": "capability"},
-				"41": {"names": ["multiple rocket launcher", "MLRS", "HIMARS"], "cat": "capability"},
+				"41": {"names": ["multiple rocket launcher", "MLRS", "MRLS"], "cat": "capability"},
 				"42": {"name": "NATO medical role 1", "cat": "medical capability"},
 				"43": {"name": "NATO medical role 2", "cat": "medical capability"},
 				"44": {"name": "NATO medical role 3", "cat": "medical capability"},
@@ -1071,7 +1071,7 @@
 				"46": {"name": "tactical", "cat": "capability"},
 				"47": {"name": "towed", "cat": "mobility"},
 				"48": {"name": "troop", "cat": "capability"},
-				"49": {"name": "VTOL/VSTOL", "cat": "mobility"},
+				"49": {"names": ["VTOL/VSTOL", "VTOL", "VSTOL"], "cat": "mobility"},
 				"50": {"name": "veterinary", "cat": "medical capability"},
 				"51": {"name": "wheeled", "cat": "mobility"},
 				"52": {"name": "high to low altitude", "cat": "capability"},

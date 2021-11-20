@@ -1,5 +1,6 @@
 import re
 
+import symbol_template
 from nato_symbol import NATOSymbol
 from symbol_schema import SymbolSchema
 
@@ -94,82 +95,104 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=Fal
     if verbose:
         print(f'Matching "{proc_name_string}"')
 
+    # Step 0: Check for templates
+    template: symbol_template.SymbolTemplate = None
+    template, new_name_string = fuzzy_match(symbol_schema, name_string, symbol_schema.get_template_list())
+
+    ret_symbol:NATOSymbol = None
+
+    if template is not None:
+        proc_name_string = new_name_string
+        if verbose:
+            print(f"\tMatches template \"{template.name}\" -> \"{proc_name_string}\"")
+
+        ret_symbol = template.symbol
+    else:
+        ret_symbol = NATOSymbol(symbol_schema)
+
     # Step 1: Detect standard identity
-    standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string,
-                                                 symbol_schema.standard_identities.values(), match_longest=True)
 
-    if standard_identity is None:
-        print("\tUnable to determine standard identity; assuming unknown")
-        standard_identity = [si for si in symbol_schema.standard_identities.values() if si.name == 'unknown'][0]
-    else:
-        proc_name_string = new_name_string
+    if template is None or not template.standard_identity_fixed:
+        standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string,
+                                                     symbol_schema.standard_identities.values(), match_longest=True)
 
-    if verbose:
-        print(f'\tAssuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
-
-    # Step 2: Detect entity type
-    entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
-                                           match_longest=True)
-
-    symbol_set = None
-    if entity_type is None:
-        print(f"\tWARNING: Unable to determine entity type from string \"{name_string}\"; defaulting to land unit")
-        ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
-        symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
-        ret_symbol.entity = symbol_set.get_entity("000000")
-    else:
-        if verbose:
-            print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
-        symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
-        proc_name_string = new_name_string
-
-    candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(symbol_set.id_code)]
-    amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
-    if amplifier is not None:
-        proc_name_string = new_name_string
-        if verbose:
-            print(f'\tAssuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
-
-    # Find task force / headquarters / dummy
-    hqtfd, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
-                                         [code for code in symbol_schema.hqtfd_codes.values() if code.applies_to_symbol_set(symbol_set)],
-                                         match_longest=True)
-    if hqtfd is not None:
-        proc_name_string = new_name_string
-        if verbose:
-            print(f'\tAssuming HQTFD code "{hqtfd.names[0]}" -> "{proc_name_string}"')
-
-    # Find status code
-    # print([status.names for status in symbol_schema.statuses.values()])
-    status_code, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
-                                               [code for code in symbol_schema.statuses.values()],
-                                               match_longest=True)
-    if status_code is not None:
-        proc_name_string = new_name_string
-        if verbose:
-            print(f'\tAssuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
-
-    # Find modifiers
-    mods = [None, None]
-    for mod_set in [1, 2]:
-        modifier_candidates = list(symbol_set.modifiers[mod_set].values())
-        # print([get_names_list(mod) for mod in modifier_candidates])
-        mod, new_name_string = fuzzy_match(symbol_schema, proc_name_string, modifier_candidates, match_longest=True)
-        if mod is not None:
+        if standard_identity is None:
+            print("\tUnable to determine standard identity; assuming unknown")
+            standard_identity = [si for si in symbol_schema.standard_identities.values() if si.name == 'unknown'][0]
+        else:
             proc_name_string = new_name_string
 
-            if verbose:
-                print(f'Assuming modifier "{mod.name}" -> "{proc_name_string}"')
-            mods[mod_set - 1] = mod
+        if verbose:
+            print(f'\tAssuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
 
-    ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
-    ret_symbol.standard_identity = standard_identity
-    ret_symbol.symbol_set = symbol_set
-    ret_symbol.entity = entity_type
-    ret_symbol.amplifier = amplifier
-    ret_symbol.modifiers[1] = mods[0]
-    ret_symbol.modifiers[2] = mods[1]
-    ret_symbol.hqtfd = hqtfd
-    ret_symbol.status = status_code
+        ret_symbol.standard_identity = standard_identity
+
+    # Step 2: Detect entity type
+    if template is None or not template.entity_fixed:
+        entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
+                                               match_longest=True)
+
+        symbol_set = None
+        if entity_type is None:
+            print(f"\tWARNING: Unable to determine entity type from string \"{name_string}\"; defaulting to land unit")
+            ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
+            symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
+            ret_symbol.entity = symbol_set.get_entity("000000")
+        else:
+            if verbose:
+                print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
+            symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
+            proc_name_string = new_name_string
+
+        ret_symbol.entity = entity_type
+        ret_symbol.symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
+
+    if template is None or not template.amplifier_fixed:
+        candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(ret_symbol.symbol_set.id_code)]
+        amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
+        if amplifier is not None:
+            proc_name_string = new_name_string
+            if verbose:
+                print(f'\tAssuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
+
+        ret_symbol.amplifier = amplifier
+
+    # Find task force / headquarters / dummy
+    if template is None or not template.hqtfd_fixed:
+        hqtfd, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
+                                             [code for code in symbol_schema.hqtfd_codes.values() if code.applies_to_symbol_set(ret_symbol.symbol_set)],
+                                             match_longest=True)
+        if hqtfd is not None:
+            proc_name_string = new_name_string
+            if verbose:
+                print(f'\tAssuming HQTFD code "{hqtfd.names[0]}" -> "{proc_name_string}"')
+
+        ret_symbol.hqtfd = hqtfd
+
+    # Find status code
+    if template is None or not template.status_fixed:
+        # print([status.names for status in symbol_schema.statuses.values()])
+        status_code, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
+                                                   [code for code in symbol_schema.statuses.values()],
+                                                   match_longest=True)
+        if status_code is not None:
+            proc_name_string = new_name_string
+            if verbose:
+                print(f'\tAssuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
+
+        ret_symbol.status = status_code
+
+    # Find modifiers
+    for mod_set in [1, 2]:
+        if template is None or not template.modifiers_fixed[mod_set - 1]:
+            modifier_candidates = list(symbol_set.modifiers[mod_set].values())
+            # print([get_names_list(mod) for mod in modifier_candidates])
+            mod, new_name_string = fuzzy_match(symbol_schema, proc_name_string, modifier_candidates, match_longest=True)
+            if mod is not None:
+                proc_name_string = new_name_string
+
+                if verbose:
+                    print(f'\tAssuming modifier "{mod.name}" -> "{proc_name_string}"')
+                ret_symbol.modifiers[mod_set] = mod
 
     return ret_symbol
