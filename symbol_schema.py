@@ -26,16 +26,16 @@ class SymbolSchema:
             self.frame_set = 0
 
             self.standard_colorset = {
-                    'light': '#ffffff',
-                    'medium': '#ffffff',
-                    'dark': '#ffffff',
-                    'unfilled': '#000000'
+                'light': '#ffffff',
+                'medium': '#ffffff',
+                'dark': '#ffffff',
+                'unfilled': '#000000'
             }
             self.civilian_colorset = {
-                    'light': '#ffffff',
-                    'medium': '#ffffff',
-                    'dark': '#ffffff',
-                    'unfilled': '#000000'
+                'light': '#ffffff',
+                'medium': '#ffffff',
+                'dark': '#ffffff',
+                'unfilled': '#000000'
             }
 
         def __str__(self):
@@ -47,6 +47,7 @@ class SymbolSchema:
             ret += ' - colors %s' % self.standard_colorset
             ret += ' - civ colors %s' % self.civilian_colorset
             return ret
+
         def __repr__(self):
             return str(self)
 
@@ -106,7 +107,7 @@ class SymbolSchema:
             return True if symbol_set_code in self.applies_to_list else False
 
         def __str__(self):
-            return '#%s (%s) - applies to %s / category "%s"' % (self.id_code, self.name, self.applies_to_list,
+            return '#%s (%s) - applies to %s / category "%s"' % (self.id_code, self.names, self.applies_to_list,
                                                                  self.category)
 
     class SymbolSet:
@@ -193,6 +194,7 @@ class SymbolSchema:
                 self.alt_names = []
                 self.type = "mn"
                 self.overlay_elements = []
+                self.match_weight = 0
 
             def is_overlay(self):
                 return len(self.overlay_elements) > 0
@@ -337,7 +339,7 @@ class SymbolSchema:
             def load_entity(symbol_set, new_id_code, entity_json, level=0, inherit_icon_type=False,
                             icon_type_to_inherit='main',
                             inherit_modcats=False,
-                            modcats_to_inherit=[], inherited_civilian_coloring=False,
+                            modcats_to_inherit: list = [], inherited_civilian_coloring=False,
                             inherited_use_with_unfilled_frames=False,
                             inherit_variants=False, variants_to_inherit=0):
                 """
@@ -356,7 +358,7 @@ class SymbolSchema:
                 :param variants_to_inherit: How many variants this entity inherits from its parent
                 :return:
                 """
-                created_entity:SymbolSchema.SymbolSet.Entity = SymbolSchema.SymbolSet.Entity()
+                created_entity: SymbolSchema.SymbolSet.Entity = SymbolSchema.SymbolSet.Entity()
                 created_entity.id_code = new_id_code
                 created_entity.symbol_set = symbol_set.id_code
 
@@ -379,8 +381,10 @@ class SymbolSchema:
                     elif 'names' in entity_json.keys():
                         created_entity.name = entity_json['names'][0]
                         created_entity.alt_names = entity_json['names'][1:]
-                    created_entity.icon_type = entity_json['type'] if 'type' in entity_json.keys() else icon_type_to_inherit
-                    type_inherit = entity_json['type-inherit'] if 'type-inherit' in entity_json.keys() else inherit_icon_type
+                    created_entity.icon_type = entity_json[
+                        'type'] if 'type' in entity_json.keys() else icon_type_to_inherit
+                    type_inherit = entity_json[
+                        'type-inherit'] if 'type-inherit' in entity_json.keys() else inherit_icon_type
                     modcat_inherit = entity_json['modcats-inherit'] if 'modcats-inherit' in entity_json.keys() \
                         else inherit_modcats
                     created_entity.use_with_unfilled_frames = entity_json['use with unfilled frames'] if \
@@ -461,6 +465,11 @@ class SymbolSchema:
                                     # Child doesn't use a name substitution
                                     new_child_entity.short_subtype_name = new_child_entity.name
 
+                                alt_names = []
+                                for name in new_child_entity.alt_names:
+                                    alt_names.append(name.replace('*', created_entity.name))
+                                new_child_entity.alt_names = alt_names
+
                                 # Remove duplicate categories
                                 new_child_entity.modifier_categories = list(
                                     dict.fromkeys(new_child_entity.modifier_categories))
@@ -521,6 +530,7 @@ class SymbolSchema:
                             new_modifier.alt_names = mod_json['names'][1:]
                         new_modifier.mod_category = mod_json['cat'] if 'cat' in mod_json.keys() else ''
                         new_modifier.type = mod_json['type'] if 'type' in mod_json.keys() else 'mn'
+                        new_modifier.match_weight = int(mod_json['match weight']) if 'match weight' in mod_json.keys() else 0
 
                         if 'overlay' in mod_json.keys():
                             for overlay_item in mod_json['overlay']:
@@ -541,7 +551,7 @@ class SymbolSchema:
         if verbose:
             print('Importing master JSON schema')
         with open(json_filepath, 'r') as json_file:
-            json_data = json.load(json_file) # TODO load from string instead
+            json_data = json.load(json_file)  # TODO load from string instead
 
         new_symbol_schema = SymbolSchema()
         new_symbol_schema.version = json_data['version']
@@ -635,7 +645,7 @@ class SymbolSchema:
                 new_status.variants = status_data['variants']
 
             new_status.makes_frame_dashed = status_data['makes frame dashed'] if 'makes frame dashed' in \
-                status_data.keys() else False
+                                                                                 status_data.keys() else False
 
             new_symbol_schema.statuses[new_status.id_code] = new_status
             if verbose:
@@ -663,7 +673,7 @@ class SymbolSchema:
                 new_hqtfd_code.applies_to_symbol_sets = hqtfd_value['applies to']
 
             if verbose:
-                print('\t' + new_hqtfd_code)
+                print(f'\t{new_hqtfd_code}')
             new_symbol_schema.hqtfd_codes[new_hqtfd_code.id_code] = new_hqtfd_code
 
         # Load amplifiers
@@ -703,7 +713,7 @@ class SymbolSchema:
             print('Loading symbol sets')
         for symbol_set_json_code in [key for key in json_data['symbol sets'] if key != 'notes']:
             loaded_symbol_set = import_symbol_set(symbol_set_json_code,
-                                               json_data['symbol sets'][symbol_set_json_code])
+                                                  json_data['symbol sets'][symbol_set_json_code])
             new_symbol_schema.symbol_sets[loaded_symbol_set.id_code] = loaded_symbol_set
 
             if verbose:
@@ -711,7 +721,7 @@ class SymbolSchema:
 
         return new_symbol_schema
 
-    def get_entity(self, symbol_set, entity_code, frame_set = 0):
+    def get_entity(self, symbol_set, entity_code, frame_set=0):
         if symbol_set not in self.symbol_sets.keys():
             return None
         return self.symbol_sets[symbol_set].get_entity(entity_code, frame_set)
@@ -721,8 +731,8 @@ class SymbolSchema:
             return None
         return self.symbol_sets[symbol_set].get_modifier(mod_index, mod_code)
 
-
-    def get_svg_string(self, svg_name, verbose=False):
+    @staticmethod
+    def get_svg_string(svg_name, verbose=False):
         if verbose:
             print(f'Loaded "{svg_name}"')
         try:
@@ -758,7 +768,7 @@ class SymbolSchema:
                 return None
 
             path_name = os.path.join(path_name, self.symbol_folders['symbol sets'],
-                                    symbol_set)
+                                     symbol_set)
             if svg_type == 'E':
                 # Entity
                 # Format E-00-111111
@@ -769,21 +779,21 @@ class SymbolSchema:
                 path_name = os.path.join(path_name, self.symbol_folders['within symbol set']['entities'])
                 entity_code = code[3:]
 
-                if entity_code[3:4] == '0X':
-                    print('Entity is 0X-type overlay.')
+                # if entity_code[:2] == '0X':
+                #     print('\tEntity is 0X-type overlay')
 
                 entity = self.get_entity(symbol_set, entity_code, standard_identity.frame_set)
                 if entity is None:
-                    print('Can\'t find overlay %s' % entity_code)
+                    # print('Can\'t find overlay %s' % entity_code)
                     filename = entity_code + '.svg'
                     if os.path.exists(os.path.join(path_name, filename)):
-                        print('Path exists')
+                        # print('Path exists')
                         pass
                     else:
-                        filename = entity_code + '-' + standard_identity.frame_set + '.svg' 
+                        filename = entity_code + '-' + standard_identity.frame_set + '.svg'
                 else:
                     # print('\tFound overlay%s' % ('*' if entity.icon_type == 'ff' else ''))
-                    filename = entity.id_code + ('-%s' % standard_identity.frame_set \
+                    filename = entity.id_code + ('-%s' % standard_identity.frame_set
                                                  if entity.icon_type == 'ff' else '') + '.svg'
                 path_name = os.path.join(path_name, filename)
 
@@ -798,7 +808,7 @@ class SymbolSchema:
                 mod_set = code[3]
                 mod_code = code[4:]
                 path_name = os.path.join(path_name,
-                                         self.symbol_folders['within symbol set']['modifiers'].replace('*', mod_set),)
+                                         self.symbol_folders['within symbol set']['modifiers'].replace('*', mod_set), )
                 # Check if modifier is full frame
                 if int(mod_set) not in [1, 2] or mod_code not in \
                         self.symbol_sets[symbol_set].modifiers[int(mod_set)].keys():

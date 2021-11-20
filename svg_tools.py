@@ -1,6 +1,6 @@
-import xml.etree.ElementTree as ET
 import copy
 import re
+import xml.etree.ElementTree as ET
 
 
 def read_string_into_etree(raw_string_data):
@@ -103,7 +103,7 @@ def apply_offset(svg_ele, offset, offset_children=True):
     # Done
 
 
-def layer_svg(svg_bottom, svg_top, offset=[0.0, 0.0]):
+def layer_svg(svg_bottom, svg_top, offset:list=[0.0, 0.0]):
     if svg_top is None:
         return
     # print(svg_top.tag)

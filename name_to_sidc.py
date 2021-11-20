@@ -1,7 +1,7 @@
-from symbol_schema import SymbolSchema
-from nato_symbol import  NATOSymbol
-from fuzzywuzzy import fuzz
 import re
+
+from nato_symbol import NATOSymbol
+from symbol_schema import SymbolSchema
 
 
 def get_names_list(item) -> list:
@@ -16,37 +16,24 @@ def get_names_list(item) -> list:
         return item.names
     return []
 
-def get_match_weights(name_string, candidates, match_type='partial_token_sort_ratio'):
-    matches = []
-    for candidate in candidates:
-        candidate_names = get_names_list(candidate)
-        if len(candidate_names) < 1:
-            print("ERROR: No candidate names; skipping")
-            continue
-        max_ratio = 0
-        for name in candidate_names:
-            fuzzy_dist = getattr(fuzz, match_type)(name, name_string)
-            max_ratio = max(max_ratio, fuzzy_dist)
-        matches.append((candidate, max_ratio))
-    return matches
-
 
 def split_into_words(in_str:str) -> list:
-    in_str = re.sub('[/ \t\n]+', ' ', in_str).strip().lower()
+    in_str = re.sub('[/ \-\t\n]+', ' ', in_str).strip().lower()
     in_str = ''.join([c for c in in_str if c.isalpha() or c == ' '])
     return [word.strip() for word in in_str.strip().split(' ') if len(word) > 0]
 
 
 def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
+
     # Step 1: calculate the number of words in candidate_list_of_lists
     matches = [] # Set of (candidate, weight) pairs
     name_string_words = split_into_words(name_string)
+
     for candidate in candidate_list:
+
         # Iterate over the possible names
         for candidate_name in get_names_list(candidate):
             candidate_name_words = split_into_words(candidate_name)
-
-            # print(candidate_name_words)
 
             matching = False
 
@@ -98,12 +85,12 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
 
 def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=False) -> NATOSymbol:
     proc_name_string = name_string
-    EMPTY_SIDC = ''
 
     # Sanitize string
     # Remove extra white spaces
     proc_name_string = proc_name_string.lower()
     proc_name_string = re.sub('[ \t\n]+', ' ', proc_name_string).strip()
+
     if verbose:
         print(f'Matching "{proc_name_string}"')
 
@@ -121,20 +108,20 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=Fal
         print(f'\tAssuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
 
     # Step 2: Detect entity type
-    entity_type, proc_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
+    entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
                                            match_longest=True)
 
+    symbol_set = None
     if entity_type is None:
-        print("\tWarning: Unable to determine entity type; defaulting to land unit")
+        print(f"\tWARNING: Unable to determine entity type from string \"{name_string}\"; defaulting to land unit")
         ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
-        ret_symbol.entity = None
-        ret_symbol.symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
-        ret_symbol.standard_identity = standard_identity
-        return ret_symbol
-
-    if verbose:
-        print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
-    symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
+        symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
+        ret_symbol.entity = symbol_set.get_entity("000000")
+    else:
+        if verbose:
+            print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
+        symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
+        proc_name_string = new_name_string
 
     candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(symbol_set.id_code)]
     amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
@@ -160,7 +147,7 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=Fal
     if status_code is not None:
         proc_name_string = new_name_string
         if verbose:
-            print(f'Assuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
+            print(f'\tAssuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
 
     # Find modifiers
     mods = [None, None]

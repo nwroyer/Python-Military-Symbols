@@ -1,9 +1,8 @@
-from symbol_schema import SymbolSchema
-from nato_symbol import NATOSymbol
 import os
-import subprocess
 import xml.etree.ElementTree as ET
 
+from nato_symbol import NATOSymbol
+from symbol_schema import SymbolSchema
 
 master_json_location = '/home/nick/Projects/QGIS NATO/QGIS-APP-6D-Renderer-Plugin/NATO symbols.json'
 
@@ -11,7 +10,7 @@ if __name__ == '__main__':
     symbol_schema = SymbolSchema.load_symbol_schema_from_file(master_json_location)
 
     test_symbol = NATOSymbol(symbol_schema)
-    #test_symbol.create_from_sidc('12-34-56-7-8-90-123456-78-90')
+    # test_symbol.create_from_sidc('12-34-56-7-8-90-123456-78-90')
 
     # Status flag then HQTFD flag
     test_symbol.create_from_sidc('10-03-10-0-1-14-121800-01-42')

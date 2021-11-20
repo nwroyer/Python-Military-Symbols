@@ -1,0 +1,12 @@
+{
+  "name": "EWS 8674",
+  "subsets": {
+    "friendly units": {
+      "HIMARS": "10*3 10 **** 130301 4100",
+      "ACV": {
+        "alt names": ["AAV"],
+        "sidc": "10*3 10 **** 120502 0000"
+      }
+    }
+  }
+}

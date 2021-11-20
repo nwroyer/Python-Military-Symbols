@@ -92,7 +92,7 @@
 			},
 			"5": {
 				"name": "suspect",
-				"alt name": "joker",
+				"alt names": ["joker", "suspected"],
 				"frame alias": "6",
 				"uses dashed frame": true
 			},
@@ -575,13 +575,15 @@
 					"modcats-inherit": true,
 					"entity types": {
 						"01": {"name": "broadcast transmitter antennae", "type": "fo"},
-						"02": "civil affairs",
+						"02": ["civil affairs", "CA"],
 						"03": "civil-military cooperation",
-						"04": "information operations",
+						"04": ["information operations", "IO"],
 						"05": "liaison",
 						"06": {
-							"name": "military information support operations (MISO)",
-							"alt names": ["PSYOPS"],
+							"name": "PSYOP",
+							"alt names": ["PSYOPS", "MISO", "military information support operations",
+								"psychological operations"
+							],
 							"entity subtypes": {
 								"01": {"name": "* broadcast transmitter antennae", "type": "fo", "overlay": ["110600", "110100"]}
 							}
@@ -590,18 +592,21 @@
 						"08": "radio relay",
 						"09": "radio teletype center",
 						"10": {
-							"name": "signal",
+							"names": ["signal", "comms", "comm", "communications", "communication"],
 							"type": "ff",
 							"entity subtypes": {
 								"01": {"name": "radio *", "type": "ff", "overlay": ["111000", "110700"]},
 								"02": {"name": "radio relay *", "type": "ff", "overlay": ["111000", "110800"]},
 								"03": {"name": "teletype *", "type": "ff", "overlay": ["111000", "110900"]},
 								"04": {"name": "tactical satellite *", "type": "ff", "overlay": ["111000", "111100"]},
-								"05": {"name": "video imagery (combat camera) *", "type": "ff", "overlay": ["111000", "111200"]}
+								"05": {"names": "video imagery (combat camera) *", "type": "ff", "overlay": ["111000", "111200"]}
 							}
 						},
 						"11": "tactical satellite",
-						"12": "video imagery (combat camera)"
+						"12": {
+							"names": ["video imagery (combat camera)", "combat camera", "comcam", "COMMSTRAT"],
+							"match weight": 1
+						}
 					}
 				},
 				"12": {
@@ -647,11 +652,13 @@
 							"type": "ff",
 							"match weight": 2,
 							"entity subtypes": {
-								"01": {"name": "amphibious *", "type": "ff", "overlay": ["121100", "120300"]},
-								"02": {"names": ["armored *", "mechanized *", "mechanized", "tracked *"], "type": "ff", "overlay": ["121100", "120500"], "match weight":  2},
+								"01": {"names": ["amphibious *", "amphibious infantry"],
+									"match weight": 2, "type": "ff", "overlay": ["121100", "120300"]},
+								"02": {"names": ["armored *", "mechanized *", "mechanized", "tracked *"],
+									"type": "ff", "overlay": ["121100", "120500"], "match weight":  2},
 								"03": {"name": "main gun system *", "type": "ff", "overlay": ["121100", "121106"]},
-								"04": {"name": "motorized *", "type": "ff", "overlay": ["121100", "0XMotorized"]},
-								"05": {"names": ["infantry fighting vehicle", "IFV"], "type": "ff", "overlay": ["121103", "120500"]},
+								"04": {"name": "motorized *", "type": "ff", "overlay": ["121100", "0XMotorized"], "match weight":  2},
+								"05": {"names": ["infantry fighting vehicle", "IFV"], "type": "ff", "overlay": ["121103", "120500"], "match weight":  2},
 								"06": {
 									"name": "main gun system",
 									"alt names": ["heavy weapon"],
@@ -707,7 +714,7 @@
 						"03": {
 							"names": ["field artillery", "artillery"],
 							"entity subtypes": {
-								"01": {"name": "self-propelled *", "overlay": ["130300", "120500"]},
+								"01": {"names": ["self-propelled *", "self-propelled artillery", "motorized artillery", "mechanized artillery"], "overlay": ["130300", "120500"]},
 								"02": {"name": "* target acquisition", "type": "ff", "overlay": ["130301", "121300"]}
 							}
 						},
@@ -817,52 +824,53 @@
 						"03": {"name": "airport of debarkation/embarkation", "type": "m1", "overlay": ["163600", "0XAirport"]},
 						"04": "ammunition",
 						"05": "band",
-						"06": "combat service support",
+						"06": ["combat service support", "CSS"],
 						"07": "finance",
 						"08": "judge advocate general",
 						"09": "labor",
-						"10": "laundry / bath",
+						"10": ["laundry", "bath"],
 						"11": "maintenance",
 						"12": {"name": "material", "type": "ff", "overlay": ["0XMaterial", "163400"]},
 						"13": {"name": "medical", "type": "ff", "modcats-additional": ["medical capability"]},
 						"14": {
-							"name": "medical treatment facility",
+							"names": ["medical treatment facility", "MTF"],
 							"type": "ff",
 							"overlay": ["0XHospital", "161300"],
 							"modcats-additional": ["medical capability"]
 						},
-						"15": "morale, welfare, and recreation",
-						"16": "mortuary affairs / graves registration",
+						"15": ["morale, welfare, and recreation", "MWR"],
+						"16": ["mortuary affairs", "graves registration"],
 						"17": {"name": "multiple classes of supply", "type": "ff", "overlay": ["0XMult", "163400"]},
 						"18": {"name": "NATO supply class I", "type": "ff", "overlay": ["0XClassI", "163400"]},
 						"19": {"name": "NATO supply class II", "type": "ff", "overlay": ["0XClassII", "163400"]},
 						"20": {"name": "NATO supply class III", "type": "ff", "overlay": ["162500", "163400"]},
 						"21": {"name": "NATO supply class IV", "type": "ff", "overlay": ["0XClassIV", "163400"]},
 						"22": {"name": "NATO supply class V", "type": "ff", "overlay": ["160400", "163400"]},
-						"23": "Ordnance",
+						"23": "ordnance",
 						"24": "personnel services",
-						"25": "petroleum, oil, and lubricants",
+						"25": ["petroleum, oil, and lubricants", "oil", "gas", "POL"],
 						"26": "pipeline",
 						"27": "postal",
-						"28": "public affairs / public information",
+						"28": ["public affairs", "public information", "PA", "COMMSTRAT"],
 						"29": "quartermaster",
 						"30": {"name": "railhead", "type": "m1", "overlay": ["163600", "0XRailhead"]},
 						"31": "religious support",
 						"32": "replacement holding unit",
-						"33": {"name": "sea port of debarkation/embarkation", "type": "m1", "overlay": ["163600", "0XSeaport"]},
+						"33": {"names": ["sea port of debarkation/embarkation", "sea port of debarkation", "SPOD", "SPOE",
+							"sea port of embarkation", "sea port", "seaport"], "type": "m1", "overlay": ["163600", "0XSeaport"]},
 						"34": {"name": "supply","type": "ff"},
-						"35": "joint information bureau",
-						"36": "transportation",
-						"37": {"name": "US supply class I", "type": "ff", "overlay": ["0XUSClassI", "163400"]},
-						"38": {"name": "US supply class II", "type": "ff", "overlay": ["0XUSClassII", "163400"]},
-						"39": {"name": "US supply class III", "type": "ff", "overlay": ["162900", "163400"]},
-						"40": {"name": "US supply class IV", "type": "ff", "overlay": ["140700", "163400"]},
-						"41": {"name": "US supply class V", "type": "ff", "overlay": ["160400", "163400"]},
-						"42": {"name": "US supply class VI", "type": "ff", "overlay": ["0XUSClassVI", "163400"]},
-						"43": {"name": "US supply class VII", "type": "ff", "overlay": ["0XUSClassVII", "163400"]},
-						"44": {"name": "US supply class VIII", "type": "ff"},
-						"45": {"name": "US supply class IX", "type": "ff", "overlay": ["0XUSClassIX", "163400"]},
-						"46": {"name": "US supply class X", "type": "ff", "overlay": ["110200", "163400"]},
+						"35": ["joint information bureau", "JIB", "CJIB"],
+						"36": ["transportation", "motor transportation", "motor T", "trucks"],
+						"37": {"names": ["US supply class I", "US class I", "class I"], "type": "ff", "overlay": ["0XUSClassI", "163400"]},
+						"38": {"names": ["US supply class II", "US class II", "class II"], "type": "ff", "overlay": ["0XUSClassII", "163400"]},
+						"39": {"names": ["US supply class III", "US class III", "class III"], "type": "ff", "overlay": ["162900", "163400"]},
+						"40": {"names": ["US supply class IV", "US class IV", "class IV"], "type": "ff", "overlay": ["140700", "163400"]},
+						"41": {"names": ["US supply class V", "US class V", "class V"], "type": "ff", "overlay": ["160400", "163400"]},
+						"42": {"names": ["US supply class VI", "US class VI", "class VI"], "type": "ff", "overlay": ["0XUSClassVI", "163400"]},
+						"43": {"names": ["US supply class VII", "US class VII", "class VII"], "type": "ff", "overlay": ["0XUSClassVII", "163400"]},
+						"44": {"names": ["US supply class VIII", "US class VIII", "class VIII"], "type": "ff"},
+						"45": {"names": ["US supply class IX", "US class IX", "class IX"], "type": "ff", "overlay": ["0XUSClassIX", "163400"]},
+						"46": {"names": ["US supply class X", "US class X", "class X"], "type": "ff", "overlay": ["110200", "163400"]},
 						"47": "water",
 						"48": "water purification",
 						"49": "broadcast"
@@ -963,7 +971,7 @@
 				"38": {"name": "movement control center", "cat": "capability"},
 				"39": {"name": "multinational", "cat": "capability"},
 				"40": {"name": "multinational specialized unit", "cat": "capability"},
-				"41": {"name": "multiple rocket launcher", "cat": "capability"},
+				"41": {"names": ["multiple rocket launcher", "MLRS", "HIMARS"], "cat": "capability"},
 				"42": {"name": "NATO medical role 1", "cat": "medical capability"},
 				"43": {"name": "NATO medical role 2", "cat": "medical capability"},
 				"44": {"name": "NATO medical role 3", "cat": "medical capability"},
@@ -981,7 +989,7 @@
 				"56": {"name": "sensor control module", "cat": "capability"},
 				"57": {"name": "signals intelligence", "cat": "capability"},
 				"58": {"name": "single shelter switch", "cat": "capability"},
-				"59": {"name": "single rocket launcher", "cat": "capability"},
+				"59": {"names": ["single rocket launcher", "rocket"], "cat": "capability"},
 				"60": {"name": "smoke", "cat": "capability"},
 				"61": {"name": "sniper", "cat": "capability"},
 				"62": {"name": "sound ranging", "cat": "capability"},
@@ -1128,7 +1136,7 @@
 								"13": {"name":  "flamethrower"},
 								"14": {"name":  "mortar"},
 								"15": {"name":  "single rocket launcher"},
-								"16": {"name":  "antitank rocket launcher"}
+								"16": {"name":  "anti-tank rocket launcher"}
 							}
 						},
 						"04": {
@@ -1444,7 +1452,7 @@
 							"name": "anti-tank missile launcher",
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"name": "light *", "type": "fo", "overlay": ["111200", "0XLight"]},
+								"01": {"names": ["light *", "AT4", "Javelin"], "type": "fo", "overlay": ["111200", "0XLight"]},
 								"02": {"name": "medium *", "type": "fo", "overlay": ["111200", "0XMedium"]},
 								"03": {"name": "heavy *", "type": "fo", "overlay": ["111200", "0XHeavy"]}
 							}
@@ -1505,15 +1513,15 @@
 							"name": "armored",
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"name": "armored fighting vehicle", "type": "fo"},
+								"01": {"names": ["armored fighting vehicle", "AFV", "IFV"], "type": "fo"},
 								"02": {"name": "armored fighting vehicle command and control", "type": "fo", "overlay": ["120101", "0XCenterC2"]},
-								"03": {"name": "armored personnel carrier", "type": "fo"},
-								"04": {"name": "armored personnel carrier ambulance", "type": "fo", "overlay": ["120103", "0XMedical"]},
+								"03": {"names": ["armored personnel carrier", "APC"], "type": "fo"},
+								"04": {"names": ["armored personnel carrier ambulance", "APC ambulance"], "type": "fo", "overlay": ["120103", "0XMedical"]},
 								"05": {"name": "armored protected vehicle", "type": "fo"},
 								"06": {"name": "armored protected vehicle recovery", "type": "fo", "overlay": ["120105", "0XMaintenance"]},
 								"07": {"name": "armored protected vehicle MEDEVAC", "type": "fo", "overlay": ["120105", "0XMedical"]},
 								"08": {"name": "armored personnel carrier recovery", "type": "fo", "overlay": ["120103", "0XMaintenance"]},
-								"09": {"name": "combat service support vehicle", "type": "fo"},
+								"09": {"names": ["combat service support vehicle", "CSS vehicle"], "type": "fo"},
 								"10": {"name": "light armored wheeled vehicle", "type": "fo"}
 							}
 						},
@@ -1759,15 +1767,17 @@
 						"03": {"name": "booby trap", "type": "fo"},
 						"04": {"name": "CBRN equipment", "type": "fo"},
 						"05": {"name": "computer system", "type": "fo"},
-						"06": "Command Launch Equipment (CLE)",
-						"07": {"name": "generator set", "type": "fo"},
+						"06": ["Command Launch Equipment", "CLE"],
+						"07": {"names": ["generator set", "generator"], "type": "fo"},
 						"08": "Ground Based Midcourse Defense (GMD) Fire Control Center (GFC)",
 						"09": "In-Flight Interceptor Communications System (IFICS) Data Terminal (IDT)",
 						"10": {"name": "laser", "type": "fo"},
 						"11": {
-							"name": "Military Information Support Operations (MISO)",
-							"alt names": ["PSYOPS"], 
-							"type": "fo"
+							"name": "PSYOP",
+							"alt names": ["PSYOPS", "MISO", "Military Information Support Operations",
+								"psychological operations"],
+							"type": "fo",
+							"match weight": -1
 						},
 						"12": "sustainment shipments",
 						"13": {"name": "tent", "type": "fo"},
@@ -2376,8 +2386,8 @@
 								"02": "amphibious assault, non-specified",
 								"03": "amphibious assault ship, general",
 								"04": "amphibious assault ship, multipurpose",
-								"05": "amphibious assault ship, helicopter",
-								"06": {"name": "amphibious transport dock", "modcats-additional": ["cargo capacity"]},
+								"05": ["amphibious assault ship, helicopter", "LHA"],
+								"06": {"names": ["amphibious transport dock", "LHD"], "modcats-additional": ["cargo capacity"]},
 								"07": {"name": "landing ship", "modcats-additional": ["cargo capacity"]},
 								"08": {"name": "landing craft",  "modcats-additional": ["cargo capacity"]}
 							}
@@ -2385,8 +2395,8 @@
 						"04": {
 							"name": "mine warfare ship",
 							"entity subtypes": {
-								"01": "mine layer",
-								"02": "mine sweeper",
+								"01": ["mine layer", "minelayer"],
+								"02": ["mine sweeper", "minesweeper"],
 								"03": "mine sweeper, drone",
 								"04": "mine hunter",
 								"05": "mine countermeasures",
@@ -2394,9 +2404,9 @@
 							}
 						},
 						"05": {
-							"name": "patrol boat",
+							"names": ["patrol boat", "PB"],
 							"entity subtypes": {
-								"01": "patrol craft, submarine chaser/escort, general",
+								"01": ["patrol craft, submarine chaser/escort, general", "ASW PB"],
 								"02": "patrol ship, general"
 							}
 						},
@@ -2408,7 +2418,7 @@
 						"08": {
 							"name": "speedboat",
 							"entity subtypes": {
-								"01": "rigid hull inflatable boat (RHIB)"
+								"01": ["rigid hull inflatable boat", "RHIB"]
 							}
 						},
 						"09": "jet ski",

@@ -20,11 +20,12 @@ class NATOSymbol:
 
         # SIDC component codes
         self.context = None
-        self.entity = None
         self.standard_identity = None
         self.symbol_set = None
         self.status = None
         self.hqtfd = None
+        self.entity = None
+
         self.amplifier = None
         self.modifiers = {1: None, 2: None}
 
@@ -139,7 +140,7 @@ class NATOSymbol:
         if amplifier_code == '00':
             self.amplifier = None
         elif amplifier_code not in self.symbol_schema.amplifiers:
-            print('Amplifier "%s" not recognized; defaulting to 00' % self.amplifier_code, file=sys.stderr)
+            print('Amplifier "%s" not recognized; defaulting to 00' % amplifier_code, file=sys.stderr)
             self.amplifier = None
 
         # Check that amplifier applies to symbol set
@@ -235,9 +236,9 @@ class NATOSymbol:
 
         # Add entity icon
         if self.entity is not None and self.symbol_set is not None:
-            symbol_sets_folder = os.path.join(sym_root, self.symbol_schema.symbol_folders["symbol sets"],
-                                              self.symbol_set.id_code,
-                                              self.symbol_schema.symbol_folders['within symbol set']['entities'])
+            # symbol_sets_folder = os.path.join(sym_root, self.symbol_schema.symbol_folders["symbol sets"],
+            #                                   self.symbol_set.id_code,
+            #                                   self.symbol_schema.symbol_folders['within symbol set']['entities'])
             overlay_svgs = []
             if self.entity.is_overlay():
                 # print(self.entity.overlay_elements)
@@ -267,15 +268,11 @@ class NATOSymbol:
         # Adding entity done; add amplifiers
         if self.amplifier is not None and self.symbol_set is not None and \
                 self.amplifier.applies_to(self.symbol_set.id_code):
-            amplifier_file_location = os.path.join(sym_root, self.symbol_schema.symbol_folders['amplifiers'],
-                                            '%s-%s.svg' % (self.amplifier.id_code, self.standard_identity.frame_set))
 
             amplifier_svg = self.symbol_schema.get_svg_by_code('A-%s' % self.amplifier.id_code, self.standard_identity)
             if fill_type == 'unfilled':
                 make_unfilled(amplifier_svg, fill_color)
             layer_svg(symbol_svg, amplifier_svg)
-
-        # TODO Add status
 
         # Add HQ/TF/Dummy indicator
         if self.hqtfd is not None:
@@ -327,12 +324,8 @@ class NATOSymbol:
                     make_unfilled(mod_svg, fill_color)
                 layer_svg(symbol_svg, mod_svg)
 
-        # Done adding HQTFD codes; add status code
-        if self.status is not None and (not(use_variants) or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
-            print(self.status.names[0])
-            overlays = []
-
-            overlays.append(self.status.id_code)
+        if self.status is not None and (not use_variants  or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
+            overlays = [self.status.id_code]
 
             for overlay_code in overlays:
                 overlay_svg = self.symbol_schema.get_svg_by_code(f'S-{overlay_code}', self.standard_identity,
@@ -349,6 +342,7 @@ class NATOSymbol:
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
         old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
+        old_center = [old_viewbox[0] + old_viewbox[2]*0.5, old_viewbox[1] + old_viewbox[3] * 0.5]
 
         if expand_to_fit:
             # Expand the bounding box to fit if that option is selected
@@ -384,6 +378,8 @@ class NATOSymbol:
             new_image_size = [float(symbol_svg.attrib['width']) + pixel_padding*2,
                               float(symbol_svg.attrib['height']) + pixel_padding*2]
             new_viewbox = old_viewbox
+
+        new_center = [new_viewbox[0] + new_viewbox[2] * 0.5, new_viewbox[1] + new_viewbox[3] * 0.5]
 
         if expand_to_fit or pixel_padding > 0:
             symbol_svg.attrib["width"] = str(int(new_image_size[0]))

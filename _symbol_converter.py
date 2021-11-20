@@ -13,7 +13,6 @@ def pack_svgs_into_json(current_working_directory:str, subdir:str = 'symbols', o
 	total_file_count:int = 0
 	json_contents = JSONFilesystem()
 
-	subdirs = []
 	for subdir, dirs, files in os.walk(symbol_dir):
 		for filename in files:
 			if os.path.splitext(filename)[1] != '.svg':
@@ -34,8 +33,6 @@ def pack_svgs_into_json(current_working_directory:str, subdir:str = 'symbols', o
 
 
 def convert_inkscape_to_svg(current_working_directory, subdir = ''):
-	current_working_directory = os.getcwd()
-
 	clean_only = False
 
 	svg_directory = os.path.join(current_working_directory, 'svgs')
@@ -89,7 +86,6 @@ def convert_inkscape_to_svg(current_working_directory, subdir = ''):
 														'--group-by-style', 'no'], stdout=FNULL))
 
 	exit_codes = [p.wait() for p in cleaning_processes]
-
 	FNULL.close()
 
 
