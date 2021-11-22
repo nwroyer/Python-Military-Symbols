@@ -316,7 +316,7 @@ class SymbolSchema:
         return ret
 
     @classmethod
-    def load_symbol_schema_from_file(cls, json_filepath, verbose=False):
+    def load_symbol_schema_from_file(cls, json_filepath='', verbose=False):
         """
         A function to load a symbol schema from JSON file at a particular filepath
         :param json_filepath: The filepath to the JSON file to load
@@ -562,9 +562,14 @@ class SymbolSchema:
 
         # End load symbol set subroutine
 
+        opening_filepath = json_filepath
+        if json_filepath is None or json_filepath == '':
+            module_dir = os.path.dirname(os.path.realpath(__file__))
+            opening_filepath = os.path.join(module_dir, 'symbols.json')
+
         if verbose:
             print('Importing master JSON schema')
-        with open(json_filepath, 'r') as json_file:
+        with open(opening_filepath, 'r') as json_file:
             json_data = json.load(json_file)  # TODO load from string instead
 
         new_symbol_schema = SymbolSchema()

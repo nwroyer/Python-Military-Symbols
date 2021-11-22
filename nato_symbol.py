@@ -68,7 +68,7 @@ class NATOSymbol:
 
         return ret
 
-    def create_from_sidc(self, sidc_raw, verbose=False) -> bool:
+    def create_from_sidc(self, sidc_raw, verbose=False):
         """
         Initializes the SIC from the given symbol
         :param sidc_raw: The string containing the SIDC to initialize from
@@ -79,7 +79,7 @@ class NATOSymbol:
         sidc = ''.join(c for c in sidc_raw if c.isnumeric())
         if len(sidc) < 20:
             print('SIDCs must be at least 20 digits', file=sys.stderr)
-            return False
+            return None
         elif len(sidc) > 20:
             if len(sidc) >= 30:
                 self.extra_ten_digits = sidc[20:30]
@@ -98,13 +98,13 @@ class NATOSymbol:
         context_code = sidc[2]
         if context_code not in self.symbol_schema.contexts.keys():
             print('Context "%s" not recognized; aborting' % context_code, file=sys.stderr)
-            return False
+            return None
         self.context = self.symbol_schema.contexts[context_code]
 
         symbol_set_code = sidc[4:6]
         if symbol_set_code not in self.symbol_schema.symbol_sets.keys():
             print('Symbol set "%s" not recognized; aborting' % symbol_set_code, file=sys.stderr)
-            return False
+            return None
         self.symbol_set = self.symbol_schema.symbol_sets[symbol_set_code]
 
         standard_identity_code = sidc[3]
@@ -181,7 +181,7 @@ class NATOSymbol:
                 self.modifiers[mod_set] = new_mod
 
         # Sanity check complete; pointers to all the relevant information have been loaded in
-        return True
+        return self
 
     def uses_civilian_coloring(self):
         if self.entity.uses_civilian_coloring:
@@ -191,7 +191,7 @@ class NATOSymbol:
                 return True
         return False
 
-    def get_svg(self, fill_type='light', expand_to_fit=False, pixel_padding=8, use_variants=False):
+    def get_svg(self, fill_type='light', pixel_padding=-1, use_variants=False):
         """
         Gets an SVG as a string representing this object
         :param: fill_type: Can be "light" (default), "medium", "dark", or 'unfilled'
@@ -345,7 +345,7 @@ class NATOSymbol:
         old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
         old_center = [old_viewbox[0] + old_viewbox[2]*0.5, old_viewbox[1] + old_viewbox[3] * 0.5]
 
-        if expand_to_fit:
+        if pixel_padding >= 0:
             # Expand the bounding box to fit if that option is selected
             svg_tmp_name = os.path.join(os.getcwd(), 'svg.tmp')
             with open(svg_tmp_name, 'w') as svg_tmp:
@@ -382,7 +382,7 @@ class NATOSymbol:
 
         new_center = [new_viewbox[0] + new_viewbox[2] * 0.5, new_viewbox[1] + new_viewbox[3] * 0.5]
 
-        if expand_to_fit or pixel_padding > 0:
+        if pixel_padding >= 0:
             symbol_svg.attrib["width"] = str(int(new_image_size[0]))
             symbol_svg.attrib["height"] = str(int(new_image_size[1]))
             symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)

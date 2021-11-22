@@ -1,35 +1,112 @@
 # test
 import os
+import sys
 
-from name_to_sidc import name_to_symbol
+import name_to_sidc
 from nato_symbol import NATOSymbol
 from symbol_schema import SymbolSchema
 from symbol_template import SymbolTemplateSet
 
+sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
+if sym_schema is None:
+    print("Error loading symbol schema; exiting", file=sys.stderr)
+
+
+def add_symbol_template_set(template_filename):
+    """
+    Add a symbol template to allow easier generation of symbols by name for specific situation.
+    :param template_filename: The filename for the template file is structured as shown in the example_template.json file
+    """
+    symbol_temp: SymbolTemplateSet = SymbolTemplateSet(sym_schema).load_from_file(template_filename)
+    sym_schema.add_template_set(symbol_temp)
+
+
+def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False) -> str:
+    """
+    Constructs an SVG for the specified symbol, given as a SIDC, and returns it as a string for further processing.
+    :param sidc: The SIDC to construct the symbol from
+    :param bounding_padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param verbose: Whether to print ancillary information while processing, defaulting to false.
+    :return: A string containing the SVG for the constructed symbol.
+    """
+    symbol: NATOSymbol = NATOSymbol(sym_schema).create_from_sidc(sidc, verbose)
+    return symbol.get_svg(pixel_padding=bounding_padding) if symbol is not None else ''
+
+
+def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose=False) -> str:
+    """
+    Constructs an SVG and returns it in string form, using the best guess as to the SIDC based on the provided name.
+    :param name_string: The string containing the name, i.e. "Friendly infantry platoon headquarters"
+    :param bounding_padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param verbose:  Whether to print ancillary information while processing, defaulting to false.
+    :return: A string containing the SVG for the constructed symbol.
+    """
+    symbol: NATOSymbol = name_to_sidc.name_to_symbol(name_string, sym_schema, verbose)
+    return symbol.get_svg(pixel_padding=bounding_padding) if symbol is not None else ''
+
+
+def _write_symbol(is_sidc, creator_var, out_filepath, bounding_padding=4, auto_name=True, verbose=False) -> None:
+    """
+    Internal helper function to write a symbol to the file specified.
+    :param is_sidc: Whether the creator_var parameter is a SIDC or a name
+    :param creator_var: The string to construct the symbol from, either a SIDC or a name
+    :param out_filepath: The filepath to write to
+    :param bounding_padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param auto_name: Whether to auto-name the file by SIDC in the directory specified by out_filepath, or use out_filepath directly. Defaults to true.
+    :param verbose: Whether to print ancillary information while processing, defaulting to false.
+    """
+    symbol: NATOSymbol = NATOSymbol(sym_schema).create_from_sidc(creator_var, verbose) if is_sidc else name_to_sidc.name_to_symbol(creator_var, sym_schema, verbose)
+
+    if auto_name:
+        out_dir = os.path.dirname(out_filepath) if os.path.isfile(out_filepath) else out_filepath
+        out_filepath = os.path.join(out_dir, f"{symbol.get_sidc()}.svg")
+
+    with open(out_filepath, 'w') as out_file:
+        out_file.write(symbol.get_svg(pixel_padding=bounding_padding))
+
+
+def write_symbol_svg_string_from_sidc(sidc, out_filepath, bounding_padding=4, auto_name=True, verbose=False) -> None:
+    """
+    Internal helper function to write a symbol constructed from the given SIDC to the given filepath.
+    :param sidc: The SIDC to construct the symbol from
+    :param out_filepath: The filepath to write to
+    :param bounding_padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param auto_name: Whether to auto-name the file by SIDC in the directory specified by out_filepath, or use out_filepath directly. Defaults to true.
+    :param verbose: Whether to print ancillary information while processing, defaulting to false.
+    """
+    _write_symbol(True, sidc, out_filepath, bounding_padding, auto_name, verbose)
+
+
+def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_padding=4, auto_name=True, verbose=False) -> None:
+    """
+    Internal helper function to write a symbol constructed as a best guess from the given name to the given filepath.
+    :param name_string: The name to construct the symbol from
+    :param out_filepath: The filepath to write to
+    :param bounding_padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param auto_name: Whether to auto-name the file by SIDC in the directory specified by out_filepath, or use out_filepath directly. Defaults to true.
+    :param verbose: Whether to print ancillary information while processing, defaulting to false.
+    """
+    _write_symbol(False, name_string, out_filepath, bounding_padding, auto_name, verbose)
+
+
 if __name__ == '__main__':
     # Get current working directory
 
-    module_dir = os.path.dirname(os.path.realpath(__file__))
+    module_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep
 
-    symbol_schema:SymbolSchema = SymbolSchema.load_symbol_schema_from_file(os.path.join(module_dir, 'symbols.json'))
-
-    symbol_temp:SymbolTemplateSet = SymbolTemplateSet(symbol_schema).load_from_file(os.path.join(module_dir, 'templates.json'))
-    symbol_schema.add_template_set(symbol_temp)
+    add_symbol_template_set(os.path.join(module_dir, 'example_template.json'))
 
     test_lines = [
         "friendly airborne infantry platoon headquarters",
         "HIMARS battery",
-        "suspected enemy PSYOP company",
+        "suspected enemy airborne PSYOP company",
         "friendly VTOL rotary-wing squadron",
         "friendly Javelin",
-        "neutral civilian pickup truck"
+        "neutral civilian pickup truck",
+        "T-82"
     ]
 
+    out_dir = os.path.join(os.getcwd(), 'examples')
+
     for symbol_name in test_lines:
-        # print(symbol_name)
-        symbol:NATOSymbol = name_to_symbol(symbol_name, symbol_schema, verbose=False)
-        if symbol is not None:
-            svg_text = symbol.get_svg(expand_to_fit=True, pixel_padding=4)
-            svg_filename = os.path.join(os.getcwd(), 'examples', f'{symbol.get_name()} ({symbol.get_sidc()}).svg')
-            with open(svg_filename, 'w') as output:
-                output.write(svg_text)
+        write_symbol_svg_string_from_name(symbol_name, out_dir)
