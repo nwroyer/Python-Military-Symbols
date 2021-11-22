@@ -13,6 +13,16 @@ class JSONFilesystem:
     def __repr__(self):
         return str(self.json)
 
+    def get_contents_at_path(self, path):
+        path_list = os.path.normpath(path).split(os.sep)
+        cursor_element = self.json
+        for path_element in path_list[:-1]:
+            if path_element in cursor_element.keys():
+                # "Folder" exists
+                cursor_element = cursor_element[path_element]
+            else:
+                raise FileNotFoundError(path)
+
     def set_contents_at_path(self, path, contents, create_if_nonexistent=False):
         path_list = os.path.normpath(path).split(os.sep)
 
@@ -39,4 +49,6 @@ class JSONFilesystem:
         with open(filepath, 'w') as out_file:
             json.dump(self.json, out_file)
 
-
+    def read_from_file(self, filepath):
+        with open(filepath, 'r') as in_file:
+            self.json = json.load(in_file)

@@ -1,7 +1,7 @@
 try:
-    from .svg_tools import *
+    from ._svg_tools import *
 except:
-    from svg_tools import *
+    from _svg_tools import *
 
 import os
 import sys

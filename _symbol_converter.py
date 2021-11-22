@@ -1,13 +1,13 @@
 # Utility script for converting SVGs in Inkscape-ready format to raw SVGs suitable for output
-
+import json
 import os
 import subprocess
 from pathlib import Path
 
-from json_filesystem import JSONFilesystem
+from _json_filesystem import JSONFilesystem
 
 
-def pack_svgs_into_json(current_working_directory:str, subdir:str = 'symbols', output_file=''):
+def pack_svgs_into_json(current_working_directory:str, subdir:str = 'symbols', existing_input_file = '', output_file=''):
 	symbol_dir = os.path.join(current_working_directory, subdir)
 
 	total_file_count:int = 0
@@ -25,11 +25,23 @@ def pack_svgs_into_json(current_working_directory:str, subdir:str = 'symbols', o
 			total_file_count += 1
 
 	if output_file != '':
-		json_contents.dump_to_file(os.path.join(current_working_directory, output_file))
+		outfile_existing_dict = {}
+		if existing_input_file != '':
+			with open(existing_input_file, 'r') as json_file:
+				outfile_existing_dict = json.load(json_file)
+
+		outfile_existing_dict['SVGs'] = json_contents.json
+
+		with open(os.path.join(current_working_directory, output_file), 'w') as output_file_obj:
+			json.dump(outfile_existing_dict, output_file_obj)
+
 	else:
 		print(json_contents.get_dump_string())
 
-	print(f'Packing {total_file_count} SVGs into JSON')
+	print(f'Packed {total_file_count} SVGs into JSON')
+
+	new_json_file = JSONFilesystem()
+	new_json_file.read_from_file(os.path.join(current_working_directory, output_file))
 
 
 def convert_inkscape_to_svg(current_working_directory, subdir = ''):
@@ -91,7 +103,7 @@ def convert_inkscape_to_svg(current_working_directory, subdir = ''):
 
 def main():
 	# convert_inkscape_to_svg(os.getcwd(), '')
-	pack_svgs_into_json(os.getcwd(), 'symbols', 'symbols.json')
+	pack_svgs_into_json(os.getcwd(), 'symbols', output_file='symbols.json', existing_input_file='Symbol schema.json')
 
 
 if __name__ == '__main__':
