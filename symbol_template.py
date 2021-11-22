@@ -119,4 +119,5 @@ class SymbolTemplateSet:
         with open(json_filepath, 'r') as json_file:
             json_data = json.load(json_file)  # TODO load from string instead
             self.load_from_dict(json_data)
+        return self
 

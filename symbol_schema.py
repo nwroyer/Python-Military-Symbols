@@ -1,6 +1,8 @@
 import json
 import os
 
+from _json_filesystem import JSONFilesystem
+
 try:
     from ._svg_tools import *
 except:
@@ -294,6 +296,7 @@ class SymbolSchema:
         self.symbol_folders = {}
         self.symbol_fill_placeholder = ''
         self.template_sets = {}
+        self.symbol_svg_json:JSONFilesystem = None
         pass
 
     def get_flat_entities(self):
@@ -730,6 +733,9 @@ class SymbolSchema:
             if verbose:
                 loaded_symbol_set.print(tab_stops='\t', max_depth_level=4)
 
+        new_symbol_schema.symbol_svg_json = JSONFilesystem()
+        new_symbol_schema.symbol_svg_json.json = json_data['SVGs']
+
         return new_symbol_schema
 
     def get_entity(self, symbol_set, entity_code, frame_set=0):
@@ -742,23 +748,43 @@ class SymbolSchema:
             return None
         return self.symbol_sets[symbol_set].get_modifier(mod_index, mod_code)
 
-    @staticmethod
-    def get_svg_string(svg_name, verbose=False):
-        if verbose:
-            print(f'Loaded "{svg_name}"')
+    def get_svg_string(self, svg_name, verbose=False):
         try:
             with open(svg_name, 'r') as input_file:
                 raw_string_data = input_file.read()
+
+                if verbose:
+                    print(f'Loading "{svg_name}"')
+
                 return raw_string_data
         except:
+            print(f'Error: No file "{svg_name}" found')
             return None
 
     def get_svg_by_filename(self, svg_name):
-        raw_string_data = self.get_svg_string(svg_name)
-        return read_string_into_etree(raw_string_data)
+        raw_string_data = ''
+        if self.symbol_svg_json is None:
+            raw_string_data = self.get_svg_string(svg_name)
+        else:
+            try:
+                raw_string_data = self.symbol_svg_json.get_contents_at_path(svg_name)
+            except FileNotFoundError:
+                # Try without SI code
+                re_match = [it for it in re.finditer('-\d', svg_name)]
+                if len(re_match) < 1:
+                    raise FileNotFoundError
+
+                new_svg_name:str = svg_name[:re_match[-1].span()[0]] + svg_name[re_match[-1].span()[1]:]
+                raw_string_data = self.symbol_svg_json.get_contents_at_path(new_svg_name)
+
+        ret = read_string_into_etree(raw_string_data)
+        if ret is None:
+            print(f'Error: No file "{svg_name}" found by filename')
+        return ret
 
     def get_svg_filename_by_code(self, code, standard_identity, use_variants=False):
         if code is None:
+            print(f'Error: No SVG code "{code}" found')
             return None
         code = ''.join([c for c in code if c.isalnum()])
 
@@ -770,7 +796,7 @@ class SymbolSchema:
         #   S = status
         #   F = frame
         svg_type = code[0].upper()
-        path_name = self.symbol_root_folder
+        path_name = ''  # Formerly self.symbol_root_folder
 
         if svg_type in ['E', 'M']:
             # Get entity

@@ -241,7 +241,7 @@ class NATOSymbol:
             #                                   self.symbol_set.id_code,
             #                                   self.symbol_schema.symbol_folders['within symbol set']['entities'])
             overlay_svgs = []
-            if self.entity.is_overlay():
+            if self.entity.is_overlay() and self.entity.icon_type:
                 # print(self.entity.overlay_elements)
                 for overlay_code in self.entity.overlay_elements:
                     # print(overlay_code)

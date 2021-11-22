@@ -7,9 +7,6 @@ class JSONFilesystem:
     def __init__(self):
         self.json:dict = {}
 
-    def get_contents_at_path(self, path):
-        pass
-
     def __repr__(self):
         return str(self.json)
 
@@ -21,7 +18,14 @@ class JSONFilesystem:
                 # "Folder" exists
                 cursor_element = cursor_element[path_element]
             else:
+                # print(f'ERROR: File not found "{path}" in JSONFilesystem')
                 raise FileNotFoundError(path)
+
+        if path_list[-1] not in cursor_element.keys():
+            # print(f'ERROR: File not found "{path}" in JSONFilesystem')
+            raise FileNotFoundError(path)
+
+        return cursor_element[path_list[-1]]
 
     def set_contents_at_path(self, path, contents, create_if_nonexistent=False):
         path_list = os.path.normpath(path).split(os.sep)

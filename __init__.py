@@ -13,15 +13,16 @@ if __name__ == '__main__':
 
     symbol_schema:SymbolSchema = SymbolSchema.load_symbol_schema_from_file(os.path.join(module_dir, 'symbols.json'))
 
-    symbol_temp:SymbolTemplateSet = SymbolTemplateSet(symbol_schema)
-    symbol_temp.load_from_file(os.path.join(module_dir, 'templates.json'))
+    symbol_temp:SymbolTemplateSet = SymbolTemplateSet(symbol_schema).load_from_file(os.path.join(module_dir, 'templates.json'))
     symbol_schema.add_template_set(symbol_temp)
 
     test_lines = [
         "friendly airborne infantry platoon headquarters",
         "HIMARS battery",
         "suspected enemy PSYOP company",
-        "friendly VTOL rotary-wing squadron"
+        "friendly VTOL rotary-wing squadron",
+        "friendly Javelin",
+        "neutral civilian pickup truck"
     ]
 
     for symbol_name in test_lines:
