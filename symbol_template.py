@@ -4,6 +4,9 @@ from nato_symbol import NATOSymbol
 
 
 class SymbolTemplate:
+    """
+    Class representing a symbol template, to allow for easier creation of symbols by name
+    """
 
     def __init__(self, symbol_schema):
         self.name: str = ''
@@ -23,6 +26,10 @@ class SymbolTemplate:
         self.modifiers_fixed: list = [False, False]  # Digits 16-17 and 18-19, respectively
 
     def create_from_sidc(self, sidc):
+        """
+        Creates a template from a given SIDC, where asterisks indicate "free spaces" that can be modified
+        :param sidc: The SIDC to create the template from
+        """
 
         template_sidc = ''.join([c for c in sidc if c.isnumeric() or c == '*'])
         if len(template_sidc) != 20:

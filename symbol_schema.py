@@ -1,6 +1,7 @@
 import json
 import os
 
+import _svg_tools
 from _json_filesystem import JSONFilesystem
 
 try:
@@ -10,13 +11,23 @@ except:
 
 
 class SymbolSchema:
+    """
+    Class representing the symbol schema to use, defining all possible values and permissible relations between them
+    """
+
     class StandardIdentity:
+        """
+        A class defining a standard identity per the NATO APP-6D standard.
+        """
         class Context:
             def __init__(self):
-                self.name = 'reality'
+                self.name = ''
                 self.id_code = 0
 
         def get_names(self):
+            """
+            Returns a list containing all names, including alternates, of the standard identity.
+            """
             ret = [self.name]
             ret.extend(self.alt_names)
             return ret
@@ -54,6 +65,9 @@ class SymbolSchema:
             return str(self)
 
     class Status:
+        """
+        A class representing a status, per the NATO APP-6D standard
+        """
         def __init__(self):
             self.names = []
             self.id_code = 0
@@ -67,7 +81,10 @@ class SymbolSchema:
                                                  'all' if self.applies_to_all else str(self.applies_to_list))
 
     class HQTFDCode:
-        # Note that HQTFD codes apply only to land units
+        """
+        A class representing the headquarters, task force, or dummy indicator, per the NATO APP-6D standard. Note that
+        this only applies to symbol set 10 (land units).
+        """
         def __init__(self):
             self.names = []
             self.id_code = 0
@@ -79,12 +96,22 @@ class SymbolSchema:
             return len(self.overlay_elements) > 0
 
         def get_offset(self, frame_set):
+            """
+            Returns an [x, y] pair indicating the offset for the symbols to apply, indexed by standard identity
+            :param frame_set: The frame set to consider when offsetting
+            :return: An [x, y] list indicating the offset
+            """
             if frame_set not in self.offsets.keys():
                 return [0, 0]
             else:
                 return self.offsets[frame_set]
 
         def applies_to_symbol_set(self, symbol_set):
+            """
+            Indicates whether this HQTFD code applies to a particular symbol set.
+            :param symbol_set: The symbol set to check against
+            :return: True if the HQTFD code applies to the symbol set, false otherwise.
+            """
             if symbol_set is None:
                 return False
             return symbol_set.id_code in self.applies_to_symbol_sets
@@ -98,6 +125,9 @@ class SymbolSchema:
             return ret
 
     class Amplifier:
+        """
+        A class representing an amplifier, per the NATO APP-6D standard.
+        """
         def __init__(self):
             self.id_code = 0
             self.names = ['']
@@ -106,6 +136,11 @@ class SymbolSchema:
             self.category = ''
 
         def applies_to(self, symbol_set_code):
+            """
+            Indicates whether an amplifier can apply to entities in the given symbol set.
+            :param symbol_set_code: The symbol set to check against in two-digit string form
+            :return: True if the amplifier can apply to the given symbol set, false otherwise
+            """
             return True if symbol_set_code in self.applies_to_list else False
 
         def __str__(self):
@@ -113,8 +148,14 @@ class SymbolSchema:
                                                                  self.category)
 
     class SymbolSet:
+        """
+        Class representing a symbol set per the NATO APP-6D standard, including entities and modifiers
+        """
 
         class Entity:
+            """
+            Class representing an entity, per the NATO APP-6D standard, belonging to a specific symbol set
+            """
             def __init__(self):
                 self.id_code = "000000"
                 self.symbol_set = '00'
@@ -137,17 +178,29 @@ class SymbolSchema:
                 self.match_weight = 0
 
             def get_names(self) -> list:
+                """
+                Returns a list of names for the given entity, including alternate ones
+                :return: List of names
+                """
                 ret = [self.name]
                 ret.extend(self.alt_names)
                 return ret
 
             def get_flat_entities(self):
+                """
+                Returns a flat list containing this entity and all its sub-entities and sub-sub-entities, as applicable.
+                :return: List containing entity and descendants
+                """
                 ret = [self]
                 for child in self.children.values():
                     ret = ret + child.get_flat_entities()
                 return ret
 
             def is_overlay(self):
+                """
+                Indicates whether this entity's symbol is an overlay of existing elements or not.
+                :return: True if this entity is an overlay, false otherwise
+                """
                 return len(self.overlay_elements) > 0
 
             def __str__(self):
@@ -169,6 +222,12 @@ class SymbolSchema:
                 return ret
 
             def print(self, tab_stops='', max_depth_level=2):
+                """
+                Recursive helper function to print out an entity structure in a human-readable format for debugging.
+                :param tab_stops: Current tab stops, defaulting to ''.
+                :param max_depth_level: Max depth level to print to
+                :return:
+                """
                 if max_depth_level < 1:
                     return
                 print(tab_stops + str(self))
@@ -176,6 +235,11 @@ class SymbolSchema:
                     child.print(tab_stops + '\t', max_depth_level - 1)
 
             def get_child(self, id_code):
+                """
+                Returns the child of the given entity with the specified code
+                :param id_code: Two-digit ID code for entity's child to check for
+                :return: The child entity, or None if it's not found
+                """
                 if id_code in self.children.keys():
                     return self.children[id_code]
                 for child_key, child_value in self.children.items():
@@ -185,16 +249,19 @@ class SymbolSchema:
                 return None
 
         class Modifier:
+            """
+            Class representing a modifier in a symbol set, per the NATO APP-6D standard.
+            """
             def __init__(self):
-                self.modifier_set = 0
+                self.modifier_set = 0  # Whether this is part of modifier set 1 or 2, per APP-6D standard
                 self.name = ''
                 self.symbol_set = '00'
                 self.id_code = '00'
                 self.mod_category = ''
-                self.has_civilian_coloring_override = False
-                self.civilian_coloring_override_value = False
+                self.has_civilian_coloring_override = False  # Whether this modifier applies an automatic override that renders an entity with a civilian coloration
+                self.civilian_coloring_override_value = False  # The actual value to override with
                 self.alt_names = []
-                self.type = "mn"
+                self.type = "mn"  # Types: mn = main icon, ff = full frame, nn = no icon, fo = full octagon
                 self.overlay_elements = []
                 self.match_weight = 0
 
@@ -231,6 +298,12 @@ class SymbolSchema:
             return ret
 
         def print(self, tab_stops='', max_depth_level=2):
+            """
+            Recursive helper function to print modifiers in human-readable form to aid debugging
+            :param tab_stops: The current tab stops, defaulting to ''
+            :param max_depth_level: Max depth level to recurse to
+            :return:
+            """
             if max_depth_level < 1:
                 return
             print(tab_stops + str(self))
@@ -246,6 +319,11 @@ class SymbolSchema:
                     print(tab_stops + '\t\t' + str(mod))
 
         def get_entity_internal(self, id_code):
+            """
+            Returns the entity in the symbol set with the given ID code
+            :param id_code: ID code to search for
+            :return:
+            """
             if id_code in self.entities.keys():
                 return self.entities[id_code]
             for ent_key, ent_val in self.entities.items():
@@ -256,6 +334,12 @@ class SymbolSchema:
             return None
 
         def get_entity(self, id_code, frame_type=0):
+            """
+            Returns an entity with the given frame type
+            :param id_code: Type to search for
+            :param frame_type: Frame type to use
+            :return:
+            """
             test_val = self.get_entity_internal(id_code)
             if test_val is not None:
                 return test_val
@@ -267,12 +351,22 @@ class SymbolSchema:
             return None
 
         def get_flat_entities(self):
+            """
+            Returns a flat list of this symbol set's entities
+            :return: List of Entity objects
+            """
             ret = []
             for ent in self.entities.values():
                 ret = ret + ent.get_flat_entities()
             return ret
 
         def get_modifier(self, index, mod_code):
+            """
+            Returns the given modifier if it exists
+            :param index: The modifier index (1 or 2) to search in
+            :param mod_code: The two-digit modifier code in str format
+            :return: The found Modifier object, or None if it wasn't found
+            """
             if int(index) not in self.modifiers.keys():
                 return None
 
@@ -300,16 +394,27 @@ class SymbolSchema:
         pass
 
     def get_flat_entities(self):
+        """
+        Returns a flat list of all entities in the symbol schema
+        :return: List of `SymbolSet.Entity` objects
+        """
         ret = []
         for sym_set in self.symbol_sets.values():
             ret += sym_set.get_flat_entities()
         return ret
 
-    def add_template_set(self, template):
+    def add_template_set(self, template) -> None:
+        """
+        Adds a template set to the given schema
+        :param template: Template to add
+        """
         if template is not None:
             self.template_sets[template.name] = template
 
     def get_template_list(self):
+        """
+        Returns the list of all templates recognized by this SymbolSchema, regardless of symbol sets.
+        """
         ret = []
         for template_set in self.template_sets.values():
             ret.extend(template_set.get_template_list())
@@ -744,32 +849,39 @@ class SymbolSchema:
         return new_symbol_schema
 
     def get_entity(self, symbol_set, entity_code, frame_set=0):
+        """
+        Finds an entity in the given symbol schema
+        :param symbol_set: The symbol set to search in
+        :param entity_code: The entity code to search for
+        :param frame_set: The frame set to use when returning
+        :return: The Entity object if found, None otherwise
+        """
         if symbol_set not in self.symbol_sets.keys():
             return None
         return self.symbol_sets[symbol_set].get_entity(entity_code, frame_set)
 
     def get_modifier(self, symbol_set, mod_index, mod_code):
+        """
+        Searches for a modifier from the given symbol schema
+        :param symbol_set: Symbol set to search in
+        :param mod_index: Modifier index [1, 2] to look in within the symbol set
+        :param mod_code: Modifier code to search for
+        :return: The Modifier object if found, None otherwise
+        """
         if symbol_set not in self.symbol_sets.keys():
             return None
         return self.symbol_sets[symbol_set].get_modifier(mod_index, mod_code)
 
-    def get_svg_string(self, svg_name, verbose=False):
-        try:
-            with open(svg_name, 'r') as input_file:
-                raw_string_data = input_file.read()
-
-                if verbose:
-                    print(f'Loading "{svg_name}"')
-
-                return raw_string_data
-        except:
-            print(f'Error: No file "{svg_name}" found')
-            return None
-
     def get_svg_by_filename(self, svg_name):
-        raw_string_data = ''
+        """
+        Returns an ETree from the given SVG filename, whether internally (default) or by filename if there's no
+        JSONFilesystem defined for this symbol schema
+        :param svg_name: The name of the SVG to return
+        :return: An ETree object containing the SVG contents, or None if not found
+        """
+
         if self.symbol_svg_json is None:
-            raw_string_data = self.get_svg_string(svg_name)
+            raw_string_data = _svg_tools.get_svg_string(svg_name)
         else:
             try:
                 raw_string_data = self.symbol_svg_json.get_contents_at_path(svg_name)
@@ -788,6 +900,13 @@ class SymbolSchema:
         return ret
 
     def get_svg_filename_by_code(self, code, standard_identity, use_variants=False):
+        """
+        Returns an SVG filename using a shorthand code
+        :param code: The string of code to search for
+        :param standard_identity: The standard identity to use
+        :param use_variants: Whether to use the variant form (mainly applies to status and mine warfare symbols)
+        :return:
+        """
         if code is None:
             print(f'Error: No SVG code "{code}" found')
             return None
@@ -922,4 +1041,11 @@ class SymbolSchema:
         return path_name
 
     def get_svg_by_code(self, code, standard_identity, use_variants=False):
+        """
+        Returns an SVG using a shorthand code
+        :param code: The string of code to search for
+        :param standard_identity: The standard identity to use
+        :param use_variants: Whether to use the variant form (mainly applies to status and mine warfare symbols)
+        :return:
+        """
         return self.get_svg_by_filename(self.get_svg_filename_by_code(code, standard_identity, use_variants))

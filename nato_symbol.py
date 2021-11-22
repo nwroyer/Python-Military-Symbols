@@ -11,6 +11,9 @@ import svgpathtools
 
 
 class NATOSymbol:
+    """
+    A class representing a given NATO symbol
+    """
     def __init__(self, symbol_schema):
         if symbol_schema is None:
             print('ERROR: symbol schema must not be None for NATO symbol creation', file=sys.stderr)
@@ -72,7 +75,7 @@ class NATOSymbol:
         """
         Initializes the SIC from the given symbol
         :param sidc_raw: The string containing the SIDC to initialize from
-        :param verbose: Whether to print output information
+        :param verbose: Whether to print ancillary information
         :return: Whether initialization was successful
         """
         # Strip all non-digit characters
@@ -194,7 +197,9 @@ class NATOSymbol:
     def get_svg(self, fill_type='light', pixel_padding=-1, use_variants=False):
         """
         Gets an SVG as a string representing this object
-        :param: fill_type: Can be "light" (default), "medium", "dark", or 'unfilled'
+        :param fill_type: Can be "light" (default), "medium", "dark", or 'unfilled'
+        :param pixel_padding: The padding around the symbol to use when cropping to fit. Values less than 0 will lead to no cropping. Defaults to -1.
+        :param use_variants: Whether to use the variant type of symbol element if they exist (primarily for statuses and sea mine symbols).
         :return: A string containing the SVG of the object
         """
         # Sanity check fill type
@@ -227,13 +232,11 @@ class NATOSymbol:
         else:
             replace_color(symbol_svg, self.symbol_schema.symbol_fill_placeholder, fill_color)
 
-        # TODO - add context amplifier
-
-        def get_entity_icon_name(base_folder, entity, standard_identity):
-            if entity.icon_type == 'ff':
-                return os.path.join(base_folder, entity.id_code + '-' + standard_identity.frame_set + '.svg')
-            else:
-                return os.path.join(base_folder, entity.id_code + '.svg')
+        # def get_entity_icon_name(base_folder, entity, standard_identity):
+        #     if entity.icon_type == 'ff':
+        #         return os.path.join(base_folder, entity.id_code + '-' + standard_identity.frame_set + '.svg')
+        #     else:
+        #         return os.path.join(base_folder, entity.id_code + '.svg')
 
         # Add entity icon
         if self.entity is not None and self.symbol_set is not None:
@@ -325,7 +328,7 @@ class NATOSymbol:
                     make_unfilled(mod_svg, fill_color)
                 layer_svg(symbol_svg, mod_svg)
 
-        if self.status is not None and (not use_variants  or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
+        if self.status is not None and (not use_variants or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
             overlays = [self.status.id_code]
 
             for overlay_code in overlays:
@@ -343,7 +346,7 @@ class NATOSymbol:
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
         old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
-        old_center = [old_viewbox[0] + old_viewbox[2]*0.5, old_viewbox[1] + old_viewbox[3] * 0.5]
+        # old_center = [old_viewbox[0] + old_viewbox[2]*0.5, old_viewbox[1] + old_viewbox[3] * 0.5]
 
         if pixel_padding >= 0:
             # Expand the bounding box to fit if that option is selected
@@ -390,5 +393,3 @@ class NATOSymbol:
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
         return svg_string
-
-

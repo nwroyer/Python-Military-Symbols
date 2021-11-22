@@ -3,6 +3,27 @@ import re
 import xml.etree.ElementTree as ET
 
 
+def get_svg_string(svg_name, verbose=False):
+    """
+    Helper function returning an SVG string from the given file
+    :param svg_name: The filename to search in
+    :param verbose: Whether to print ancillar information
+    :return: The contents of the SVG file, or an empty string if none are found.
+    """
+    try:
+        with open(svg_name, 'r') as input_file:
+            raw_string_data = input_file.read()
+
+            if verbose:
+                print(f'Loading "{svg_name}"')
+
+            return raw_string_data
+    except:
+        print(f'Error: No file "{svg_name}" found')
+        return ''
+        None
+        ''
+
 def read_string_into_etree(raw_string_data):
     if raw_string_data is None:
         return None

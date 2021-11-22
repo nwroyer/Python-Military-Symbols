@@ -6,6 +6,12 @@ from symbol_schema import SymbolSchema
 
 
 def get_names_list(item) -> list:
+    """
+    Helper function to return the names of an object, searching through "alt_names", "name", and "names" attributes to get
+    a single list of name strings.
+    :param item: The item to assess for names
+    :return: A list containing the found names of the object
+    """
     candidate_members = dir(item)
 
     if 'name' in candidate_members:
@@ -19,15 +25,28 @@ def get_names_list(item) -> list:
 
 
 def split_into_words(in_str:str) -> list:
+    """
+    Helper function splitting the given string into a list of words. Hyphens are considered to separate words.
+    :param in_str: The string to split into words
+    :return: A list of words in the given string
+    """
     in_str = re.sub('[/ \-\t\n]+', ' ', in_str).strip().lower()
     in_str = ''.join([c for c in in_str if c.isalpha() or c == ' '])
     return [word.strip() for word in in_str.strip().split(' ') if len(word) > 0]
 
 
 def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
+    """
+    Returns a list of closest candidates for the given name string from the provided list of candidates
+    :param symbol_schema: The symbol schema to consider the candidates to be part of
+    :param name_string: The string to match against
+    :param candidate_list: A list of candidates containing name, names, or alt_names attributes to choose from
+    :param match_longest: Whether to prefer matching the longest possible (most specific) match, or the shortest. Defaults to true (longest).
+    :return: A list containing the closest-matched candidates
+    """
 
     # Step 1: calculate the number of words in candidate_list_of_lists
-    matches = [] # Set of (candidate, weight) pairs
+    matches = []  # Set of (candidate, weight) pairs
     name_string_words = split_into_words(name_string)
 
     for candidate in candidate_list:
@@ -84,7 +103,14 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
     return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
 
 
-def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=False) -> NATOSymbol:
+def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False) -> NATOSymbol:
+    """
+    Function to return a NATOSymbol object from the provided name, using a best guess
+    :param name_string: The string representing the name to construct a best-guess symbol from, e.g. "Friendly infantry platoon"
+    :param symbol_schema: The symbol schema to use
+    :param verbose: Whether to print ancillary information during execution; defaults to false.
+    :return:
+    """
     proc_name_string = name_string
 
     # Sanitize string
@@ -99,7 +125,7 @@ def name_to_symbol(name_string:str, symbol_schema:SymbolSchema, verbose:bool=Fal
     template: symbol_template.SymbolTemplate = None
     template, new_name_string = fuzzy_match(symbol_schema, name_string, symbol_schema.get_template_list())
 
-    ret_symbol:NATOSymbol = None
+    ret_symbol: NATOSymbol = None
 
     if template is not None:
         proc_name_string = new_name_string
