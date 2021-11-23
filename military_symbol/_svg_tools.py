@@ -24,13 +24,25 @@ def get_svg_string(svg_name, verbose=False):
         None
         ''
 
+
 def read_string_into_etree(raw_string_data):
+    """
+    Reads a string into an XML Etree object
+    :param raw_string_data: String data to read in
+    :return: An xml.etree.ElementTree object
+    """
     if raw_string_data is None:
         return None
     return ET.fromstring(raw_string_data)
 
 
 def make_all_strokes_dashed(svg, unfilled=False):
+    """
+    Makes all strokes in the SVG dashed
+    :param svg: The SVG, in xml.etree.ElementTree format
+    :param unfilled: Whether this is an unfilled symbol
+    :return: The resulting SVG
+    """
     stroke_elements = [ele for ele in svg.findall('.//*[@stroke]') if ele.attrib['stroke'] != 'none']
 
     if not unfilled:
@@ -50,6 +62,12 @@ def make_all_strokes_dashed(svg, unfilled=False):
 
 
 def make_unfilled(svg, color):
+    """
+    Turn this SVG into an unfilled symbol
+    :param svg: The SVG, in xml.etree.ElementTree format
+    :param color: The color to turn all elements to
+    :return: The resulting SVG
+    """
     stroke_elements = [ele for ele in svg.findall('.//*[@stroke]') if ele.attrib['stroke'] != 'none']
     for ele in stroke_elements:
         ele.attrib['stroke'] = color
@@ -64,6 +82,10 @@ def make_unfilled(svg, color):
         else:
             # Remove the element entirely
             fill_ele.attrib['fill'] = 'none'
+
+    # Replace default-colored items
+    for ele in [ele for ele in svg.findall('.//*') if 'fill' not in ele.attrib.keys()]:
+        ele.attrib['fill'] = color
 
     return svg
 
@@ -87,6 +109,13 @@ def replace_color(svg, from_color, to_color, type='both'):
 
 
 def apply_offset(svg_ele, offset, offset_children=True):
+    """
+    Offsets the specified SVG object by the given offset
+    :param svg_ele: The element to offset, in xml.etree.ElementTree form
+    :param offset: Offset in [x, y] format
+    :param offset_children: Whether to offset the element's children as well
+    :return: The resulting SVG
+    """
     if svg_ele is None:
         return
 
@@ -124,7 +153,13 @@ def apply_offset(svg_ele, offset, offset_children=True):
     # Done
 
 
-def layer_svg(svg_bottom, svg_top, offset:list=[0.0, 0.0]):
+def layer_svg(svg_bottom, svg_top, offset: list = [0.0, 0.0]):
+    """
+    Adds one SVG over another. Modifies the bottom SVG in place.
+    :param svg_bottom: The bottom SVG, in in xml.etree.ElementTree form
+    :param svg_top: The top SVG, in in xml.etree.ElementTree form
+    :param offset: How far to offset the top SVG elements
+    """
     if svg_top is None:
         return
     # print(svg_top.tag)
