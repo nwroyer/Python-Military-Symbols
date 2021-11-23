@@ -1,4 +1,4 @@
-# test
+import argparse
 import os
 import sys
 
@@ -65,7 +65,7 @@ def _write_symbol(is_sidc, creator_var, out_filepath, bounding_padding=4, auto_n
         out_file.write(symbol.get_svg(pixel_padding=bounding_padding))
 
 
-def get_symbol_class_from_sidc(sidc, verbose=False) -> individual_symbol.MilitarySymbol:
+def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
     """
     Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given SIDC
     :param sidc: The SIDC to construct the MilitarySymbol from
@@ -76,7 +76,7 @@ def get_symbol_class_from_sidc(sidc, verbose=False) -> individual_symbol.Militar
     return symbol
 
 
-def get_symbol_class_from_name(name, verbose=False) -> individual_symbol.MilitarySymbol:
+def get_symbol_class_from_name(name, verbose=False) -> MilitarySymbol:
     """
     Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
     guess
@@ -111,24 +111,24 @@ def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_paddin
     """
     _write_symbol(False, name_string, out_filepath, bounding_padding, auto_name, verbose)
 
+
 if __name__ == '__main__':
     # Get current working directory
 
-    module_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep
+    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards")
+    parser.add_argument('-o', '--output-dir', dest='output_dir', default='')
+    parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False)
+    parser.add_argument('inputs', nargs='+', default=[])
 
-    add_symbol_template_set(os.path.join(module_dir, '../Examples/example_template.json'))
+    parser.print_usage()
 
-    test_lines = [
-        "friendly airborne infantry platoon headquarters",
-        "HIMARS battery",
-        "suspected enemy airborne PSYOP company",
-        "friendly VTOL rotary-wing squadron",
-        "friendly Javelin",
-        "neutral civilian pickup truck",
-        "T-82"
-    ]
+    arguments = parser.parse_args()
 
-    out_dir = os.path.join(os.getcwd(), '../Examples')
+    output_dir = os.path.realpath(arguments.output_dir)
 
-    for symbol_name in test_lines:
-        write_symbol_svg_string_from_name(symbol_name, out_dir)
+    if arguments.by_name:
+        print('\tParsing by name')
+
+    for input_arg in arguments.inputs:
+        print(f'\tParsing "{input_arg}"')
+
