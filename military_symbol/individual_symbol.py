@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 import svgpathtools
 
 
-class NATOSymbol:
+class MilitarySymbol:
     """
     A class representing a given NATO symbol
     """
@@ -69,7 +69,7 @@ class NATOSymbol:
 
         ret = ret.replace('/', ' or ')
 
-        return ret
+        return ret.strip()
 
     def create_from_sidc(self, sidc_raw, verbose=False):
         """
@@ -286,10 +286,12 @@ class NATOSymbol:
             else:
                 overlays.append(self.hqtfd.id_code)
 
+            # print('Overlay for HQTFD on {}: {}, amplifier'.format(self.get_name(), overlays))
+
             for overlay_code in overlays:
                 overlay_svg = self.symbol_schema.get_svg_by_code('H-%s%s' % (
                     overlay_code,
-                    '-%s' % self.amplifier.id_code if self.amplifier is not None else '-00'
+                    '-%s' % self.amplifier.id_code if self.amplifier is not None else '-11'
                 ), self.standard_identity)
 
                 offset = self.symbol_schema.hqtfd_codes[overlay_code].get_offset(self.standard_identity.frame_set)

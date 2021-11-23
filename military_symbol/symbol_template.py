@@ -1,6 +1,6 @@
 import json
 
-from nato_symbol import NATOSymbol
+from military_symbol.individual_symbol import MilitarySymbol
 
 
 class SymbolTemplate:
@@ -11,7 +11,7 @@ class SymbolTemplate:
     def __init__(self, symbol_schema):
         self.name: str = ''
         self.alt_names: list = []
-        self.symbol: NATOSymbol = None
+        self.symbol: MilitarySymbol = None
         self.template_sidc:str = ''
         self.symbol_schema = symbol_schema
 
@@ -36,7 +36,7 @@ class SymbolTemplate:
             print(f'Error with template SIDC "{sidc}"')
 
         self.template_sidc = template_sidc
-        self.symbol = NATOSymbol(self.symbol_schema)
+        self.symbol = MilitarySymbol(self.symbol_schema)
         self.symbol.create_from_sidc(template_sidc.replace('*', '0'))
 
         # Determine whether symbol is fixed
@@ -56,6 +56,10 @@ class SymbolTemplate:
 
 
 class SymbolTemplateSet:
+    """
+    Class representing a set of symbol templates; can contain other SymbolTemplateSets as subsets to create "palettes"
+    of symbols for better organization in human-readable files.
+    """
 
     def __init__(self, symbol_schem):
         self.symbol_schema = symbol_schem
@@ -64,6 +68,11 @@ class SymbolTemplateSet:
         self.templates = {}
 
     def load_from_dict(self, dict_val):
+        """
+        Loads this SymbolTemplateSet from a dictionary (typically parsed from a JSON file. Does not clear existing data
+        if it already exists in the SymbolTemplateSet.
+        :param dict_val: The dictionary to load values from
+        """
 
         if 'name' in dict_val.keys():
             self.name = dict_val['name']
@@ -101,8 +110,12 @@ class SymbolTemplateSet:
             self.templates[new_template.name] = new_template
 
     def get_template(self, template_name):
+        """
+        Returns a template whose primary name matches the given name exactly
+        :param template_name: The name to match
+        :return: The first matching template, or None if none found
+        """
 
-        # TODO template search
         if template_name in self.templates.keys():
             return self.templates[template_name]
 
@@ -114,6 +127,10 @@ class SymbolTemplateSet:
         return None
 
     def get_template_list(self):
+        """
+        Returns a flat list of all the SymbolTemplates belonging to this SymbolTemplateSet and all its descendant subsets
+        :return: List containing the SymbolTemplate
+        """
         ret = []
         ret.extend(self.templates.values())
 
@@ -123,6 +140,11 @@ class SymbolTemplateSet:
         return ret
 
     def load_from_file(self, json_filepath):
+        """
+        Loads data into a SymbolTemplateSet from a file
+        :param json_filepath: The filepath to a JSON file to load from
+        :return:
+        """
         with open(json_filepath, 'r') as json_file:
             json_data = json.load(json_file)  # TODO load from string instead
             self.load_from_dict(json_data)

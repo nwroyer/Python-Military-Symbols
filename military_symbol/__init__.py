@@ -2,10 +2,10 @@
 import os
 import sys
 
-import name_to_sidc
-from nato_symbol import NATOSymbol
-from symbol_schema import SymbolSchema
-from symbol_template import SymbolTemplateSet
+from military_symbol import name_to_sidc
+from military_symbol.individual_symbol import MilitarySymbol
+from military_symbol.symbol_schema import SymbolSchema
+from military_symbol.symbol_template import SymbolTemplateSet
 
 sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
 if sym_schema is None:
@@ -29,7 +29,7 @@ def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False) -> 
     :param verbose: Whether to print ancillary information while processing, defaulting to false.
     :return: A string containing the SVG for the constructed symbol.
     """
-    symbol: NATOSymbol = NATOSymbol(sym_schema).create_from_sidc(sidc, verbose)
+    symbol: MilitarySymbol = MilitarySymbol(sym_schema).create_from_sidc(sidc, verbose)
     return symbol.get_svg(pixel_padding=bounding_padding) if symbol is not None else ''
 
 
@@ -41,7 +41,7 @@ def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose
     :param verbose:  Whether to print ancillary information while processing, defaulting to false.
     :return: A string containing the SVG for the constructed symbol.
     """
-    symbol: NATOSymbol = name_to_sidc.name_to_symbol(name_string, sym_schema, verbose)
+    symbol: MilitarySymbol = name_to_sidc.name_to_symbol(name_string, sym_schema, verbose)
     return symbol.get_svg(pixel_padding=bounding_padding) if symbol is not None else ''
 
 
@@ -55,7 +55,7 @@ def _write_symbol(is_sidc, creator_var, out_filepath, bounding_padding=4, auto_n
     :param auto_name: Whether to auto-name the file by SIDC in the directory specified by out_filepath, or use out_filepath directly. Defaults to true.
     :param verbose: Whether to print ancillary information while processing, defaulting to false.
     """
-    symbol: NATOSymbol = NATOSymbol(sym_schema).create_from_sidc(creator_var, verbose) if is_sidc else name_to_sidc.name_to_symbol(creator_var, sym_schema, verbose)
+    symbol: MilitarySymbol = get_symbol_class_from_sidc(creator_var, verbose) if is_sidc else get_symbol_class_from_name(creator_var, verbose)
 
     if auto_name:
         out_dir = os.path.dirname(out_filepath) if os.path.isfile(out_filepath) else out_filepath
@@ -63,6 +63,29 @@ def _write_symbol(is_sidc, creator_var, out_filepath, bounding_padding=4, auto_n
 
     with open(out_filepath, 'w') as out_file:
         out_file.write(symbol.get_svg(pixel_padding=bounding_padding))
+
+
+def get_symbol_class_from_sidc(sidc, verbose=False) -> individual_symbol.MilitarySymbol:
+    """
+    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given SIDC
+    :param sidc: The SIDC to construct the MilitarySymbol from
+    :param verbose: Whether to print ancillary information
+    :return: An individual_symbol.MilitarySymbol object
+    """
+    symbol: MilitarySymbol = MilitarySymbol(sym_schema).create_from_sidc(sidc, verbose)
+    return symbol
+
+
+def get_symbol_class_from_name(name, verbose=False) -> individual_symbol.MilitarySymbol:
+    """
+    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
+    guess
+    :param name: The name to construct the MilitarySymbol from using a best-guess algorithm
+    :param verbose: Whether to print ancillary information
+    :return: An individual_symbol.MilitarySymbol object
+    """
+    symbol: MilitarySymbol = name_to_sidc.name_to_symbol(name, symbol_schema=sym_schema, verbose=verbose)
+    return symbol
 
 
 def write_symbol_svg_string_from_sidc(sidc, out_filepath, bounding_padding=4, auto_name=True, verbose=False) -> None:
@@ -88,13 +111,12 @@ def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_paddin
     """
     _write_symbol(False, name_string, out_filepath, bounding_padding, auto_name, verbose)
 
-
 if __name__ == '__main__':
     # Get current working directory
 
     module_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep
 
-    add_symbol_template_set(os.path.join(module_dir, 'example_template.json'))
+    add_symbol_template_set(os.path.join(module_dir, '../Examples/example_template.json'))
 
     test_lines = [
         "friendly airborne infantry platoon headquarters",
@@ -106,7 +128,7 @@ if __name__ == '__main__':
         "T-82"
     ]
 
-    out_dir = os.path.join(os.getcwd(), 'examples')
+    out_dir = os.path.join(os.getcwd(), '../Examples')
 
     for symbol_name in test_lines:
         write_symbol_svg_string_from_name(symbol_name, out_dir)

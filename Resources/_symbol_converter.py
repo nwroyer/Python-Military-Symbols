@@ -4,7 +4,7 @@ import os
 import subprocess
 from pathlib import Path
 
-from _json_filesystem import JSONFilesystem
+from military_symbol._json_filesystem import JSONFilesystem
 
 
 def pack_svgs_into_json(current_working_directory:str, subdir:str = 'symbols', existing_input_file = '', output_file=''):
@@ -105,8 +105,9 @@ def main():
 	working_dir = os.path.dirname(os.path.realpath(__file__))
 	print(working_dir)
 	# convert_inkscape_to_svg(os.getcwd(), '')
-	pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir, '../symbols.json'),
-						existing_input_file=os.path.join(working_dir, 'Symbol schema.json'))
+	pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,
+                                                                         '../military_symbol/symbols.json'),
+                        existing_input_file=os.path.join(working_dir, 'Symbol schema.json'))
 
 
 if __name__ == '__main__':

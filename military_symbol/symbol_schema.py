@@ -1,8 +1,7 @@
 import json
 import os
 
-import _svg_tools
-from _json_filesystem import JSONFilesystem
+from military_symbol._json_filesystem import JSONFilesystem
 
 try:
     from ._svg_tools import *
@@ -1006,7 +1005,9 @@ class SymbolSchema:
 
             hqtfd_code = code[1]
             amp_code = code[2:]
+
             if hqtfd_code == '4':
+                # print(amp_code)
                 path_name = os.path.join(path_name, self.symbol_folders['hqtfd'],
                                          hqtfd_code + '-' + amp_code + '.svg')
             else:

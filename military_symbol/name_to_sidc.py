@@ -1,8 +1,8 @@
 import re
 
-import symbol_template
-from nato_symbol import NATOSymbol
-from symbol_schema import SymbolSchema
+from military_symbol import symbol_template
+from military_symbol.individual_symbol import MilitarySymbol
+from military_symbol.symbol_schema import SymbolSchema
 
 
 def get_names_list(item) -> list:
@@ -103,7 +103,7 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
     return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
 
 
-def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False) -> NATOSymbol:
+def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False) -> MilitarySymbol:
     """
     Function to return a NATOSymbol object from the provided name, using a best guess
     :param name_string: The string representing the name to construct a best-guess symbol from, e.g. "Friendly infantry platoon"
@@ -125,7 +125,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     template: symbol_template.SymbolTemplate = None
     template, new_name_string = fuzzy_match(symbol_schema, name_string, symbol_schema.get_template_list())
 
-    ret_symbol: NATOSymbol = None
+    ret_symbol: MilitarySymbol = None
 
     if template is not None:
         proc_name_string = new_name_string
@@ -134,7 +134,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
         ret_symbol = template.symbol
     else:
-        ret_symbol = NATOSymbol(symbol_schema)
+        ret_symbol = MilitarySymbol(symbol_schema)
 
     # Step 1: Detect standard identity
 
@@ -161,7 +161,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
         symbol_set = None
         if entity_type is None:
             print(f"\tWARNING: Unable to determine entity type from string \"{name_string}\"; defaulting to land unit")
-            ret_symbol:NATOSymbol = NATOSymbol(symbol_schema)
+            ret_symbol:MilitarySymbol = MilitarySymbol(symbol_schema)
             symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
             ret_symbol.entity = symbol_set.get_entity("000000")
         else:
