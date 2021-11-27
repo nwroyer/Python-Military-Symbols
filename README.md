@@ -15,7 +15,14 @@ Control measure graphics are not yet implemented.
 Command line usage examples:
 
 ```bash
+# Create a set of symbols by name, using variant symbols if available, in the current directory
 military_symbol --use-variants --by-name -o . "Friendly artillery company" "Destroyed Enemy PSYOP section"
+
+# Create a single symbol at the designated path by name
+military_symbol -o platoon.svg -n "Friendly infantry platoon"
+
+# Print a set of symbols by name, in unfilled style, to STDOUT
+military_symbol -s unfilled -n "Friendly infantry platoon" "Enemy anti-air battery"
 ```
 
 Python module usage:
