@@ -7,7 +7,7 @@ import os
 import subprocess
 from pathlib import Path
 
-import military_symbol._json_filesystem
+import src.military_symbol._json_filesystem
 
 
 def pack_svgs_into_json(current_working_directory: str, subdir: str = 'symbols', existing_input_file='',
@@ -24,7 +24,7 @@ def pack_svgs_into_json(current_working_directory: str, subdir: str = 'symbols',
     print(f'Symbol dir: {symbol_dir}')
 
     total_file_count: int = 0
-    json_contents = military_symbol._json_filesystem.JSONFilesystem()
+    json_contents = src.military_symbol._json_filesystem.JSONFilesystem()
 
     for subdir, dirs, files in os.walk(symbol_dir):
         for filename in files:
@@ -53,7 +53,7 @@ def pack_svgs_into_json(current_working_directory: str, subdir: str = 'symbols',
 
     print(f'Packed {total_file_count} SVGs into JSON')
 
-    new_json_file = military_symbol._json_filesystem.JSONFilesystem()
+    new_json_file = src.military_symbol._json_filesystem.JSONFilesystem()
     new_json_file.read_from_file(os.path.join(current_working_directory, output_file))
 
 
@@ -129,7 +129,8 @@ def main():
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
     convert_inkscape_to_svg(os.getcwd(), '')
-    pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,'../military_symbol/symbols.json'),
+    pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,
+                                                                         '../src/military_symbol/symbols.json'),
                         existing_input_file=os.path.join(working_dir, 'Symbol schema.json'))
 
 

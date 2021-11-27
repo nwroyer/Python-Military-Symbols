@@ -1,6 +1,6 @@
 /Resources/symbols/
 /venv/
-/Examples/
-/military_symbol/symbols.json
+/example/*.svg
 /.stfolder/
 /*.svg
+/dist/

@@ -1,12 +1,8 @@
 import json
 import os
 
-from military_symbol._json_filesystem import JSONFilesystem
-
-try:
-    from ._svg_tools import *
-except:
-    from _svg_tools import *
+from _json_filesystem import JSONFilesystem
+from _svg_tools import *
 
 
 class SymbolSchema:

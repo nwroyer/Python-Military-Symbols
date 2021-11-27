@@ -1,8 +1,8 @@
 import re
 
-from military_symbol import symbol_template
-from military_symbol.individual_symbol import MilitarySymbol
-from military_symbol.symbol_schema import SymbolSchema
+import symbol_template
+from individual_symbol import MilitarySymbol
+from symbol_schema import SymbolSchema
 
 
 def get_names_list(item) -> list:

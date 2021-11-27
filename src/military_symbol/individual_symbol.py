@@ -194,17 +194,19 @@ class MilitarySymbol:
                 return True
         return False
 
-    def get_svg(self, fill_type='light', pixel_padding=-1, use_variants=False):
+    def get_svg(self, style='light', pixel_padding=-1, use_variants=False):
         """
         Gets an SVG as a string representing this object
-        :param fill_type: Can be "light" (default), "medium", "dark", or 'unfilled'
+        :param style: Can be "light" (default), "medium", "dark", or 'unfilled'
         :param pixel_padding: The padding around the symbol to use when cropping to fit. Values less than 0 will lead to no cropping. Defaults to -1.
         :param use_variants: Whether to use the variant type of symbol element if they exist (primarily for statuses and sea mine symbols).
         :return: A string containing the SVG of the object
         """
+
         # Sanity check fill type
-        if fill_type not in ['light', 'medium', 'dark', 'unfilled']:
-            fill_type = 'light'
+        style_name = style
+        if style_name not in ['light', 'medium', 'dark', 'unfilled']:
+            style_name = 'light'
 
         # Start with base frame
         sym_root = self.symbol_schema.symbol_root_folder
@@ -216,7 +218,7 @@ class MilitarySymbol:
         uses_dashed_frame = self.standard_identity.uses_dashed_frame or \
                             (self.status is not None and self.status.makes_frame_dashed)
         if uses_dashed_frame:
-            make_all_strokes_dashed(symbol_svg, unfilled=(fill_type == 'unfilled'))
+            make_all_strokes_dashed(symbol_svg, unfilled=(style_name == 'unfilled'))
 
         if self.entity is None:
             fill_color_set = self.standard_identity.standard_colorset
@@ -224,10 +226,10 @@ class MilitarySymbol:
             fill_color_set = self.standard_identity.civilian_colorset if self.uses_civilian_coloring() else \
                 self.standard_identity.standard_colorset
 
-        fill_color = fill_color_set[fill_type]
+        fill_color = fill_color_set[style_name]
 
         # Remove fill if unfilled
-        if fill_type == 'unfilled':
+        if style_name == 'unfilled':
             make_unfilled(symbol_svg, fill_color)
         else:
             replace_color(symbol_svg, self.symbol_schema.symbol_fill_placeholder, fill_color)
@@ -263,7 +265,7 @@ class MilitarySymbol:
                 if overlay is None:
                     print('ERROR: Null value overlay')
                     continue
-                if fill_type == 'unfilled':
+                if style_name == 'unfilled':
                     make_unfilled(overlay, fill_color)
 
                 # print(f'Overlay: {xml.etree.ElementTree.tostring(overlay)}')
@@ -274,7 +276,7 @@ class MilitarySymbol:
                 self.amplifier.applies_to(self.symbol_set.id_code):
 
             amplifier_svg = self.symbol_schema.get_svg_by_code('A-%s' % self.amplifier.id_code, self.standard_identity)
-            if fill_type == 'unfilled':
+            if style_name == 'unfilled':
                 make_unfilled(amplifier_svg, fill_color)
             layer_svg(symbol_svg, amplifier_svg)
 
@@ -297,7 +299,7 @@ class MilitarySymbol:
                 offset = self.symbol_schema.hqtfd_codes[overlay_code].get_offset(self.standard_identity.frame_set)
                 # print(offset)
                 apply_offset(overlay_svg, offset, True)
-                if fill_type == 'unfilled':
+                if style_name == 'unfilled':
                     make_unfilled(overlay_svg, fill_color)
                 layer_svg(symbol_svg, overlay_svg)
 
@@ -326,7 +328,7 @@ class MilitarySymbol:
             for mod_svg in overlay_svgs:
                 if mod_svg is None:
                     continue
-                if fill_type == 'unfilled':
+                if style_name == 'unfilled':
                     make_unfilled(mod_svg, fill_color)
                 layer_svg(symbol_svg, mod_svg)
 
@@ -339,7 +341,7 @@ class MilitarySymbol:
                 if overlay_svg is None:
                     print(f"Error applying status overlay {overlay_code} -> {self.symbol_schema.get_svg_filename_by_code(f'S-{overlay_code}', self.standard_identity)}")
                     continue
-                if fill_type == 'unfilled':
+                if style_name == 'unfilled':
                     make_unfilled(overlay_svg, fill_color)
                 layer_svg(symbol_svg, overlay_svg)
 

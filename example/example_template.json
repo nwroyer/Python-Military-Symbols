@@ -1,0 +1,24 @@
+{
+  "name": "USMC examples",
+  "subsets": {
+    "friendly units": {
+      "HIMARS": "10*3 10 **** 130301 4100",
+      "ACV": {
+        "alt names": ["AAV"],
+        "sidc": "10*3 10 **** 120502 0000"
+      },
+      "VMM": {
+        "alt names": ["Osprey squadron"],
+        "sidc": "10*3 10 **16 120600 0049"
+      },
+      "VMFA": {
+        "alt names": [],
+        "sidc": "10*3 10 **16 120600 0049"
+      }
+    },
+    "enemy units": {
+      "T-80": "10*6 15 **** 120203 0000",
+      "T-82": "10*6 15 **** 120203 0000"
+    }
+  }
+}
