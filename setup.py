@@ -43,5 +43,8 @@ setup(
         'console_scripts': [
             'military_symbol=military_symbol.command_line:main'
         ]
+    },
+    project_urls={
+        'PyPI': 'https://pypi.org/project/military-symbol/1.0.0/'
     }
 )
