@@ -1,13 +1,11 @@
-try:
-    from ._svg_tools import *
-except:
-    from _svg_tools import *
+
 
 import os
 import sys
-import xml.etree.ElementTree as ET
 
 import svgpathtools
+
+from ._svg_tools import *
 
 
 class MilitarySymbol:

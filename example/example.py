@@ -5,7 +5,7 @@ command line
 
 import os
 
-from src import military_symbol
+import military_symbol
 
 if __name__ == '__main__':
     # Print symbol generated from a name to STDOUT

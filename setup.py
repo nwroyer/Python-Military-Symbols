@@ -37,7 +37,7 @@ setup(
     python_requires='>=3.6, <4',
     install_requires=['lxml', 'svgpathtools', ''],
     package_data={  # Optional
-        'symbols': ['src/military_symbol/symbols.json'],
+        'military_symbol': ['symbols.json'],
     },
     entry_points= {
         'console_scripts': [

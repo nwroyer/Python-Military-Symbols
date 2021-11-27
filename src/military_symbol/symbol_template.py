@@ -1,6 +1,6 @@
 import json
 
-from src.military_symbol.individual_symbol import MilitarySymbol
+from .individual_symbol import MilitarySymbol
 
 
 class SymbolTemplate:

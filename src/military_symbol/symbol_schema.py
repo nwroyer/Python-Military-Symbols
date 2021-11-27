@@ -1,8 +1,8 @@
 import json
 import os
 
-from _json_filesystem import JSONFilesystem
-from _svg_tools import *
+from ._json_filesystem import JSONFilesystem
+from ._svg_tools import *
 
 
 class SymbolSchema:

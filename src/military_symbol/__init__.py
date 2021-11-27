@@ -2,10 +2,10 @@ import argparse
 import os
 import sys
 
-from src.military_symbol import name_to_sidc
-from src.military_symbol.individual_symbol import MilitarySymbol
-from src.military_symbol.symbol_schema import SymbolSchema
-from src.military_symbol.symbol_template import SymbolTemplateSet
+from . import name_to_sidc
+from .individual_symbol import MilitarySymbol
+from .symbol_schema import SymbolSchema
+from .symbol_template import SymbolTemplateSet
 
 # Load the symbol schema from its default location; don't
 sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
@@ -13,6 +13,7 @@ if sym_schema is None:
     print("Error loading symbol schema; exiting", file=sys.stderr)
 
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
+
 
 def add_symbol_template_set(template_filename):
     """
