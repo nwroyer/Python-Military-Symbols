@@ -10,6 +10,8 @@ This is a lightweight Python module, including a command-line script, to generat
 
 Control measure graphics are not yet implemented.
 
+Available as a [Python package](https://pypi.org/project/military-symbol/1.0.0/). 
+
 ### Usage
 
 Command line usage examples:
@@ -75,7 +77,4 @@ if __name__ == '__main__':
 ## License
 
 This project is licensed under the MIT license. 
-
-
-
-## 
+ 
