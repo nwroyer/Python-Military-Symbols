@@ -2,5 +2,6 @@
 /venv/
 /example/*.svg
 /.stfolder/
+/.idea
 /*.svg
 /dist/

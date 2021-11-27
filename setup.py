@@ -12,7 +12,7 @@ setup(
     description='Lightweight library for producing SVGs of NATO standard military symbols from NATO sidcs or natural-language descriptions',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='',
+    url='https://github.com/nwroyer/Python-Military-Symbols',
     author='Nicholas Royer',
     author_email='nick.w.royer@protonmail.com',
     classifiers=[
