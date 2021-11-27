@@ -43,11 +43,8 @@ def main():
     output_dir: str = ''
     if arguments.output_dir != '':
         output_dir = os.path.realpath(arguments.output_dir)
-    else:
-        output_dir = os.getcwd()
-
-    if os.path.isdir(output_dir):
-        use_auto_name = True
+        if os.path.isdir(output_dir):
+            use_auto_name = True
 
     # Parse style choice to use
     style_name = arguments.style_name
