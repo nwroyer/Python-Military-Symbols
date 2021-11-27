@@ -7,6 +7,7 @@ from military_symbol.individual_symbol import MilitarySymbol
 from military_symbol.symbol_schema import SymbolSchema
 from military_symbol.symbol_template import SymbolTemplateSet
 
+# Load the symbol schema from its default location; don't
 sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
 if sym_schema is None:
     print("Error loading symbol schema; exiting", file=sys.stderr)
@@ -116,19 +117,51 @@ if __name__ == '__main__':
     # Get current working directory
 
     parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards")
-    parser.add_argument('-o', '--output-dir', dest='output_dir', default='')
-    parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False)
+    parser.add_argument('-o', '--output-dir', dest='output_dir', default='',
+                        help="Chooses an output directory (or file if not auto-naming exports)")
+    parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False,
+                        help="Indicates inputs are names, not SIDC strings")
+    parser.add_argument('-a', '--auto-name', dest='auto_name', action='store_const', const=True, default=False,
+                        help='Whether to auto-name outputs (only valid for one)')
+    parser.add_argument('-v', '--verbose', dest='verbose', action='store_const', const=True, default=False,
+                        help="Whether to print ancillary information (pollutes STDOUT if you're using a pipe)")
+    parser.add_argument('-p', '--padding', dest='padding', action='store', default=4,
+                        help="Select padding for output SVG; default is 4; values < 0 will not crop to fit content")
     parser.add_argument('inputs', nargs='+', default=[])
-
-    parser.print_usage()
 
     arguments = parser.parse_args()
 
-    output_dir = os.path.realpath(arguments.output_dir)
+    # Parse output directory
+    output_dir: str = ''
+    if arguments.output_dir != '':
+        output_dir = os.path.realpath(arguments.output_dir)
 
     if arguments.by_name:
         print('\tParsing by name')
 
+    use_auto_name: bool = arguments.auto_name
+    if len(arguments.inputs) > 1 and not arguments.auto_name:
+        print('More than one input; auto-naming anyway', file=sys.stderr)
+        use_auto_name = True
+
     for input_arg in arguments.inputs:
         print(f'\tParsing "{input_arg}"')
+        if arguments.by_name:  # Construct from names
+            if output_dir != '':
+                write_symbol_svg_string_from_name(input_arg, out_filepath=output_dir, bounding_padding=arguments.padding,
+                                                  auto_name=use_auto_name,
+                                                  verbose=arguments.verbose)
+            else:
+                print(get_symbol_svg_string_from_name(input_arg, bounding_padding=arguments.padding,
+                                                      verbose=arguments.verbose))
+        else:  # Construct from SIDC
+            if output_dir != '':
+                write_symbol_svg_string_from_sidc(input_arg, out_filepath=output_dir, bounding_padding=arguments.padding,
+                                                  auto_name=use_auto_name,
+                                                  verbose=arguments.verbose)
+            else:
+                print(get_symbol_svg_string_from_sidc(input_arg, bounding_padding=arguments.padding,
+                                                      verbose=arguments.verbose))
+
+
 
