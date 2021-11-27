@@ -41,7 +41,7 @@ setup(
     },
     entry_points= {
         'console_scripts': [
-            'milsymbol=milsymbol:main'
+            'military_symbol=military_symbol.command_line:main'
         ]
     }
 )
