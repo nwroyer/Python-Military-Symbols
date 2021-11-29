@@ -161,17 +161,16 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
         symbol_set = None
         if entity_type is None:
             print(f"\tWARNING: Unable to determine entity type from string \"{name_string}\"; defaulting to land unit")
-            ret_symbol:MilitarySymbol = MilitarySymbol(symbol_schema)
             symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
             ret_symbol.entity = symbol_set.get_entity("000000")
+            ret_symbol.symbol_set = symbol_set
         else:
             if verbose:
                 print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
             symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
             proc_name_string = new_name_string
-
-        ret_symbol.entity = entity_type
-        ret_symbol.symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
+            ret_symbol.symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
+            ret_symbol.entity = entity_type
 
     if template is None or not template.amplifier_fixed:
         candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(ret_symbol.symbol_set.id_code)]
@@ -221,4 +220,5 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
                     print(f'\tAssuming modifier "{mod.name}" -> "{proc_name_string}"')
                 ret_symbol.modifiers[mod_set] = mod
 
+    print(ret_symbol.get_sidc())
     return ret_symbol
