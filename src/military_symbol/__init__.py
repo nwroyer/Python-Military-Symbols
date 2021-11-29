@@ -1,11 +1,11 @@
 import os
 import sys
 
-from . import command_line
+from .command_line import *
 
 
 if __name__ == '__main__':
-    command_line.main()
+    command_line_main()
 
 
 

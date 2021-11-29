@@ -142,7 +142,7 @@ def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_paddin
     write_symbol_svg_string(name_string, False, out_filepath, bounding_padding, auto_name, verbose, use_variants=use_variants, style=style)
 
 
-def main():
+def command_line_main():
     # Get current working directory
     style_choices_args = STYLE_CHOICES.copy()
     style_choices_args.extend([i[0] for i in style_choices_args])
@@ -216,4 +216,4 @@ def main():
                                                       style=style_name))
 
 if __name__ == '__main__':
-    main()
+    command_line_main()
