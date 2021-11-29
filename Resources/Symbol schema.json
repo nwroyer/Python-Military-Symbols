@@ -614,8 +614,10 @@
 					"modcats": ["capability", "mobility", "composite loss", "operation"],
 					"modcats-inherit": true,
 					"entity types": {
-						"01": {"name": "air assault with organic lift", "type": "ff"},
-						"02": "air traffic services / airfield operations",
+						"01": {"names": ["air assault with organic lift"], "type": "ff"},
+						"02": {
+							"names": ["air traffic services", "airfield operations"]
+						},
 						"03": {"name": "amphibious", "type": "ff"},
 						"04": {
 							"names": ["anti-tank", "antitank", "anti-armor", "antiarmor"],
@@ -628,21 +630,21 @@
 						"05": {
 							"names": ["armor", "tanks","armored", "mechanized", "tracked"],
 							"entity subtypes": {
-								"01": {"names": ["armored reconnaissance", "armored cavalry", "armored scout"], "type": "ff", "overlay": ["120500", "121300"]},
+								"01": {"names": ["armored reconnaissance", "armored recon", "armored cavalry", "armored cav", "armored scout"], "type": "ff", "overlay": ["120500", "121300"]},
 								"02": {"names": ["amphibious *", "ACV", "AAV"], "type": "ff", "overlay": ["120500", "120300"]}
 							}
 						},
 						"06": {
 							"names": ["army aviation", "aviation rotary wing", "rotary wing", "rotary-wing"],
 							"entity subtypes": {
-								"01": {"name": "* reconnaissance", "type": "ff", "overlay": ["120600", "121300"]}
+								"01": {"names": ["* reconnaissance", "* recon"], "type": "ff", "overlay": ["120600", "121300"]}
 							}
 						},
 						"07": "aviation composite",
 						"08": {
 							"names": ["aviation fixed wing", "fixed-wing", "fixed wing"],
 							"entity subtypes": {
-								"01": {"name": "* reconnaissance", "type": "ff", "overlay": ["120800", "121300"]}
+								"01": {"names": ["* reconnaissance", "* recon"], "type": "ff", "overlay": ["120800", "121300"]}
 							}
 						},
 						"09": "combat",
@@ -668,18 +670,18 @@
 						},
 						"12": "observer",
 						"13": {
-							"names": ["reconnaissance", "cavalry", "scout"],
+							"names": ["reconnaissance", "recon", "cavalry", "cav", "scout"],
 							"type": "ff",
 							"entity subtypes": {
 								"01": {"name": "reconnaissance and surveillance", "type": "ff", "overlay": ["121300", "121600"]},
 								"02": {"name": "Marine *", "type": "ff", "overlay": ["121300", "120300"]},
-								"03": {"name": "motorized *", "type": "ff", "overlay": ["121300", "0XMotorized"]}
+								"03": {"names": ["motorized *", "motorized recon", "motorized scout", "motorized cavalry", "motorized cav"], "type": "ff", "overlay": ["121300", "0XMotorized"]}
 							}
 						},
-						"14": "Sea Air Land (SEAL)",
+						"14": ["Sea Air Land (SEAL)", "SEAL"],
 						"15": "sniper",
 						"16": "surveillance",
-						"17": "Special Forces",
+						"17": ["Special Forces", "Green Berets", "Green Beret"],
 						"18": {
 							"name": "special operations forces (SOF)",
 							"entity subtypes": {
@@ -689,12 +691,15 @@
 									"alt names": ["fixed wing PSYOPS (SOF)"]
 								},
 								"02": {"name": "ground SOF", "type": "ff", "overlay": ["121800", "121100"]},
-								"03": {"name": "special boat (SOF)", "type": "m1"},
-								"04": {"name": "special SSNR (SOF)", "type": "m1"},
-								"05": "underwater demolition team (SOF)"
+								"03": {"name": "special boat SOF", "type": "m1"},
+								"04": {"name": "special SSNR SOF", "type": "m1"},
+								"05": {"names": ["underwater demolition team (SOF)", "UDT", "underwater demo team", "underwater demolition team"]}
 							}
 						},
-						"19": "unmanned aerial systems"
+						"19": {
+							"names": ["unmanned aerial systems", "UAS", "UAV", "unmanned aerial vehicle"],
+							"match weight": 1
+						}
 					}
 				},
 				"13": {
