@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='military_symbol',
-    version='1.0.5',
+    version='1.0.6',
     description='Lightweight library for producing SVGs of NATO standard military symbols from NATO sidcs or natural-language descriptions',
     long_description=long_description,
     long_description_content_type='text/markdown',
