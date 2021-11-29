@@ -220,5 +220,4 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
                     print(f'\tAssuming modifier "{mod.name}" -> "{proc_name_string}"')
                 ret_symbol.modifiers[mod_set] = mod
 
-    print(ret_symbol.get_sidc())
     return ret_symbol

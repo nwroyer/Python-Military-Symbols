@@ -2011,11 +2011,11 @@
 							"modcats": ["operation"],
 							"modcats-inherit": true,							
 							"entity subtypes": {
-								"01": {"name": "electric power", "type": "mn", "modcats-additional": ["electric power type"]},
-								"02": {"name": "generation station", "type": "fo", "modcats-additional": ["electric power type"]},
+								"01": {"names": ["electric power", "power"], "type": "mn", "modcats-additional": ["electric power type"]},
+								"02": {"names": ["generation station", "power plant", "powerplant"], "type": "fo", "modcats-additional": ["electric power type"]},
 								"03": {"name": "natural gas facility", "type": "fo"},
 								"04": {"name": "petroleum facility", "type": "fo"},
-								"05": {"name": "petroleum / gas / oil", "type": "mn"},
+								"05": {"names": ["petroleum / gas / oil", "POL", "POL facility", "gas facility", "oil facility", "petroleum facility"], "type": "mn"},
 								"06": {"name": "propane facility", "type": "fo"}
 							}
 						},
