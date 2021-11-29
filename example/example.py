@@ -32,14 +32,19 @@ if __name__ == '__main__':
         ("Dummy damaged neutral hospital", 'medium'),
         ("Friendly fighter", 'dark'),
         ('Friendly fighter', 'dark'),
+        ('Friendly fighter', 'dark'),
         ("Destroyed neutral artillery task force headquarters", 'unfilled'),
         ("Suspected CBRN section", 'light')
     ]
 
     for example_name, example_style in examples:
-        example_symbol: military_symbol.MilitarySymbol = military_symbol.get_symbol_class_from_name(example_name)
-        print('Exporting symbol "{}"'.format(example_symbol.get_name()))
+        example_symbol, svg_string = military_symbol.get_symbol_and_svg_string(example_name, is_sidc=False,
+                                                                               style=example_style,
+                                                                               padding=4,
+                                                                               use_variants=True)
+
+        print('\tExporting symbol "{}"'.format(example_symbol.get_name()))
 
         output_filename = os.path.join(os.getcwd(), '{} ({}).svg'.format(example_symbol.get_sidc(), example_style))
         with open(output_filename, 'w') as output_file:
-            output_file.write(example_symbol.get_svg(style=example_style, pixel_padding=4, use_variants=True))
+            output_file.write(svg_string)

@@ -53,14 +53,16 @@ def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose
     return get_svg_string(name_string, False, pixel_padding=bounding_padding, verbose=verbose, use_variants=use_variants, style=style)
 
 
-def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
+def get_symbol_class(originator, is_sidc=True, verbose=False) -> MilitarySymbol:
     """
-    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given SIDC
-    :param sidc: The SIDC to construct the MilitarySymbol from
+    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
+    guess, or SIDC, depending on inputs
+    :param originator: The variable to construct from, whether name or SIDC
+    :param is_sidc: Whether the originator is a SIDC (true) or name (false)
     :param verbose: Whether to print ancillary information
-    :return: An individual_symbol.MilitarySymbol object
+    :return: The generated symbol
     """
-    return MilitarySymbol(sym_schema).create_from_sidc(sidc, verbose)
+    return symbol_cache.get_symbol(originator, is_sidc=is_sidc)
 
 
 def get_symbol_class_from_name(name, verbose=False) -> MilitarySymbol:
@@ -71,26 +73,47 @@ def get_symbol_class_from_name(name, verbose=False) -> MilitarySymbol:
     :param verbose: Whether to print ancillary information
     :return: An individual_symbol.MilitarySymbol object
     """
-    return name_to_sidc.name_to_symbol(name, symbol_schema=sym_schema, verbose=verbose)
+    return get_symbol_class(name, is_sidc=False)
 
 
-def get_symbol_class(originator, is_sidc=True, verbose=False) -> MilitarySymbol:
+def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
     """
-    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
-    guess, or SIDC, depending on inputs
-    :param originator: The variable to construct from, whether name or SIDC
-    :param is_sidc: Whether the originator is a SIDC (true) or name (false)
+    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given SIDC
+    :param sidc: The SIDC to construct the MilitarySymbol from
     :param verbose: Whether to print ancillary information
-    :return: The generated symbol
+    :return: An individual_symbol.MilitarySymbol object
     """
-    if is_sidc:
-        return get_symbol_class_from_sidc(originator, verbose)
-    else:
-        return get_symbol_class_from_name(originator, verbose)
+    return get_symbol_class(sidc, is_sidc=True)
 
-def get_svg_string(creator_var, is_sidc:bool, pixel_padding=4, verbose=False, use_variants=False, style='light') -> str:
+
+def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=False, style='light', verbose=False) -> str:
+    """
+    Constructs an SVG for the specified symbol, given as a SIDC or name, and returns it as a string for further processing.
+    :param creator_var: The SIDC or name to construct the symbol from
+    :param is_sidc: Whether the creator value is a SIDC (true) or name (false)
+    :param pixel_padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param verbose: Whether to print ancillary information while processing, defaulting to false.
+    :param use_variants: Whether to use variant symbols
+    :param style: Style to use, between 'light', 'dark', 'medium', and 'unfilled'
+    :return: A string containing the SVG for the constructed symbol.
+    """
     return symbol_cache.get_svg_string(creator_var, is_sidc, padding=pixel_padding, style=style,
                                        use_variants=use_variants, create_if_missing=True)
+
+
+def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, style:str='light', use_variants:bool=False,
+                              verbose=False) -> tuple:
+    """
+    Returns a (MilitarySymbol, str) tuple containing the symbol and SVG string for the given creator value and style elements
+    :param creator_var: The SIDC or name to construct the symbol from
+    :param is_sidc: Whether the creator value is a SIDC (true) or name (false)
+    :param padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
+    :param style: Style to use, between 'light', 'dark', 'medium', and 'unfilled'
+    :param use_variants: Whether to use variant symbols
+    :param verbose: Whether to print ancillary information while processing, defaulting to false.
+    :return: A (MilitarySymbol, str) tuple containing the symbol and SVG for the constructed symbol.
+    """
+    return symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc, padding, style, use_variants)
 
 
 def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, style='light') -> None:
@@ -105,14 +128,16 @@ def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_pa
     :param use_variants: Whether to use variant symbols
     :param style: Style to use, between 'light', 'dark', 'medium', and 'unfilled'
     """
-    symbol: MilitarySymbol = get_symbol_class(creator_var, is_sidc, verbose)
+    symbol, svg_string = symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc,
+                                                                padding=bounding_padding, style=style,
+                                                                use_variants=use_variants)
 
     if auto_name:
         out_dir = os.path.dirname(out_filepath) if os.path.isfile(out_filepath) else out_filepath
         out_filepath = os.path.join(out_dir, f"{symbol.get_sidc()}.svg")
 
     with open(out_filepath, 'w') as out_file:
-        out_file.write(symbol.get_svg(pixel_padding=bounding_padding, use_variants=use_variants, style=style))
+        out_file.write(svg_string)
 
 
 def write_symbol_svg_string_from_sidc(sidc, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, style='light') -> None:
