@@ -36,9 +36,9 @@ if __name__ == '__main__':
     ]
 
     for example_name, example_style in examples:
-        example_symbol: src.military_symbol.individual_symbol.MilitarySymbol = military_symbol.get_symbol_class_from_name(example_name)
+        example_symbol: military_symbol.MilitarySymbol = military_symbol.get_symbol_class_from_name(example_name)
         print('Exporting symbol "{}"'.format(example_symbol.get_name()))
 
-        output_filename = '{} ({}).svg'.format(example_symbol.get_sidc(), example_style)
+        output_filename = os.path.join(os.getcwd(), '{} ({}).svg'.format(example_symbol.get_sidc(), example_style))
         with open(output_filename, 'w') as output_file:
             output_file.write(example_symbol.get_svg(style=example_style, pixel_padding=4, use_variants=True))
