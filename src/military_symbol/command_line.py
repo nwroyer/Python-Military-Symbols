@@ -16,6 +16,7 @@ if sym_schema is None:
     print("Error loading symbol schema; exiting", file=sys.stderr)
 
 
+
 def add_symbol_template_set(template_filename):
     """
     Add a symbol template to allow easier generation of symbols by name for specific situation.
