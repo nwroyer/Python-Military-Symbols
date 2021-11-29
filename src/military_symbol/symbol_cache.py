@@ -13,8 +13,8 @@ class SymbolCache:
     ]
 
     def __init__(self, symbol_schema):
-        self.sidc_to_svg_string_map:dict = {}
-        self.name_to_sidc_string_map:dict = {}
+        self.sidc_to_symbol_map:dict = {}  # Map of SIDCs + options to SVG string
+        self.name_to_sidc_string_map:dict = {}  # Map of names to (symbol, SIDC) pairs
         self.symbol_schema = symbol_schema
 
     @classmethod
@@ -51,35 +51,66 @@ class SymbolCache:
             '1' if use_variants else '0'
         )
 
-    def get_svg_string_from_sidc(self, sidc:str, padding:int, style:str, use_variants:bool, create_if_missing:bool=True) -> str:
-        key_string:str = sidc + SymbolCache.options_string_encode(padding, style, use_variants)
-        svg_string:str =  self.sidc_to_svg_string_map.get(key=key_string, default='')
-
-        if svg_string == '' and create_if_missing:
-            symbol:MilitarySymbol = MilitarySymbol(symbol_schema=self.symbol_schema)
-            symbol.create_from_sidc(sidc)
-            svg_string = symbol.get_svg(style, padding, use_variants)
-            self.sidc_to_svg_string_map[key_string] = svg_string
-            return svg_string
+    def _get_symbol_cache_from_sidc(self, sidc, create_if_missing:bool=True) -> tuple:
+        symbol_cache_entry:tuple = self.sidc_to_symbol_map.get(sidc, ())
+        if len(symbol_cache_entry) < 0:
+            # Entry doesn't exist
+            if create_if_missing:
+                # Tuple doesn't exist
+                symbol: MilitarySymbol = MilitarySymbol(symbol_schema=self.symbol_schema)
+                symbol.create_from_sidc(sidc)
+                symbol_cache_entry = (symbol, {})
+                self.sidc_to_symbol_map[sidc] = symbol_cache_entry
+            else:
+                return None
         else:
-            return svg_string
+            return symbol_cache_entry
 
-    def get_svg_string_from_name(self, name:str, padding:int, style:str, use_variants:bool, create_if_missing:bool=True) -> str:
-        sidc_string = self.name_to_sidc_string_map.get(name, defualt='')
+    def get_symbol_from_sidc(self, sidc:str, create_if_missing:bool=True) -> MilitarySymbol:
+        cache_entry:tuple = self._get_symbol_cache_from_sidc(sidc, create_if_missing)
+        return cache_entry[0] if cache_entry is not None else None
 
-        if sidc_string == '':
+    def _get_symbol_cache_from_name(self, name, create_if_missing:bool=True) -> tuple:
+        sidc:str = self.name_to_sidc_string_map.get(name, '')
+        if sidc == '':
             if create_if_missing:
                 symbol:MilitarySymbol = name_to_sidc.name_to_symbol(name, self.symbol_schema)
-                sidc_string = symbol.get_sidc()
-                self.name_to_sidc_string_map[name] = sidc_string
+                sidc = symbol.get_sidc()
+                cache_entry:tuple = (symbol, {})
+                self.sidc_to_symbol_map[sidc] = cache_entry
+                self.name_to_sidc_string_map[name] = sidc
+                return cache_entry
+            else:
+                return None
+        else:
+            return self.sidc_to_symbol_map[sidc]
 
-                # Add to name -> SIDC map
-                key_string = sidc_string + self.options_string_encode(padding, style, use_variants)
-                svg_string:str = symbol.get_svg(style, padding, use_variants)
-                self.sidc_to_svg_string_map[key_string] = svg_string
+    def get_symbol_from_name(self, name, create_if_missing:bool=True) -> MilitarySymbol:
+        cache_entry:tuple = self._get_symbol_cache_from_name(name, create_if_missing)
+        return cache_entry[0] if cache_entry is not None else None
+
+    def get_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, create_if_missing:bool=True):
+        cache_entry_tuple:tuple = self._get_symbol_cache_from_sidc(creator_val, create_if_missing) if is_sidc else self._get_symbol_cache_from_name(creator_val, create_if_missing)
+        if cache_entry_tuple is None:
+            return ''
+
+        symbol:MilitarySymbol = cache_entry_tuple[0]
+        svg_map:dict = cache_entry_tuple[1]
+
+        key_string:str = self.options_string_encode(padding, style, use_variants)
+        svg_string:str = svg_map.get(key_string, '')
+        if svg_string == '':
+            if create_if_missing:
+                svg_string = symbol.get_svg(style=style, pixel_padding=padding, use_variants=use_variants)
+                svg_map[key_string] = svg_string
                 return svg_string
             else:
                 return ''
+        else:
+            return svg_string
 
-        return self.get_svg_string_from_sidc(sidc_string, padding, style, use_variants, create_if_missing)
+    def get_svg_string_from_name(self, name, padding:int, style:str, use_variants:bool=False, create_if_missing:bool=True):
+        return self.get_svg_string(name, False, padding, style, use_variants, create_if_missing)
 
+    def get_svg_string_from_sidc(self, sidc, padding:int, style:str, use_variants:bool=False, create_if_missing:bool=True):
+        return self.get_svg_string(sidc, True, padding, style, use_variants, create_if_missing)

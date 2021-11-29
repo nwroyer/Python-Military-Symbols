@@ -7,6 +7,7 @@ from . import name_to_sidc
 from .individual_symbol import MilitarySymbol
 from .symbol_schema import SymbolSchema
 from .symbol_template import SymbolTemplateSet
+from .symbol_cache import SymbolCache
 
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
 
@@ -15,7 +16,7 @@ sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
 if sym_schema is None:
     print("Error loading symbol schema; exiting", file=sys.stderr)
 
-
+symbol_cache: SymbolCache = SymbolCache(sym_schema)
 
 def add_symbol_template_set(template_filename):
     """
@@ -88,9 +89,8 @@ def get_symbol_class(originator, is_sidc=True, verbose=False) -> MilitarySymbol:
         return get_symbol_class_from_name(originator, verbose)
 
 def get_svg_string(creator_var, is_sidc:bool, pixel_padding=4, verbose=False, use_variants=False, style='light') -> str:
-    symbol: MilitarySymbol = get_symbol_class(creator_var, is_sidc, verbose)
-    if symbol is not None:
-        return symbol.get_svg(style=style, pixel_padding=pixel_padding, use_variants=use_variants)
+    return symbol_cache.get_svg_string(creator_var, is_sidc, padding=pixel_padding, style=style,
+                                       use_variants=use_variants, create_if_missing=True)
 
 
 def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, style='light') -> None:

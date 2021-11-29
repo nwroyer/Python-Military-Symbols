@@ -31,6 +31,7 @@ if __name__ == '__main__':
         ('Enemy armor company', 'light'),
         ("Dummy damaged neutral hospital", 'medium'),
         ("Friendly fighter", 'dark'),
+        ('Friendly fighter', 'dark'),
         ("Destroyed neutral artillery task force headquarters", 'unfilled'),
         ("Suspected CBRN section", 'light')
     ]
