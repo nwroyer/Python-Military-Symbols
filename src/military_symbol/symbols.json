@@ -5773,14 +5773,21 @@
        "modcats-inherit": true,
        "entity subtypes": {
         "01": {
-         "name": "electric power",
+         "names": [
+          "electric power",
+          "power"
+         ],
          "type": "mn",
          "modcats-additional": [
           "electric power type"
          ]
         },
         "02": {
-         "name": "generation station",
+         "names": [
+          "generation station",
+          "power plant",
+          "powerplant"
+         ],
          "type": "fo",
          "modcats-additional": [
           "electric power type"
@@ -5795,7 +5802,14 @@
          "type": "fo"
         },
         "05": {
-         "name": "petroleum / gas / oil",
+         "names": [
+          "petroleum / gas / oil",
+          "POL",
+          "POL facility",
+          "gas facility",
+          "oil facility",
+          "petroleum facility"
+         ],
          "type": "mn"
         },
         "06": {
@@ -5824,12 +5838,15 @@
          "type": "ff",
          "overlay": [
           "10-161300"
-         ]
+         ],
+         "match weight": -1
         },
         "02": {
          "names": [
           "medical treatment facility / hospital",
-          "hospital"
+          "hospital",
+          "medical treatment facility",
+          "MTF"
          ],
          "type": "ff",
          "overlay": [
@@ -5845,7 +5862,10 @@
        "type-inherit": true,
        "entity subtypes": {
         "01": {
-         "name": "military armory",
+         "names": [
+          "military armory",
+          "armory"
+         ],
          "overlay": [
           "120802",
           "0XTopRES"
@@ -5879,7 +5899,13 @@
         "01": "enclosed facility",
         "02": "open facility",
         "03": "recreational area",
-        "04": "religious institution"
+        "04": [
+         "religious institution",
+         "church",
+         "mosque",
+         "temple",
+         "synagogue"
+        ]
        }
       },
       "11": {
@@ -5932,7 +5958,13 @@
        "type": "fo",
        "entity subtypes": {
         "01": {
-         "name": "airport / air base",
+         "names": [
+          "airport / air base",
+          "airport",
+          "air base",
+          "air port",
+          "aeroport"
+         ],
          "type": "m1",
          "overlay": [
           "10-163600",
@@ -5940,7 +5972,10 @@
          ]
         },
         "02": {
-         "name": "air traffic control facility"
+         "names": [
+          "air traffic control facility",
+          "ATC"
+         ]
         },
         "03": {
          "name": "bus station",
@@ -5964,7 +5999,13 @@
          ]
         },
         "07": {
-         "name": "railhead / railroad station",
+         "names": [
+          "railhead / railroad station",
+          "railhead",
+          "railroad station",
+          "rail station",
+          "railway station"
+         ],
          "type": "fo",
          "overlay": [
           "10-163600",
@@ -5973,7 +6014,13 @@
         },
         "08": "rest stop",
         "09": {
-         "name": "sea port / naval base",
+         "names": [
+          "sea port / naval base",
+          "naval base",
+          "seaport",
+          "port",
+          "sea port"
+         ],
          "type": "m1",
          "overlay": [
           "10-163600",
@@ -6013,9 +6060,12 @@
         "04": "ground water well",
         "05": "pumping station",
         "06": "reservoir",
-        "07": "storage tower",
+        "07": [
+         "storage tower",
+         "water tower"
+        ],
         "08": "surface water intake",
-        "09": "wasterwater treatment facility",
+        "09": "wastewater treatment facility",
         "10": {
          "name": "water",
          "overlay": [

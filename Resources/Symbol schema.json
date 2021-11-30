@@ -2029,8 +2029,8 @@
 							"modcats": ["operation"],
 							"modcats-inherit": true,							
 							"entity subtypes": {
-								"01": {"names": ["medical", "clinic"], "type": "ff", "overlay": ["10-161300"]},
-								"02": {"names": ["medical treatment facility / hospital", "hospital"], "type": "ff", "overlay": ["10-161300", "10-0XHospital"]}
+								"01": {"names": ["medical", "clinic"], "type": "ff", "overlay": ["10-161300"], "match weight":  -1},
+								"02": {"names": ["medical treatment facility / hospital", "hospital", "medical treatment facility", "MTF"], "type": "ff", "overlay": ["10-161300", "10-0XHospital"]}
 							}
 						},
 						"08": {
@@ -2038,7 +2038,7 @@
 							"type": "fo",
 							"type-inherit": true,
 							"entity subtypes": {
-								"01": {"name": "military armory", "overlay": ["120802", "0XTopRES"]}, 
+								"01": {"names": ["military armory", "armory"], "overlay": ["120802", "0XTopRES"]},
 								"02": "military base"
 							}
 						},
@@ -2063,7 +2063,7 @@
 								"01": "enclosed facility",
 								"02": "open facility",
 								"03": "recreational area",
-								"04": "religious institution"
+								"04": ["religious institution", "church", "mosque", "temple", "synagogue"]
 							}
 						},
 						"11": {
@@ -2095,21 +2095,21 @@
 							"modcats-inherit": true,
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"name": "airport / air base",
+								"01": {"names": ["airport / air base", "airport", "air base", "air port", "aeroport"],
 									"type": "m1", "overlay": ["10-163600", "10-0XAirport"]
 								},
-								"02": {"name": "air traffic control facility"},
+								"02": {"names": ["air traffic control facility", "ATC"]},
 								"03": {"name": "bus station",
 									"type": "fo", "overlay": ["15-160300"]
 								},
 								"04": {"name": "ferry terminal", "type": "fo"},
 								"05": {"name": "helicopter landing site", "type": "fo"},
 								"06": {"name": "maintenance facility", "overlay": ["10-161100"]},
-								"07": {"name": "railhead / railroad station",
+								"07": {"names": ["railhead / railroad station", "railhead", "railroad station", "rail station", "railway station"],
 									"type": "fo", "overlay": ["10-163600", "10-0XRailhead"]
 								},
 								"08": "rest stop",
-								"09": {"name": "sea port / naval base", 
+								"09": {"names": ["sea port / naval base", "naval base", "seaport", "port", "sea port"],
 									"type": "m1", "overlay": ["10-163600", "10-0XSeaport"]
 								},
 								"10": {"name": "shipyard", "type": "m1"},
@@ -2131,9 +2131,9 @@
 								"04": "ground water well",
 								"05": "pumping station",
 								"06": "reservoir",
-								"07": "storage tower",
+								"07": ["storage tower", "water tower"],
 								"08": "surface water intake",
-								"09": "wasterwater treatment facility",
+								"09": "wastewater treatment facility",
 								"10": {"name": "water", "overlay": ["10-164700"]},
 								"11": {"name": "water treatment", "overlay": ["10-164800"]}
 							}
