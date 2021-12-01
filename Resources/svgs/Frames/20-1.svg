@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        sodipodi:docname="20-1.svg"
-        inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-        id="svg8"
-        version="1.1"
-        viewBox="0 0 67.733332 67.733332"
-        height="256"
-        width="256">
+   sodipodi:docname="20-1.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 67.733332 67.733332"
+   height="256"
+   width="256"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <style
-     id="style838"></style>
+     id="style838" />
   <title
      id="title856">MIL-STD-2525D Icon</title>
   <defs
@@ -22,18 +23,18 @@
   <sodipodi:namedview
      inkscape:pagecheckerboard="true"
      units="px"
-     inkscape:window-maximized="0"
-     inkscape:window-y="27"
-     inkscape:window-x="1494"
-     inkscape:window-height="1385"
-     inkscape:window-width="1946"
+     inkscape:window-maximized="1"
+     inkscape:window-y="29"
+     inkscape:window-x="65"
+     inkscape:window-height="711"
+     inkscape:window-width="1301"
      showgrid="false"
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
-     inkscape:cy="108.38527"
-     inkscape:cx="94.864463"
-     inkscape:zoom="3.0648962"
+     inkscape:cy="108.64968"
+     inkscape:cx="19.250244"
+     inkscape:zoom="1.5324481"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      borderopacity="1.0"
@@ -72,15 +73,15 @@
      inkscape:groupmode="layer"
      inkscape:label="Symbol">
     <path
+       id="rect858"
+       style="display:inline;fill:#000000;stroke:none;stroke-width:3.99999;stop-color:#000000"
+       d="M 70.607422 1.9335938 L 70.607422 84.398438 L 71.328125 84.398438 A 45.255059 45.255059 0 0 1 82.744141 82.744141 A 45.255059 45.255059 0 0 1 128 37.490234 A 45.255059 45.255059 0 0 1 173.25391 82.744141 A 45.255059 45.255059 0 0 1 185.38477 84.402344 L 185.39258 84.402344 L 185.39258 1.9335938 L 70.607422 1.9335938 z "
+       transform="scale(0.26458333)" />
+    <path
        id="path919"
        style="fill:#ff8000;stroke:none;stroke-width:3.99999997;stroke-linejoin:round;stop-color:#000000"
        d="M 128,37.490234 A 45.255059,45.255059 0 0 0 82.744141,82.744141 45.255059,45.255059 0 0 0 37.490234,128 45.255059,45.255059 0 0 0 82.744141,173.25391 45.255059,45.255059 0 0 0 128,218.50977 45.255059,45.255059 0 0 0 173.25391,173.25391 45.255059,45.255059 0 0 0 218.50977,128 45.255059,45.255059 0 0 0 173.25391,82.744141 45.255059,45.255059 0 0 0 128,37.490234 Z"
        transform="scale(0.26458333)" />
-    <path
-       id="rect858"
-       style="display:inline;fill:#000000;stroke:none;stroke-width:1.05833;stop-color:#000000"
-       d="m 26.274099,4.5525804 h 15.185136 l 0,8.0820106 c 0,0 -2.956222,-2.7153 -7.532789,-2.7153 -4.576567,0 -7.652347,2.714876 -7.652347,2.714876 z"
-       sodipodi:nodetypes="ccczcc" />
     <path
        transform="scale(0.26458333)"
        d="M 128,37.490234 A 45.255059,45.255059 0 0 0 82.744141,82.744141 45.255059,45.255059 0 0 0 37.490234,128 45.255059,45.255059 0 0 0 82.744141,173.25391 45.255059,45.255059 0 0 0 128,218.50977 45.255059,45.255059 0 0 0 173.25391,173.25391 45.255059,45.255059 0 0 0 218.50977,128 45.255059,45.255059 0 0 0 173.25391,82.744141 45.255059,45.255059 0 0 0 128,37.490234 Z"
