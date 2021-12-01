@@ -3671,6 +3671,11 @@
   },
   "11": {
    "name": "land civilian unit/organization",
+   "alt names": [
+    "land civilian",
+    "land civilian unit",
+    "land civilian organization"
+   ],
    "frame set": "10",
    "entities": {
     "11": {
@@ -3691,14 +3696,21 @@
        ]
       },
       "03": {
-       "name": "individual",
+       "names": [
+        "individual",
+        "civilian individual"
+       ],
        "modcats": [
         "organization",
         "crime"
        ]
       },
       "04": {
-       "name": "organization or group",
+       "names": [
+        "organization or group",
+        "civilian group",
+        "civilian organization"
+       ],
        "modcats": [
         "organization",
         "crime"
@@ -3851,7 +3863,11 @@
    },
    "modifier set 2": {
     "01": {
-     "name": "leader or leadership",
+     "names": [
+      "leader or leadership",
+      "leader",
+      "leadership"
+     ],
      "cat": "organization"
     }
    }
@@ -6566,6 +6582,7 @@
     },
     "14": {
      "name": "civilian",
+     "match weight": -1,
      "uses-civilian-coloring": true,
      "civilian-coloring-inherit": true,
      "modcats": [
@@ -6905,6 +6922,7 @@
     },
     "12": {
      "name": "civilian",
+     "match weight": -1,
      "uses-civilian-coloring": true,
      "civilian-coloring-inherit": true,
      "modcats": [

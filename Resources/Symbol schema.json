@@ -1288,6 +1288,7 @@
 		},
 		"11": {
 			"name": "land civilian unit/organization",
+			"alt names": ["land civilian", "land civilian unit", "land civilian organization"],
 			"frame set": "10",
 			"entities": {
 				"11": {
@@ -1297,8 +1298,8 @@
 					"entity types": {
 						"01": {"name": "environmental protection", "modcats": ["organization"]},
 						"02": {"name": "governmental organization", "modcats": ["organization"]},
-						"03": {"name": "individual", "modcats": ["organization", "crime"]},
-						"04": {"name": "organization or group", "modcats": ["organization", "crime"]},
+						"03": {"names": ["individual", "civilian individual"], "modcats": ["organization", "crime"]},
+						"04": {"names": ["organization or group", "civilian group", "civilian organization"], "modcats": ["organization", "crime"]},
 						"05": {"name": "killing victim", "modcats": ["crime", "organization"]},
 						"06": {"name": "killing victims", "modcats": ["crime", "organization"]},
 						"07": {"name": "victim of an attempted crime", "modcats": ["organization", "crime"]},
@@ -1336,7 +1337,7 @@
 				"24": {"name": "loot", "cat": "crime"}
 			},
 			"modifier set 2": {
-				"01": {"name": "leader or leadership", "cat": "organization"}
+				"01": {"names": ["leader or leadership", "leader", "leadership"], "cat": "organization"}
 			}
 		},
 		"15": {
@@ -2487,6 +2488,7 @@
 				},
 				"14": {
 					"name": "civilian",
+					"match weight": -1,
 					"uses-civilian-coloring": true,
 					"civilian-coloring-inherit": true,
 					"modcats": ["crime", "ship capacity", "asset capability", "ship mobility"],
@@ -2617,6 +2619,7 @@
 				},
 				"12": {
 					"name": "civilian",
+					"match weight": -1,
 					"uses-civilian-coloring": true,
 					"civilian-coloring-inherit": true,
 					"modcats": ["crime"],
