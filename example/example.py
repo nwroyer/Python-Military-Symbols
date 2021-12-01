@@ -8,7 +8,7 @@ import os
 import military_symbol
 
 if __name__ == '__main__':
-    # Print symbol generated from a name to STDOUT
+    # Print symbol genera/home/nick/Projects/Python-Military-Symbols/Resources/_symbol_converter.pyted from a name to STDOUT
     print(military_symbol.get_symbol_svg_string_from_name("enemy infantry platoon"))
 
     # Add a symbol template and write it to a file adjacent to this script

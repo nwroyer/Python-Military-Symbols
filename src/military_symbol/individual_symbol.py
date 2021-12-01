@@ -330,12 +330,16 @@ class MilitarySymbol:
                     make_unfilled(mod_svg, fill_color)
                 layer_svg(symbol_svg, mod_svg)
 
-        if self.status is not None and (not use_variants or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
+        if self.status is not None and not self.status.makes_frame_dashed and (not use_variants or (use_variants and len(self.status.variants) > 0 and self.status.variants[0] != 'nn')):
             overlays = [self.status.id_code]
 
             for overlay_code in overlays:
-                overlay_svg = self.symbol_schema.get_svg_by_code(f'S-{overlay_code}', self.standard_identity,
+                try:
+                    overlay_svg = self.symbol_schema.get_svg_by_code(f'S-{overlay_code}', self.standard_identity,
                                                                  use_variants=use_variants)
+                except Exception as e:
+                    overlay_svg = None
+
                 if overlay_svg is None:
                     print(f"Error applying status overlay {overlay_code} -> {self.symbol_schema.get_svg_filename_by_code(f'S-{overlay_code}', self.standard_identity)}")
                     continue
