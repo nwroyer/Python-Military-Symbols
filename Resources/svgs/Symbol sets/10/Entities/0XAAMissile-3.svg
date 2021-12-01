@@ -6,7 +6,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
-   sodipodi:docname="130100-1.svg"
+   sodipodi:docname="0XAAMissile-3.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -43,8 +43,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="160.75"
-     inkscape:cy="127.75"
+     inkscape:cx="130.25"
+     inkscape:cy="143.75"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -57,16 +57,15 @@
      units="px"
      inkscape:pagecheckerboard="true"
      showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:snap-smooth-nodes="true">
+     inkscape:guide-bbox="true">
     <sodipodi:guide
        position="33.866665,50.8"
        orientation="1,0"
        id="guide861" />
     <sodipodi:guide
-       position="16.933332,33.866667"
+       position="9.9193223,33.866662"
        orientation="0,-1"
-       id="guide1865" />
+       id="guide1629" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -96,11 +95,16 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline;opacity:1">
-    <path
-       sodipodi:nodetypes="czc"
-       style="fill:none;stroke:#000000;stroke-width:1.05833;stop-color:#000000"
-       d="m 51.422617,44.477039 c 0,0 -4.326572,-10.610374 -17.555952,-10.610374 -13.22938,0 -17.545575,10.605116 -17.545575,10.605116"
-       id="path875" />
+    <g
+       id="g982"
+       transform="translate(5.4921876e-7,-0.26458349)"
+       style="display:inline">
+      <path
+         sodipodi:nodetypes="cscsc"
+         d="m 30.843721,33.866665 v -9.46539 c 0,-1.669526 1.353418,-3.022944 3.022944,-3.022944 1.669526,0 3.022943,1.353418 3.022943,3.022944 v 9.46539"
+         style="display:inline;opacity:1;fill:none;stroke:#000000;stroke-width:1.05833;stop-color:#000000"
+         id="path864" />
+    </g>
   </g>
   <g
      sodipodi:insensitive="true"

@@ -318,7 +318,7 @@
 								"27": "ultra light *",
 								"28": "photographic reconnaissance *",
 								"29": "VIP *",
-								"30": "suppression of enemy air defense *",
+								"30": ["suppression of enemy air defense *", "SEAD"],
 								"31": "passenger *",
 								"32": "* escort",
 								"33": "* electronic attack"
@@ -711,8 +711,17 @@
 							"names": ["air defense", "anti-air"],
 							"type": "ff",
 							"entity subtypes": {
-								"01": {"name": "main gun system *", "type": "ff", "overlay": ["130100", "121106"]},
-								"02": {"name": "missile *", "type": "ff", "overlay": ["130100", "130700"]}
+								"01": {"names": ["main gun system *",
+								    "anti-air gun",
+								    "air defense gun",
+								    "flak"
+								], "type": "ff", "overlay": ["130100", "121106"]},
+								"02": {"names": [
+								    "missile *",
+								    "anti-air missile",
+								    "AA missile",
+								    "air defense missile"								
+								], "match weight": 1, "type": "ff", "overlay": ["130100", "0XAAMissile"]}
 							}
 						},
 						"02": {"name": "air / land naval gunfire liaison", "type": "ff", "overlay": ["0XSeaport", "130300", "120600", "121300"]},
