@@ -37,14 +37,15 @@ if __name__ == '__main__':
         ("Suspected CBRN section", 'light')
     ]
 
-    for example_name, example_style in examples:
-        example_symbol, svg_string = military_symbol.get_symbol_and_svg_string(example_name, is_sidc=False,
-                                                                               style=example_style,
-                                                                               padding=4,
-                                                                               use_variants=True)
+    for i in range(100):
+        for example_name, example_style in examples:
+            example_symbol, svg_string = military_symbol.get_symbol_and_svg_string(example_name, is_sidc=False,
+                                                                                   style=example_style,
+                                                                                   padding=4,
+                                                                                   use_variants=True)
 
-        print('\tExporting symbol "{}"'.format(example_symbol.get_name()))
+            print('\t{}: Exporting symbol "{}"'.format(i, example_symbol.get_name()))
 
-        output_filename = os.path.join(os.getcwd(), '{} ({}).svg'.format(example_symbol.get_sidc(), example_style))
-        with open(output_filename, 'w') as output_file:
-            output_file.write(svg_string)
+            output_filename = os.path.join(os.getcwd(), '{} ({}).svg'.format(example_symbol.get_sidc(), example_style))
+            with open(output_filename, 'w') as output_file:
+                output_file.write(svg_string)
