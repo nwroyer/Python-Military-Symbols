@@ -354,7 +354,9 @@
    ],
    "second digit": {
     "1": [
-     "team, crew"
+     "team",
+     "crew",
+     "fireteam"
     ],
     "2": "squad",
     "3": "section",

@@ -202,7 +202,7 @@
 			"name": "echelon at brigade and below",
 			"applies to": [10, 11],
 			"second digit": {
-				"1": ["team, crew"],
+				"1": ["team", "crew", "fireteam"],
 				"2": "squad",
 				"3": "section",
 				"4": ["platoon", "detachment"],
@@ -640,7 +640,7 @@
 								"01": {"names": ["* reconnaissance", "* recon"], "type": "ff", "overlay": ["120600", "121300"]}
 							}
 						},
-						"07": "aviation composite",
+						"07": ["aviation composite", "composite aviation"],
 						"08": {
 							"names": ["aviation fixed wing", "fixed-wing", "fixed wing"],
 							"entity subtypes": {
