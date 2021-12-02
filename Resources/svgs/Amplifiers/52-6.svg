@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        width="256"
-        height="256"
-        viewBox="0 0 67.733332 67.733332"
-        version="1.1"
-        id="svg8"
-        inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-        sodipodi:docname="652.svg">
+   width="256"
+   height="256"
+   viewBox="0 0 67.733332 67.733332"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="52-6.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <style
-     id="style847"></style>
+     id="style847" />
   <title
      id="title856">MIL-STD-2525D Icon</title>
   <defs
@@ -59,16 +60,16 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="238.53978"
-     inkscape:cy="261.70129"
+     inkscape:cx="63.286055"
+     inkscape:cy="261.98306"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1718"
-     inkscape:window-height="1385"
+     inkscape:window-height="1380"
      inkscape:window-x="1722"
-     inkscape:window-y="27"
+     inkscape:window-y="32"
      inkscape:window-maximized="0"
      units="px"
      inkscape:pagecheckerboard="true"
@@ -137,7 +138,7 @@
      id="layer1"
      style="display:inline;opacity:1">
     <path
-       style="display:inline;opacity:1;fill:none;stroke:#000000;stroke-width:1.05833;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       style="display:inline;opacity:1;fill:none;stroke:#000000;stroke-width:1.58749997;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000;stroke-linecap:round"
        d="m 57.814041,55.402728 c 0,-1.579199 -1.531655,-2.859393 -3.42105,-2.859393 -1.889396,0 -3.421054,1.280193 -3.421054,2.859393 0,1.579199 -1.531655,2.859394 -3.42105,2.859394 -1.889396,0 -3.42105,-1.280195 -3.42105,-2.859394 0,-1.5792 -1.531657,-2.859393 -3.421052,-2.859393 -1.889396,0 -3.421052,1.280193 -3.421052,2.838665 0,1.558472 -1.531656,2.838667 -3.421051,2.838667 -1.889395,0 -3.421051,-1.280195 -3.421051,-2.838667 0,-1.558472 -1.531656,-2.838665 -3.421052,-2.838665 -1.889395,0 -3.421051,1.280193 -3.421051,2.859392 0,1.579199 -1.531657,2.859394 -3.421051,2.859394 -1.889394,0 -3.421051,-1.280195 -3.421051,-2.859394 0,-1.579199 -1.531656,-2.859392 -3.421052,-2.859392 -1.889395,0 -3.4210512,1.280194 -3.4210512,2.859393"
        id="path965"
        sodipodi:nodetypes="cszszszszszszsc" />

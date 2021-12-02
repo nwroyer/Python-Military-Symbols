@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        width="256"
-        height="256"
-        viewBox="0 0 67.733332 67.733332"
-        version="1.1"
-        id="svg8"
-        inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-        sodipodi:docname="662.svg">
+   width="256"
+   height="256"
+   viewBox="0 0 67.733332 67.733332"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="62-6.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <style
-     id="style847"></style>
+     id="style847" />
   <title
      id="title856">MIL-STD-2525D Icon</title>
   <defs
@@ -61,16 +62,16 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="165.71794"
-     inkscape:cy="255.2291"
+     inkscape:cx="117.20295"
+     inkscape:cy="200.64155"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1810"
-     inkscape:window-height="1385"
+     inkscape:window-height="1380"
      inkscape:window-x="1630"
-     inkscape:window-y="27"
+     inkscape:window-y="32"
      inkscape:window-maximized="0"
      units="px"
      inkscape:pagecheckerboard="true"
@@ -134,13 +135,14 @@
        x="30.913855"
        y="59.169464" />
     <path
-       d="m 21.20492,57.813494 v 1.35599 h -2.424658 v 5.9061 h 2.424658 v 1.355474 h 1.058333 v -1.355474 h 2.423625 v -5.9061 h -2.423625 v -1.35599 z"
+       d="m 20.675753,57.813494 v 1.35599 h -1.895491 v 5.9061 h 1.895491 v 1.355474 h 2.116667 v -1.355474 h 1.894458 v -5.9061 H 22.79242 v -1.35599 z"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
-       id="path928" />
+       id="path928"
+       sodipodi:nodetypes="ccccccccccccc" />
     <path
        sodipodi:nodetypes="ccc"
-       style="display:inline;opacity:1;fill:none;stroke:#000000;stroke-width:1.05833;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       d="m 60.556992,62.122388 -26.690326,0 -26.6903312,0"
+       style="display:inline;opacity:1;fill:none;stroke:#000000;stroke-width:1.5875;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+       d="M 60.027825,62.122388 H 33.866666 7.7055015"
        id="path977" />
     <rect
        y="59.169327"
@@ -159,7 +161,8 @@
     <path
        id="path931"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
-       d="m 45.471355,57.813494 v 1.35599 h -2.424658 v 5.9061 h 2.424658 v 1.355474 h 1.058333 v -1.355474 h 2.423625 v -5.9061 h -2.423625 v -1.35599 z" />
+       d="m 44.942188,57.813494 v 1.35599 h -1.895491 v 5.9061 h 1.895491 v 1.355474 h 2.116667 v -1.355474 h 1.894458 v -5.9061 h -1.894458 v -1.35599 z"
+       sodipodi:nodetypes="ccccccccccccc" />
   </g>
   <g
      sodipodi:insensitive="true"

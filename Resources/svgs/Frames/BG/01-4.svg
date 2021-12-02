@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 67.733332 67.733332"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="01-4.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="style838" />
+  <title
+     id="title856">MIL-STD-2525D Icon</title>
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:object-paths="true"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="70.25"
+     inkscape:cy="133.625"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1931"
+     inkscape:window-height="1380"
+     inkscape:window-x="1509"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     units="px"
+     inkscape:pagecheckerboard="true" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>MIL-STD-2525D Icon</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Nicholas W. Royer</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>All rights reserved</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:description>L=128px</dc:description>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Symbol"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       id="rect838"
+       style="fill:#ff8000;stroke:none;stroke-width:1.05833;stroke-linejoin:round;stop-color:#000000"
+       d="m 51.5625,4.6269531 c -12.315559,0.071848 -24.632272,0.00509 -36.947266,0.09375 -3.094061,0.4722202 -5.2224888,3.7762768 -4.7361528,6.7992189 0.061965,13.419424 -0.08788,26.842463 0.1463098,40.259375 0.653538,2.999611 3.995949,4.768831 6.90625,4.314453 12.211265,-0.03077 24.426207,0.105254 36.634765,-0.138672 2.976399,-0.678312 4.71641,-3.995256 4.269532,-6.890625 -0.0233,-13.36679 0.08656,-26.737459 -0.125,-40.1015624 C 57.142652,6.2087844 54.244605,4.511765 51.5625,4.6269531 Z" />
+  </g>
+  <g
+     sodipodi:insensitive="true"
+     style="opacity:0.25"
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Octagon">
+    <path
+       sodipodi:type="star"
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#ff0080;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;paint-order:normal;stop-color:#000000"
+       id="path836"
+       sodipodi:sides="8"
+       sodipodi:cx="33.866665"
+       sodipodi:cy="33.866665"
+       sodipodi:r1="16.933332"
+       sodipodi:r2="15.64436"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 45.840339,45.840339 33.866665,50.799997 21.892991,45.840339 16.933332,33.866665 21.892991,21.892991 33.866665,16.933332 45.840339,21.892991 50.799997,33.866665 Z" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path857"
+       d="M 27.093333,19.738938 V 47.994392"
+       style="fill:none;stroke:#ff0080;stroke-width:0.264583;stroke-linejoin:round;stop-color:#000000" />
+    <path
+       style="fill:none;stroke:#ff0080;stroke-width:0.264583;stroke-linejoin:round;stop-color:#000000"
+       d="M 40.639997,19.738938 V 47.994392"
+       id="path859"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path861"
+       d="M 47.994392,27.093332 H 19.738938"
+       style="fill:none;stroke:#ff0080;stroke-width:0.264583;stroke-linejoin:round;stop-color:#000000" />
+    <path
+       style="fill:none;stroke:#ff0080;stroke-width:0.264583;stroke-linejoin:round;stop-color:#000000"
+       d="M 47.994392,40.639997 H 19.738938"
+       id="path863"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

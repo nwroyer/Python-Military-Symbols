@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 67.733332 67.733332"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="24-6.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="style847" />
+  <title
+     id="title856">MIL-STD-2525D Icon</title>
+  <defs
+     id="defs2">
+    <rect
+       x="23.463894"
+       y="29.981363"
+       width="37.028973"
+       height="27.825965"
+       id="rect919" />
+    <rect
+       id="rect839"
+       height="13.148852"
+       width="40.416331"
+       y="3.2134565"
+       x="23.31878" />
+    <rect
+       x="23.318781"
+       y="3.2134564"
+       width="40.416332"
+       height="13.148852"
+       id="rect839-3" />
+    <rect
+       x="23.318781"
+       y="3.2134564"
+       width="40.416332"
+       height="13.148852"
+       id="rect852" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:bbox-paths="true"
+     inkscape:snap-others="false"
+     inkscape:snap-nodes="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-center="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-midpoints="true"
+     inkscape:object-paths="true"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.828427"
+     inkscape:cx="93.868429"
+     inkscape:cy="33.76435"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="3354"
+     inkscape:window-height="1380"
+     inkscape:window-x="86"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox-edge-midpoints="true">
+    <sodipodi:guide
+       position="33.866665,50.8"
+       orientation="1,0"
+       id="guide861" />
+    <sodipodi:guide
+       id="guide1095"
+       orientation="1,0"
+       position="9.9193223,33.866662" />
+    <sodipodi:guide
+       id="guide1097"
+       orientation="1,0"
+       position="57.814041,33.866664" />
+    <sodipodi:guide
+       id="guide1098"
+       orientation="0,-1"
+       position="33.866665,57.814039" />
+    <sodipodi:guide
+       id="guide1388"
+       orientation="0,-1"
+       position="35.454167,58.343206" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>MIL-STD-2525D Icon</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Nicholas W. Royer</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>All rights reserved</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:description>L=128px</dc:description>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Symbol"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline;opacity:1">
+    <path
+       id="path1493"
+       style="color:#000000;fill:#ff8000;stroke-width:3.77952;stroke-linejoin:round;-inkscape-stroke:none"
+       d="M -11.578125 -33.484375 C -11.915689 -33.480165 -12.254905 -33.464479 -12.59375 -33.439453 C -22.72958 -32.187185 -29.792226 -23.986253 -36.333984 -16.957031 C -42.081542 -8.726411 -40.052084 3.1034454 -33.314453 10.134766 C -39.152795 16.547116 -42.290126 26.770274 -37.376953 34.605469 C -33.316769 41.471332 -26.952343 46.718543 -20.398438 51.066406 C -13.116686 54.697259 -3.5963614 53.637928 2.40625 48.027344 C 9.1316959 53.908527 19.87019 55.210399 27.238281 49.738281 C 29.617142 48.223424 31.715842 46.327453 33.75 44.386719 C 39.201116 49.837191 46.65712 54.603854 54.708984 53.048828 C 58.597079 52.440063 62.187401 50.543361 65.181641 48.033203 C 71.891595 53.828209 82.461792 55.242282 89.851562 49.880859 C 92.31998 48.343884 94.464042 46.361403 96.570312 44.373047 C 102.16976 49.996935 110.05322 54.919262 118.30469 52.853516 C 121.89521 52.170498 125.21882 50.378728 127.98633 48.019531 C 134.92429 54.061987 146.07599 55.209594 153.48438 49.339844 C 155.60028 47.872597 157.5302 46.156855 159.375 44.365234 C 164.71807 49.760438 172.01102 54.477282 179.95117 53.072266 C 183.97656 52.531884 187.7562 50.656467 190.83008 48.033203 C 197.50779 53.776486 208.02062 55.2266 215.38867 49.923828 C 217.88177 48.377045 220.07425 46.407696 222.1875 44.386719 C 227.69898 49.950274 235.38634 54.728937 243.5332 52.984375 C 247.27322 52.325263 250.72548 50.463768 253.61133 48.033203 C 260.25678 53.743718 270.7422 55.289209 278.05859 49.921875 C 283.9297 46.11261 288.99066 41.006467 293.14648 35.419922 C 297.96779 27.281505 295.67697 15.955881 289.06055 9.8183594 C 295.60358 3.4299296 298.34196 -7.5819201 292.93164 -15.523438 C 288.94103 -21.886562 282.94259 -26.75397 276.82812 -30.958984 C 269.49604 -34.918227 259.63972 -33.933434 253.61133 -28.037109 C 247.04207 -34.002927 236.37685 -35.35765 229.03711 -29.970703 C 226.57456 -28.411311 224.37365 -26.484772 222.26172 -24.486328 C 216.62749 -30.208959 208.55243 -35.096909 200.24219 -32.875 C 196.75547 -32.127341 193.48369 -30.470365 190.76367 -28.169922 C 183.96139 -34.076371 173.07468 -35.357983 165.74609 -29.658203 C 163.45036 -28.195997 161.42389 -26.362093 159.45703 -24.492188 C 153.69484 -30.418372 145.23173 -35.263184 136.75586 -32.728516 C 133.53102 -31.880264 130.50515 -30.304681 127.95703 -28.154297 C 121.27355 -33.968064 110.60449 -35.378672 103.29688 -29.882812 C 100.86015 -28.371814 98.712439 -26.451511 96.644531 -24.478516 C 90.813612 -30.488948 82.159655 -35.34589 73.605469 -32.6875 C 70.514284 -31.799245 67.664526 -30.184107 65.181641 -28.154297 C 58.423728 -33.988816 47.658608 -35.366519 40.322266 -29.787109 C 37.967987 -28.268861 35.851898 -26.411756 33.832031 -24.478516 C 28.170848 -30.268102 19.999508 -35.097223 11.642578 -32.886719 C 8.1535669 -32.143473 5.0352204 -30.241057 2.2226562 -28.109375 C -1.6242611 -31.311521 -6.5146685 -33.547518 -11.578125 -33.484375 z "
+       transform="scale(0.26458333)" />
+  </g>
+  <g
+     sodipodi:insensitive="true"
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Octagon"
+     style="opacity:0.25">
+    <path
+       d="M 33.866665,9.9192931 A 11.973734,11.973734 0 0 0 21.89272,21.892723 11.973734,11.973734 0 0 0 9.9192906,33.866668 11.973734,11.973734 0 0 0 21.89272,45.840098 11.973734,11.973734 0 0 0 33.866665,57.814044 11.973734,11.973734 0 0 0 45.840095,45.840098 11.973734,11.973734 0 0 0 57.814041,33.866668 11.973734,11.973734 0 0 0 45.840095,21.892723 11.973734,11.973734 0 0 0 33.866665,9.9192931 Z"
+       style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#ff0080;stroke-width:0.249999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;paint-order:normal;stop-color:#000000;stop-opacity:1"
+       id="path919" />
+    <path
+       sodipodi:type="star"
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#ff0080;stroke-width:0.249999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;paint-order:normal;stop-color:#000000"
+       id="path836"
+       sodipodi:sides="8"
+       sodipodi:cx="33.866665"
+       sodipodi:cy="33.866665"
+       sodipodi:r1="16.933332"
+       sodipodi:r2="15.64436"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 45.840339,45.840339 33.866665,50.799997 21.892991,45.840339 16.933332,33.866665 21.892991,21.892991 33.866665,16.933332 45.840339,21.892991 50.799997,33.866665 Z" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path857"
+       d="M 27.093333,19.738938 V 47.994392"
+       style="fill:none;stroke:#ff0080;stroke-width:0.25;stroke-linejoin:round;stop-color:#000000" />
+    <path
+       style="fill:none;stroke:#ff0080;stroke-width:0.25;stroke-linejoin:round;stop-color:#000000"
+       d="M 40.639997,19.738938 V 47.994392"
+       id="path859"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path861"
+       d="M 47.994392,27.093332 H 19.738938"
+       style="fill:none;stroke:#ff0080;stroke-width:0.25;stroke-linejoin:round;stop-color:#000000" />
+    <path
+       style="fill:none;stroke:#ff0080;stroke-width:0.25;stroke-linejoin:round;stop-color:#000000"
+       d="M 47.994392,40.639997 H 19.738938"
+       id="path863"
+       sodipodi:nodetypes="cc" />
+    <path
+       id="rect838-7"
+       style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#ff0080;stroke-width:0.249999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;paint-order:normal;stop-color:#000000;stop-opacity:1"
+       d="M 15.190002,15.189999 H 52.54333 V 52.543335 H 15.190002 Z" />
+    <path
+       d="M 33.866669,9.9193234 57.814011,33.866666 33.866664,57.814013 9.9193223,33.86667 Z"
+       style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#ff0080;stroke-width:0.249999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;paint-order:normal;stop-color:#000000;stop-opacity:1"
+       id="rect838-3" />
+    <path
+       id="rect838"
+       style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#ff0080;stroke-width:0.249999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;paint-order:normal;stop-color:#000000;stop-opacity:1"
+       d="M 8.2166646,16.933335 H 59.516663 V 50.799998 H 8.2166646 Z" />
+  </g>
+</svg>
