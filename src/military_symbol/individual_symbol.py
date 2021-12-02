@@ -192,14 +192,21 @@ class MilitarySymbol:
                 return True
         return False
 
-    def get_svg(self, style='light', pixel_padding=-1, use_variants=False):
+
+    def get_svg(self, style='light', pixel_padding=-1, use_variants=False, use_background=False, background_color='#ffffff'):
         """
         Gets an SVG as a string representing this object
         :param style: Can be "light" (default), "medium", "dark", or 'unfilled'
         :param pixel_padding: The padding around the symbol to use when cropping to fit. Values less than 0 will lead to no cropping. Defaults to -1.
         :param use_variants: Whether to use the variant type of symbol element if they exist (primarily for statuses and sea mine symbols).
+        :param use_background: Whether to draw a background "halo" around the symbol
+        :param background_color: Hex color in the form #xxxxxx to draw with the background; defaults to white
         :return: A string containing the SVG of the object
         """
+
+        def interject_background_filename(filename: str):
+            head, tail = os.path.split(filename)
+            return os.path.join(head, 'BG', tail)
 
         # Sanity check fill type
         style_name = style
@@ -231,6 +238,12 @@ class MilitarySymbol:
             make_unfilled(symbol_svg, fill_color)
         else:
             replace_color(symbol_svg, self.symbol_schema.symbol_fill_placeholder, fill_color)
+
+        # Add frame background if indicated
+        if use_background: # background_color != '':
+            frame_bg_svg = self.symbol_schema.get_svg_by_filename(interject_background_filename(frame_svg_filename))
+            replace_color(frame_bg_svg, self.symbol_schema.symbol_fill_placeholder, background_color)
+            symbol_svg = layer_svg(frame_bg_svg, symbol_svg)
 
         # def get_entity_icon_name(base_folder, entity, standard_identity):
         #     if entity.icon_type == 'ff':
@@ -273,10 +286,18 @@ class MilitarySymbol:
         if self.amplifier is not None and self.symbol_set is not None and \
                 self.amplifier.applies_to(self.symbol_set.id_code):
 
-            amplifier_svg = self.symbol_schema.get_svg_by_code('A-%s' % self.amplifier.id_code, self.standard_identity)
+            amplifier_svg_filename = self.symbol_schema.get_svg_filename_by_code('A-%s' % self.amplifier.id_code, self.standard_identity)
+            amplifier_svg = self.symbol_schema.get_svg_by_filename(amplifier_svg_filename)
             if style_name == 'unfilled':
                 make_unfilled(amplifier_svg, fill_color)
+
             layer_svg(symbol_svg, amplifier_svg)
+
+            # Add halo if indicated
+            if use_background:  # background_color != '':
+                halo_svg = self.symbol_schema.get_svg_by_filename(interject_background_filename(amplifier_svg_filename))
+                replace_color(halo_svg, self.symbol_schema.symbol_fill_placeholder, background_color)
+                symbol_svg = layer_svg(halo_svg, symbol_svg)
 
         # Add HQ/TF/Dummy indicator
         if self.hqtfd is not None:
@@ -286,13 +307,12 @@ class MilitarySymbol:
             else:
                 overlays.append(self.hqtfd.id_code)
 
-            # print('Overlay for HQTFD on {}: {}, amplifier'.format(self.get_name(), overlays))
-
             for overlay_code in overlays:
-                overlay_svg = self.symbol_schema.get_svg_by_code('H-%s%s' % (
+                overlay_svg_filename = self.symbol_schema.get_svg_filename_by_code('H-%s%s' % (
                     overlay_code,
                     '-%s' % self.amplifier.id_code if self.amplifier is not None else '-11'
                 ), self.standard_identity)
+                overlay_svg = self.symbol_schema.get_svg_by_filename(overlay_svg_filename)
 
                 offset = self.symbol_schema.hqtfd_codes[overlay_code].get_offset(self.standard_identity.frame_set)
                 # print(offset)
@@ -300,6 +320,13 @@ class MilitarySymbol:
                 if style_name == 'unfilled':
                     make_unfilled(overlay_svg, fill_color)
                 layer_svg(symbol_svg, overlay_svg)
+
+                # Add halo if indicated
+                if use_background:  # background_color != '':
+                    halo_svg = self.symbol_schema.get_svg_by_filename(interject_background_filename(overlay_svg_filename))
+                    apply_offset(halo_svg, offset, True)
+                    replace_color(halo_svg, self.symbol_schema.symbol_fill_placeholder, background_color)
+                    symbol_svg = layer_svg(halo_svg, symbol_svg)
 
         # Add modifiers
         if self.entity is not None and self.entity.icon_type != 'fo' or self.entity is None:
@@ -334,9 +361,11 @@ class MilitarySymbol:
             overlays = [self.status.id_code]
 
             for overlay_code in overlays:
+                overlay_svg_filename = ''
                 try:
-                    overlay_svg = self.symbol_schema.get_svg_by_code(f'S-{overlay_code}', self.standard_identity,
+                    overlay_svg_filename = self.symbol_schema.get_svg_filename_by_code(f'S-{overlay_code}', self.standard_identity,
                                                                  use_variants=use_variants)
+                    overlay_svg = self.symbol_schema.get_svg_by_filename(overlay_svg_filename)
                 except Exception as e:
                     overlay_svg = None
 
@@ -346,6 +375,12 @@ class MilitarySymbol:
                 if style_name == 'unfilled':
                     make_unfilled(overlay_svg, fill_color)
                 layer_svg(symbol_svg, overlay_svg)
+
+                # Add halo if indicated
+                if use_background:  # background_color != '':
+                    halo_svg = self.symbol_schema.get_svg_by_filename(interject_background_filename(overlay_svg_filename))
+                    replace_color(halo_svg, self.symbol_schema.symbol_fill_placeholder, background_color)
+                    symbol_svg = layer_svg(halo_svg, symbol_svg)
 
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
 

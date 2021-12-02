@@ -166,4 +166,4 @@ def layer_svg(svg_bottom, svg_top, offset: list = [0.0, 0.0]):
     for child in list(svg_top):
         apply_offset(child, offset, offset_children=True)
         svg_bottom.append(child)
-    pass
+    return svg_bottom

@@ -9,7 +9,7 @@ import military_symbol
 
 if __name__ == '__main__':
     # Print symbol genera/home/nick/Projects/Python-Military-Symbols/Resources/_symbol_converter.pyted from a name to STDOUT
-    print(military_symbol.get_symbol_svg_string_from_name("enemy infantry platoon"))
+    # print(military_symbol.get_symbol_svg_string_from_name("enemy infantry platoon"))
 
     # Add a symbol template and write it to a file adjacent to this script
     example_template_directory = os.path.dirname(__file__)
@@ -37,15 +37,15 @@ if __name__ == '__main__':
         ("Suspected CBRN section", 'light')
     ]
 
-    for i in range(100):
-        for example_name, example_style in examples:
-            example_symbol, svg_string = military_symbol.get_symbol_and_svg_string(example_name, is_sidc=False,
-                                                                                   style=example_style,
-                                                                                   padding=4,
-                                                                                   use_variants=True)
+    for example_name, example_style in examples:
+        example_symbol, svg_string = military_symbol.get_symbol_and_svg_string(example_name, is_sidc=False,
+                                                                               style=example_style,
+                                                                               padding=4,
+                                                                               use_variants=True,
+                                                                               use_background=True)
 
-            print('\t{}: Exporting symbol "{}"'.format(i, example_symbol.get_name()))
+        print('\tExporting symbol "{}"'.format(example_symbol.get_name()))
 
-            output_filename = os.path.join(os.getcwd(), '{} ({}).svg'.format(example_symbol.get_sidc(), example_style))
-            with open(output_filename, 'w') as output_file:
-                output_file.write(svg_string)
+        output_filename = os.path.join(os.getcwd(), '{} ({}).svg'.format(example_symbol.get_sidc(), example_style))
+        with open(output_filename, 'w') as output_file:
+            output_file.write(svg_string)
