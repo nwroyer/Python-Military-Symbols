@@ -124,14 +124,18 @@ def convert_inkscape_to_svg(current_working_directory, subdir=''):
     f_null.close()
 
 
+
 def main():
     """
     Main function that processes everything
     """
 
+    subdirs = ['Frames', 'Amplifiers', 'HQTFD', 'Statuses'] 
+
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
-    convert_inkscape_to_svg(os.getcwd(), 'Symbol sets/10/Entities')
+    for subdir in subdirs:
+        convert_inkscape_to_svg(os.getcwd(), subdir)
     pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,
                                                                          '../src/military_symbol/symbols.json'),
                         existing_input_file=os.path.join(working_dir, 'Symbol schema.json'))
