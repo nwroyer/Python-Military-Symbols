@@ -616,7 +616,7 @@
 					"entity types": {
 						"01": {"names": ["air assault with organic lift"], "type": "ff"},
 						"02": {
-							"names": ["air traffic services", "airfield operations"]
+							"names": ["air traffic services", "airfield operations", "airfield ops"]
 						},
 						"03": {"name": "amphibious", "type": "ff"},
 						"04": {
@@ -765,10 +765,10 @@
 								}
 							}
 						},
-						"02": "combat support (maneuver enhancement)",
-						"03": "criminal investigation division",
+						"02": ["combat support (maneuver enhancement)", "combat support"],
+						"03": ["criminal investigation division", "CID"],
 						"04": "diving",
-						"05": "dog",
+						"05": ["dog", "K9"],
 						"06": "drilling",
 						"07": {
 							"name": "engineer",
@@ -778,11 +778,11 @@
 								"03": {"name": "* reconnaissance", "type": "ff", "overlay": ["140700", "121300"]}
 							}
 						},
-						"08": "explosive ordnance disposal",
+						"08": ["explosive ordnance disposal", "EOD"],
 						"09": {"name": "field camp construction", "type": "m1"},
-						"10": "fire fighting / fire protection",
+						"10": ["fire fighting / fire protection", "firefighter", "fire fighting", "fire fighter", "firefighting"],
 						"11": "geospatial support / geospatial information support",
-						"12": "military police",
+						"12": ["military police", "MP"],
 						"13": "mine",
 						"14": {"name": "mine clearing", "type": "fo"},
 						"15": {"name": "mine launching", "type": "fo"},
@@ -794,7 +794,7 @@
 								"02": {"name": "motorized *", "type": "ff", "overlay": ["141700", "0XMotorized"]}
 							}
 						},
-						"18": "search and rescue",
+						"18": ["search and rescue", "SAR"],
 						"19": {"name": "security police (air)", "type": "m2"},
 						"20": "shore patrol",
 						"21": "topographic"
@@ -810,7 +810,7 @@
 						"03": {"name": "direction finding", "type": "fo"},
 						"04": "electronic ranging",
 						"05": {
-							"name": "electronic warfare (EW)",
+							"names": ["electronic warfare (EW)", "electronic warfare", "EW"],
 							"entity subtypes": {
 								"01": {"name": "* analysis", "type": "fo", "overlay": ["0XEW", "150100"]},
 								"02": {"name": "* direction finding", "type": "fo", "overlay": ["0XEW", "150300"]},
@@ -823,7 +823,7 @@
 						"07": "interrogation",
 						"08": {"name": "jamming", "type": "ff"},
 						"09": "joint intelligence center",
-						"10": "military intelligence",
+						"10": ["military intelligence", "intelligence"],
 						"11": {"name": "search", "type": "fo"},
 						"12": "sensor"
 					}
@@ -833,17 +833,17 @@
 					"modcats": ["capability", "mobility", "composite loss", "operation"],
 					"modcats-inherit": true,
 					"entity types": {
-						"01": "administrative",
+						"01": ["administrative", "admin"],
 						"02": {"name": "all classes of supply", "type": "ff", "overlay": ["0XAll", "163400"]},
 						"03": {"name": "airport of debarkation/embarkation", "type": "m1", "overlay": ["163600", "0XAirport"]},
-						"04": "ammunition",
+						"04": ["ammunition", "ammo"],
 						"05": "band",
 						"06": ["combat service support", "CSS"],
 						"07": "finance",
-						"08": "judge advocate general",
+						"08": ["judge advocate general", "JAG", "SJA"],
 						"09": "labor",
 						"10": ["laundry", "bath"],
-						"11": "maintenance",
+						"11": ["maintenance", "maintainer", "maintainers"],
 						"12": {"name": "material", "type": "ff", "overlay": ["0XMaterial", "163400"]},
 						"13": {"name": "medical", "type": "ff", "modcats-additional": ["medical capability"]},
 						"14": {
@@ -875,23 +875,23 @@
 						"34": {"name": "supply","type": "ff"},
 						"35": ["joint information bureau", "JIB", "CJIB"],
 						"36": ["transportation", "motor transportation", "motor T", "trucks"],
-						"37": {"names": ["US supply class I", "US class I", "class I"], "type": "ff", "overlay": ["0XUSClassI", "163400"]},
-						"38": {"names": ["US supply class II", "US class II", "class II"], "type": "ff", "overlay": ["0XUSClassII", "163400"]},
-						"39": {"names": ["US supply class III", "US class III", "class III"], "type": "ff", "overlay": ["162900", "163400"]},
-						"40": {"names": ["US supply class IV", "US class IV", "class IV"], "type": "ff", "overlay": ["140700", "163400"]},
-						"41": {"names": ["US supply class V", "US class V", "class V"], "type": "ff", "overlay": ["160400", "163400"]},
-						"42": {"names": ["US supply class VI", "US class VI", "class VI"], "type": "ff", "overlay": ["0XUSClassVI", "163400"]},
-						"43": {"names": ["US supply class VII", "US class VII", "class VII"], "type": "ff", "overlay": ["0XUSClassVII", "163400"]},
-						"44": {"names": ["US supply class VIII", "US class VIII", "class VIII"], "type": "ff"},
-						"45": {"names": ["US supply class IX", "US class IX", "class IX"], "type": "ff", "overlay": ["0XUSClassIX", "163400"]},
-						"46": {"names": ["US supply class X", "US class X", "class X"], "type": "ff", "overlay": ["110200", "163400"]},
+						"37": {"names": ["US supply class I", "US class I", "class I", "class I supply"], "type": "ff", "overlay": ["0XUSClassI", "163400"]},
+						"38": {"names": ["US supply class II", "US class II", "class II", "class II supply"], "type": "ff", "overlay": ["0XUSClassII", "163400"]},
+						"39": {"names": ["US supply class III", "US class III", "class III", "class III supply"], "type": "ff", "overlay": ["162900", "163400"]},
+						"40": {"names": ["US supply class IV", "US class IV", "class IV", "class IV supply"], "type": "ff", "overlay": ["140700", "163400"]},
+						"41": {"names": ["US supply class V", "US class V", "class V", "class V supply"], "type": "ff", "overlay": ["160400", "163400"]},
+						"42": {"names": ["US supply class VI", "US class VI", "class VI", "class V supply"], "type": "ff", "overlay": ["0XUSClassVI", "163400"]},
+						"43": {"names": ["US supply class VII", "US class VII", "class VII", "class VII supply"], "type": "ff", "overlay": ["0XUSClassVII", "163400"]},
+						"44": {"names": ["US supply class VIII", "US class VIII", "class VIII", "class VIII supply"], "type": "ff"},
+						"45": {"names": ["US supply class IX", "US class IX", "class IX", "class IX supply"], "type": "ff", "overlay": ["0XUSClassIX", "163400"]},
+						"46": {"names": ["US supply class X", "US class X", "class X", "class X supply"], "type": "ff", "overlay": ["110200", "163400"]},
 						"47": "water",
 						"48": "water purification",
 						"49": "broadcast"
 					}
 				},
 				"17": {
-					"name": "naval",
+					"names": ["naval", "navy"],
 					"modcats": ["capability", "mobility", "composite loss", "operation"],
 					"modcats-inherit": true,
 					"entity types": {
@@ -905,7 +905,7 @@
 					"entity types": {
 						"01": "Allied Command Europe Rapid Reaction Corps",
 						"02": "Allied Command Operations",
-						"03": "International Security Assistance Force (ISAF)",
+						"03": ["International Security Assistance Force", "ISAF"],
 						"04": "Multinational"
 					}
 				},
@@ -916,24 +916,24 @@
 					"modcats-inherit": true
 				},
 				"20": {
-					"name": "law enforcement",
+					"names": ["law enforcement", "LE"],
 					"modcats": ["capability", "mobility", "composite loss", "operation"],
 					"modcats-inherit": true,
 					"type": "fo",
 					"entity types": {
-						"01": "Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF) (DOJ)",
+						"01": ["Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF) (DOJ)", "ATF"],
 						"02": {"name": "Border Patrol", "type": "fo"},
 						"03": {"name": "Customs Service", "type": "fo"},
-						"04": "Drug Enforcement Administration (DEA)",
-						"05": {"name": "Department of Justice (DOJ)", "type": "fo"},
-						"06": "Federal Bureau of Investigation (FBI)",
+						"04": ["Drug Enforcement Administration", "DEA"],
+						"05": {"names": ["Department of Justice", "DOJ"], "type": "fo"},
+						"06": ["Federal Bureau of Investigation", "FBI"],
 						"07": "police",
 						"08": {"name": "prison", "type": "fo"},
-						"09": "United States Secret Service (USSS)",
-						"10": "Transportation Security Administration (TSA)",
-						"11": {"name": "coast guard", "type": "fo"},
+						"09": ["United States Secret Service", "USSS"],
+						"10": ["Transportation Security Administration", "TSA"],
+						"11": {"names": ["coast guard", "CG"], "type": "fo"},
 						"12": {"name": "US Marshals Service", "type": "fo"},
-						"13": "internal security force"
+						"13": ["internal security force", "ISF"]
 					}
 				}
 
@@ -1745,16 +1745,16 @@
 					"type": "fo",
 					"overlay": ["10-200000"],
 					"entity types": {
-						"01": {"name": "Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF)", "overlay": ["10-200100"]},
+						"01": {"names": ["Bureau of Alcohol, Tobacco, Firearms, and Explosives", "ATF"], "overlay": ["10-200100"]},
 						"02": {"name": "border patrol", "type": "fo", "overlay": ["10-200200"]},
 						"03": {"name": "customs service", "type": "fo", "overlay": ["10-200300"]},
-						"04": {"name": "Drug Enforcement Administration (DEA)", "overlay": ["10-200400"]},
-						"05": {"name": "Department of Justice (DOJ)", "type": "fo", "overlay": ["10-200500"]},
-						"06": {"name": "Federal Bureau of Investigation (FBI)", "overlay": ["10-200600"]},
+						"04": {"names": ["Drug Enforcement Administration", "DEA"], "overlay": ["10-200400"]},
+						"05": {"names": ["Department of Justice", "DOJ"], "type": "fo", "overlay": ["10-200500"]},
+						"06": {"names": ["Federal Bureau of Investigation", "FBI"], "overlay": ["10-200600"]},
 						"07": {"name": "police", "overlay": ["10-200700"]},
-						"08": {"name": "United States Secret Service (USSS)", "overlay": ["10-200900"]},
-						"09": {"name": "Transportation Security Administration (TSA)", "overlay": ["10-201000"]},
-						"10": {"name": "coast guard", "type": "fo", "overlay": ["10-201100"]},
+						"08": {"names": ["United States Secret Service", "USSS"], "overlay": ["10-200900"]},
+						"09": {"names": ["Transportation Security Administration", "TSA"], "overlay": ["10-201000"]},
+						"10": {"names": ["coast guard", "CG"], "type": "fo", "overlay": ["10-201100"]},
 						"11": {"name": "US Marshals Service", "type": "fo", "overlay": ["10-201200"]}
 					}
 				},

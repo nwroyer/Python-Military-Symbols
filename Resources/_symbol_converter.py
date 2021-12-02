@@ -134,8 +134,8 @@ def main():
 
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
-    for subdir in subdirs:
-        convert_inkscape_to_svg(os.getcwd(), subdir)
+    # for subdir in subdirs:
+    #     convert_inkscape_to_svg(os.getcwd(), subdir)
     pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,
                                                                          '../src/military_symbol/symbols.json'),
                         existing_input_file=os.path.join(working_dir, 'Symbol schema.json'))

@@ -1355,7 +1355,8 @@
       "02": {
        "names": [
         "air traffic services",
-        "airfield operations"
+        "airfield operations",
+        "airfield ops"
        ]
       },
       "03": {
@@ -1818,10 +1819,19 @@
         }
        }
       },
-      "02": "combat support (maneuver enhancement)",
-      "03": "criminal investigation division",
+      "02": [
+       "combat support (maneuver enhancement)",
+       "combat support"
+      ],
+      "03": [
+       "criminal investigation division",
+       "CID"
+      ],
       "04": "diving",
-      "05": "dog",
+      "05": [
+       "dog",
+       "K9"
+      ],
       "06": "drilling",
       "07": {
        "name": "engineer",
@@ -1851,14 +1861,26 @@
         }
        }
       },
-      "08": "explosive ordnance disposal",
+      "08": [
+       "explosive ordnance disposal",
+       "EOD"
+      ],
       "09": {
        "name": "field camp construction",
        "type": "m1"
       },
-      "10": "fire fighting / fire protection",
+      "10": [
+       "fire fighting / fire protection",
+       "firefighter",
+       "fire fighting",
+       "fire fighter",
+       "firefighting"
+      ],
       "11": "geospatial support / geospatial information support",
-      "12": "military police",
+      "12": [
+       "military police",
+       "MP"
+      ],
       "13": "mine",
       "14": {
        "name": "mine clearing",
@@ -1892,7 +1914,10 @@
         }
        }
       },
-      "18": "search and rescue",
+      "18": [
+       "search and rescue",
+       "SAR"
+      ],
       "19": {
        "name": "security police (air)",
        "type": "m2"
@@ -1922,7 +1947,11 @@
       },
       "04": "electronic ranging",
       "05": {
-       "name": "electronic warfare (EW)",
+       "names": [
+        "electronic warfare (EW)",
+        "electronic warfare",
+        "EW"
+       ],
        "entity subtypes": {
         "01": {
          "name": "* analysis",
@@ -1976,7 +2005,10 @@
        "type": "ff"
       },
       "09": "joint intelligence center",
-      "10": "military intelligence",
+      "10": [
+       "military intelligence",
+       "intelligence"
+      ],
       "11": {
        "name": "search",
        "type": "fo"
@@ -1994,7 +2026,10 @@
      ],
      "modcats-inherit": true,
      "entity types": {
-      "01": "administrative",
+      "01": [
+       "administrative",
+       "admin"
+      ],
       "02": {
        "name": "all classes of supply",
        "type": "ff",
@@ -2011,20 +2046,31 @@
         "0XAirport"
        ]
       },
-      "04": "ammunition",
+      "04": [
+       "ammunition",
+       "ammo"
+      ],
       "05": "band",
       "06": [
        "combat service support",
        "CSS"
       ],
       "07": "finance",
-      "08": "judge advocate general",
+      "08": [
+       "judge advocate general",
+       "JAG",
+       "SJA"
+      ],
       "09": "labor",
       "10": [
        "laundry",
        "bath"
       ],
-      "11": "maintenance",
+      "11": [
+       "maintenance",
+       "maintainer",
+       "maintainers"
+      ],
       "12": {
        "name": "material",
        "type": "ff",
@@ -2172,7 +2218,8 @@
        "names": [
         "US supply class I",
         "US class I",
-        "class I"
+        "class I",
+        "class I supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2184,7 +2231,8 @@
        "names": [
         "US supply class II",
         "US class II",
-        "class II"
+        "class II",
+        "class II supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2196,7 +2244,8 @@
        "names": [
         "US supply class III",
         "US class III",
-        "class III"
+        "class III",
+        "class III supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2208,7 +2257,8 @@
        "names": [
         "US supply class IV",
         "US class IV",
-        "class IV"
+        "class IV",
+        "class IV supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2220,7 +2270,8 @@
        "names": [
         "US supply class V",
         "US class V",
-        "class V"
+        "class V",
+        "class V supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2232,7 +2283,8 @@
        "names": [
         "US supply class VI",
         "US class VI",
-        "class VI"
+        "class VI",
+        "class V supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2244,7 +2296,8 @@
        "names": [
         "US supply class VII",
         "US class VII",
-        "class VII"
+        "class VII",
+        "class VII supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2256,7 +2309,8 @@
        "names": [
         "US supply class VIII",
         "US class VIII",
-        "class VIII"
+        "class VIII",
+        "class VIII supply"
        ],
        "type": "ff"
       },
@@ -2264,7 +2318,8 @@
        "names": [
         "US supply class IX",
         "US class IX",
-        "class IX"
+        "class IX",
+        "class IX supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2276,7 +2331,8 @@
        "names": [
         "US supply class X",
         "US class X",
-        "class X"
+        "class X",
+        "class X supply"
        ],
        "type": "ff",
        "overlay": [
@@ -2290,7 +2346,10 @@
      }
     },
     "17": {
-     "name": "naval",
+     "names": [
+      "naval",
+      "navy"
+     ],
      "modcats": [
       "capability",
       "mobility",
@@ -2314,7 +2373,10 @@
      "entity types": {
       "01": "Allied Command Europe Rapid Reaction Corps",
       "02": "Allied Command Operations",
-      "03": "International Security Assistance Force (ISAF)",
+      "03": [
+       "International Security Assistance Force",
+       "ISAF"
+      ],
       "04": "Multinational"
      }
     },
@@ -2330,7 +2392,10 @@
      "modcats-inherit": true
     },
     "20": {
-     "name": "law enforcement",
+     "names": [
+      "law enforcement",
+      "LE"
+     ],
      "modcats": [
       "capability",
       "mobility",
@@ -2340,7 +2405,10 @@
      "modcats-inherit": true,
      "type": "fo",
      "entity types": {
-      "01": "Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF) (DOJ)",
+      "01": [
+       "Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF) (DOJ)",
+       "ATF"
+      ],
       "02": {
        "name": "Border Patrol",
        "type": "fo"
@@ -2349,28 +2417,49 @@
        "name": "Customs Service",
        "type": "fo"
       },
-      "04": "Drug Enforcement Administration (DEA)",
+      "04": [
+       "Drug Enforcement Administration",
+       "DEA"
+      ],
       "05": {
-       "name": "Department of Justice (DOJ)",
+       "names": [
+        "Department of Justice",
+        "DOJ"
+       ],
        "type": "fo"
       },
-      "06": "Federal Bureau of Investigation (FBI)",
+      "06": [
+       "Federal Bureau of Investigation",
+       "FBI"
+      ],
       "07": "police",
       "08": {
        "name": "prison",
        "type": "fo"
       },
-      "09": "United States Secret Service (USSS)",
-      "10": "Transportation Security Administration (TSA)",
+      "09": [
+       "United States Secret Service",
+       "USSS"
+      ],
+      "10": [
+       "Transportation Security Administration",
+       "TSA"
+      ],
       "11": {
-       "name": "coast guard",
+       "names": [
+        "coast guard",
+        "CG"
+       ],
        "type": "fo"
       },
       "12": {
        "name": "US Marshals Service",
        "type": "fo"
       },
-      "13": "internal security force"
+      "13": [
+       "internal security force",
+       "ISF"
+      ]
      }
     }
    },
@@ -5163,7 +5252,10 @@
      ],
      "entity types": {
       "01": {
-       "name": "Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF)",
+       "names": [
+        "Bureau of Alcohol, Tobacco, Firearms, and Explosives",
+        "ATF"
+       ],
        "overlay": [
         "10-200100"
        ]
@@ -5183,20 +5275,29 @@
        ]
       },
       "04": {
-       "name": "Drug Enforcement Administration (DEA)",
+       "names": [
+        "Drug Enforcement Administration",
+        "DEA"
+       ],
        "overlay": [
         "10-200400"
        ]
       },
       "05": {
-       "name": "Department of Justice (DOJ)",
+       "names": [
+        "Department of Justice",
+        "DOJ"
+       ],
        "type": "fo",
        "overlay": [
         "10-200500"
        ]
       },
       "06": {
-       "name": "Federal Bureau of Investigation (FBI)",
+       "names": [
+        "Federal Bureau of Investigation",
+        "FBI"
+       ],
        "overlay": [
         "10-200600"
        ]
@@ -5208,19 +5309,28 @@
        ]
       },
       "08": {
-       "name": "United States Secret Service (USSS)",
+       "names": [
+        "United States Secret Service",
+        "USSS"
+       ],
        "overlay": [
         "10-200900"
        ]
       },
       "09": {
-       "name": "Transportation Security Administration (TSA)",
+       "names": [
+        "Transportation Security Administration",
+        "TSA"
+       ],
        "overlay": [
         "10-201000"
        ]
       },
       "10": {
-       "name": "coast guard",
+       "names": [
+        "coast guard",
+        "CG"
+       ],
        "type": "fo",
        "overlay": [
         "10-201100"
