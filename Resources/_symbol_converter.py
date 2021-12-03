@@ -134,6 +134,7 @@ def main():
 
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
+    convert_inkscape_to_svg(os.getcwd(), '')
     # for subdir in subdirs:
     #     convert_inkscape_to_svg(os.getcwd(), subdir)
     pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,

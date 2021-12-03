@@ -27,6 +27,7 @@ class SymbolCache:
         :param style: String indicating style from ['light', 'medium', 'dark', 'unfilled']
         :param use_variants: Boolean indicating whether to use variant symbols if they exist
         :param use_background: Boolean indicating whether to use the background "halo"
+        :param background_color: Background color
         :return: Three-character string of encoded options
         """
         return '{}{}{}{}{}'.format(
