@@ -48,6 +48,8 @@ class SymbolCache:
                 symbol.create_from_sidc(sidc)
                 symbol_cache_entry = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = symbol_cache_entry
+
+                return symbol_cache_entry
             else:
                 return None
         else:
