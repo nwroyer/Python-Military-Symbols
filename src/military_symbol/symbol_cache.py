@@ -40,7 +40,7 @@ class SymbolCache:
 
     def _get_symbol_cache_from_sidc(self, sidc, create_if_missing:bool=True) -> tuple:
         symbol_cache_entry:tuple = self.sidc_to_symbol_map.get(sidc, ())
-        if len(symbol_cache_entry) < 0:
+        if len(symbol_cache_entry) < 1:
             # Entry doesn't exist
             if create_if_missing:
                 # Tuple doesn't exist
@@ -55,8 +55,8 @@ class SymbolCache:
             return symbol_cache_entry
 
     def get_symbol_from_sidc(self, sidc:str, create_if_missing:bool=True) -> MilitarySymbol:
-        cache_entry:tuple = self._get_symbol_cache_from_sidc(sidc, create_if_missing)
-        return cache_entry[0] if cache_entry is not None else None
+        ret = self._get_symbol_cache_from_sidc(sidc, create_if_missing)
+        return ret[0] if ret is not None else None
 
     def _get_symbol_cache_from_name(self, name, create_if_missing:bool=True) -> tuple:
         sidc:str = self.name_to_sidc_string_map.get(name, '')
