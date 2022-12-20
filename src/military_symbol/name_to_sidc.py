@@ -139,7 +139,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     # Step 1: Detect standard identity
 
     if template is None or not template.standard_identity_fixed:
-        standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string,
+        standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string.lower(),
                                                      symbol_schema.standard_identities.values(), match_longest=True)
 
         if standard_identity is None:
