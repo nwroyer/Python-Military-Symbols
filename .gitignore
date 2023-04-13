@@ -6,3 +6,6 @@
 /*.svg
 /dist/
 /src/military_symbol.egg-info/
+/__pycache__/
+/Examples/
+/src/military_symbol/__pycache__/

@@ -127,15 +127,15 @@
     "present"
    ],
    "applies to": [
-    1,
-    2,
-    5,
-    6,
-    10,
-    15,
-    20,
-    30,
-    35
+    "1",
+    "2",
+    "5",
+    "6",
+    "10",
+    "15",
+    "20",
+    "30",
+    "35"
    ],
    "variants": [
     "nn"
@@ -147,15 +147,15 @@
     "damaged"
    ],
    "applies to": [
-    1,
-    2,
-    5,
-    6,
-    10,
-    15,
-    20,
-    30,
-    35
+    "1",
+    "2",
+    "5",
+    "6",
+    "10",
+    "15",
+    "20",
+    "30",
+    "35"
    ],
    "variants": [
     "mn"
@@ -167,15 +167,15 @@
     "destroyed"
    ],
    "applies to": [
-    1,
-    2,
-    5,
-    6,
-    10,
-    15,
-    20,
-    30,
-    35
+    "01",
+    "02",
+    "05",
+    "06",
+    "10",
+    "15",
+    "20",
+    "30",
+    "35"
    ],
    "variants": [
     "mn"
@@ -187,14 +187,14 @@
     "full"
    ],
    "applies to": [
-    1,
-    2,
-    5,
-    6,
-    15,
-    20,
-    30,
-    35
+    "01",
+    "02",
+    "05",
+    "06",
+    "15",
+    "20",
+    "30",
+    "35"
    ],
    "variants": [
     "nn"
@@ -349,8 +349,8 @@
   "1": {
    "name": "echelon at brigade and below",
    "applies to": [
-    10,
-    11
+    "10",
+    "11"
    ],
    "second digit": {
     "1": [
@@ -955,6 +955,7 @@
       },
       "07": {
        "name": "satellite",
+       "match weight": 2,
        "modcats-additional": [
         "sensor"
        ]
@@ -1317,7 +1318,7 @@
          ]
         },
         "05": {
-         "names": "video imagery (combat camera) *",
+         "names": ["video imagery (combat camera) *", "combat camera *"],
          "type": "ff",
          "overlay": [
           "111000",

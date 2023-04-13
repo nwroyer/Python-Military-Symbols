@@ -120,22 +120,22 @@
 		},
 		"2": {
 			"names": ["present / fully capable", "ready", "capable", "intact", "present"],
-			"applies to": [1, 2, 5, 6, 10, 15, 20, 30, 35],
+			"applies to": ["01", "02", "05", "06", "10", "15", "20", "30", "35"],
 			"variants": ["nn"]
 		},
 		"3": {
 			"names": ["present / damaged", "damaged"],
-			"applies to": [1, 2, 5, 6, 10, 15, 20, 30, 35],
+			"applies to": ["01", "02", "05", "06", "10", "15", "20", "30", "35"],
 			"variants": ["mn"]
 		},
 		"4": {
 			"names": ["present / destroyed", "destroyed"],
-			"applies to": [1, 2, 5, 6, 10, 15, 20, 30, 35],
+			"applies to": ["01", "02", "05", "06", "10", "15", "20", "30", "35"],
 			"variants": ["mn"]
 		},
 		"5": {
 			"names": ["present / full to capacity", "full"],
-			"applies to": [1, 2, 5, 6, 15, 20, 30, 35],
+			"applies to": ["01", "02", "05", "06", "15", "20", "30", "35"],
 			"variants": ["nn"]
 		}
 	},
@@ -200,7 +200,7 @@
 
 		"1": {
 			"name": "echelon at brigade and below",
-			"applies to": [10, 11],
+			"applies to": ["10", "11"],
 			"second digit": {
 				"1": ["team", "crew", "fireteam"],
 				"2": "squad",
@@ -214,7 +214,7 @@
 		},
 		"2": {
 			"name": "echelon at division and above",
-			"applies to": [10, 11],
+			"applies to": ["10", "11"],
 			"second digit": {
 				"1": "division",
 				"2": ["corps", "MEF"],
@@ -227,7 +227,7 @@
 		"3": {
 			"name": "equipment mobility on land",
 			"equipment mobility": true,
-			"applies to": [15],
+			"applies to": ["15"],
 			"second digit": {
 				"1": ["wheeled" ,"wheeled (limited cross-country)"],
 				"2": "wheeled (cross-country)",
@@ -240,7 +240,7 @@
 		},
 		"4": {
 			"name": "equipment mobility on snow",
-			"applies to": [15],
+			"applies to": ["15"],
 			"second digit": {
 				"1": "over snow / prime mover",
 				"2": "sled"
@@ -248,7 +248,7 @@
 		},
 		"5": {
 			"name": "equipment mobility on water",
-			"applies to": [15],
+			"applies to": ["15"],
 			"second digit": {
 				"1": "barge",
 				"2": "amphibious"
@@ -256,7 +256,7 @@
 		},
 		"6": {
 			"name": "naval towed array",
-			"applies to": [30, 35],
+			"applies to": ["30", "35"],
 			"second digit": {
 				"1": "short towed array",
 				"2": "long towed array"
@@ -264,7 +264,7 @@
 		},
 		"7": {
 			"name": "leadership indicator",
-			"applies to": [27],
+			"applies to": ["27"],
 			"second digit": {
 				"1": "leader individual",
 				"2": "deputy individual"
@@ -599,12 +599,12 @@
 								"02": {"name": "radio relay *", "type": "ff", "overlay": ["111000", "110800"]},
 								"03": {"name": "teletype *", "type": "ff", "overlay": ["111000", "110900"]},
 								"04": {"name": "tactical satellite *", "type": "ff", "overlay": ["111000", "111100"]},
-								"05": {"names": "video imagery (combat camera) *", "type": "ff", "overlay": ["111000", "111200"]}
+								"05": {"names": ["video imagery (combat camera) *"], "type": "ff", "overlay": ["111000", "111200"]}
 							}
 						},
 						"11": "tactical satellite",
 						"12": {
-							"names": ["video imagery (combat camera)", "combat camera", "comcam", "COMMSTRAT"],
+							"names": ["video imagery (combat camera)"], "combat camera", "comcam", "COMMSTRAT"],
 							"match weight": 1
 						}
 					}

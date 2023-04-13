@@ -45,7 +45,7 @@ def make_all_strokes_dashed(svg, unfilled=False):
     """
     stroke_elements = [ele for ele in svg.findall('.//*[@stroke]') if ele.attrib['stroke'] != 'none']
 
-    if not unfilled:
+    if not unfilled
         stroke_elements_with_dash = [copy.deepcopy(ele) for ele in stroke_elements]
 
         for ele in stroke_elements:
