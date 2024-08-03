@@ -1441,7 +1441,7 @@
 								},
 								"03": {
 									"name": "light tactical landing approach radar *",
-									"type": "fo", "overlay": ["111100", "0XLight", "OXRightR", "0XLeftE"]
+									"type": "fo", "overlay": ["111100", "0XLight", "0XRightR", "0XLeftE"]
 								},
 								"04": {"name": "medium *", "type": "fo", "overlay": ["111100", "0XMedium"]},
 								"05": {
@@ -1450,7 +1450,7 @@
 								},
 								"06": {
 									"name": "medium tactical landing approach radar *",
-									"type": "fo", "overlay": ["111100", "0XMedium", "OXRightR", "0XLeftE"]
+									"type": "fo", "overlay": ["111100", "0XMedium", "0XRightR", "0XLeftE"]
 								},
 								"07": {"name": "heavy *", "type": "fo", "overlay": ["111100", "0XHeavy"]},
 								"08": {
