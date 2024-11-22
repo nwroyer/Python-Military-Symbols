@@ -4,6 +4,7 @@ import os.path
 import sys
 
 from . import name_to_sidc
+
 from .individual_symbol import MilitarySymbol
 from .symbol_schema import SymbolSchema
 from .symbol_template import SymbolTemplateSet
@@ -212,6 +213,8 @@ def command_line_main():
                         help='Whether to draw a background halo around the symbol')
     parser.add_argument('-c', '--background-color', dest='background_color', action='store', default='#ffffff',
                         help='Background color to use, if it\'s used')
+    parser.add_argument('-d', '--sidc-only', dest='sidc_only', action='store_const', const=True, default=False,
+                        help='Whether to only return the SIDC from the name')
     parser.add_argument('inputs', nargs='+', default=[])
 
     arguments = parser.parse_args()
@@ -220,7 +223,7 @@ def command_line_main():
         print('\tParsing by name; results may not be exact', file=sys.stderr)
 
     use_auto_name: bool = arguments.auto_name
-    if len(arguments.inputs) > 1 and not arguments.auto_name:
+    if len(arguments.inputs) > 1 and not arguments.auto_name and not arguments.sidc_only:
         print('More than one input; auto-naming anyway', file=sys.stderr)
         use_auto_name = True
 
@@ -241,7 +244,17 @@ def command_line_main():
         if arguments.verbose:
             print(f'\tParsing "{input_arg}"', file=sys.stderr)
         if arguments.by_name:  # Construct from names
-            if output_dir != '':
+
+            if arguments.sidc_only:
+                # Print SIDCs only
+                symbol_class = get_symbol_class_from_name(input_arg, verbose=arguments.verbose)
+                if symbol_class is None:
+                    print(f'No symbol creatable for name \"{input_arg}\"; skipping', file=sys.stderr)
+                else:
+                    print(f'{input_arg} -> {symbol_class.get_sidc()}' if arguments.verbose else f'{symbol_class.get_sidc()}')
+
+            elif output_dir:
+                # Write to an outpur directory
                 write_symbol_svg_string_from_name(input_arg, out_filepath=output_dir, bounding_padding=arguments.padding,
                                                   auto_name=use_auto_name,
                                                   verbose=arguments.verbose,
@@ -250,6 +263,7 @@ def command_line_main():
                                                   use_background=arguments.use_background,
                                                   background_color=arguments.background_color)
             else:
+                # Write SVG strings to stdout
                 print(get_symbol_svg_string_from_name(input_arg, bounding_padding=arguments.padding,
                                                       verbose=arguments.verbose,
                                                       use_variants=arguments.use_variants,

@@ -274,7 +274,7 @@ class MilitarySymbol:
             # print('Overlay: %s' % str(overlay_svgs))
             for overlay in overlay_svgs:
                 if overlay is None:
-                    print('ERROR: Null value overlay')
+                    #print('ERROR: Null value overlay', file=sys.stderr)
                     continue
                 if style_name == 'unfilled':
                     make_unfilled(overlay, fill_color)
