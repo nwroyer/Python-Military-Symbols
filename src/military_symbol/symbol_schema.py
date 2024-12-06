@@ -884,7 +884,8 @@ class SymbolSchema:
                 # Try without SI code
                 re_match = [it for it in re.finditer('-\d', svg_name)]
                 if len(re_match) < 1:
-                    raise FileNotFoundError
+                    #raise FileNotFoundError(f"No match for \"{svg_name}\"")
+                    return None
 
                 new_svg_name:str = svg_name[:re_match[-1].span()[0]] + svg_name[re_match[-1].span()[1]:]
                 raw_string_data = self.symbol_svg_json.get_contents_at_path(new_svg_name)
