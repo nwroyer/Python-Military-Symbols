@@ -66,7 +66,7 @@ if __name__ == '__main__':
     ]
 
     for example_name, example_style in examples:
-        example_symbol: src.military_symbol.individual_symbol.MilitarySymbol = military_symbol.get_symbol_class_from_name(example_name)
+        example_symbol: military_symbol.individual_symbol.MilitarySymbol = military_symbol.get_symbol_class_from_name(example_name)
         print('Exporting symbol "{}"'.format(example_symbol.get_name()))
 
         output_filename = '{} ({}).svg'.format(example_symbol.get_sidc(), example_style)
