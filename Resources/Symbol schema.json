@@ -157,13 +157,13 @@
 		},
 		"2": {
 			"names": ["headquarters", "HQ"],
-			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element", "head quarters unit", "head quarters element"],
 			"applies to": ["10"]
 		},
 		"3": {
 			"names": ["feint headquarters", "dummy headquarters",
 					  "feint HQ", "dummy HQ"],
-			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element", "head quarters unit", "head quarters element"],
 			"overlay": ["1", "2"],
 			"applies to": ["10"]
 		},
@@ -184,7 +184,7 @@
 		},
 		"6": {
 			"names": ["task force headquarters", "task force HQ", "TF headquarters", "TF HQ"],
-			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element", "head quarters unit", "head quarters element"],
 			"overlay": ["2", "4"],
 			"applies to": ["10"]
 		},
@@ -193,7 +193,7 @@
 					  "feint task force HQ", "dummy task force HQ",
 					  "feint TF headquarters", "dummy TF headquarters",
 					  "feint TF HQ", "dummy TF HQ"],
-			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element", "head quarters unit", "head quarters element"],
 			"overlay": ["1", "2", "4"],
 			"applies to": ["10"]
 		}
@@ -945,7 +945,7 @@
 
 			},
 			"special entity subtypes": {
-				"95": {"names": ["headquarters element", "headquarters unit"], "type": "ff"},
+				"95": {"names": ["headquarters element", "headquarters unit", "HQ unit", "HQ element", "head quarters unit", "headquarters element"], "type": "ff"},
 				"96": {"name": "division and below support", "type": "ff"},
 				"97": {"name": "corps support", "type": "ff"},
 				"98": {"name": "theater/echelons above corps support", "type": "ff"}
@@ -1039,7 +1039,7 @@
 				"95": {"name": "army or theater corps", "cat": "capability"},
 				"96": {"name": "corps", "cat": "capability"},
 				"97": {"names": ["brigade", "MEF"], "cat": "capability"},
-				"98": {"names": ["headquarters element", "headquarters unit"], "cat": "capability", "type": "ff"}
+				"98": {"names": ["headquarters element", "headquarters unit", "HQ unit", "HQ element", "head quarters unit", "head quarters element"], "cat": "capability", "type": "ff"}
 
 			},
 			"modifier set 2": {
