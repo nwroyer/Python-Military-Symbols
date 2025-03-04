@@ -1,4 +1,4 @@
 rm -rf ./dist
 python -m build .
-yes | sudo pip uninstall military-symbol
-pip install ./dist/military_symbol-1.1.0.tar.gz
+yes | sudo pip uninstall --break-system-packages military-symbol
+pip install --break-system-packages ./dist/military_symbol-1.1.1.tar.gz

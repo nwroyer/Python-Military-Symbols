@@ -157,11 +157,13 @@
 		},
 		"2": {
 			"names": ["headquarters", "HQ"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
 			"applies to": ["10"]
 		},
 		"3": {
 			"names": ["feint headquarters", "dummy headquarters",
 					  "feint HQ", "dummy HQ"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
 			"overlay": ["1", "2"],
 			"applies to": ["10"]
 		},
@@ -182,6 +184,7 @@
 		},
 		"6": {
 			"names": ["task force headquarters", "task force HQ", "TF headquarters", "TF HQ"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
 			"overlay": ["2", "4"],
 			"applies to": ["10"]
 		},
@@ -190,6 +193,7 @@
 					  "feint task force HQ", "dummy task force HQ",
 					  "feint TF headquarters", "dummy TF headquarters",
 					  "feint TF HQ", "dummy TF HQ"],
+			"blacklist": ["headquarters unit", "headquarters element", "HQ unit", "HQ element"],
 			"overlay": ["1", "2", "4"],
 			"applies to": ["10"]
 		}
@@ -201,6 +205,7 @@
 		"1": {
 			"name": "echelon at brigade and below",
 			"applies to": ["10", "11"],
+			"prerun": true,
 			"second digit": {
 				"1": ["team", "crew", "fireteam"],
 				"2": "squad",
@@ -214,6 +219,7 @@
 		},
 		"2": {
 			"name": "echelon at division and above",
+			"prerun": true,
 			"applies to": ["10", "11"],
 			"second digit": {
 				"1": "division",
@@ -604,7 +610,7 @@
 						},
 						"11": "tactical satellite",
 						"12": {
-							"names": ["video imagery (combat camera)"], "combat camera", "comcam", "COMMSTRAT"],
+							"names": ["video imagery (combat camera)", "combat camera", "comcam", "COMMSTRAT"],
 							"match weight": 1
 						}
 					}
@@ -658,11 +664,11 @@
 									"match weight": 2, "type": "ff", "overlay": ["121100", "120300"]},
 								"02": {"names": ["armored *", "mechanized *", "mechanized", "tracked *"],
 									"type": "ff", "overlay": ["121100", "120500"], "match weight":  2},
-								"03": {"name": "main gun system *", "type": "ff", "overlay": ["121100", "121106"]},
+								"03": {"names": ["main gun system *", "MGS *"], "type": "ff", "overlay": ["121100", "121106"]},
 								"04": {"name": "motorized *", "type": "ff", "overlay": ["121100", "0XMotorized"], "match weight":  2},
-								"05": {"names": ["infantry fighting vehicle", "IFV"], "type": "ff", "overlay": ["121103", "120500"], "match weight":  2},
+								"05": {"names": ["infantry fighting vehicle", "IFV", "main gun system mechanized infantry"], "type": "ff", "overlay": ["121100", "120500", "121106"], "match weight":  2},
 								"06": {
-									"name": "main gun system",
+									"names": ["main gun system", "MGS"],
 									"alt names": ["heavy weapon"],
 									"type": "ff"
 								}
@@ -728,8 +734,8 @@
 						"03": {
 							"names": ["field artillery", "artillery"],
 							"entity subtypes": {
-								"01": {"names": ["self-propelled *", "self-propelled artillery", "motorized artillery", "mechanized artillery"], "overlay": ["130300", "120500"]},
-								"02": {"name": "* target acquisition", "type": "ff", "overlay": ["130301", "121300"]}
+								"01": {"names": ["self-propelled artillery", "self-propelled artillery", "motorized artillery", "mechanized artillery"], "overlay": ["130300", "120500"]},
+								"02": {"name": "artillery target acquisition", "type": "ff", "overlay": ["130301", "121300"]}
 							}
 						},
 						"04": ["field artillery observer", "FO", "forward observer"],
@@ -939,7 +945,7 @@
 
 			},
 			"special entity subtypes": {
-				"95": {"names": ["headquarters element"], "type": "ff"},
+				"95": {"names": ["headquarters element", "headquarters unit"], "type": "ff"},
 				"96": {"name": "division and below support", "type": "ff"},
 				"97": {"name": "corps support", "type": "ff"},
 				"98": {"name": "theater/echelons above corps support", "type": "ff"}
@@ -1033,7 +1039,7 @@
 				"95": {"name": "army or theater corps", "cat": "capability"},
 				"96": {"name": "corps", "cat": "capability"},
 				"97": {"names": ["brigade", "MEF"], "cat": "capability"},
-				"98": {"name": "headquarters element", "cat": "capability", "type": "ff"}
+				"98": {"names": ["headquarters element", "headquarters unit"], "cat": "capability", "type": "ff"}
 
 			},
 			"modifier set 2": {

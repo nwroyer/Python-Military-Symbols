@@ -162,6 +162,7 @@ class MilitarySymbol:
         else:
             self.entity = test_entity
 
+        # Modifier sets
         modifier_codes = {
             1: sidc[16:18],
             2: sidc[18:20]

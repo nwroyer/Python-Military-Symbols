@@ -86,6 +86,7 @@ class SymbolSchema:
             self.overlay_elements = []
             self.offsets = {}
             self.applies_to_symbol_sets = []
+            self.blacklist = []
 
         def is_overlay(self):
             return len(self.overlay_elements) > 0
@@ -111,6 +112,14 @@ class SymbolSchema:
                 return False
             return symbol_set.id_code in self.applies_to_symbol_sets
 
+        def matches_blacklist(self, name_string):
+            test_string = name_string.lower()
+            for b in self.blacklist:
+                if b.lower() in test_string:
+                    return True
+
+            return False
+
         def __str__(self):
             ret = '#%i (%s)' % (self.id_code, self.names[0])
             if self.is_overlay():
@@ -129,6 +138,7 @@ class SymbolSchema:
             self.match_weight = 0
             self.applies_to_list = []
             self.category = ''
+            self.prerun = False
 
         def applies_to(self, symbol_set_code):
             """
@@ -137,6 +147,12 @@ class SymbolSchema:
             :return: True if the amplifier can apply to the given symbol set, false otherwise
             """
             return True if symbol_set_code in self.applies_to_list else False
+
+        def applies_to_entity(self, entity):
+            if entity is None:
+                return False
+
+            return self.applies_to(entity.symbol_set)
 
         def __str__(self):
             return '#%s (%s) - applies to %s / category "%s"' % (self.id_code, self.names, self.applies_to_list,
@@ -791,6 +807,9 @@ class SymbolSchema:
             if 'applies to' in hqtfd_value.keys():
                 new_hqtfd_code.applies_to_symbol_sets = hqtfd_value['applies to']
 
+            if 'blacklist' in hqtfd_value.keys():
+                new_hqtfd_code.blacklist = [str(c) for c in hqtfd_value['blacklist']]
+
             if verbose:
                 print(f'\t{new_hqtfd_code}')
             new_symbol_schema.hqtfd_codes[new_hqtfd_code.id_code] = new_hqtfd_code
@@ -802,6 +821,7 @@ class SymbolSchema:
         for amplifier_first_digit in [key for key in amplifier_groups_json if key != 'notes']:
             applies_to_codes = [str(code) for code in amplifier_groups_json[amplifier_first_digit]['applies to']]
             category = amplifier_groups_json[amplifier_first_digit]['name']
+            prerun = True if 'prerun' in amplifier_groups_json[amplifier_first_digit] and amplifier_groups_json[amplifier_first_digit]['prerun'] else False
 
             for amplifier_second_digit in amplifier_groups_json[amplifier_first_digit]['second digit']:
                 new_amplifier = SymbolSchema.Amplifier()
@@ -809,6 +829,7 @@ class SymbolSchema:
                 new_amplifier.id_code = '%s%s' % (amplifier_first_digit, amplifier_second_digit)
                 new_amplifier.applies_to_list = applies_to_codes
                 new_amplifier.category = category
+                new_amplifier.prerun = prerun
 
                 specific_data = amplifier_groups_json[amplifier_first_digit]['second digit'][amplifier_second_digit]
                 if isinstance(specific_data, str):

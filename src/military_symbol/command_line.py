@@ -70,7 +70,7 @@ def get_symbol_class(originator, is_sidc=True, verbose=False) -> MilitarySymbol:
     :param verbose: Whether to print ancillary information
     :return: The generated symbol
     """
-    return symbol_cache.get_symbol(originator, is_sidc=is_sidc)
+    return symbol_cache.get_symbol(originator, is_sidc=is_sidc, verbose=verbose)
 
 
 def get_symbol_class_from_name(name, verbose=False) -> MilitarySymbol:
@@ -81,7 +81,7 @@ def get_symbol_class_from_name(name, verbose=False) -> MilitarySymbol:
     :param verbose: Whether to print ancillary information
     :return: An individual_symbol.MilitarySymbol object
     """
-    return get_symbol_class(name, is_sidc=False)
+    return get_symbol_class(name, is_sidc=False, verbose=verbose)
 
 
 def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
@@ -91,7 +91,7 @@ def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
     :param verbose: Whether to print ancillary information
     :return: An individual_symbol.MilitarySymbol object
     """
-    return get_symbol_class(sidc, is_sidc=True)
+    return get_symbol_class(sidc, is_sidc=True, verbose=verbose)
 
 
 def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=False, style='light', use_background=False, background_color='#ffffff', verbose=False) -> str:
@@ -109,7 +109,7 @@ def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=
     """
     return symbol_cache.get_svg_string(creator_var, is_sidc, padding=pixel_padding, style=style,
                                        use_variants=use_variants, use_background=use_background,
-                                       background_color=background_color, create_if_missing=True)
+                                       background_color=background_color, create_if_missing=True, verbose=verbose)
 
 
 def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, style:str='light', use_variants:bool=False, use_background=False, background_color='#ffffff',
@@ -126,7 +126,7 @@ def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, styl
     :param verbose: Whether to print ancillary information while processing, defaulting to false.
     :return: A (MilitarySymbol, str) tuple containing the symbol and SVG for the constructed symbol.
     """
-    return symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc, padding, style, use_variants, use_background=use_background, background_color=background_color)
+    return symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc, padding, style, use_variants, use_background=use_background, background_color=background_color, verbose=verbose)
 
 
 def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_padding=4, auto_name=True, use_variants=False, style='light', use_background=False, background_color='#ffffff', verbose=False) -> None:
@@ -147,7 +147,8 @@ def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_pa
                                                                 padding=bounding_padding, style=style,
                                                                 use_variants=use_variants,
                                                                 use_background=use_background,
-                                                                background_color=background_color)
+                                                                background_color=background_color,
+                                                                verbose=verbose)
 
     if auto_name:
         out_dir = os.path.dirname(out_filepath) if os.path.isfile(out_filepath) else out_filepath
@@ -194,7 +195,7 @@ def command_line_main():
     style_choices_args = STYLE_CHOICES.copy()
     style_choices_args.extend([i[0] for i in style_choices_args])
 
-    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards")
+    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.1.1")
     parser.add_argument('-o', '--output-dir', dest='output_dir', default='',
                         help="Chooses an output directory (or file if not auto-naming exports)")
     parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False,
@@ -242,7 +243,8 @@ def command_line_main():
     # Loop through remaining inputs and process t hem
     for input_arg in arguments.inputs:
         if arguments.verbose:
-            print(f'\tParsing "{input_arg}"', file=sys.stderr)
+            print(f'\tParsing "{input_arg}": {arguments.verbose}', file=sys.stderr)
+
         if arguments.by_name:  # Construct from names
 
             if arguments.sidc_only:
@@ -254,7 +256,7 @@ def command_line_main():
                     print(f'{input_arg} -> {symbol_class.get_sidc()}' if arguments.verbose else f'{symbol_class.get_sidc()}')
 
             elif output_dir:
-                # Write to an outpur directory
+                # Write to an output directory
                 write_symbol_svg_string_from_name(input_arg, out_filepath=output_dir, bounding_padding=arguments.padding,
                                                   auto_name=use_auto_name,
                                                   verbose=arguments.verbose,

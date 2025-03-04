@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        sodipodi:docname="130803.svg"
-        inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-        id="svg8"
-        version="1.1"
-        viewBox="0 0 67.733332 67.733332"
-        height="256"
-        width="256">
+   sodipodi:docname="130803.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 67.733332 67.733332"
+   height="256"
+   width="256"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <title
      id="title856">MIL-STD-2525D Icon</title>
   <defs
@@ -36,17 +37,17 @@
      inkscape:pagecheckerboard="true"
      units="px"
      inkscape:window-maximized="0"
-     inkscape:window-y="27"
+     inkscape:window-y="32"
      inkscape:window-x="1762"
-     inkscape:window-height="1385"
+     inkscape:window-height="1371"
      inkscape:window-width="1678"
      showgrid="false"
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
-     inkscape:cy="141.03421"
-     inkscape:cx="121.15708"
-     inkscape:zoom="5.6568542"
+     inkscape:cy="257.25"
+     inkscape:cx="196.75"
+     inkscape:zoom="2"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      borderopacity="1.0"
@@ -57,11 +58,14 @@
      inkscape:snap-midpoints="true"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-center="true"
-     inkscape:snap-smooth-nodes="true">
+     inkscape:snap-smooth-nodes="true"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
     <sodipodi:guide
        id="guide861"
        orientation="1,0"
-       position="33.866665,50.8" />
+       position="33.866665,50.8"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -95,24 +99,9 @@
        id="path916"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
        d="m 33.867182,25.067616 -2.972427,2.972946 0.747758,0.747757 1.695503,-1.694987 v 5.928836 c -1.289556,0.24932 -2.271694,1.389118 -2.271694,2.748672 0,1.540454 1.260406,2.800861 2.80086,2.800861 1.540455,0 2.800863,-1.260407 2.800863,-2.800861 0,-1.359554 -0.982138,-2.499352 -2.271696,-2.748672 v -5.928836 l 1.695505,1.694987 0.747758,-0.747757 z m 0,8.96121 c 0.968492,0 1.742014,0.773523 1.742014,1.742014 0,0.968489 -0.773522,1.742527 -1.742014,1.742527 -0.968491,0 -1.742011,-0.774038 -1.742011,-1.742527 0,-0.968491 0.77352,-1.742014 1.742011,-1.742014 z" />
-    <circle
-       style="fill:none;stroke:#000000;stroke-width:1.05833;stop-color:#000000"
-       id="path971"
-       cx="24.16507"
-       cy="38.571701"
-       r="1.3964449" />
     <path
-       id="path977"
-       d="M 42.172849,38.571701 H 33.867182 25.561515"
-       style="fill:none;stroke:#000000;stroke-width:1.05833;stop-color:#000000"
-       sodipodi:nodetypes="ccc" />
-    <circle
-       r="1.3964449"
-       cy="38.571701"
-       cx="-43.569294"
-       id="circle979"
-       style="fill:none;stroke:#000000;stroke-width:1.05833;stop-color:#000000"
-       transform="scale(-1,1)" />
+       id="path971"
+       d="M 24.165966 36.646341 C 23.108748 36.646341 22.239986 37.515104 22.239986 38.572322 C 22.239986 39.629539 23.108748 40.498302 24.165966 40.498302 C 25.039906 40.498302 25.783364 39.904468 26.014949 39.101488 L 33.867183 39.101488 L 41.719416 39.101488 C 41.951001 39.904469 42.694458 40.498302 43.568399 40.498302 C 44.625617 40.498302 45.49438 39.629539 45.49438 38.572322 C 45.49438 37.515104 44.625617 36.646341 43.568399 36.646341 C 42.694458 36.646341 41.951001 37.240174 41.719416 38.043155 L 33.867183 38.043155 L 26.014949 38.043155 C 25.783364 37.240175 25.039906 36.646342 24.165966 36.646341 z M 24.165966 37.705191 C 24.651219 37.705191 25.033097 38.087069 25.033097 38.572322 C 25.033097 39.057575 24.651219 39.439452 24.165966 39.439452 C 23.680712 39.439452 23.296769 39.057575 23.296769 38.572322 C 23.296769 38.087068 23.680712 37.705191 24.165966 37.705191 z M 43.568399 37.705191 C 44.053653 37.705191 44.437597 38.087068 44.437597 38.572322 C 44.437597 39.057575 44.053653 39.439452 43.568399 39.439452 C 43.083146 39.439452 42.701269 39.057575 42.701269 38.572322 C 42.701269 38.087068 43.083146 37.705191 43.568399 37.705191 z " />
   </g>
   <g
      style="opacity:0.25"

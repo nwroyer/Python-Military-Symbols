@@ -4,7 +4,6 @@ from . import symbol_template
 from .individual_symbol import MilitarySymbol
 from .symbol_schema import SymbolSchema
 
-
 def get_names_list(item) -> list:
     """
     Helper function to return the names of an object, searching through "alt_names", "name", and "names" attributes to get
@@ -34,8 +33,13 @@ def split_into_words(in_str:str) -> list:
     in_str = ''.join([c for c in in_str if c.isalpha() or c == ' '])
     return [word.strip() for word in in_str.strip().split(' ') if len(word) > 0]
 
+def exact_match(a, b):
+    if a.lower() == b.lower():
+        return True
 
-def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
+    return False
+
+def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, verbose=False, match_algorithm='basic'):
     """
     Returns a list of closest candidates for the given name string from the provided list of candidates
     :param symbol_schema: The symbol schema to consider the candidates to be part of
@@ -49,10 +53,15 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
     matches = []  # Set of (candidate, weight) pairs
     name_string_words = split_into_words(name_string)
 
-    for candidate in candidate_list:
+    if verbose:
+        print(f'\tFuzzy matching \"{name_string}\"')
 
+    for candidate in candidate_list:
+        #print(candidate)
         # Iterate over the possible names
+
         for candidate_name in get_names_list(candidate):
+
             candidate_name_words = split_into_words(candidate_name)
 
             matching = False
@@ -76,6 +85,41 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True):
             else:
                 pass
 
+    # Handle exact matches
+    for match in matches:
+        if exact_match(name_string, match[0]):
+            matches = [m for m in matches if exact_match(m[0], name_string)]
+            break
+
+
+    # elif match_algorithm == 'advanced':
+    #     matches = []
+    #     for candidate in candidate_list:
+    #         for candidate_name in get_names_list(candidate):
+    #             score = fuzz.token_sort_ratio(name_string, candidate_name)
+    #             matches.append([str(candidate_name), candidate, score])
+
+    #     # Add match weight
+    #     for match in matches:
+    #         match_weight = 0
+    #         if 'symbol_set' in dir(match[1]):
+    #             sym_set_weight = symbol_schema.symbol_sets[match[1].symbol_set].match_weight
+    #             match_weight = sym_set_weight if abs(sym_set_weight) > abs(match[1].match_weight) else match[1].match_weight
+    #         elif 'match_weight' in dir(match[1]):
+    #             match_weight = match[1].match_weight
+    #         match[2] = match[2] + match_weight
+
+    #     matches = sorted(matches, key=lambda item: item[2])
+
+    #     if len(matches) < 1:
+    #         return None, None
+    #     elif len(matches) == 1:
+    #         return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
+
+    #     print(f'Picking {matches[-1][1]} (score {matches[-1][2]})')
+    #     return matches[-1][1], name_string.replace(matches[-1][0], '').strip().replace('  ', ' ')
+        
+    # Handle 0 and 1-match weights
     if len(matches) < 1:
         return None, None
     elif len(matches) == 1:
@@ -119,7 +163,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     proc_name_string = re.sub('[ \t\n]+', ' ', proc_name_string).strip()
 
     if verbose:
-        print(f'Matching "{proc_name_string}"')
+        print(f'\tMatching "{proc_name_string}"')
 
     # Step 0: Check for templates
     template: symbol_template.SymbolTemplate = None
@@ -153,10 +197,29 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
         ret_symbol.standard_identity = standard_identity
 
-    # Step 2: Detect entity type
+    # Amplifier
+    prerun_amplifier = False
+
+    if template is None or not template.amplifier_fixed:
+        candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.prerun]
+        amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
+        if amplifier is not None:
+            proc_name_string = new_name_string
+            if verbose:
+                print(f'\tAssuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
+            prerun_amplifier = True
+
+        ret_symbol.amplifier = amplifier
+
+
+    # Entity type
     if template is None or not template.entity_fixed:
-        entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_flat_entities(),
-                                               match_longest=True)
+        candidates = symbol_schema.get_flat_entities()
+        if ret_symbol.amplifier is not None:
+            candidates = [c for c in candidates if ret_symbol.amplifier.applies_to_entity(c)]
+
+        entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidates,
+                                               match_longest=True, verbose=verbose, match_algorithm='basic')
 
         symbol_set = None
         if entity_type is None:
@@ -165,27 +228,41 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
             ret_symbol.entity = symbol_set.get_entity("000000")
             ret_symbol.symbol_set = symbol_set
         else:
-            if verbose:
-                print(f'\tAssuming entity "{entity_type.name}" -> "{proc_name_string}"')
             symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
             proc_name_string = new_name_string
             ret_symbol.symbol_set = symbol_schema.symbol_sets[entity_type.symbol_set]
             ret_symbol.entity = entity_type
 
-    if template is None or not template.amplifier_fixed:
-        candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to(ret_symbol.symbol_set.id_code)]
+            if verbose:
+                print(f'\tAssuming entity "{entity_type.name}" ({entity_type.id_code}) -> \"{proc_name_string}\"')
+
+    if (template is None or not template.amplifier_fixed) and not prerun_amplifier:
+        ret_symbol.amplifier = None
+        candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to_entity(ret_symbol.entity)]
         amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
         if amplifier is not None:
             proc_name_string = new_name_string
-            if verbose:
-                print(f'\tAssuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
 
         ret_symbol.amplifier = amplifier
 
+    # Double-check amplifier
+    if prerun_amplifier and ret_symbol.amplifier is not None and not ret_symbol.amplifier.applies_to(ret_symbol.symbol_set.id_code):
+        print(f'Removing amplifier "{ret_symbol.amplifier}"')
+        ret_symbol.amplifier = None
+
+    if verbose:
+        if ret_symbol.amplifier is not None:
+            print(f'\tConfirming amplifier "{ret_symbol.names[0]}" -> "{proc_name_string}"')
+        else:
+            print('\tNo modifier assigned')
+
     # Find task force / headquarters / dummy
     if template is None or not template.hqtfd_fixed:
+
+        candidates = [hc for hc in symbol_schema.hqtfd_codes.values() if not hc.matches_blacklist(proc_name_string) and hc.applies_to_symbol_set(ret_symbol.symbol_set)]
+
         hqtfd, new_name_string = fuzzy_match(symbol_schema, proc_name_string,
-                                             [code for code in symbol_schema.hqtfd_codes.values() if code.applies_to_symbol_set(ret_symbol.symbol_set)],
+                                             [code for code in symbol_schema.hqtfd_codes.values() if code in candidates],
                                              match_longest=True)
         if hqtfd is not None:
             proc_name_string = new_name_string
