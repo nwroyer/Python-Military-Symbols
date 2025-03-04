@@ -252,7 +252,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
     if verbose:
         if ret_symbol.amplifier is not None:
-            print(f'\tConfirming amplifier "{ret_symbol.names[0]}" -> "{proc_name_string}"')
+            print(f'\tConfirming amplifier "{ret_symbol.get_name()[0]}" -> "{proc_name_string}"')
         else:
             print('\tNo modifier assigned')
 
