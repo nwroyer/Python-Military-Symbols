@@ -229,7 +229,7 @@ def command_line_main():
     parser.add_argument('-l', '--force-all-elements', dest='force_all_elements', action='store_const', const=True, default=False,
                         help='Whether to force using all elements even if they would overlap in a way that conflicts with the standard')
     parser.add_argument('-m', '--template', dest='template_filename', action='store', default='',
-                        help='A template JSON file whose root is a dictionary of "SIDC": ["name_1", "name_2"], pairs')
+                        help='A template JSON file; see example folder for details')
     parser.add_argument('inputs', nargs='+', default=[])
 
     arguments = parser.parse_args()
