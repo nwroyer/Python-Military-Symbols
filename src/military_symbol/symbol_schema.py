@@ -430,7 +430,7 @@ class SymbolSchema:
         :param template: Template to add
         """
         if template is not None:
-            self.template_sets[template.name] = template
+            self.template_sets[template.names[0]] = template
 
     def get_template_list(self):
         """
@@ -1003,9 +1003,11 @@ class SymbolSchema:
                 modifier = self.symbol_sets[symbol_set].modifiers[int(mod_set)][mod_code]
                 if modifier.type == 'ff':
                     path_name = os.path.join(path_name,
-                                             mod_code + '-' + str(standard_identity.frame_set) + '.svg')
+                                             mod_code + '-' + 
+                                             str(standard_identity.frame_set) + '.svg')
                 else:
                     path_name = os.path.join(path_name, mod_code + '.svg')
+
         elif svg_type == 'F':
             # Frame
             # Format F-00-1
@@ -1056,7 +1058,8 @@ class SymbolSchema:
                     status_code = status_code + "-V1"
 
             path_name = os.path.join(path_name, self.symbol_folders['statuses'],
-                                     status_code + '.svg')
+                                     status_code +
+                                     '.svg')
             return path_name
         else:
             print(f"Unrecognized status code \"{svg_type}\"")

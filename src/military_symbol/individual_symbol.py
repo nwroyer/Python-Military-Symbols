@@ -59,8 +59,8 @@ class MilitarySymbol:
         ret = ''
         ret += self.symbol_set.name.capitalize() + ' - ' if self.symbol_set is not None else ''
         ret += self.standard_identity.name + ' ' if self.standard_identity is not None else ''
-        ret += self.modifiers[1].name + ' ' if self.modifiers[1] is not None else ''
-        ret += self.modifiers[2].name + ' ' if self.modifiers[2] is not None else ''
+        ret += self.modifiers[1].names[0] + ' ' if self.modifiers[1] is not None else ''
+        ret += self.modifiers[2].names[0] + ' ' if self.modifiers[2] is not None else ''
         ret += self.entity.names[0] + ' ' if self.entity is not None else ''
         ret += self.amplifier.names[0] + ' ' if self.amplifier is not None else ''
         ret += '(%s) ' % self.hqtfd.names[0] if self.hqtfd is not None else ''
@@ -337,7 +337,7 @@ class MilitarySymbol:
                 if self.modifiers[mod_i] is not None:
                     modifier = self.modifiers[mod_i]
                     # print(modifier.name)
-
+                    
                     if modifier.is_overlay():
                         for ele in modifier.overlay_elements:
                             overlay_svgs.append(

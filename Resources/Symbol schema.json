@@ -208,8 +208,8 @@
 			"prerun": true,
 			"second digit": {
 				"1": ["team", "crew", "fireteam"],
-				"2": "squad",
-				"3": "section",
+				"2": ["squad"],
+				"3": ["section"],
 				"4": ["platoon", "detachment"],
 				"5": ["company", "battery", "troop"],
 				"6": ["battalion", "squadron"],
@@ -222,12 +222,12 @@
 			"prerun": true,
 			"applies to": ["10", "11"],
 			"second digit": {
-				"1": "division",
+				"1": ["division"],
 				"2": ["corps", "MEF"],
-				"3": "army",
+				"3": ["army"],
 				"4": ["army group", "front"],
 				"5": ["region", "theater"],
-				"6": "command"
+				"6": ["command"]
 			}
 		},
 		"3": {
@@ -236,44 +236,44 @@
 			"applies to": ["15"],
 			"second digit": {
 				"1": ["wheeled" ,"wheeled (limited cross-country)"],
-				"2": "wheeled (cross-country)",
-				"3": "tracked",
-				"4": "wheeled and tracked combination",
-				"5": "towed",
-				"6": "rail",
-				"7": "pack animals"
+				"2": ["wheeled (cross-country)"],
+				"3": ["tracked"],
+				"4": ["wheeled and tracked combination"],
+				"5": ["towed"],
+				"6": ["rail"],
+				"7": ["pack animals"]
 			}
 		},
 		"4": {
 			"name": "equipment mobility on snow",
 			"applies to": ["15"],
 			"second digit": {
-				"1": "over snow / prime mover",
-				"2": "sled"
+				"1": ["over snow / prime mover"],
+				"2": ["sled"]
 			}
 		},
 		"5": {
 			"name": "equipment mobility on water",
 			"applies to": ["15"],
 			"second digit": {
-				"1": "barge",
-				"2": "amphibious"
+				"1": ["barge"],
+				"2": ["amphibious"]
 			}
 		},
 		"6": {
 			"name": "naval towed array",
 			"applies to": ["30", "35"],
 			"second digit": {
-				"1": "short towed array",
-				"2": "long towed array"
+				"1": ["short towed array"],
+				"2": ["long towed array"]
 			}
 		},
 		"7": {
 			"name": "leadership indicator",
 			"applies to": ["27"],
 			"second digit": {
-				"1": "leader individual",
-				"2": "deputy individual"
+				"1": ["leader individual"],
+				"2": ["deputy individual"]
 			}
 		}
 	},
@@ -1178,7 +1178,7 @@
 				"59": {"name": "air assault", "cat": "mobility", "intro": "2525E"},
 				"60": {"name": "amphibious", "cat": "mobility", "intro": "2525E", "type": "ff"},
 				"61": {"name": "very heavy", "cat": "capability", "intro": "2525E"},
-				"62": {"name": "supply", "cat": "capability", "intro": "2525E"},
+				"62": {"name": "supply", "cat": "capability", "intro": "2525E", "type": "ff"},
 				"64": {"names": ["navy barge self-propelled", "self-propelled barge"], "cat": "capability", "intro": "2525E"},
 				"65": {"names": ["navy barge not self-propelled", "barge"], "cat": "capability", "intro": "2525E"},
 				"66": {"names": ["launch"], "cat": "capability", "intro": "2525E"},

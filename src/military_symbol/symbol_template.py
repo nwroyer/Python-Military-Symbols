@@ -9,8 +9,7 @@ class SymbolTemplate:
     """
 
     def __init__(self, symbol_schema):
-        self.name: str = ''
-        self.alt_names: list = []
+        self.names: list = []
         self.symbol: MilitarySymbol = None
         self.template_sidc:str = ''
         self.symbol_schema = symbol_schema
@@ -25,6 +24,9 @@ class SymbolTemplate:
         self.entity_fixed: bool = False  # Digits 10-15
         self.modifiers_fixed: list = [False, False]  # Digits 16-17 and 18-19, respectively
 
+    def get_names(self):
+        return self.names
+
     def create_from_sidc(self, sidc):
         """
         Creates a template from a given SIDC, where asterisks indicate "free spaces" that can be modified
@@ -35,13 +37,16 @@ class SymbolTemplate:
         if len(template_sidc) != 20:
             print(f'Error with template SIDC "{sidc}"')
 
+        print(template_sidc)
+
         self.template_sidc = template_sidc
         self.symbol = MilitarySymbol(self.symbol_schema)
         self.symbol.create_from_sidc(template_sidc.replace('*', '0'))
+        self.names = [self.symbol.get_name()]
 
         # Determine whether symbol is fixed
-        self.context_fixed = template_sidc[2] != '*'
-        self.standard_identity_fixed = template_sidc[3] != '*'
+        self.context_fixed = template_sidc[1] != '*'
+        self.standard_identity_fixed = template_sidc[2] != '*'
         self.symbol_set_fixed = template_sidc[4:6] != '**'
         self.status_fixed = template_sidc[6] != '*'
         self.hqtfd_fixed = template_sidc[7] != '*'
@@ -63,9 +68,12 @@ class SymbolTemplateSet:
 
     def __init__(self, symbol_schem):
         self.symbol_schema = symbol_schem
-        self.name = ''
+        self.names = ['']
         self.subsets = {}
         self.templates = {}
+
+    def get_names(self):
+        return self.names
 
     def load_from_dict(self, dict_val):
         """
@@ -75,7 +83,9 @@ class SymbolTemplateSet:
         """
 
         if 'name' in dict_val.keys():
-            self.name = dict_val['name']
+            self.names = [dict_val['name']]
+        elif 'names' in dict_val.keys():
+            self.names = dict_val['names']
 
         # print(f'Loading template set \"{self.name}\"')
 
@@ -83,31 +93,33 @@ class SymbolTemplateSet:
             for tmp_name, template in dict_val['subsets'].items():
                 # print(tab_stops + f'\tSubset {self.name} >> {tmp_name}')
                 subset = SymbolTemplateSet(self.symbol_schema)
-                subset.name = tmp_name
+                subset.names = [tmp_name]
                 subset.load_from_dict(template)
-                self.subsets[subset.name] = subset
+                self.subsets[subset.names[0]] = subset
 
         if 'templates' in dict_val.keys():
             for template_name, template_sidc in dict_val['templates'].items():
                 # print(f'\t{template_name} -> {template_sidc}')
                 new_template = SymbolTemplate(self.symbol_schema)
-                new_template.name = template_name
                 new_template.create_from_sidc(template_sidc)
+                new_template.names = [template_name]
                 self.templates[new_template.name] = new_template
 
         remaining_items = [(key, value) for (key, value) in dict_val.items() if key not in ['name', 'subsets']]
         for (template_name, template_sidc) in remaining_items:
 
             new_template = SymbolTemplate(self.symbol_schema)
-            new_template.name = template_name
+            names = [template_name]
 
             if isinstance(template_sidc, str):
                 new_template.create_from_sidc(template_sidc)
             elif isinstance(template_sidc, dict):
-                new_template.alt_names = template_sidc['alt names']
                 new_template.create_from_sidc(template_sidc['sidc'])
+                names.extend(template_sidc['alt names'])
+            
+            new_template.names = list(set(names))
 
-            self.templates[new_template.name] = new_template
+            self.templates[new_template.names[0]] = new_template
 
     def get_template(self, template_name):
         """

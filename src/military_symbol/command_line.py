@@ -228,6 +228,8 @@ def command_line_main():
                         help='Whether to only return the SIDC from the name')
     parser.add_argument('-l', '--force-all-elements', dest='force_all_elements', action='store_const', const=True, default=False,
                         help='Whether to force using all elements even if they would overlap in a way that conflicts with the standard')
+    parser.add_argument('-m', '--template', dest='template_filename', action='store', default='',
+                        help='A template JSON file whose root is a dictionary of "SIDC": ["name_1", "name_2"], pairs')
     parser.add_argument('inputs', nargs='+', default=[])
 
     arguments = parser.parse_args()
@@ -251,6 +253,10 @@ def command_line_main():
     style_name = arguments.style_name
     if style_name not in STYLE_CHOICES:
         style_name = [name for name in STYLE_CHOICES if name[0] == style_name[0]][0]
+
+    templates = []
+    if arguments.template_filename != '':
+        add_symbol_template_set(arguments.template_filename)
 
     # Loop through remaining inputs and process t hem
     for input_arg in arguments.inputs:

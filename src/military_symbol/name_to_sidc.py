@@ -3,6 +3,8 @@ import re
 from . import symbol_template
 from .individual_symbol import MilitarySymbol
 from .symbol_schema import SymbolSchema
+from thefuzz import fuzz
+from functools import cmp_to_key
 
 def get_names_list(item) -> list:
     """
@@ -52,105 +54,74 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
     :return: A list containing the closest-matched candidates
     """
 
+    name_string = name_string.lower().strip()
+
     # Step 1: calculate the number of words in candidate_list_of_lists
     matches = []  # Set of (candidate, weight) pairs
+    candidate_name_list = [(name.lower().strip(), candidate) for candidate in candidate_list for name in candidate.get_names() ]
+
+    print_candidates = False
+    if len(name_string) < 1:
+        return None, None
+
+    if print_candidates:
+        print(f'Searching for \"{name_string}\"')
+
+    # Check for exact matches    
     name_string_words = split_into_words(name_string)
-
-    if verbose:
-        print(f'\tFuzzy matching \"{name_string}\"')
-
-    for candidate in candidate_list:
-        # Iterate over the possible names
-
-        for candidate_name in get_names_list(candidate):
-            if print_candidates:
-                print(candidate_name)
-
-            candidate_name_words = split_into_words(candidate_name)
-
-            matching = False
-
-            for start_i in range(len(name_string_words) - len(candidate_name_words) + 1):
-                matching_count = 0
-                for i in range(len(candidate_name_words)):
-                    if name_string_words[start_i + i] != candidate_name_words[i]:
-                        break
-                    else:
-                        matching_count += 1
-                        if matching_count == len(candidate_name_words):
-                            matching = True
-                            break
-                if matching:
-                    break
-
-            if matching:
-                matches.append([str(candidate_name), candidate])
-                continue
-            else:
-                pass
-
+    # Return matching candidates
+    matches = [(name, candidate) for (name, candidate) in candidate_name_list if name in name_string]
+    if print_candidates:
+        print(f'\tMatches: {[f[0] for f in matches]}')
 
     # Handle exact matches
     for match in matches:
         if exact_match(name_string, match[0]):
-            matches = [m for m in matches if exact_match(m[0], name_string)]
-            print(f'Exact matches: {matches}')
+            matches = [(name, cand) for (name, cand) in matches if exact_match(name, name_string)]
             break
-
-
-    # elif match_algorithm == 'advanced':
-    #     matches = []
-    #     for candidate in candidate_list:
-    #         for candidate_name in get_names_list(candidate):
-    #             score = fuzz.token_sort_ratio(name_string, candidate_name)
-    #             matches.append([str(candidate_name), candidate, score])
-
-    #     # Add match weight
-    #     for match in matches:
-    #         match_weight = 0
-    #         if 'symbol_set' in dir(match[1]):
-    #             sym_set_weight = symbol_schema.symbol_sets[match[1].symbol_set].match_weight
-    #             match_weight = sym_set_weight if abs(sym_set_weight) > abs(match[1].match_weight) else match[1].match_weight
-    #         elif 'match_weight' in dir(match[1]):
-    #             match_weight = match[1].match_weight
-    #         match[2] = match[2] + match_weight
-
-    #     matches = sorted(matches, key=lambda item: item[2])
-
-    #     if len(matches) < 1:
-    #         return None, None
-    #     elif len(matches) == 1:
-    #         return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
-
-    #     print(f'Picking {matches[-1][1]} (score {matches[-1][2]})')
-    #     return matches[-1][1], name_string.replace(matches[-1][0], '').strip().replace('  ', ' ')
-        
+    
     # Handle 0 and 1-match weights
     if len(matches) < 1:
         return None, None
     elif len(matches) == 1:
         return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 
-    # Sort matches by match weight
-    for match in matches:
-        match_weight = 0
-        if 'symbol_set' in dir(match[1]):
-            sym_set_weight = symbol_schema.symbol_sets[match[1].symbol_set].match_weight
-            match_weight = sym_set_weight if abs(sym_set_weight) > abs(match[1].match_weight) else match[1].match_weight
-        elif 'match_weight' in dir(match[1]):
-            match_weight = match[1].match_weight
-        match.append(match_weight)
+    # Apply fuzzy match score
+    matches = [(name, cand, fuzz.partial_ratio(name, name_string)) for (name, cand) in matches]
 
-    matches = sorted(matches, key=lambda item: item[2])
-    max_match_weight = max(item[2] for item in matches)
-    matches = [match for match in matches if match[2] == max_match_weight]
-    if len(matches) == 1:
-        return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
+    def sort_func(a, b):
+        score_a = fuzz.partial_ratio(a[0], name_string)
+        score_b = fuzz.partial_ratio(b[0], name_string)
+        if score_a == score_b:
+            if len(a[0]) == len(b[0]):
+                return 0
+            return 1 if len(a[0]) < len(b[0]) else -1
 
-    # Sort matches by string length name
-    matches = sorted(matches, key=lambda item: len(item[0]))
-    match_index = -1 if match_longest else 0
-    return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
+        return 1 if score_a > score_b else -1
+
+    matches = sorted(matches, key=cmp_to_key(sort_func))
+    return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
+
+    # # Sort matches by match weight
+    # for match in matches:
+    #     match_weight = 0
+    #     if 'symbol_set' in dir(match[1]):
+    #         sym_set_weight = symbol_schema.symbol_sets[match[1].symbol_set].match_weight
+    #         match_weight = sym_set_weight if abs(sym_set_weight) > abs(match[1].match_weight) else match[1].match_weight
+    #     elif 'match_weight' in dir(match[1]):
+    #         match_weight = match[1].match_weight
+    #     match.append(match_weight)
+
+    # matches = sorted(matches, key=lambda item: item[2])
+    # max_match_weight = max(item[2] for item in matches)
+    # matches = [match for match in matches if match[2] == max_match_weight]
+    # if len(matches) == 1:
+    #     return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
+
+    # # Sort matches by string length name
+    # matches = sorted(matches, key=lambda item: len(item[0]))
+    # match_index = -1 if match_longest else 0
+    # return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
 
 
 def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False) -> MilitarySymbol:
@@ -174,13 +145,12 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     # Step 0: Check for templates
     template: symbol_template.SymbolTemplate = None
     template, new_name_string = fuzzy_match(symbol_schema, name_string, symbol_schema.get_template_list())
-
     ret_symbol: MilitarySymbol = None
 
     if template is not None:
         proc_name_string = new_name_string
         if verbose:
-            print(f"\tMatches template \"{template.name}\" leaving \"{proc_name_string}\"")
+            print(f"\tMatches template \"{template.names[0]}\" leaving \"{proc_name_string}\"; standard identity is {'not ' if not template.standard_identity_fixed else ''}fixed")
 
         ret_symbol = template.symbol
     else:
@@ -225,7 +195,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
             candidates = [c for c in candidates if ret_symbol.amplifier.applies_to_entity(c)]
 
         entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidates,
-                                               match_longest=True, verbose=verbose, match_algorithm='basic')
+                                               match_longest=True, verbose=verbose, match_algorithm='advanced')
 
         symbol_set = None
         if entity_type is None:
@@ -258,7 +228,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
     if verbose:
         if ret_symbol.amplifier is not None:
-            print(f'\tConfirming amplifier "{ret_symbol.get_name()[0]}" leaving "{proc_name_string}"')
+            print(f'\tConfirming amplifier "{ret_symbol.amplifier}" leaving "{proc_name_string}"')
         else:
             print('\tNo modifier assigned')
 
