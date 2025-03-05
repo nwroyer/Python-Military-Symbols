@@ -60,11 +60,10 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
         print(f'\tFuzzy matching \"{name_string}\"')
 
     for candidate in candidate_list:
-        #print(candidate)
         # Iterate over the possible names
 
         for candidate_name in get_names_list(candidate):
-            print(candidate_name)
+            #print(candidate_name)
 
             candidate_name_words = split_into_words(candidate_name)
 

@@ -448,7 +448,9 @@
 				"05": {"name": "anti-ballistic", "cat": "missile class"},
 				"06": {"name": "ballistic", "cat": "missile class"},
 				"07": {"name": "cruise", "cat": "missile class"},
-				"08": {"name": "interceptor", "cat": "missile class"}
+				"08": {"name": "interceptor", "cat": "missile class"},
+
+				"09": {"name": "hypersonic", "cat": "missile class"}
 			},
 			"modifier set 2": {
 				"01": {"name": "air", "cat": "missile destination"},
@@ -484,7 +486,7 @@
 						"05": "capsule",
 						"06": {"name": "general satellite", "modcats-additional": ["sensor"]},
 						"07": {"name": "satellite", "modcats-additional": ["sensor"]},
-						"08": {"name": "anti-satellite weapon", "modcats-additional": ["sensor"]},
+						"08": {"name": "anti-satellite weapon", "modcats-additional": ["sensor", "antisatellite"]},
 						"09": {"name": "astronomical satellite", "modcats-additional": ["sensor"]},
 						"10": {"name": "biosatellite", "modcats-additional": ["sensor"]},
 						"11": {"name": "communications satellite", "modcats-additional": ["sensor"]},
@@ -516,7 +518,10 @@
 						"09": {"name": "navigational satellite", "modcats-additional": ["sensor"]},
 						"10": "space station",
 						"11": {"name": "tether satellite", "modcats-additional": ["sensor"]},
-						"12": {"name": "weather satellite", "modcats-additional": ["sensor"]}
+						"12": {"name": "weather satellite", "modcats-additional": ["sensor"]},
+
+						"13": {"name": "planetary lander"},
+						"14": {"name": "space vehicle"}
 					}
 				},
 				"13": "manual track"
@@ -534,7 +539,16 @@
 				"01": {"name": "optical", "cat": "sensor"},
 				"02": {"name": "infrared", "cat": "sensor"},
 				"03": {"name": "radar", "cat": "sensor"},
-				"04": {"name": "signals intelligence", "cat": "sensor"}
+				"04": {"names": ["signals intelligence", "SIGINT"], "cat": "sensor"},
+
+				"06": {"names": ["electromagnetic warfare ASAT", "EW ASAT"], "cat": "antisatellite"},
+				"07": {"names": ["high power microwave ASAT"], "cat": "antisatellite"},
+				"08": {"names": ["laser ASAT"], "cat": "antisatellite"},
+
+				"09": {"names": ["maintenance"]},
+				"10": {"names": ["mine", "space mine", "mine ASAT"], "cat": "antisatellite"},
+				"11": {"names": ["refuel", "refueling", "tanker"]},
+				"11": {"names": ["tug"]}
 			}
 		},
 		"06": {
@@ -553,7 +567,8 @@
 			"modifier set 1": {
 				"01": {"name": "ballistic", "cat": "missile class"},
 				"02": {"name": "space", "cat": "launch origin"},
-				"03": {"name": "interceptor", "cat": "missile class"}
+				"03": {"name": "interceptor", "cat": "missile class"},
+				"04": {"name": "hypersonic", "cat": "missile class"}
 			},
 			"modifier set 2": {
 				"01": {"name": "short range", "cat": "missile range"},
@@ -567,7 +582,11 @@
 				"09": {"name": "Standard Missile Terminal Phase (SM-T)", "cat": "missile type - BMD"},
 				"10": {"name": "Standard Missile-3 (SM-3)", "cat": "missile type - BMD"},
 				"11": {"name": "Terminal High Altitude Area Defense (THAAD)", "cat": "missile type - BMD"},
-				"12": {"name": "space", "cat": "launch origin"}
+				"12": {"name": "space", "cat": "launch origin"},
+
+				"13": {"names": ["close range", "CRBM"]},
+				"14": {"name": "debris"},
+				"15": {"name": "unknown"}
 			}
 		},
 		"10": {
@@ -584,7 +603,12 @@
 						"02": ["civil affairs", "CA"],
 						"03": "civil-military cooperation",
 						"04": ["information operations", "IO"],
-						"05": "liaison",
+						"05": {
+							"name": "liaison",
+							"entity subtypes": {
+								"01": {"name": "reconnaissance and liaison element", "type": "ff", "overlay": ["110500", "121300"]}
+							}
+						},
 						"06": {
 							"name": "PSYOP",
 							"alt names": ["PSYOPS", "MISO", "military information support operations",
@@ -612,7 +636,11 @@
 						"12": {
 							"names": ["video imagery (combat camera)", "combat camera", "comcam", "COMMSTRAT"],
 							"match weight": 1
-						}
+						},
+
+						"13": {"names": ["space"], "intro": "2525E"},
+						"14": {"names": ["special troops"], "intro": "2525E"},
+						"15": {"names": ["multi-domain operations", "MDO"], "intro": "2525E"}
 					}
 				},
 				"12": {
@@ -641,7 +669,7 @@
 							}
 						},
 						"06": {
-							"names": ["army aviation", "aviation rotary wing", "rotary wing", "rotary-wing"],
+							"names": ["army aviation", "aviation rotary wing", "rotary wing", "rotary-wing", "rotary wing unit", "rotary-wing unit"],
 							"entity subtypes": {
 								"01": {"names": ["* reconnaissance", "* recon"], "type": "ff", "overlay": ["120600", "121300"]}
 							}
@@ -705,6 +733,10 @@
 						"19": {
 							"names": ["unmanned aerial systems", "UAS", "UAV", "unmanned aerial vehicle"],
 							"match weight": 1
+						},
+						"20": {
+							"names": ["Ranger"],
+							"intro": "2525E"
 						}
 					}
 				},
@@ -727,7 +759,12 @@
 								    "anti-air missile",
 								    "AA missile",
 								    "air defense missile"								
-								], "match weight": 1, "type": "ff", "overlay": ["130100", "0XAAMissile"]}
+								], "match weight": 1, "type": "ff", "overlay": ["130100", "0XAAMissile"]},
+								"03": {
+									"names": ["air and missile defense"], "intro": "2525E",
+									"type": "ff",
+									"overlay": ["130100", "0XAAMD"]
+								}
 							}
 						},
 						"02": {"name": "air / land naval gunfire liaison", "type": "ff", "overlay": ["0XSeaport", "130300", "120600", "121300"]},
@@ -768,6 +805,10 @@
 								"05": {"name": "motorized * reconnaissance (equipped)",
 									"type": "ff",
 									"overlay": ["140100", "121300", "0XMotorized"]
+								},
+								"06": {
+									"names": ["CBRNHE", "Chemical Biological Radiological Nuclear and High-Yield Explosives"],
+									"intro": "2525E"
 								}
 							}
 						},
@@ -800,10 +841,19 @@
 								"02": {"name": "motorized *", "type": "ff", "overlay": ["141700", "0XMotorized"]}
 							}
 						},
-						"18": ["search and rescue", "SAR"],
+						"18": {
+							"names": ["search and rescue", "SAR"],
+							"entity subtypes": {
+								"01": {"names": ["isolated personnel"], "intro": "2525E"}
+							}
+						},
 						"19": {"name": "security police (air)", "type": "m2"},
 						"20": "shore patrol",
-						"21": "topographic"
+						"21": "topographic",
+						"22": {
+							"names": ["missile defense"],
+							"intro": "2525E"
+						}
 					}
 				},
 				"15": {
@@ -831,7 +881,8 @@
 						"09": "joint intelligence center",
 						"10": ["military intelligence", "intelligence"],
 						"11": {"name": "search", "type": "fo"},
-						"12": "sensor"
+						"12": "sensor",
+						"13": {"names": ["military history", "historical", "history"], "intro": "2525E"}
 					}
 				},
 				"16": {
@@ -849,7 +900,7 @@
 						"08": ["judge advocate general", "JAG", "SJA"],
 						"09": "labor",
 						"10": ["laundry", "bath"],
-						"11": ["maintenance", "maintainer", "maintainers"],
+						"11": {"names": ["maintenance", "maintainer", "maintainers"]},
 						"12": {"name": "material", "type": "ff", "overlay": ["0XMaterial", "163400"]},
 						"13": {"name": "medical", "type": "ff", "modcats-additional": ["medical capability"]},
 						"14": {
@@ -893,7 +944,14 @@
 						"46": {"names": ["US supply class X", "US class X", "class X", "class X supply"], "type": "ff", "overlay": ["110200", "163400"]},
 						"47": "water",
 						"48": "water purification",
-						"49": "broadcast"
+						"49": "broadcast",
+
+						"51": {"names": ["interpreter/translator", "interpreter", "translator"], "intro": "2525E"},
+						"52": {"names": ["support"], "intro": "2525E"},
+						"53": {"names": ["army field support"], "intro": "2525E"},
+						"54": {"names": ["contracting services", "contracting"], "intro": "2525E"},
+						"55": {"names": ["parachute rigger"], "intro": "2525E"},
+						"56": {"names": ["human resources"], "intro": "2525E"}
 					}
 				},
 				"17": {
@@ -941,8 +999,11 @@
 						"12": {"name": "US Marshals Service", "type": "fo"},
 						"13": ["internal security force", "ISF"]
 					}
+				},
+				"21": {
+					"names": ["cyber"],
+					"intro": "2525E"
 				}
-
 			},
 			"special entity subtypes": {
 				"95": {"names": ["headquarters element", "headquarters unit", "HQ unit", "HQ element", "head quarters unit", "headquarters element"], "type": "ff"},
@@ -1035,12 +1096,24 @@
 				"81": {"name": "joint network note", "cat": "capability"},
 				"82": {"name": "retransmission site", "cat": "capability"},
 
+				"84": {"name": "assault", "cat": "capability", "intro": "2525E"},
+				"85": {"names": ["criminal investigation division", "CID"], "cat": "capability", "intro": "2525E"},
+				"87": {"names": ["digital"], "cat": "capability", "intro": "2525E"},
+				"88": {"names": ["network", "network operations"], "cat": "capability", "intro": "2525E"},
+				"89": {"names": ["airfield", "aerial port of debarkation", "aerial port of embarkation", "APOD", "APOE"], "cat": "capability", "intro": "2525E"},
+				"90": {"names": ["pipeline"], "cat": "capability", "intro": "2525E"},
+				
+				"93": {"names": ["independent command"], "cat": "capability", "intro": "2525E"},
 				"94": {"name": "theater", "cat": "capability"},
 				"95": {"name": "army or theater corps", "cat": "capability"},
 				"96": {"name": "corps", "cat": "capability"},
 				"97": {"names": ["brigade", "MEF"], "cat": "capability"},
-				"98": {"names": ["headquarters element", "headquarters unit", "HQ unit", "HQ element", "head quarters unit", "head quarters element"], "cat": "capability", "type": "ff"}
-
+				"98": {"names": ["headquarters element", "headquarters unit", "HQ unit", "HQ element", "head quarters unit", "head quarters element"], "cat": "capability", "type": "ff"},
+				"99": {
+					"names": ["multi-domain operations", "MDO"],
+					"cat": "capability",
+					"intro": "2525E"
+				}
 			},
 			"modifier set 2": {
 				"01": {"name": "airborne", "cat": "mobility"},
@@ -1099,7 +1172,32 @@
 				"54": {"name": "attack", "cat": "capability"},
 				"55": {"name": "refuel", "cat": "capability"},
 				"56": {"name": "utility", "cat": "capability"},
-				"57": {"name": "combat search and rescue", "cat": "capability"}
+				"57": {"name": "combat search and rescue", "cat": "capability"},
+
+				"58": {"name": "guerilla", "cat": "capability", "intro": "2525E"},
+				"59": {"name": "air assault", "cat": "mobility", "intro": "2525E"},
+				"60": {"name": "amphibious", "cat": "mobility", "intro": "2525E", "type": "ff"},
+				"61": {"name": "very heavy", "cat": "capability", "intro": "2525E"},
+				"62": {"name": "supply", "cat": "capability", "intro": "2525E"},
+				"64": {"names": ["navy barge self-propelled", "self-propelled barge"], "cat": "capability", "intro": "2525E"},
+				"65": {"names": ["navy barge not self-propelled", "barge"], "cat": "capability", "intro": "2525E"},
+				"66": {"names": ["launch"], "cat": "capability", "intro": "2525E"},
+				"67": {"names": ["landing craft"], "cat": "capability", "intro": "2525E"},
+				"68": {"names": ["landing ship"], "cat": "capability", "intro": "2525E"},
+				"69": {"names": ["service craft", "service yard"], "cat": "capability", "intro": "2525E"},
+				"70": {"names": ["tug harbor", "harbor tug"], "cat": "capability", "intro": "2525E"},
+				"71": {"names": ["ocean-going tug", "oceangoing tug"], "cat": "capability", "intro": "2525E"},
+				"72": {"names": ["surface deployment and distribution command"], "cat": "capability", "intro": "2525E"},
+				"73": {"names": ["non-combatant generic vessel"], "cat": "capability", "intro": "2525E"},
+				"74": {"names": ["composite"], "cat": "capability", "intro": "2525E"},
+				"75": {"names": ["shelter"], "cat": "capability", "intro": "2525E"},
+				"81": {"names": ["surgical"], "cat": "medical capability", "intro": "2525E"},
+				"82": {"names": ["blood"], "cat": "medical capability", "intro": "2525E"},
+				"83": {"names": ["combat and operational stress control"], "cat": "medical capability", "intro": "2525E"},
+				"84": {"names": ["jamming", "jammer"], "cat": "capability", "intro": "2525E", "type": "ff"},
+				"86": {"names": ["optometry", "optometrist"], "cat": "medical capability", "intro": "2525E"},
+				"87": {"names": ["preventive medicine"], "cat": "medical capability", "intro": "2525E"},
+				"89": {"names": ["air defense", "anti-air", "AA", "anti-aircraft"], "cat": "capability", "intro": "2525E", "type": "ff"}
 			}
 		},
 		"27": {
@@ -1135,7 +1233,18 @@
 								"07": {"name": "observer", "overlay": ["10-121200"]},
 								"08": {"name": "security", "overlay": ["10-141700"]},
 								"09": {"name": "sniper", "overlay": ["10-121500"]},
-								"10": {"name": "SOF", "overlay": ["10-121800"]}
+								"10": {"name": "SOF", "overlay": ["10-121800"]},
+								"11": {"name": ["designated marksman", "DM"], "intro": "2525E"},
+								"12": {"names": ["medic"], "intro": "2525E"},
+								"13": {"names":  ["signal", "RO", "RTO", "radioman", "radio operator"], "type": "ff", "intro": "2525E"},
+								"14": {"names":  ["reconnaissance", "recon"], "type":  "ff", "intro": "2525E"},
+								"15": {"names":  ["infantry", "rifleman"], "type":  "ff", "intro": "2525E"},
+								"16": {"names":  ["close protection"], "intro": "2525E"},
+								"17": {"names":  ["crowd and riot control", "riot control", "crowd control"], "intro": "2525E"},
+								"18": {"names":  ["SWAT", "special weapons and tactics"], "intro": "2525E"},
+								"19": {"names":  ["demolition"], "intro": "2525E"},
+								"20": {"names":  ["commander"], "intro": "2525E"},
+								"21": {"names":  ["second in command"], "intro": "2525E"}
 							}
 						},
 						"03": {
@@ -1311,7 +1420,8 @@
 						"07": {"name": "victim of an attempted crime", "modcats": ["organization", "crime"]},
 						"08": {"name": "spy", "modcats": ["organization"]},
 						"09": {"name": "composite loss", "modcats": ["composite loss"]},
-						"10": {"name": "emergency medical operation", "type": "fo", "modcats": ["organization"]}
+						"10": {"name": "emergency medical operation", "type": "fo", "modcats": ["organization"]},
+						"11": {"name": "emergency medical operation", "type": "fo", "modcats": ["organization"], "intro": "2525E"}
 					}
 				}
 			},
@@ -1506,7 +1616,7 @@
 							}
 						},
 						"16": {
-							"name": "multiple rocket launcher",
+							"names": ["multiple rocket launcher", "MLRS"],
 							"entity subtypes": {
 								"01": {"name": "light *", "type": "fo", "overlay": ["111600", "0XLight"]},
 								"02": {"name": "medium *", "type": "fo", "overlay": ["111600", "0XMedium"]},
@@ -1514,7 +1624,7 @@
 							}
 						},
 						"17": {
-							"name": "anti-tank rocket launcher",
+							"names": ["anti-tank rocket launcher", "antitank rocket launcher"],
 							"entity subtypes": {
 								"01": {"name": "light *", "type": "fo", "overlay": ["111700", "0XLight"]},
 								"02": {"name": "medium *", "type": "fo", "overlay": ["111700", "0XMedium"]},
@@ -1599,7 +1709,10 @@
 							"type": "fo",
 							"entity subtypes": {
 								"01": {"name": "trailer mounted *", "type": "fo"},
-								"02": {"name": "* on tank chassis", "type": "fo"}
+								"02": {"name": "* on tank chassis", "type": "fo"},
+								"03": {"names": ["assault breacher vehicle with combat dozer blade", "ABV"], "type": "fo", "intro": "2525E"},
+								"04": {"names": ["medium capability equipment"], "type": "fo", "intro": "2525E"},
+								"05": {"names": ["heavy capability equipment"], "type": "fo", "intro": "2525E"}
 							}
 						},
 						"10": {
@@ -1801,7 +1914,12 @@
 							"match weight": -1
 						},
 						"12": "sustainment shipments",
-						"13": {"name": "tent", "type": "fo"},
+						"13": {
+							"name": "tent", "type": "fo",
+							"entity subtypes": {
+								"01": {"names": ["civilian *"], "type": "fo", "civilian-coloring-override": true, "intro": "2525E"}
+							}
+						},
 						"14": "unit deployment shipments",
 						"15": {
 							"name": "emergency medical operation",
@@ -1845,7 +1963,8 @@
 						"02": {"name": "fire fighting / fire protection", "overlay": ["10-141000"]}
 					}
 				},
-				"24": {"name": "manual track", "type": "fo"}
+				"24": {"name": "manual track", "type": "fo"},
+				"25": {"names": ["rotary-wing equipment", "rotary wing equipment"], "type": "fo", "intro": "2525E"}
 			},
 			"modifier set 1": {
 				"01": {"name": "biological", "cat": "sensor type"},
@@ -1856,7 +1975,12 @@
 				"06": {"name": "radiological", "cat": "sensor type"},
 				"07": {"name": "upgraded early warning radar", "cat": "sensor type"},
 				"08": {"name": "hijacking", "cat": "crime", "civilian-coloring-override":  false},
-				"09": {"name": "civilian", "cat": "operation", "civilian-coloring-override":  true}
+				"09": {"name": "civilian", "cat": "operation", "civilian-coloring-override":  true},
+				"12": {"names": ["multi-purpose blade"], "intro": "2525E"},
+				"13": {"names": ["tank-width mine plow"], "intro": "2525E"}
+			},
+			"modifier set 2": {
+				"06": {"names": ["tractor trailer"], "intro": "2525E"}
 			}
 		},
 		"20": {
@@ -1913,7 +2037,12 @@
 								"02": "training camp"
 							}
 						},
-						"20": {"name": "warehouse / storage facility", "type": "fo"},
+						"20": {
+							"names": ["warehouse", "storage facility"], "type": "fo",
+							"entity subtypes": {
+								"01": {"names": ["grenade *"], "type": "mn", "intro": "2525E"}
+							}
+						},
 						"21": {
 							"name": "law enforcement",
 							"type": "fo",
@@ -1943,6 +2072,11 @@
 								"01": {"name": "fire station", "type": "fo"},
 								"02": {"name": "emergency medical operation", "type": "fo", "overlay": ["15-201500"]}
 							}
+						},
+						"23": {
+							"name": ["home", "house"],
+							"civilian-coloring-override": true,
+							"intro": "2525E"
 						}						
 					}
 				},
@@ -2055,7 +2189,8 @@
 							"type-inherit": true,
 							"entity subtypes": {
 								"01": {"names": ["military armory", "armory"], "overlay": ["120802", "0XTopRES"]},
-								"02": "military base"
+								"02": "military base",
+								"03": {"names": ["military air port", "air base", "airbase"], "intro": "2525E"}
 							}
 						},
 						"09": {
@@ -2111,7 +2246,7 @@
 							"modcats-inherit": true,
 							"type": "fo",
 							"entity subtypes": {
-								"01": {"names": ["airport / air base", "airport", "air base", "air port", "aeroport"],
+								"01": {"names": ["airport", "air port", "aeroport"],
 									"type": "m1", "overlay": ["10-163600", "10-0XAirport"]
 								},
 								"02": {"names": ["air traffic control facility", "ATC"]},
@@ -2188,7 +2323,8 @@
 				"05": {"name": "atomic energy reactor", "cat": "nuclear type"},
 				"06": {"name": "nuclear material production", "cat": "nuclear type"},
 				"07": {"name": "nuclear material storage", "cat": "nuclear type"},
-				"08": {"name": "weapons grade", "cat": "nuclear type"}
+				"08": {"name": "weapons grade", "cat": "nuclear type"},
+				"10": {"names": ["transportation"], "intro": "2525E"}
 			}
 		},
 		"25": {
@@ -2652,7 +2788,9 @@
 					"type": "fo", "local-only": true
 				},
 				"15": {"name": "fused track", "type": "fo", "local-only": true},
-				"16": {"name": "manual track", "type": "fo", "local-only": true}
+				"16": {"name": "manual track", "type": "fo", "local-only": true},
+				"20": {"names": ["military seabed installation", "seabed installation man-made, military"], "intro": "2525E"},
+				"21": {"names": ["civilian seabed installation", "seabed installation man-made, civilian"], "intro": "2525E", "civilian-coloring-override": true}
 			},
 			"modifier set 1": {
 				"01": {"name": "anti-submarine warfare", "cat": "mission area"},
@@ -2963,6 +3101,10 @@
 								"05": "rocket *",
 								"06": "bomb *"
 							}
+						},
+						"07": {
+							"names": ["home", "house"],
+							"intro": "2525E"
 						}
 					}
 				},
@@ -3230,7 +3372,10 @@
 				"15": {"name": "attempted", "cat": "incident qualifier"},
 				"16": {"name": "accident", "cat": "incident qualifier"},
 				"17": {"name": "incident", "cat": "incident qualifier"},
-				"18": {"name": "theft", "cat": "crime"}
+				"18": {"name": "theft", "cat": "crime"},
+
+				"21": {"name": "eviction", "intro": "2525E"},
+				"22": {"name": "raid", "intro": "2525E"}
 			}
 		},
 		"45": {
@@ -3682,6 +3827,41 @@
 		},
 		"60": {
 			"name": "cyberspace",
+			"frame set": "05",
+			"notes": "MIL-STD-2525D page 123; not yet implemented; can use any domain frames",
+			"implemented": false,
+			"entities": {
+				"11": {
+					"name": "botnet",
+					"type": "nn",
+					"entity types": {
+						"01": "command and control *",
+						"02": "herder *",
+						"03": "callback domain *",
+						"04": "zombie *"
+					}
+
+				},
+				"12": {
+					"name": "infection",
+					"type": "nn",
+					"entity types": {
+						"01": {
+							"name": "advanced persistent threat (APT)",
+							"entity subtypes": {
+								"01": "APT with C2",
+								"02": "APT with self-propagation",
+								"03": "APT with C2 and self-propagation",
+								"04": "@TODO"
+							}
+						}
+					}
+				}
+			},
+			"modifier set 1": {}
+		},
+		"61": {
+			"name": "APP-6D Cyberspace",
 			"frame set": "05",
 			"notes": "MIL-STD-2525D page 123; not yet implemented; can use any domain frames",
 			"implemented": false,
