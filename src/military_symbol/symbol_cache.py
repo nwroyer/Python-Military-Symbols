@@ -86,7 +86,9 @@ class SymbolCache:
         else:
             return self.get_symbol_from_name(creator_var, create_if_missing, verbose=verbose)
 
-    def get_symbol_and_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False) -> tuple:
+    def get_symbol_and_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, 
+        use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False) -> tuple:
+
         cache_entry_tuple: tuple = self._get_symbol_cache_from_sidc(creator_val,
                                                                     create_if_missing) if is_sidc else self._get_symbol_cache_from_name(
             creator_val, create_if_missing, verbose=verbose)
@@ -101,7 +103,8 @@ class SymbolCache:
         svg_string: str = svg_map.get(key_string, '')
         if svg_string == '':
             if create_if_missing:
-                svg_string = symbol.get_svg(style=style, pixel_padding=padding, use_variants=use_variants, use_background=use_background, background_color=background_color)
+                svg_string = symbol.get_svg(style=style, pixel_padding=padding, use_variants=use_variants, use_background=use_background, 
+                    background_color=background_color, force_all_elements=force_all_elements)
                 svg_map[key_string] = svg_string
                 return symbol, svg_string
             else:
@@ -109,11 +112,20 @@ class SymbolCache:
         else:
             return symbol, svg_string
 
-    def get_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False):
-        return self.get_symbol_and_svg_string(creator_val, is_sidc, padding, style, use_variants, use_background, background_color, create_if_missing, verbose=verbose)[1]
+    def get_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, use_background:bool=True, 
+        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False):
 
-    def get_svg_string_from_name(self, name, padding:int, style:str, use_variants:bool=False, use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False):
-        return self.get_svg_string(name, False, padding, style, use_variants, use_background, background_color, create_if_missing, verbose=verbose)
+        return self.get_symbol_and_svg_string(creator_val, is_sidc, padding, style, use_variants, use_background, 
+            background_color, create_if_missing, verbose=verbose, force_all_elements=force_all_elements)[1]
 
-    def get_svg_string_from_sidc(self, sidc, padding:int, style:str, use_variants:bool=False, use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False):
-        return self.get_svg_string(sidc, True, padding, style, use_variants, use_background, background_color, create_if_missing, verbose=verbose)
+    def get_svg_string_from_name(self, name, padding:int, style:str, use_variants:bool=False, use_background:bool=True, 
+        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False):
+
+        return self.get_svg_string(name, False, padding, style, use_variants, use_background, background_color, create_if_missing, 
+            verbose=verbose, force_all_elements=force_all_elements)
+
+    def get_svg_string_from_sidc(self, sidc, padding:int, style:str, use_variants:bool=False, use_background:bool=True, 
+        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False):
+
+        return self.get_svg_string(sidc, True, padding, style, use_variants, use_background, background_color, create_if_missing, 
+            verbose=verbose, force_all_elements=force_all_elements)

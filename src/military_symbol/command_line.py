@@ -28,7 +28,8 @@ def add_symbol_template_set(template_filename):
     sym_schema.add_template_set(symbol_temp)
 
 
-def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False, use_variants=False, style='light', use_background=False, background_color='#ffffff') -> str:
+def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False, use_variants=False, style='light', 
+                                    use_background=False, background_color='#ffffff', force_all_elements=False) -> str:
     """
     Constructs an SVG for the specified symbol, given as a SIDC, and returns it as a string for further processing.
     :param sidc: The SIDC to construct the symbol from
@@ -41,11 +42,11 @@ def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False, use
     :return: A string containing the SVG for the constructed symbol.
     """
     return get_svg_string(sidc, True, pixel_padding=bounding_padding, verbose=verbose, use_variants=use_variants,
-                          style=style, use_background=use_background, background_color=background_color)
+                          style=style, use_background=use_background, background_color=background_color, force_all_elements=force_all_elements)
 
 
 def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose=False, use_variants=False, style='light',
-                                    use_background:bool=True, background_color:str='#ffffff') -> str:
+                                    use_background:bool=True, background_color:str='#ffffff', force_all_elements=False) -> str:
     """
     Constructs an SVG and returns it in string form, using the best guess as to the SIDC based on the provided name.
     :param name_string: The string containing the name, i.e. "Friendly infantry platoon headquarters"
@@ -58,7 +59,7 @@ def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose
     :return: A string containing the SVG for the constructed symbol.
     """
     return get_svg_string(name_string, False, pixel_padding=bounding_padding, verbose=verbose, use_variants=use_variants, style=style,
-                          use_background=use_background, background_color=background_color)
+                          use_background=use_background, background_color=background_color, force_all_elements=force_all_elements)
 
 
 def get_symbol_class(originator, is_sidc=True, verbose=False) -> MilitarySymbol:
@@ -94,7 +95,8 @@ def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
     return get_symbol_class(sidc, is_sidc=True, verbose=verbose)
 
 
-def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=False, style='light', use_background=False, background_color='#ffffff', verbose=False) -> str:
+def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=False, style='light', use_background=False, 
+                   background_color='#ffffff', verbose=False, force_all_elements=False) -> str:
     """
     Constructs an SVG for the specified symbol, given as a SIDC or name, and returns it as a string for further processing.
     :param creator_var: The SIDC or name to construct the symbol from
@@ -109,11 +111,12 @@ def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=
     """
     return symbol_cache.get_svg_string(creator_var, is_sidc, padding=pixel_padding, style=style,
                                        use_variants=use_variants, use_background=use_background,
-                                       background_color=background_color, create_if_missing=True, verbose=verbose)
+                                       background_color=background_color, create_if_missing=True, verbose=verbose,
+                                       force_all_elements=force_all_elements)
 
 
 def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, style:str='light', use_variants:bool=False, use_background=False, background_color='#ffffff',
-                              verbose=False) -> tuple:
+                              verbose=False, force_all_elements=False) -> tuple:
     """
     Returns a (MilitarySymbol, str) tuple containing the symbol and SVG string for the given creator value and style elements
     :param creator_var: The SIDC or name to construct the symbol from
@@ -126,10 +129,12 @@ def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, styl
     :param verbose: Whether to print ancillary information while processing, defaulting to false.
     :return: A (MilitarySymbol, str) tuple containing the symbol and SVG for the constructed symbol.
     """
-    return symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc, padding, style, use_variants, use_background=use_background, background_color=background_color, verbose=verbose)
+    return symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc, padding, style, use_variants, use_background=use_background, 
+        background_color=background_color, verbose=verbose, force_all_elements=force_all_elements)
 
 
-def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_padding=4, auto_name=True, use_variants=False, style='light', use_background=False, background_color='#ffffff', verbose=False) -> None:
+def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_padding=4, auto_name=True, use_variants=False, style='light', 
+                            use_background=False, background_color='#ffffff', verbose=False, force_all_elements=False) -> None:
     """
     Internal helper function to write a symbol to the file specified.
     :param is_sidc: Whether the creator_var parameter is a SIDC or a name
@@ -148,7 +153,8 @@ def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_pa
                                                                 use_variants=use_variants,
                                                                 use_background=use_background,
                                                                 background_color=background_color,
-                                                                verbose=verbose)
+                                                                verbose=verbose,
+                                                                force_all_elements=force_all_elements)
 
     if auto_name:
         out_dir = os.path.dirname(out_filepath) if os.path.isfile(out_filepath) else out_filepath
@@ -158,7 +164,8 @@ def write_symbol_svg_string(creator_var, is_sidc:bool, out_filepath, bounding_pa
         out_file.write(svg_string)
 
 
-def write_symbol_svg_string_from_sidc(sidc, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, style='light', use_background=False, background_color='#ffffff') -> None:
+def write_symbol_svg_string_from_sidc(sidc, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, style='light', 
+                                      use_background=False, background_color='#ffffff', force_all_elements=False) -> None:
     """
     Internal helper function to write a symbol constructed from the given SIDC to the given filepath.
     :param sidc: The SIDC to construct the symbol from
@@ -171,10 +178,12 @@ def write_symbol_svg_string_from_sidc(sidc, out_filepath, bounding_padding=4, au
     :param use_background: Whether to use a colored background around the symbol
     :param background_color: Background color to use, if it's used
     """
-    write_symbol_svg_string(sidc, True, out_filepath, bounding_padding, auto_name, use_variants=use_variants, style=style, use_background=use_background, background_color=background_color, verbose=verbose)
+    write_symbol_svg_string(sidc, True, out_filepath, bounding_padding, auto_name, use_variants=use_variants, style=style, 
+        use_background=use_background, background_color=background_color, verbose=verbose, force_all_elements=force_all_elements)
 
 
-def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, style='light', use_background=False, background_color='#ffffff') -> None:
+def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_padding=4, auto_name=True, verbose=False, use_variants=False, 
+                                      style='light', use_background=False, background_color='#ffffff', force_all_elements=False) -> None:
     """
     Internal helper function to write a symbol constructed as a best guess from the given name to the given filepath.
     :param name_string: The name to construct the symbol from
@@ -187,7 +196,8 @@ def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_paddin
     :param use_background: Whether to use a colored background around the symbol
     :param background_color: Background color to use, if it's used
     """
-    write_symbol_svg_string(name_string, False, out_filepath, bounding_padding, auto_name, use_variants=use_variants, style=style, use_background=use_background, background_color=background_color, verbose=verbose)
+    write_symbol_svg_string(name_string, False, out_filepath, bounding_padding, auto_name, use_variants=use_variants, style=style, 
+        use_background=use_background, background_color=background_color, verbose=verbose, force_all_elements=force_all_elements)
 
 
 def command_line_main():
@@ -195,7 +205,7 @@ def command_line_main():
     style_choices_args = STYLE_CHOICES.copy()
     style_choices_args.extend([i[0] for i in style_choices_args])
 
-    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.1.1")
+    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.1.2")
     parser.add_argument('-o', '--output-dir', dest='output_dir', default='',
                         help="Chooses an output directory (or file if not auto-naming exports)")
     parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False,
@@ -216,6 +226,8 @@ def command_line_main():
                         help='Background color to use, if it\'s used')
     parser.add_argument('-d', '--sidc-only', dest='sidc_only', action='store_const', const=True, default=False,
                         help='Whether to only return the SIDC from the name')
+    parser.add_argument('-l', '--force-all-elements', dest='force_all_elements', action='store_const', const=True, default=False,
+                        help='Whether to force using all elements even if they would overlap in a way that conflicts with the standard')
     parser.add_argument('inputs', nargs='+', default=[])
 
     arguments = parser.parse_args()
@@ -257,37 +269,46 @@ def command_line_main():
 
             elif output_dir:
                 # Write to an output directory
-                write_symbol_svg_string_from_name(input_arg, out_filepath=output_dir, bounding_padding=arguments.padding,
+                write_symbol_svg_string_from_name(input_arg, 
+                                                  out_filepath=output_dir, 
+                                                  bounding_padding=arguments.padding,
                                                   auto_name=use_auto_name,
                                                   verbose=arguments.verbose,
                                                   use_variants=arguments.use_variants,
                                                   style=style_name,
                                                   use_background=arguments.use_background,
-                                                  background_color=arguments.background_color)
+                                                  background_color=arguments.background_color,
+                                                  force_all_elements=arguments.force_all_elements)
             else:
                 # Write SVG strings to stdout
-                print(get_symbol_svg_string_from_name(input_arg, bounding_padding=arguments.padding,
+                print(get_symbol_svg_string_from_name(input_arg, 
+                                                      bounding_padding=arguments.padding,
                                                       verbose=arguments.verbose,
                                                       use_variants=arguments.use_variants,
                                                       style=style_name,
                                                       use_background=arguments.use_background,
-                                                      background_color=arguments.background_color))
+                                                      background_color=arguments.background_color,
+                                                      force_all_elements=arguments.force_all_elements))
         else:  # Construct from SIDC
             if output_dir != '':
-                write_symbol_svg_string_from_sidc(input_arg, out_filepath=output_dir, bounding_padding=arguments.padding,
+                write_symbol_svg_string_from_sidc(input_arg, 
+                                                  out_filepath=output_dir, 
+                                                  bounding_padding=arguments.padding,
                                                   auto_name=use_auto_name,
                                                   verbose=arguments.verbose,
                                                   use_variants=arguments.use_variants,
                                                   style=style_name,
                                                   use_background=arguments.use_background,
-                                                  background_color=arguments.background_color)
+                                                  background_color=arguments.background_color,
+                                                  force_all_elements=arguments.force_all_elements)
             else:
                 print(get_symbol_svg_string_from_sidc(input_arg, bounding_padding=arguments.padding,
                                                       verbose=arguments.verbose,
                                                       use_variants=arguments.use_variants,
                                                       style=style_name,
                                                       use_background=arguments.use_background,
-                                                      background_color=arguments.background_color))
+                                                      background_color=arguments.background_color,
+                                                      force_all_elements=arguments.force_all_elements))
 
 if __name__ == '__main__':
     command_line_main()

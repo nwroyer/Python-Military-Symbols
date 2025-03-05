@@ -194,7 +194,7 @@ class MilitarySymbol:
         return False
 
 
-    def get_svg(self, style='light', pixel_padding=-1, use_variants=False, use_background=False, background_color='#ffffff'):
+    def get_svg(self, style='light', pixel_padding=-1, use_variants=False, use_background=False, background_color='#ffffff', force_all_elements:bool=False):
         """
         Gets an SVG as a string representing this object
         :param style: Can be "light" (default), "medium", "dark", or 'unfilled'
@@ -330,7 +330,7 @@ class MilitarySymbol:
                     symbol_svg = layer_svg(halo_svg, symbol_svg)
 
         # Add modifiers
-        if self.entity is not None and self.entity.icon_type != 'fo' or self.entity is None:
+        if self.entity is not None and (self.entity.icon_type != 'fo' or force_all_elements) or self.entity is None:
             overlay_svgs = []
 
             for mod_i in [1, 2]:

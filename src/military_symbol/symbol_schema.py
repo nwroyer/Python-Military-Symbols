@@ -88,6 +88,9 @@ class SymbolSchema:
             self.applies_to_symbol_sets = []
             self.blacklist = []
 
+        def get_names(self):
+            return self.names
+
         def is_overlay(self):
             return len(self.overlay_elements) > 0
 
@@ -140,6 +143,9 @@ class SymbolSchema:
             self.category = ''
             self.prerun = False
 
+        def get_names(self):
+            return self.names
+
         def applies_to(self, symbol_set_code):
             """
             Indicates whether an amplifier can apply to entities in the given symbol set.
@@ -170,9 +176,9 @@ class SymbolSchema:
             def __init__(self):
                 self.id_code = "000000"
                 self.symbol_set = '00'
-                self.name = ''
+                self.names = []
                 self.notes = ''
-                self.short_subtype_name = ''
+                #self.short_subtype_name = ''
                 # Type can be 'mn' for 'main', 'ff for 'full frame', 'fo' 'full octagon', or 'm1/m2'
                 # for 'main + 1', or 'main + 2', or 'nn' if none (only for hierarchical purposes)
                 self.icon_type = 'mn'
@@ -185,7 +191,7 @@ class SymbolSchema:
                 self.local_only = False
                 self.use_with_unfilled_frames = False
                 self.variants = 0
-                self.alt_names = []
+                
                 self.match_weight = 0
 
             def get_names(self) -> list:
@@ -193,9 +199,7 @@ class SymbolSchema:
                 Returns a list of names for the given entity, including alternate ones
                 :return: List of names
                 """
-                ret = [self.name]
-                ret.extend(self.alt_names)
-                return ret
+                return self.names
 
             def get_flat_entities(self):
                 """
@@ -218,7 +222,7 @@ class SymbolSchema:
                 ret = '%s-%s%s%s (%s) [%s%s]' % (self.symbol_set, self.id_code,
                                                  'c' if self.uses_civilian_coloring else '',
                                                  'L' if self.local_only else '',
-                                                 self.name,
+                                                 self.names[0] if len(self.names) > 0 else '',
                                                  self.icon_type,
                                                  "/UF" if self.use_with_unfilled_frames else '')
                 if self.is_overlay():
@@ -265,16 +269,19 @@ class SymbolSchema:
             """
             def __init__(self):
                 self.modifier_set = 0  # Whether this is part of modifier set 1 or 2, per APP-6D standard
-                self.name = ''
+                self.names = []
                 self.symbol_set = '00'
                 self.id_code = '00'
                 self.mod_category = ''
                 self.has_civilian_coloring_override = False  # Whether this modifier applies an automatic override that renders an entity with a civilian coloration
                 self.civilian_coloring_override_value = False  # The actual value to override with
-                self.alt_names = []
+                
                 self.type = "mn"  # Types: mn = main icon, ff = full frame, nn = no icon, fo = full octagon
                 self.overlay_elements = []
                 self.match_weight = 0
+
+            def get_names(self):
+                return self.names
 
             def is_overlay(self):
                 return len(self.overlay_elements) > 0
@@ -507,10 +514,10 @@ class SymbolSchema:
                 else:  # Complex entity with entity types or more information
 
                     if 'name' in entity_json.keys():
-                        created_entity.name = entity_json['name']
-                    elif 'names' in entity_json.keys():
-                        created_entity.name = entity_json['names'][0]
-                        created_entity.alt_names = entity_json['names'][1:]
+                        created_entity.names.append(entity_json['name'])
+                    if 'names' in entity_json.keys():
+                        created_entity.names.extend(entity_json['names'])
+
                     created_entity.icon_type = entity_json[
                         'type'] if 'type' in entity_json.keys() else icon_type_to_inherit
                     type_inherit = entity_json[
@@ -586,19 +593,16 @@ class SymbolSchema:
                                                                else 0,
                                                                inherit_variants=new_inherit_variants)
 
-                                # Create short/long name
-                                if '*' in new_child_entity.name:
-                                    # Child uses a name substitution
-                                    new_child_entity.short_subtype_name = new_child_entity.name.replace('*', '').strip()
-                                    new_child_entity.name = new_child_entity.name.replace('*', created_entity.name)
-                                else:
-                                    # Child doesn't use a name substitution
-                                    new_child_entity.short_subtype_name = new_child_entity.name
+                                # Handle name aliases
+                                for name_index in range(len(new_child_entity.names)):
+                                    if '*' in new_child_entity.names[name_index]:
+                                        for parent_name in created_entity.names:
+                                            # Child uses a name substitution
+                                            new_child_entity.names.append(new_child_entity.names[name_index].replace('*', parent_name))
 
-                                alt_names = []
-                                for name in new_child_entity.alt_names:
-                                    alt_names.append(name.replace('*', created_entity.name))
-                                new_child_entity.alt_names = alt_names
+                                # Remove duplicates
+                                new_child_entity.names = [n for n in new_child_entity.names if '*' not in n]
+                                new_child_entity.names = list(set(new_child_entity.names))
 
                                 # Remove duplicate categories
                                 new_child_entity.modifier_categories = list(

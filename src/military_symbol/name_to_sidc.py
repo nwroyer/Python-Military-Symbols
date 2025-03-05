@@ -13,6 +13,9 @@ def get_names_list(item) -> list:
     """
     candidate_members = dir(item)
 
+    if 'get_names' in candidate_members:
+        return item.get_names()
+
     if 'name' in candidate_members:
         ret = [item.name]
         if 'alt_names' in candidate_members:
@@ -29,7 +32,7 @@ def split_into_words(in_str:str) -> list:
     :param in_str: The string to split into words
     :return: A list of words in the given string
     """
-    in_str = re.sub('[/ \-\t\n]+', ' ', in_str).strip().lower()
+    in_str = re.sub(r'[/ \-\t\n]+', ' ', in_str).strip().lower()
     in_str = ''.join([c for c in in_str if c.isalpha() or c == ' '])
     return [word.strip() for word in in_str.strip().split(' ') if len(word) > 0]
 
@@ -61,6 +64,7 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
         # Iterate over the possible names
 
         for candidate_name in get_names_list(candidate):
+            print(candidate_name)
 
             candidate_name_words = split_into_words(candidate_name)
 
@@ -85,10 +89,12 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
             else:
                 pass
 
+
     # Handle exact matches
     for match in matches:
         if exact_match(name_string, match[0]):
             matches = [m for m in matches if exact_match(m[0], name_string)]
+            print(f'Exact matches: {matches}')
             break
 
 
@@ -174,7 +180,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     if template is not None:
         proc_name_string = new_name_string
         if verbose:
-            print(f"\tMatches template \"{template.name}\" -> \"{proc_name_string}\"")
+            print(f"\tMatches template \"{template.name}\" leaving \"{proc_name_string}\"")
 
         ret_symbol = template.symbol
     else:
@@ -193,7 +199,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
             proc_name_string = new_name_string
 
         if verbose:
-            print(f'\tAssuming standard identity "{standard_identity.name}" -> "{proc_name_string}"')
+            print(f'\tAssuming standard identity "{standard_identity.name}" leaving "{proc_name_string}"')
 
         ret_symbol.standard_identity = standard_identity
 
@@ -206,7 +212,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
         if amplifier is not None:
             proc_name_string = new_name_string
             if verbose:
-                print(f'\tAssuming amplifier "{amplifier.names[0]}" -> "{proc_name_string}"')
+                print(f'\tAssuming amplifier "{amplifier.names[0]}" leaving "{proc_name_string}"')
             prerun_amplifier = True
 
         ret_symbol.amplifier = amplifier
@@ -234,7 +240,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
             ret_symbol.entity = entity_type
 
             if verbose:
-                print(f'\tAssuming entity "{entity_type.name}" ({entity_type.id_code}) -> \"{proc_name_string}\"')
+                print(f'\tAssuming entity "{entity_type.names[0] if len(entity_type.names) > 0 else ''}" ({entity_type.id_code}) leaving \"{proc_name_string}\"')
 
     if (template is None or not template.amplifier_fixed) and not prerun_amplifier:
         ret_symbol.amplifier = None
@@ -252,7 +258,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
     if verbose:
         if ret_symbol.amplifier is not None:
-            print(f'\tConfirming amplifier "{ret_symbol.get_name()[0]}" -> "{proc_name_string}"')
+            print(f'\tConfirming amplifier "{ret_symbol.get_name()[0]}" leaving "{proc_name_string}"')
         else:
             print('\tNo modifier assigned')
 
@@ -267,7 +273,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
         if hqtfd is not None:
             proc_name_string = new_name_string
             if verbose:
-                print(f'\tAssuming HQTFD code "{hqtfd.names[0]}" -> "{proc_name_string}"')
+                print(f'\tAssuming HQTFD code "{hqtfd.names[0]}" leaving "{proc_name_string}"')
 
         ret_symbol.hqtfd = hqtfd
 
@@ -280,7 +286,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
         if status_code is not None:
             proc_name_string = new_name_string
             if verbose:
-                print(f'\tAssuming status code "{status_code.names[0]}" -> "{proc_name_string}"')
+                print(f'\tAssuming status code "{status_code.names[0]}" leaving "{proc_name_string}"')
 
         ret_symbol.status = status_code
 
@@ -294,7 +300,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
                 proc_name_string = new_name_string
 
                 if verbose:
-                    print(f'\tAssuming modifier "{mod.name}" -> "{proc_name_string}"')
+                    print(f'\tAssuming modifier "{mod.name}" leaving "{proc_name_string}"')
                 ret_symbol.modifiers[mod_set] = mod
 
     return ret_symbol
