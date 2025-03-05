@@ -71,6 +71,9 @@ class SymbolSchema:
             self.makes_frame_dashed = False
             self.variants = []
 
+        def get_names(self):
+            return self.names
+
         def __str__(self):
             return '#%i (%s) - applies to %s' % (self.id_code, self.names[0],
                                                  'all' if self.applies_to_all else str(self.applies_to_list))
@@ -601,7 +604,7 @@ class SymbolSchema:
                                             new_child_entity.names.append(new_child_entity.names[name_index].replace('*', parent_name))
 
                                 # Remove duplicates
-                                new_child_entity.names = [n for n in new_child_entity.names if '*' not in n]
+                                new_child_entity.names = list([n for n in new_child_entity.names if '*' not in n and isinstance(n, str)])
                                 new_child_entity.names = list(set(new_child_entity.names))
 
                                 # Remove duplicate categories
@@ -657,11 +660,10 @@ class SymbolSchema:
                         new_modifier.name = mod_json
                     else:
                         if 'name' in mod_json.keys():
-                            new_modifier.name = mod_json['name']
+                            new_modifier.names = [mod_json['name']]
                         elif 'names' in mod_json.keys():
                             # print(f"Mod with alt names: {mod_json['names']}")
-                            new_modifier.name = mod_json['names'][0]
-                            new_modifier.alt_names = mod_json['names'][1:]
+                            new_modifier.names = mod_json['names']
                         new_modifier.mod_category = mod_json['cat'] if 'cat' in mod_json.keys() else ''
                         new_modifier.type = mod_json['type'] if 'type' in mod_json.keys() else 'mn'
                         new_modifier.match_weight = int(mod_json['match weight']) if 'match weight' in mod_json.keys() else 0

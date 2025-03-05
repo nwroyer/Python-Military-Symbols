@@ -42,7 +42,7 @@ def exact_match(a, b):
 
     return False
 
-def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, verbose=False, match_algorithm='basic'):
+def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, verbose=False, match_algorithm='basic', print_candidates=False):
     """
     Returns a list of closest candidates for the given name string from the provided list of candidates
     :param symbol_schema: The symbol schema to consider the candidates to be part of
@@ -63,7 +63,8 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
         # Iterate over the possible names
 
         for candidate_name in get_names_list(candidate):
-            #print(candidate_name)
+            if print_candidates:
+                print(candidate_name)
 
             candidate_name_words = split_into_words(candidate_name)
 
@@ -294,12 +295,12 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
         if template is None or not template.modifiers_fixed[mod_set - 1]:
             modifier_candidates = list(symbol_set.modifiers[mod_set].values())
             # print([get_names_list(mod) for mod in modifier_candidates])
-            mod, new_name_string = fuzzy_match(symbol_schema, proc_name_string, modifier_candidates, match_longest=True)
+            mod, new_name_string = fuzzy_match(symbol_schema, proc_name_string, modifier_candidates, match_longest=True, print_candidates=False)
             if mod is not None:
                 proc_name_string = new_name_string
 
                 if verbose:
-                    print(f'\tAssuming modifier "{mod.name}" leaving "{proc_name_string}"')
+                    print(f'\tAssuming modifier "{mod.names[0]}" leaving "{proc_name_string}"')
                 ret_symbol.modifiers[mod_set] = mod
 
     return ret_symbol

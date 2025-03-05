@@ -133,7 +133,7 @@ def main():
 
     working_dir = os.path.dirname(os.path.realpath(__file__))
     print(working_dir)
-    convert_inkscape_to_svg(os.getcwd(), '', clean_only=False)
+    convert_inkscape_to_svg(os.getcwd(), '', clean_only=True)
 
     pack_svgs_into_json(working_dir, 'symbols', output_file=os.path.join(working_dir,
                         '../src/military_symbol/symbols.json'),

@@ -61,7 +61,7 @@ class MilitarySymbol:
         ret += self.standard_identity.name + ' ' if self.standard_identity is not None else ''
         ret += self.modifiers[1].name + ' ' if self.modifiers[1] is not None else ''
         ret += self.modifiers[2].name + ' ' if self.modifiers[2] is not None else ''
-        ret += self.entity.name + ' ' if self.entity is not None else ''
+        ret += self.entity.names[0] + ' ' if self.entity is not None else ''
         ret += self.amplifier.names[0] + ' ' if self.amplifier is not None else ''
         ret += '(%s) ' % self.hqtfd.names[0] if self.hqtfd is not None else ''
 
