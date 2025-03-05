@@ -37,8 +37,6 @@ class SymbolTemplate:
         if len(template_sidc) != 20:
             print(f'Error with template SIDC "{sidc}"')
 
-        print(template_sidc)
-
         self.template_sidc = template_sidc
         self.symbol = MilitarySymbol(self.symbol_schema)
         self.symbol.create_from_sidc(template_sidc.replace('*', '0'))
