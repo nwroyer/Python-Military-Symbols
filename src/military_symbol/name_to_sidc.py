@@ -92,7 +92,19 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
     def sort_func(a, b):
         score_a = fuzz.partial_ratio(a[0], name_string)
         score_b = fuzz.partial_ratio(b[0], name_string)
+
+        ent_a = a[1]
+        ent_b = b[1]
+
+        sym_set_a = symbol_schema.symbol_sets[a[1].symbol_set]
+        sym_set_b = symbol_schema.symbol_sets[b[1].symbol_set]
+
         if score_a == score_b:
+            if sym_set_a.match_weight > sym_set_b.match_weight:
+                return -1
+            elif sym_set_a.match_weight < sym_set_b.match_weight:
+                return 1
+
             if len(a[0]) == len(b[0]):
                 return 0
             return 1 if len(a[0]) < len(b[0]) else -1
@@ -100,28 +112,10 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
         return 1 if score_a > score_b else -1
 
     matches = sorted(matches, key=cmp_to_key(sort_func))
+    if verbose and 'symbol_set' in dir(matches[0][1]):
+        print('\tMatches ' + f"{[f'{entity.names[0]} ({entity.symbol_set}-{entity.id_code})' for (name, entity, score) in matches]}")
     return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 
-    # # Sort matches by match weight
-    # for match in matches:
-    #     match_weight = 0
-    #     if 'symbol_set' in dir(match[1]):
-    #         sym_set_weight = symbol_schema.symbol_sets[match[1].symbol_set].match_weight
-    #         match_weight = sym_set_weight if abs(sym_set_weight) > abs(match[1].match_weight) else match[1].match_weight
-    #     elif 'match_weight' in dir(match[1]):
-    #         match_weight = match[1].match_weight
-    #     match.append(match_weight)
-
-    # matches = sorted(matches, key=lambda item: item[2])
-    # max_match_weight = max(item[2] for item in matches)
-    # matches = [match for match in matches if match[2] == max_match_weight]
-    # if len(matches) == 1:
-    #     return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
-
-    # # Sort matches by string length name
-    # matches = sorted(matches, key=lambda item: len(item[0]))
-    # match_index = -1 if match_longest else 0
-    # return matches[match_index][1], name_string.replace(matches[match_index][0], '').strip().replace('  ', ' ')
 
 
 def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False) -> MilitarySymbol:
@@ -210,7 +204,8 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
             ret_symbol.entity = entity_type
 
             if verbose:
-                print(f'\tAssuming entity "{entity_type.names[0] if len(entity_type.names) > 0 else ''}" ({entity_type.id_code}) leaving \"{proc_name_string}\"')
+                print(f'\tAssuming entity "{entity_type.names[0] if len(entity_type.names) > 0 else ''}" ({entity_type.id_code}) ' + 
+                    f' from symbol set {entity_type.symbol_set} leaving \"{proc_name_string}\"')
 
     if (template is None or not template.amplifier_fixed) and not prerun_amplifier:
         ret_symbol.amplifier = None

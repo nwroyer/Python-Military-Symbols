@@ -713,7 +713,9 @@
 							}
 						},
 						"14": ["Sea Air Land (SEAL)", "SEAL"],
-						"15": "sniper",
+						"15": {
+							"names": ["sniper"]
+						},
 						"16": "surveillance",
 						"17": ["Special Forces", "Green Berets", "Green Beret"],
 						"18": {

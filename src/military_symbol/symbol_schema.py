@@ -504,10 +504,9 @@ class SymbolSchema:
 
                 if isinstance(entity_json, str) or isinstance(entity_json, list):  # simple string entity
                     if isinstance(entity_json, str):
-                        created_entity.name = entity_json
+                        created_entity.names = [entity_json]
                     else:
-                        created_entity.name = entity_json[0]
-                        created_entity.alt_names = entity_json[1:]
+                        created_entity.names = entity_json
 
                     created_entity.modifier_categories = modcats_to_inherit
                     created_entity.icon_type = icon_type_to_inherit
