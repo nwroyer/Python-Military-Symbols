@@ -35,7 +35,7 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     python_requires='>=3.6, <4',
-    install_requires=['lxml', 'svgpathtools', ''],
+    install_requires=['lxml', 'svgpathtools', 'thefuzz'],
     package_data={  # Optional
         'military_symbol': ['symbols.json'],
     },

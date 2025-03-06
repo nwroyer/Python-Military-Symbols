@@ -157,6 +157,12 @@ class SymbolSchema:
             """
             return True if symbol_set_code in self.applies_to_list else False
 
+        def applies_to_any_in_symbol_sets(self, symbol_sets:list) -> bool:
+            for item in symbol_sets:
+                if self.applies_to(item.id_code):
+                    return True
+            return False
+
         def applies_to_entity(self, entity):
             if entity is None:
                 return False
@@ -196,6 +202,16 @@ class SymbolSchema:
                 self.variants = 0
                 
                 self.match_weight = 0
+
+            def is_in_any_of_symbol_sets(self, symbol_sets:list) -> bool:
+                """
+                Returns whether this is in any of the provided symbol sets
+                :param symbol_sets: A list of SymbolSet objects
+                """
+                for sym_set in symbol_sets:
+                    if self.symbol_set == sym_set.id_code:
+                        return True
+                return False
 
             def get_names(self) -> list:
                 """
@@ -303,7 +319,7 @@ class SymbolSchema:
 
         def __init__(self):
             self.id_code = '00'
-            self.name = ''
+            self.names = []
             self.notes = ''
             self.implemented = False
             self.uses_civilian_coloring = False
@@ -313,8 +329,14 @@ class SymbolSchema:
             self.frame_set = ''
             self.match_weight = 0
 
+        def get_names(self) -> list:
+            return self.names
+
+        def __repr__(self):
+            return self.__str__()
+
         def __str__(self):
-            ret = '#%s (%s) [%s] %s' % (self.id_code, self.name, self.frame_set,
+            ret = '#%s (%s) [%s] %s' % (self.id_code, self.names[0], self.frame_set,
                                         '(not yet implemented)' if not self.implemented else '')
             return ret
 
@@ -460,7 +482,7 @@ class SymbolSchema:
             new_symbol_set = SymbolSchema.SymbolSet()
 
             new_symbol_set.id_code = id_code
-            new_symbol_set.name = symbol_set_json['name']
+            new_symbol_set.names = symbol_set_json['names']
             new_symbol_set.frame_set = symbol_set_json['frame set']
 
             if 'implemented' in symbol_set_json.keys():

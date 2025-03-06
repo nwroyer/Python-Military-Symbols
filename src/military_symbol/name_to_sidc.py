@@ -5,6 +5,7 @@ from .individual_symbol import MilitarySymbol
 from .symbol_schema import SymbolSchema
 from thefuzz import fuzz
 from functools import cmp_to_key
+import sys
 
 def get_names_list(item) -> list:
     """
@@ -44,7 +45,7 @@ def exact_match(a, b):
 
     return False
 
-def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, verbose=False, match_algorithm='basic', print_candidates=False):
+def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, verbose=False, print_candidates=False):
     """
     Returns a list of closest candidates for the given name string from the provided list of candidates
     :param symbol_schema: The symbol schema to consider the candidates to be part of
@@ -71,8 +72,6 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
     name_string_words = split_into_words(name_string)
     # Return matching candidates
     matches = [(name, candidate) for (name, candidate) in candidate_name_list if name in name_string]
-    if print_candidates:
-        print(f'\tMatches: {[f[0] for f in matches]}')
 
     # Handle exact matches
     for match in matches:
@@ -99,10 +98,13 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
         sym_set_a = symbol_schema.symbol_sets[a[1].symbol_set]
         sym_set_b = symbol_schema.symbol_sets[b[1].symbol_set]
 
+        match_weight_a = sym_set_a.match_weight + ent_a.match_weight
+        match_weight_b = sym_set_b.match_weight + ent_b.match_weight
+
         if score_a == score_b:
-            if sym_set_a.match_weight > sym_set_b.match_weight:
+            if match_weight_a > match_weight_b:
                 return -1
-            elif sym_set_a.match_weight < sym_set_b.match_weight:
+            elif match_weight_a < match_weight_b:
                 return 1
 
             if len(a[0]) == len(b[0]):
@@ -113,20 +115,44 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
 
     matches = sorted(matches, key=cmp_to_key(sort_func))
     if verbose and 'symbol_set' in dir(matches[0][1]):
-        print('\tMatches ' + f"{[f'{entity.names[0]} ({entity.symbol_set}-{entity.id_code})' for (name, entity, score) in matches]}")
+        print('\tMatches ' + f"{[f'{entity.names[0]} ({entity.symbol_set}-{entity.id_code}) (score {score})' for (name, entity, score) in matches]}")
     return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 
+def symbol_set_from_name(symbol_schema, item, verbose:bool=False) -> SymbolSchema.SymbolSet:
+    if item is None or symbol_schema is None:
+        return None
+    if isinstance(item, SymbolSchema.SymbolSet):
+        return item
+
+    if not isinstance(item, str):
+        print(f"Can't parse symbol set from item {item}", file=sys.stderr)
+        return None
+
+    # Guess from names
+    sym_set_candidates = symbol_schema.symbol_sets.values()
+    sym_set, sym_set_name = fuzzy_match(symbol_schema, item, sym_set_candidates, verbose=verbose)
+    return sym_set
 
 
-def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False) -> MilitarySymbol:
+def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool = False, limit_to_symbol_sets=[]) -> MilitarySymbol:
     """
     Function to return a NATOSymbol object from the provided name, using a best guess
     :param name_string: The string representing the name to construct a best-guess symbol from, e.g. "Friendly infantry platoon"
     :param symbol_schema: The symbol schema to use
     :param verbose: Whether to print ancillary information during execution; defaults to false.
+    :param limit_to_symbol_sets: A list of symbol set objects or names to restrict guessing to
     :return:
     """
     proc_name_string = name_string
+
+    # Handle restricting to specific symbol sets
+    if limit_to_symbol_sets is not None and isinstance(limit_to_symbol_sets, list) and len(limit_to_symbol_sets) > 0:
+        limit_to_symbol_sets = [symbol_set_from_name(symbol_schema, item) for item in limit_to_symbol_sets if symbol_set_from_name(symbol_schema, item) is not None]
+    else:
+        limit_to_symbol_sets = None
+
+    if verbose:
+        print(f'\tLimiting to symbol sets {limit_to_symbol_sets}')
 
     # Sanitize string
     # Remove extra white spaces
@@ -172,6 +198,11 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
     if template is None or not template.amplifier_fixed:
         candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.prerun]
+
+        # Limit to given symbol sets
+        if limit_to_symbol_sets is not None:
+            candidate_amplifiers = [amp for amp in candidate_amplifiers if amp.applies_to_any_in_symbol_sets(limit_to_symbol_sets)]
+
         amplifier, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidate_amplifiers, match_longest=True)
         if amplifier is not None:
             proc_name_string = new_name_string
@@ -185,16 +216,25 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     # Entity type
     if template is None or not template.entity_fixed:
         candidates = symbol_schema.get_flat_entities()
+
+        # Limit to symbol sets
+        if limit_to_symbol_sets is not None:
+            candidates = [c for c in candidates if c.is_in_any_of_symbol_sets(limit_to_symbol_sets)]
+
         if ret_symbol.amplifier is not None:
             candidates = [c for c in candidates if ret_symbol.amplifier.applies_to_entity(c)]
 
         entity_type, new_name_string = fuzzy_match(symbol_schema, proc_name_string, candidates,
-                                               match_longest=True, verbose=verbose, match_algorithm='advanced')
+                                               match_longest=True, verbose=verbose)
 
         symbol_set = None
         if entity_type is None:
             print(f"\tWARNING: Unable to determine entity type from string \"{name_string}\"; defaulting to land unit")
-            symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.name == 'land unit'][0]
+            if limit_to_symbol_sets is None or len(limit_to_symbol_sets) < 1:
+                symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.names[0] == 'land unit'][0]
+            else:
+                symbol_set = limit_to_symbol_sets[0]
+
             ret_symbol.entity = symbol_set.get_entity("000000")
             ret_symbol.symbol_set = symbol_set
         else:
@@ -205,8 +245,9 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
             if verbose:
                 print(f'\tAssuming entity "{entity_type.names[0] if len(entity_type.names) > 0 else ''}" ({entity_type.id_code}) ' + 
-                    f' from symbol set {entity_type.symbol_set} leaving \"{proc_name_string}\"')
+                    f'from symbol set {entity_type.symbol_set} leaving \"{proc_name_string}\"')
 
+    # Amplifier post-run
     if (template is None or not template.amplifier_fixed) and not prerun_amplifier:
         ret_symbol.amplifier = None
         candidate_amplifiers = [amp for amp in symbol_schema.amplifiers.values() if amp.applies_to_entity(ret_symbol.entity)]

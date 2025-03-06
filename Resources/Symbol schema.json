@@ -284,7 +284,7 @@
 		],
 
 		"01": {
-			"name": "air unit",
+			"names": ["air unit", "air", "aviation", "aerial", "air force"],
 			"frame set": "01",
 			"entities": {
 				"11": {
@@ -424,7 +424,7 @@
 			}
 		},
 		"02": {
-			"name": "air missile",
+			"names": ["air missile"],
 			"frame set": "01",
 			"entities": {
 				"11": {
@@ -472,7 +472,7 @@
 			}
 		},
 		"05": {
-			"name": "space unit",
+			"names": ["space unit", "space", "space force"],
 			"frame set": "05",
 			"entities": {
 				"11": {
@@ -552,7 +552,7 @@
 			}
 		},
 		"06": {
-			"name": "space missile",
+			"names": ["space missile"],
 			"frame set": "05",
 			"entities": {
 				"11": {
@@ -590,7 +590,7 @@
 			}
 		},
 		"10": {
-			"name": "land unit",
+			"names": ["land unit", "land", "ground", "ORBAT", "army", "marine corps", "marines"],
 			"frame set": "10",
 			"match weight": 1,
 			"entities" : {
@@ -670,15 +670,17 @@
 						},
 						"06": {
 							"names": ["army aviation", "aviation rotary wing", "rotary wing", "rotary-wing", "rotary wing unit", "rotary-wing unit"],
+							"match weight": 1,
 							"entity subtypes": {
-								"01": {"names": ["* reconnaissance", "* recon"], "type": "ff", "overlay": ["120600", "121300"]}
+								"01": {"names": ["* reconnaissance", "* recon", "reconnaissance *", "recon *"], "type": "ff", "overlay": ["120600", "121300"], "match weight": 1}
 							}
 						},
 						"07": ["aviation composite", "composite aviation"],
 						"08": {
 							"names": ["aviation fixed wing", "fixed-wing", "fixed wing"],
+							"match weight": 1,
 							"entity subtypes": {
-								"01": {"names": ["* reconnaissance", "* recon"], "type": "ff", "overlay": ["120800", "121300"]}
+								"01": {"names": ["* reconnaissance", "* recon", "reconnaissance *", "recon *"], "type": "ff", "overlay": ["120800", "121300"], "match weight": 1}
 							}
 						},
 						"09": "combat",
@@ -866,7 +868,7 @@
 						"01": {"name": "analysis", "type": "fo"},
 						"02": "counterintelligence",
 						"03": {"name": "direction finding", "type": "fo"},
-						"04": "electronic ranging",
+						"04": {"names": ["electronic ranging", "radar"]},
 						"05": {
 							"names": ["electronic warfare (EW)", "electronic warfare", "EW"],
 							"entity subtypes": {
@@ -1203,7 +1205,7 @@
 			}
 		},
 		"27": {
-			"name": "dismounted individual",
+			"names": ["dismounted individual", "dismount", "dismounts", "individual"],
 			"frame set": "27",
 			"match weight": -1,
 			"entities": {
@@ -1220,7 +1222,7 @@
 								"01": {"names":  ["infantry", "rifleman"], "type":  "ff"},
 								"02": {"names":  ["medical", "corpsman", "doc", "medic"], "type":  "ff"},
 								"03": {"name":  "reconnaissance", "type":  "ff"},
-								"04": {"names":  ["signal", "RO", "RTO", "radioman", "radio operator"], "type": "ff"}
+								"04": {"names":  ["signal", "RTO", "radioman", "radio operator"], "type": "ff"}
 							}
 						},
 						"02": {
@@ -1404,7 +1406,7 @@
 			}
 		},
 		"11": {
-			"name": "land civilian unit/organization",
+			"names": ["land civilian unit/organization", "civilian", "civilian unit", "civilian organization"],
 			"alt names": ["land civilian", "land civilian unit", "land civilian organization"],
 			"frame set": "10",
 			"entities": {
@@ -1459,7 +1461,7 @@
 			}
 		},
 		"15": {
-			"name": "land equipment",
+			"names": ["land equipment", "equipment"],
 			"amplifiers": ["3", "4", "5"],
 			"frame set": "30",
 			"entities": {
@@ -1986,7 +1988,7 @@
 			}
 		},
 		"20": {
-			"name": "land installations",
+			"names": ["land installations", "installations", "installation", "building", "buildings", "facility", "facilities"],
 			"frame set": "20",
 			"amplifiers": [],
 			"notes": "MIL-STD-2525D page 75",
@@ -2330,7 +2332,7 @@
 			}
 		},
 		"25": {
-			"name": "control measures",
+			"names": ["control measures", "tactical control measures", "TCM", "TCMs", "controls"],
 			"notes": "MIL-STD-2525D page 80 / not yet implemented; label-align: [inline, [on]]",
 			"implemented": false,
 			"frame set": "none",
@@ -2507,7 +2509,7 @@
 			}
 		},
 		"30": {
-			"name": "sea surface",
+			"names": ["sea surface", "water", "navy", "surface", "sea", "ocean"],
 			"frame set": "30",
 			"amplifiers": ["6"],
 			"notes": "MIL-STD-2525D page 97",
@@ -2732,7 +2734,7 @@
 			}
 		},
 		"35": {
-			"name": "sea subsurface",
+			"names": ["sea subsurface", "subsurface", "underwater", "submarine"],
 			"frame set": "35",
 			"amplifiers": ["6"],
 			"notes": "MIL-STD-2525D page 101",
@@ -2836,7 +2838,7 @@
 			}
 		},
 		"36": {
-			"name": "mine warfare",
+			"names": ["mine warfare", "sea mines", "mines", "seamines"],
 			"frame set": "35",
 			"notes": "MIL-STD-2525D page 104",
 			"entities": {
@@ -3010,7 +3012,7 @@
 			}
 		},
 		"40": {
-			"name": "activities",
+			"names": ["activities", "activity", "event", "events"],
 			"frame set": "40",
 			"notes": "MIL-STD-2525D page 106",
 			"entities": {
@@ -3381,7 +3383,7 @@
 			}
 		},
 		"45": {
-			"name": "atmospheric",
+			"names": ["atmospheric"],
 			"notes": "MIL-STD-2525D page 111; not yet implemented",
 			"frame set": "none",
 			"implemented": false,
@@ -3390,7 +3392,7 @@
 			"modifier set 2": {}
 		},
 		"46": {
-			"name": "oceanographic",
+			"names": ["oceanographic"],
 			"frame set": "none",
 			"notes": "MIL-STD-2525D page 117; not yet implemented",
 			"implemented": false,
@@ -3399,7 +3401,7 @@
 			"modifier set 2": {}
 		},
 		"47": {
-			"name": "meteorological space",
+			"names": ["meteorological space"],
 			"frame set": "none",
 			"notes": "MIL-STD-2525D page 123; not yet implemented",
 			"implemented": false,
@@ -3408,7 +3410,7 @@
 			"modifier set 2": {}
 		},
 		"50": {
-			"name": "signals intelligence space",
+			"names": ["signals intelligence space", "sigint space"],
 			"frame set": "05",
 			"notes": "MIL-STD-2525D page 123; not yet implemented",
 			"entities": {
@@ -3476,7 +3478,7 @@
 			}
 		},
 		"51": {
-			"name": "signals intelligence air",
+			"names": ["signals intelligence air", "sigint air"],
 			"frame set": "01",
 			"notes": "MIL-STD-2525D page 123",
 
@@ -3567,7 +3569,7 @@
 			}
 		},
 		"52": {
-			"name": "signals intelligence land",
+			"names": ["signals intelligence land", "sigint land", "sigint ground", "signals intelligence ground"],
 			"frame set": "10",
 			"notes": "MIL-STD-2525D page 123; not yet implemented",
 			"implemented": false,
@@ -3659,7 +3661,7 @@
 			}
 		},
 		"53": {
-			"name": "signals intelligence sea surface",
+			"names": ["signals intelligence sea surface", "sigint surface", "signals intelligence surface"],
 			"frame set": "30",
 			"notes": "MIL-STD-2525D page 123",
 			"entities": {
@@ -3746,7 +3748,7 @@
 			}
 		},
 		"54": {
-			"name": "signals intelligence sea subsurface",
+			"names": ["signals intelligence sea subsurface", "sigint subsurface"],
 			"frame set": "35",
 			"notes": "MIL-STD-2525D page 123",
 			"entities": {
@@ -3828,42 +3830,7 @@
 			}
 		},
 		"60": {
-			"name": "cyberspace",
-			"frame set": "05",
-			"notes": "MIL-STD-2525D page 123; not yet implemented; can use any domain frames",
-			"implemented": false,
-			"entities": {
-				"11": {
-					"name": "botnet",
-					"type": "nn",
-					"entity types": {
-						"01": "command and control *",
-						"02": "herder *",
-						"03": "callback domain *",
-						"04": "zombie *"
-					}
-
-				},
-				"12": {
-					"name": "infection",
-					"type": "nn",
-					"entity types": {
-						"01": {
-							"name": "advanced persistent threat (APT)",
-							"entity subtypes": {
-								"01": "APT with C2",
-								"02": "APT with self-propagation",
-								"03": "APT with C2 and self-propagation",
-								"04": "@TODO"
-							}
-						}
-					}
-				}
-			},
-			"modifier set 1": {}
-		},
-		"61": {
-			"name": "APP-6D Cyberspace",
+			"names": ["cyberspace", "cyber"],
 			"frame set": "05",
 			"notes": "MIL-STD-2525D page 123; not yet implemented; can use any domain frames",
 			"implemented": false,
