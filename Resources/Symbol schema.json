@@ -542,7 +542,7 @@
 				"04": {"names": ["signals intelligence", "SIGINT"], "cat": "sensor"},
 
 				"06": {"names": ["electromagnetic warfare ASAT", "EW ASAT"], "cat": "antisatellite"},
-				"07": {"names": ["high power microwave ASAT"], "cat": "antisatellite"},
+				"07": {"names": ["high power microwave ASAT", "HPM ASAT"], "cat": "antisatellite"},
 				"08": {"names": ["laser ASAT"], "cat": "antisatellite"},
 
 				"09": {"names": ["maintenance"]},

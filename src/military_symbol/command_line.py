@@ -46,7 +46,8 @@ def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False, use
 
 
 def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose=False, use_variants=False, style='light',
-                                    use_background:bool=True, background_color:str='#ffffff', force_all_elements=False) -> str:
+                                    use_background:bool=True, background_color:str='#ffffff', force_all_elements=False,
+                                    limit_to_symbol_sets=None) -> str:
     """
     Constructs an SVG and returns it in string form, using the best guess as to the SIDC based on the provided name.
     :param name_string: The string containing the name, i.e. "Friendly infantry platoon headquarters"
@@ -211,7 +212,7 @@ def command_line_main():
     style_choices_args = STYLE_CHOICES.copy()
     style_choices_args.extend([i[0] for i in style_choices_args])
 
-    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.2.0")
+    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.2.1")
     parser.add_argument('-o', '--output-dir', dest='output_dir', default='',
                         help="Chooses an output directory (or file if not auto-naming exports)")
     parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False,
