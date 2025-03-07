@@ -244,7 +244,8 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
             ret_symbol.entity = entity_type
 
             if verbose:
-                print(f'\tAssuming entity "{entity_type.names[0] if len(entity_type.names) > 0 else ''}" ({entity_type.id_code}) ' + 
+                name = entity_type.names[0] if len(entity_type.names) > 0 else ''
+                print(f'\tAssuming entity "{name}" ({entity_type.id_code}) ' + 
                     f'from symbol set {entity_type.symbol_set} leaving \"{proc_name_string}\"')
 
     # Amplifier post-run
