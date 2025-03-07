@@ -294,11 +294,11 @@
 					"modcats-inherit": true,
 					"entity types": {
 						"01": {
-							"name": "fixed wing",
+							"names": ["fixed wing", "plane", "jet"],
 							"entity subtypes": {
 								"01": "MEDEVAC *",
 								"02": "attack / strike *",
-								"03": "* bomber",
+								"03": ["* bomber", "bomber"],
 								"04": ["* fighter", "fighter"],
 								"05": "* fighter/bomber",
 								"07": {"name": "* cargo", "modcats-additional": ["cargo/transport capacity"]},
@@ -321,7 +321,7 @@
 								"24": "* personnel recovery",
 								"25": "* search and rescue",
 								"26": "special operations forces *",
-								"27": "ultra light *",
+								"27": ["ultra light *", "ultralight *"],
 								"28": "photographic reconnaissance *",
 								"29": "VIP *",
 								"30": ["suppression of enemy air defense *", "SEAD"],

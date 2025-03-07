@@ -193,8 +193,7 @@ class MilitarySymbol:
                 return True
         return False
 
-
-    def get_svg(self, style='light', pixel_padding=-1, use_variants=False, use_background=False, background_color='#ffffff', force_all_elements:bool=False):
+    def get_svg_and_origin(self, style='light', pixel_padding=-1, use_variants=False, use_background=False, background_color='#ffffff', force_all_elements:bool=False):
         """
         Gets an SVG as a string representing this object
         :param style: Can be "light" (default), "medium", "dark", or 'unfilled'
@@ -202,7 +201,7 @@ class MilitarySymbol:
         :param use_variants: Whether to use the variant type of symbol element if they exist (primarily for statuses and sea mine symbols).
         :param use_background: Whether to draw a background "halo" around the symbol
         :param background_color: Hex color in the form #xxxxxx to draw with the background; defaults to white
-        :return: A string containing the SVG of the object
+        :return: A string containing the SVG of the object, a 2-tuple of (x, y) center
         """
 
         def interject_background_filename(filename: str):
@@ -216,6 +215,9 @@ class MilitarySymbol:
 
         # Start with base frame
         sym_root = self.symbol_schema.symbol_root_folder
+
+        if self.symbol_set is None:
+            return '', (0, 0)
 
         frame_svg_filename = self.symbol_schema.get_svg_filename_by_code('F-%s' % self.symbol_set.frame_set, self.standard_identity)
         symbol_svg = self.symbol_schema.get_svg_by_filename(frame_svg_filename)
@@ -245,6 +247,9 @@ class MilitarySymbol:
             frame_bg_svg = self.symbol_schema.get_svg_by_filename(interject_background_filename(frame_svg_filename))
             replace_color(frame_bg_svg, self.symbol_schema.symbol_fill_placeholder, background_color)
             symbol_svg = layer_svg(frame_bg_svg, symbol_svg)
+
+        old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
+        old_center = [old_viewbox[0] + old_viewbox[2]*0.5, old_viewbox[1] + old_viewbox[3] * 0.5]
 
         # def get_entity_icon_name(base_folder, entity, standard_identity):
         #     if entity.icon_type == 'ff':
@@ -388,7 +393,6 @@ class MilitarySymbol:
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
 
         old_viewbox = [float(s) for s in symbol_svg.attrib['viewBox'].split()]
-        # old_center = [old_viewbox[0] + old_viewbox[2]*0.5, old_viewbox[1] + old_viewbox[3] * 0.5]
 
         if pixel_padding >= 0:
             # Expand the bounding box to fit if that option is selected
@@ -425,7 +429,7 @@ class MilitarySymbol:
                               float(symbol_svg.attrib['height']) + pixel_padding*2]
             new_viewbox = old_viewbox
 
-        new_center = [new_viewbox[0] + new_viewbox[2] * 0.5, new_viewbox[1] + new_viewbox[3] * 0.5]
+        new_center = (new_viewbox[0] + new_viewbox[2] * 0.5, new_viewbox[1] + new_viewbox[3] * 0.5)
 
         if pixel_padding >= 0:
             symbol_svg.attrib["width"] = str(int(new_image_size[0]))
@@ -433,5 +437,21 @@ class MilitarySymbol:
             symbol_svg.attrib["viewBox"] = ' '.join(str(i) for i in new_viewbox)
 
         svg_string = ET.tostring(symbol_svg, encoding='utf8', method='xml').decode('utf-8')
+        
+        return svg_string, tuple((old_center[i] - new_image_size[i]) / new_image_size[i] for i in range(2))
 
-        return svg_string
+    def get_svg(self, style='light', pixel_padding=-1, use_variants=False, use_background=False, background_color='#ffffff', force_all_elements:bool=False):
+        """
+        Gets an SVG as a string representing this object
+        :param style: Can be "light" (default), "medium", "dark", or 'unfilled'
+        :param pixel_padding: The padding around the symbol to use when cropping to fit. Values less than 0 will lead to no cropping. Defaults to -1.
+        :param use_variants: Whether to use the variant type of symbol element if they exist (primarily for statuses and sea mine symbols).
+        :param use_background: Whether to draw a background "halo" around the symbol
+        :param background_color: Hex color in the form #xxxxxx to draw with the background; defaults to white
+        :return: A string containing the SVG of the object
+        """
+
+        return self.get_svg_and_origin(style=style, pixel_padding=pixel_padding,
+            use_variants=use_variants, use_background=use_background, background_color=background_color, force_all_elements=force_all_elements)[0]
+
+        return ''

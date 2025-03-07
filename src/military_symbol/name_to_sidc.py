@@ -83,6 +83,7 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
     if len(matches) < 1:
         return None, None
     elif len(matches) == 1:
+        print(matches[0])
         return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 
     # Apply fuzzy match score
@@ -116,6 +117,7 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
     matches = sorted(matches, key=cmp_to_key(sort_func))
     if verbose and 'symbol_set' in dir(matches[0][1]):
         print('\tMatches ' + f"{[f'{entity.names[0]} ({entity.symbol_set}-{entity.id_code}) (score {score})' for (name, entity, score) in matches]}")
+
     return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 
 def symbol_set_from_name(symbol_schema, item, verbose:bool=False) -> SymbolSchema.SymbolSet:
@@ -145,6 +147,21 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     """
     proc_name_string = name_string
 
+    # Handle symbol categories
+    symbol_set_tags = re.findall(r"\[([\w\d\s]+)\]", proc_name_string)
+    if len(symbol_set_tags) > 0:
+        if limit_to_symbol_sets is not None:
+            limit_to_symbol_sets.extend([d.lower() for d in symbol_set_tags])
+        else:
+            limit_to_symbol_sets = list([d.lower() for d in symbol_set_tags])
+    
+    # Remove category tags
+    proc_name_string = re.sub(r"\[([\w\d\s]+)\]", "", proc_name_string)
+    proc_name_string = re.sub(r"\s+", " ", proc_name_string)
+
+    if verbose and len(symbol_set_tags) > 0:
+        print('\tIdentified tags ' + ", ".join([f'\"{d}\"' for d in symbol_set_tags]) + f" -> {proc_name_string}")
+
     # Handle restricting to specific symbol sets
     if limit_to_symbol_sets is not None and isinstance(limit_to_symbol_sets, list) and len(limit_to_symbol_sets) > 0:
         limit_to_symbol_sets = [symbol_set_from_name(symbol_schema, item) for item in limit_to_symbol_sets if symbol_set_from_name(symbol_schema, item) is not None]
@@ -164,7 +181,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
 
     # Step 0: Check for templates
     template: symbol_template.SymbolTemplate = None
-    template, new_name_string = fuzzy_match(symbol_schema, name_string, symbol_schema.get_template_list())
+    template, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_template_list())
     ret_symbol: MilitarySymbol = None
 
     if template is not None:
@@ -179,7 +196,7 @@ def name_to_symbol(name_string: str, symbol_schema: SymbolSchema, verbose: bool 
     # Step 1: Detect standard identity
 
     if template is None or not template.standard_identity_fixed:
-        standard_identity, new_name_string = fuzzy_match(symbol_schema, name_string.lower(),
+        standard_identity, new_name_string = fuzzy_match(symbol_schema, proc_name_string.lower(),
                                                      symbol_schema.standard_identities.values(), match_longest=True)
 
         if standard_identity is None:

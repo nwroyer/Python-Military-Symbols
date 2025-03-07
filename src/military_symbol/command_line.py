@@ -283,9 +283,7 @@ def command_line_main():
         if arguments.verbose:
             print(f'\tParsing "{input_arg}": {arguments.verbose}', file=sys.stderr)
 
-
         if arguments.by_name:  # Construct from names
-
             if arguments.sidc_only:
                 # Print SIDCs only
                 symbol_class = get_symbol_class_from_name(input_arg, verbose=arguments.verbose)
