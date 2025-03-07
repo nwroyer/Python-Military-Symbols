@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='military_symbol',
-    version='1.1.2',
+    version='1.2.0',
     description='Lightweight library for producing SVGs of NATO standard military symbols from NATO sidcs or natural-language descriptions',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -45,6 +45,6 @@ setup(
         ]
     },
     project_urls={
-        'PyPI': 'https://pypi.org/project/military-symbol/1.0.0/'
+        'PyPI': 'https://pypi.org/project/military-symbol/1.2.0/'
     }
 )
