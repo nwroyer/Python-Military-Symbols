@@ -83,7 +83,6 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
     if len(matches) < 1:
         return None, None
     elif len(matches) == 1:
-        print(matches[0])
         return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 
     # Apply fuzzy match score
