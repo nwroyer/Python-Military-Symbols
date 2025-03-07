@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "military-symbol"
+version = "1.2.0"
+authors = [
+  { name="Nicholas Royer", email="nick.w.royer@protonmail.com" },
+]
+description = "A lightweight library for producing SVGs of NATO standard military symbols from NATO sidcs or natural-language descriptions"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+	"Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Multimedia :: Graphics"
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+	"lxml", 
+	"svgpathtools", 
+	"thefuzz"
+]
+
+[project.scripts]
+military-symbol = "military_symbol:command_line"
+
+[project.urls]
+Homepage = "https://github.com/nwroyer/Python-Military-Symbols"
+Issues = "https://github.com/nwroyer/Python-Military-Symbols/issues"
