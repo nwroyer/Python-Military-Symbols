@@ -30,7 +30,7 @@ dependencies = [
 ]
 
 [project.scripts]
-military-symbol = "military_symbol:command_line"
+military-symbol = "military_symbol.command_line:command_line_main"
 
 [project.urls]
 Homepage = "https://github.com/nwroyer/Python-Military-Symbols"
