@@ -212,7 +212,7 @@ def command_line_main():
     style_choices_args = STYLE_CHOICES.copy()
     style_choices_args.extend([i[0] for i in style_choices_args])
 
-    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.2.1")
+    parser = argparse.ArgumentParser(prog='milsymbol', description="Military symbol generator per NATO APP-6D standards, v1.2.2")
     parser.add_argument('-o', '--output-dir', dest='output_dir', default='',
                         help="Chooses an output directory (or file if not auto-naming exports)")
     parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False,
