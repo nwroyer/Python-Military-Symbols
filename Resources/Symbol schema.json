@@ -1062,7 +1062,7 @@
 				"44": {"name": "NATO medical role 3", "cat": "medical capability"},
 				"45": {"name": "NATO medical role 4", "cat": "medical capability"},
 				"46": {"name": "naval", "cat": "capability"},
-				"47": {"name": "node center", "cat": "capability"},
+				"47": {"names": ["unmanned aerial vehicle", "unmanned aerial systems", "UAS", "UAV", "unmanned"], "cat": "capability"},
 				"48": {"name": "nuclear", "cat": "capability"},
 				"49": {"name": "operations", "cat": "capability"},
 				"50": {"name": "radar", "cat": "capability"},
@@ -1751,7 +1751,7 @@
 					"entity types": {
 						"01": {"name": "utility vehicle", "type": "fo"},
 						"02": {"name": "medical", "type": "fo"},
-						"03": {"name": "medical evacuation", "type": "fo", "overlay": ["140100", "0XMedical"]},
+						"03": {"names": ["medical evacuation", "medevac"], "type": "fo", "overlay": ["140100", "0XMedical"]},
 						"04": {"name": "mobile emergency physician", "type": "fo"},
 						"05": {"name": "bus", "type": "fo", "overlay": ["140100", "0XCenterB"]},
 						"06": {

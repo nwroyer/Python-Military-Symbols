@@ -70,6 +70,7 @@ class SymbolSchema:
             self.applies_to_list = []
             self.makes_frame_dashed = False
             self.variants = []
+            self.match_weight = 0
 
         def get_names(self):
             return self.names

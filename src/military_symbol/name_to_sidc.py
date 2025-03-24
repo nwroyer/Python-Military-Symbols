@@ -95,11 +95,11 @@ def fuzzy_match(symbol_schema, name_string, candidate_list, match_longest=True, 
         ent_a = a[1]
         ent_b = b[1]
 
-        sym_set_a = symbol_schema.symbol_sets[a[1].symbol_set]
-        sym_set_b = symbol_schema.symbol_sets[b[1].symbol_set]
+        sym_set_a = symbol_schema.symbol_sets[a[1].symbol_set] if hasattr(a[1], 'symbol_set') else None
+        sym_set_b = symbol_schema.symbol_sets[b[1].symbol_set] if hasattr(b[1], 'symbol_set') else None
 
-        match_weight_a = sym_set_a.match_weight + ent_a.match_weight
-        match_weight_b = sym_set_b.match_weight + ent_b.match_weight
+        match_weight_a = sym_set_a.match_weight + ent_a.match_weight if sym_set_a else ent_a.match_weight
+        match_weight_b = sym_set_b.match_weight + ent_b.match_weight if sym_set_b else ent_b.match_weight
 
         if score_a == score_b:
             if match_weight_a > match_weight_b:
