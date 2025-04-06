@@ -27,7 +27,7 @@ dependencies = [
 	"lxml", 
 	"svgpathtools", 
 	"thefuzz",
-  "freetype"
+  "freetype-py"
 ]
 
 [project.scripts]

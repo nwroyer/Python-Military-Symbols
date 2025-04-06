@@ -56,8 +56,7 @@ class Symbol():
 		return ret
 
 	def to_sidc(self) -> str:
-		ret = ''
-		ret += f'13{self.context.id_code if self.context else "0"}{self.affiliation.id_code if self.affiliation else '0'}' + \
+		return f'13{self.context.id_code if self.context else "0"}{self.affiliation.id_code if self.affiliation else '0'}' + \
 			f'{self.status.id_code if self.status else '0'}' + \
 			f'{self.hqtfd.id_code if self.hqtfd else '0'}' + \
 			f'{self.amplifier.id_code if self.amplifier else '00'}' + \
@@ -68,6 +67,12 @@ class Symbol():
 			f'{self.modifier_1.id_code[0] if self.modifier_1 and len(self.modifier_1.id_code) > 2 else '0'}' + \
 			f'{self.modifier_2.id_code[0] if self.modifier_2 and len(self.modifier_2.id_code) > 2 else '0'}' + \
 			'0000000'
+
+	def get_sidc(self) -> str:
+		return self.to_sidc()
+
+	def get_name(self) -> str:
+		return self.__repr__()
 
 	@classmethod
 	def from_sidc(cls, sidc:str, schema:Schema):
@@ -143,8 +148,7 @@ class Symbol():
 		ret_bbox = BBox()
 
 		# Add frame base
-		frame_to_use = self.frame_shape_override if self.frame_shape_override is not None else \
-			self.symbol_set.dimension.frame_shape
+		frame_to_use = self.frame_shape_override if self.frame_shape_override is not None else self.symbol_set.dimension.frame_shape
 
 		frame_commands = []
 
@@ -199,14 +203,19 @@ class Symbol():
 				amplifier_bbox.merge(amp_bbox)
 
 		if self.is_task_force():
-			bounds = amplifier_bbox.expand(10) if has_amps else BBox(x_min=100 - (tf_width / 2), x_max = 100 + (tf_width / 2), y_min = frame_bbox.y_min - tf_height, y_max = frame_bbox.y_min)
+			pass
+			tf_width = 100 if not has_amps else (amplifier_bbox.width() + 20)
+
+			bounds = BBox(
+				x_min = 100 - (tf_width / 2), 
+				x_max = 100 + (tf_width / 2), 
+				y_min = amplifier_bbox.y_min - (5 if has_amps else 20), 
+				y_max = frame_bbox.y_min)
+
 			bounds.y_min = bounds.y_min - 5
 			bounds.y_max = frame_bbox.y_min
 
-			tf_width = 100 if not has_amps else bounds.width()
-			tf_height = 100 if not has_amps else bounds.height()
-
-			cmd = drawing_items.SymbolElement.Path(d=f"M {bounds.x_min},{bounds.y_max} l 0,-{tf_height} l {tf_width},0 l 0,{tf_height}", bbox=bounds)
+			cmd = drawing_items.SymbolElement.Path(d=f"M {bounds.x_min},{bounds.y_max} l 0,-{bounds.height()} l {tf_width},0 l 0,{bounds.height()}", bbox=bounds)
 			frame_commands += [cmd]
 			ret_bbox.merge(bounds)
 			amplifier_bbox.merge(bounds)
@@ -215,14 +224,14 @@ class Symbol():
 		if self.is_dummy():
 			half_width = frame_bbox.width() * 0.5
 			height = round(half_width * math.tan(math.pi / 4), 6)
-			origin = (frame_bbox.x_min, amplifier_bbox.y_min - 3)
-			cmd = drawing_items.SymbolElement.Path(d=f"M {origin[0]},{origin[1]} l {half_width},-{height} l {half_width},{height}", 
+			origin = (frame_bbox.x_min, amplifier_bbox.y_min - 3 if has_amps else frame_bbox.y_min - 3)
+			cmd = drawing_items.SymbolElement.Path(d=f"M {origin[0]},{origin[1]} l {half_width},-{height} L {frame_bbox.x_max},{origin[1]}", 
 				bbox=BBox(x_min=origin[0], y_min=origin[1] - height, x_max = origin[1] + (2*half_width), y_max = origin[1]),
 				stroke_dashed=True)
 
 			frame_commands += [cmd]
-			ret_bbox.merge(cmd.get_bbox(symbol=symbol, output_style=output_style))
-			amplifier_bbox.merge(cmd.get_bbox(symbol=symbol, output_style=output_style))
+			ret_bbox.merge(cmd.get_bbox(symbol=self, output_style=output_style))
+			amplifier_bbox.merge(cmd.get_bbox(symbol=self, output_style=output_style))
 			elements += [cmd.svg(symbol=self, output_style=output_style)]
 
 		# Add status

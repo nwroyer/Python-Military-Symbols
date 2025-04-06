@@ -165,7 +165,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
 #     # Step 0: Check for templates
 #     template: symbol_template.SymbolTemplate = None
 #     template, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_template_list())
-#     ret_symbol: MilitarySymbol = None
+#     ret_symbol: Symbol = None
 
 #     if template is not None:
 #         proc_name_string = new_name_string
@@ -174,7 +174,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
 
 #         ret_symbol = template.symbol
 #     else:
-#         ret_symbol = MilitarySymbol(symbol_schema)
+#         ret_symbol = Symbol(symbol_schema)
 
     template = None
     ret_symbol = Symbol()
@@ -186,7 +186,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
 
         if affiliation is None:
             print("\tUnable to determine standard identity; assuming unknown")
-            affiliation = [si for si in symbol_schema.standard_identities.values() if si.name == 'unknown'][0]
+            affiliation = [si for si in schema.affiliations.values() if si.names[0] == 'unknown'][0]
         else:
             proc_name_string = new_name_string
 
@@ -238,7 +238,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
         if entity_type is None:
             print(f"\tWARNING: Unable to determine entity type from string \"{proc_name_string}\"; defaulting to land unit")
             if limit_to_symbol_sets is None or len(limit_to_symbol_sets) < 1:
-                symbol_set = [set for set in symbol_schema.symbol_sets.values() if set.names[0] == 'land unit'][0]
+                symbol_set = [set for set in schema.symbol_sets.values() if set.names[0] == 'land unit'][0]
             else:
                 symbol_set = limit_to_symbol_sets[0]
 
@@ -258,7 +258,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
     # Amplifier post-run
     if (template is None or not template.amplifier_fixed) and not prerun_amplifier:
         ret_symbol.amplifier = None
-        candidate_amplifiers = schema.amplifiers.values() # [amp for amp in schema.amplifiers.values() if amp.applies_to_entity(ret_symbol.entity)]
+        candidate_amplifiers = [amp for amp in schema.amplifiers.values() if amp.applies_to_entity(ret_symbol.entity)]
         amplifier, new_name_string = fuzzy_match(schema, proc_name_string, candidate_amplifiers, match_longest=True)
         if amplifier is not None:
             proc_name_string = new_name_string

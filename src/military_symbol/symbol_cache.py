@@ -48,8 +48,7 @@ class SymbolCache:
             # Entry doesn't exist
             if create_if_missing:
                 # Tuple doesn't exist
-                symbol: MilitarySymbol = MilitarySymbol(symbol_schema=self.symbol_schema)
-                symbol.create_from_sidc(sidc)
+                symbol:Symbol = Symbol.from_sidc(sidc=sidc, schema=self.symbol_schema)
                 symbol_cache_entry = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = symbol_cache_entry
 
@@ -101,7 +100,7 @@ class SymbolCache:
         if cache_entry_tuple is None:
             return None, ''
 
-        symbol: MilitarySymbol = cache_entry_tuple[0]
+        symbol: Symbol = cache_entry_tuple[0]
         svg_map: dict = cache_entry_tuple[1]
 
         key_string: str = self.options_string_encode(padding, style, use_variants, use_background, background_color)
