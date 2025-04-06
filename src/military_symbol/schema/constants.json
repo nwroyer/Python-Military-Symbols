@@ -1,0 +1,657 @@
+{
+	"contexts": {
+		"0": {"names": ["reality"]},
+		"1": {"names": ["exercise"]},
+		"2": {"names": ["simulation"]},
+		"3": {"names": ["restricted target - reality"], "base context": "0"},
+		"4": {"names": ["no-strike entity - reality"], "base context": "0"},
+		"5": {"names": ["restricted target - exercise"], "base context": "1"},
+		"6": {"names": ["no-strike entity - exercise"], "base context": "1"},
+		"7": {"names": ["restricted target - simulation"], "base context": "2"},
+		"8": {"names": ["no-strike entity - simulation"], "base context": "2"}
+	},
+
+	"color modes": ["light", "medium", "dark", "unfilled"],
+	"full frame ordering": ["hostile", "friend", "neutral", "unknown"],
+
+	"affiliations": {
+		"0": {
+			"names": ["pending"],
+			"color base": "1",
+			"frame base": "1",
+			"dashed": true
+		},
+		"1": {
+			"names": ["unknown"],
+			"has civilian variant": true,
+			"colors": {
+				"light":    [255, 255, 128],
+				"medium":   [255, 255,   0],
+				"dark":     [225, 220,   0],
+				"unfilled": [255, 255,   0]
+			}
+		},
+		"2": {
+			"names": ["assumed friend"],
+			"color base": "3",
+			"frame base": "3",
+			"dashed": true
+		},
+		"3": {
+			"names": ["friend", "friendly"],
+			"has civilian variant": true,
+			"colors": {
+				"light":    [128, 224, 255],
+				"medium":   [  0, 168, 220],
+				"dark":     [  0, 107, 140],
+				"unfilled": [  0, 255, 255]
+			}
+		},
+		"4": {
+			"names": ["neutral"],
+			"has civilian variant": true,
+			"colors": {
+				"light":    [170, 255, 170],
+				"medium":   [  0, 226,   0],
+				"dark":     [  0, 160,   0],
+				"unfilled": [  0, 255,   0]
+			}
+		},
+		"5": {
+			"names": ["suspect", "joker"],
+			"frame base": "6",
+			"dashed": true,
+			"colors": {
+				"light":    [255, 229, 153],
+				"medium":   [255, 217, 107],
+				"dark":     [255, 188,   1],
+				"unfilled": [255, 188,   1]
+			}
+		},
+		"6": {
+			"names": ["hostile", "faker", "enemy"],
+			"colors": {
+				"light":    [255, 128, 128],
+				"medium":   [255,  48,  49],
+				"dark":     [200,   0,   0],
+				"unfilled": [255,   0,   0]
+			}
+		}
+	},
+
+	"frame shapes": {
+		"0": {
+			"names": ["unknown"],
+			"frames": {}
+		},
+		"1": {
+			"names": ["space"],
+			"frame base": "2",
+			"decorators": {
+				"unknown": [{"d": "M 100 22.5 C 85 22.5 70 31.669211 66 50 L 134 50 C 130 31.669204 115 22.5 100 22.5 z", "fill": true, "stroke": false}],
+				"friend":  [{"d": "M 100,30 C 90,30 80,35 68.65625,50 l 62.6875,0 C 120,35 110,30 100,30", "fill": true, "stroke": false}],
+				"neutral": [{"d": "M45,50 l0,-20 110,0 0,20 z", "fill": true, "stroke": false}],
+				"hostile": [{"d": "M67,50 L100,20 133,50 z", "fill": true, "stroke": false}]
+			}
+		},
+		"2": {
+			"names": ["air"],
+			"frames": {
+				"unknown": [{"d": "M 65,150 c -55,0 -50,-90 0,-90 0,-50 70,-50 70,0 50,0 55,90 0,90", "fill": "icon_fill", "bbox": [45, 20, 155, 150]}],
+				"friend":  [{"d": "M 155,150 C 155,50 115,30 100,30 85,30 45,50 45,150", "fill": "icon_fill", "bbox": [45, 30, 155, 150]}],
+				"neutral": [{"d": "M 45,150 L 45,30,155,30,155,150", "fill": "icon_fill", "bbox": [45, 30, 155, 150]}],
+				"hostile": [{"d": "M 45,150 L45,70 100,20 155,70 155,150", "fill": "icon_fill", "bbox": [25, 20, 175, 150]}]
+			},
+			"amplifier offsets": {
+				"unknown": {"top": [0, -19.25], "bottom": [0, -2]},
+				"friend": {"top": [0, -15], "bottom": [0, -2]},
+				"neutral": {"top": [0, -15], "bottom": [0, -2]},
+				"hostile": {"top": [0, -22], "bottom": [0, -2]}
+			}
+		},
+		"3": {
+			"names": ["land unit"],
+			"frames": {
+				"unknown": [{"d": "M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z", "fill": "icon_fill", "bbox": [30.75, 30.75, 169.25, 169.25]}],
+				"friend":  [{"d": "M25,50 l150,0 0,100 -150,0 z", "fill": "icon_fill", "bbox": [25, 50, 175, 150]}],
+				"neutral": [{"d": "M45,45 l110,0 0,110 -110,0 z", "fill": "icon_fill", "bbox": [45, 45, 155, 155]}],
+				"hostile": [{"d": "M 100,28 L172,100 100,172 28,100 100,28 Z", "fill": "icon_fill", "bbox": [28, 28, 172, 172]}]
+			},
+			"amplifier offsets": {
+				"unknown": {"top": [0, -19.25], "bottom": [0, 22]},
+				"friend": {"top": [0, 0], "bottom": [0, 0]},
+				"neutral": {"top": [0, -5], "bottom": [0, 5]},
+				"hostile": {"top": [0, -22], "bottom": [0, 22]}
+			}
+		},
+		"4": {
+			"names": ["land equipment and sea surface"],
+			"frame base": "3",
+			"frames": {
+				"friend":  [{"r": 60, "pos": [100, 100], "fill": "icon_fill", "bbox": [25, 50, 175, 150]}]
+			}, 
+			"amplifier offsets": {
+				"unknown": {"top": [0, -19.25], "bottom": [0, 22]},
+				"friend": {"top": [0, 0], "bottom": [0, 8]},
+				"neutral": {"top": [0, -5], "bottom": [0, 5]},
+				"hostile": {"top": [0, -22], "bottom": [0, 22]}
+			}			
+		},
+		"5": {
+			"names": ["land installation"],
+			"frame base": "3",
+			"decorators": {
+				"unknown": [{"fill": true, "stroke": true, "strokewidth": 4, "d": "M85,30.75 85,20.75 115,20.75 115,30.75 100,26.75 Z", "bbox": [85, 20.75, 115, 30.75]}],
+				"friend": [{"fill": true, "stroke": true, "strokewidth": 4, "d": "M85,48 85,40 115,40 115,48 100,46 Z", "bbox": [85, 40, 115, 48]}],
+				"neutral": [{"fill": true, "stroke": true, "strokewidth": 4, "d": "M85,43 85,35 115,35 115,43 100,41 Z", "bbox": [85, 35, 115, 43]}],
+				"hostile": [{"fill": true, "stroke": true, "strokewidth": 4, "d": "M85,40 85,18 115,18 115,40 100,24 Z", "bbox": [85, 18, 115, 40]}]
+			},
+			"amplifier offsets": {
+				"unknown": {"top": [0, -19.25], "bottom": [0, 22]},
+				"friend": {"top": [0, 0], "bottom": [0, 0]},
+				"neutral": {"top": [0, -5], "bottom": [0, 5]},
+				"hostile": {"top": [0, -22], "bottom": [0, 22]}
+			}	
+		},
+		"6": {
+			"names": ["dismounted individual"],
+			"frame base": "3",
+			"frames": {
+				"friend":  [{"d": "m 100,45 55,25 0,60 -55,25 -55,-25 0,-60 z", "fill": "icon_fill", "bbox": [45, 45, 155, 155]}]
+			},
+			"amplifier offsets": {
+				"unknown": {"top": [0, -19.25], "bottom": [0, 22]},
+				"friend": {"top": [0, 0], "bottom": [0, 4]},
+				"neutral": {"top": [0, -5], "bottom": [0, 5]},
+				"hostile": {"top": [0, -22], "bottom": [0, 22]}
+			}
+		},
+		"7": {
+			"names": ["sea subsurface"],
+			"frames": {
+				"unknown": [{"d": "m 65,50 c -55,0 -50,90 0,90 0,50 70,50 70,0 50,0 55,-90 0,-90", "fill": "icon_fill", "bbox": [25, 50, 175, 180]}],
+				"friend":  [{"d": "m 45,50 c 0,100 40,120 55,120 15,0 55,-20 55,-120", "fill": "icon_fill", "bbox": [45, 50, 155, 170]}],
+				"neutral": [{"d": "M45,50 L45,170 155,170 155,50", "fill": "icon_fill", "bbox": [45, 50, 155, 170]}],
+				"hostile": [{"d": "M45,50 L45,130 100,180 155,130 155,50", "fill": "icon_fill", "bbox": [45, 50, 155, 180]}]
+			},
+			"amplifier offsets": {
+				"unknown": {"top": [0, 0], "bottom": [0, 26]},
+				"friend": {"top": [0, 5], "bottom": [0, 18]},
+				"neutral": {"top": [0, 5], "bottom": [0, 18]},
+				"hostile": {"top": [0, 0], "bottom": [0, 26]}
+			}
+		},
+		"8": {
+			"names": ["activities"],
+			"frame base": "3",
+			"decorators": {
+				"unknown": [{"d": "M 107.96875 31.46875 L 92.03125 31.71875 L 92.03125 46.4375 L 107.71875 46.4375 L 107.96875 31.46875 z M 47.03125 92.5 L 31.09375 92.75 L 31.09375 107.5 L 46.78125 107.5 L 47.03125 92.5 z M 168.4375 92.5 L 152.5 92.75 L 152.5 107.5 L 168.1875 107.5 L 168.4375 92.5 z M 107.96875 153.5625 L 92.03125 153.8125 L 92.03125 168.53125 L 107.71875 168.53125 L 107.96875 153.5625 z", "fill": true, "stroke": false}],
+				"friend": [{"d": "m 160,135 0,15 15,0 0,-15 z m -135,0 15,0 0,15 -15,0 z m 135,-85 0,15 15,0 0,-15 z m -135,0 15,0 0,15 -15,0 z", "fill": true, "stroke": false}],
+				"neutral": [{"d": "m 140,140 15,0 0,15 -15,0 z m -80,0 0,15 -15,0 0,-15 z m 80,-80 0,-15 15,0 0,15 z m -80,0 -15,0 0,-15 15,0 z", "fill": true, "stroke": false}],
+				"hostile": [{"d": "M 100 28 L 89.40625 38.59375 L 100 49.21875 L 110.59375 38.59375 L 100 28 z M 38.6875 89.3125 L 28.0625 99.9375 L 38.6875 110.53125 L 49.28125 99.9375 L 38.6875 89.3125 z M 161.40625 89.40625 L 150.78125 100 L 161.40625 110.59375 L 172 100 L 161.40625 89.40625 z M 99.9375 150.71875 L 89.3125 161.3125 L 99.9375 171.9375 L 110.53125 161.3125 L 99.9375 150.71875", "fill": true, "stroke": false}]
+			}
+		},
+		"9": {
+			"names": ["cyberspace"],
+			"frame base": "3",
+			"decorators": {
+				"unknown": [{"fill": true, "stroke": false, "d": "M 150 65.7 L 150 134 C 176 123 176 77.2 150 65.7 z"}],
+				"friend": [{"fill": true, "stroke": false, "d": "m 135,150 40,-40 0,40 z"}],
+				"neutral": [{"fill": true, "stroke": false, "d": "m 115,155 40,-40 0,40 z"}],
+				"hostile": [{"fill": true, "stroke": false, "d": "m 150,78 0,44 22,-22 z"}]
+			}		
+		},
+		"A": {
+			"names": ["unframed"],
+			"frames": {}
+		},
+
+		"P": {
+			"names": ["position only"],
+			"frames": {
+				"unknown": [{"r": 15, "pos": [100, 100], "fill": "icon_fill"}],
+				"friend": [{"r": 15, "pos": [100, 100], "fill": "icon_fill"}],
+				"neutral": [{"r": 15, "pos": [100, 100], "fill": "icon_fill"}],
+				"hostile": [{"r": 15, "pos": [100, 100], "fill": "icon_fill"}]
+			}
+		}
+	},
+
+	"dimensions": {
+		"air": {
+			"names": ["air"],
+			"frame shape": "2"
+		},
+		"space": {
+			"names": ["space"],
+			"frame shape": "1"
+		},
+		"land unit": {
+			"names": ["land unit"],
+			"frame shape": "3"
+		},
+		"land equipment": {
+			"names": ["land equipment"],
+			"frame shape": "4"
+		},
+		"land installation": {
+			"names": ["land installation"],
+			"frame shape": "5"
+		},
+		"activities": {
+			"names": ["activities"],
+			"frame shape": "8"
+		},
+		"dismounted individual": {
+			"names": ["dismounted individual"],
+			"frame shape": "6"
+		},
+		"sea surface": {
+			"names": ["sea surface"],
+			"frame shape": "4"
+		},
+		"sea subsurface": {
+			"names": ["sea subsurface"],
+			"frame shape": "7"
+		},
+		"cyberspace": {
+			"names": ["cyberspace"],
+			"frame shape": "9"
+		},
+
+		"position marker": {
+			"names": ["position marker"],
+			"frame shape": "P"
+		}
+	},
+
+	"statuses": {
+		"0": {
+			"names": ["present"]
+		},
+		"1": {
+			"names": ["planned", "anticipated", "suspect", "suspected"],
+			"dashed": true
+		},
+		"2": {
+			"names": ["fully capable"],
+			"alt icon side": "bottom",
+			"alt icon": [{"d": "M25,155 l150,0 0,25 -150,0 z", "stroke": true, "fill": "status green", "bbox": [25, 155, 175, 180]}]
+		},
+		"3": {
+			"names": ["damaged"],
+			"icon side": "middle",
+			"icon": [{"d": "M150,20 L50,180", "strokewidth": 8, "stroke": true, "fill": false, "bbox": [50, 20, 150, 180]}],
+			"alt icon side": "bottom",
+			"alt icon": [{"d": "M25,155 l150,0 0,25 -150,0 z", "stroke": true, "fill": "status yellow", "bbox": [25, 155, 175, 180]}]
+		},
+		"4": {
+			"names": ["destroyed"],
+			"icon side": "middle",
+			"icon": [{"d": "M150,20 L50,180", "strokewidth": 8, "stroke": true, "fill": false, "bbox": [50, 20, 150, 180]}],
+			"alt icon side": "bottom",
+			"alt icon": [{"d": "M25,155 l150,0 0,25 -150,0 z", "stroke": true, "fill": "status red", "bbox": [25, 155, 175, 180]}]
+		},
+		"5": {
+			"names": ["full to capacity"],
+			"alt icon side": "bottom",
+			"alt icon": [{"d": "M25,155 l150,0 0,25 -150,0 z", "stroke": true, "fill": "status blue", "bbox": [25, 155, 175, 180]}]
+		}
+	},
+
+	"hqtfds": {
+		"0": {
+			"names": ["undefined"],
+			"hqtfd": []
+		},
+		"1": {
+			"names": ["feint", "decoy", "dummy"], "dashed": true,
+			"hqtfd": ["dummy"]
+		},
+		"2": {
+			"names": ["headquarters", "HQ"],
+			"hqtfd": ["headquarters"],
+			"blacklist": [
+				"headquarters unit",
+				"headquarters element",
+				"HQ unit",
+				"HQ element",
+				"head quarters unit",
+				"head quarters element"
+			]
+		},
+
+		"3": {
+			"names": ["feint headquarters", "feint HQ", "decoy headquarters", "decoy HQ", "dummy headquarters", "dummy HQ"], 
+			"dashed": true,
+			"hqtfd": ["headquarters", "dummy"],
+			"blacklist": [
+				"headquarters unit",
+				"headquarters element",
+				"HQ unit",
+				"HQ element",
+				"head quarters unit",
+				"head quarters element"
+			]
+		},
+		"4": {
+			"names": ["task force", "TF"],
+			"hqtfd": ["task force"]
+		},
+		"5": {
+			"names": ["feint task force", "feint TF", "decoy task force", "decoy TF", "dummy task force", "dummy TF"], 
+			"dashed": true,
+			"hqtfd": ["task force", "dummy"]
+		},
+		"6": {
+			"names": ["task force headquarters", "task force HQ", "TF headquarters", "TF HQ"],
+			"hqtfd": ["task force", "headquarters"],
+			"blacklist": [
+				"headquarters unit",
+				"headquarters element",
+				"HQ unit",
+				"HQ element",
+				"head quarters unit",
+				"head quarters element"
+			]
+		},
+		"7": {
+			"names": [
+				"feint task force headquarters", "feint task force HQ", "feint TF headquarters", "feint TF HQ",
+				"decoy task force headquarters", "decoy task force HQ", "decoy TF headquarters", "decoy TF HQ",
+				"dummy task force headquarters", "dummy task force HQ", "dummy TF headquarters", "dummy TF HQ"
+			],
+			"dashed": true,
+			"hqtfd": ["headquarters", "task force", "dummy"],
+			"blacklist": [
+				"headquarters unit",
+				"headquarters element",
+				"HQ unit",
+				"HQ element",
+				"head quarters unit",
+				"head quarters element"
+			]
+		}
+	},
+
+	"amplifiers": {
+		"00": {"names": ["undefined"], "type": "undefined"},
+		"11": {
+			"names": ["team", "crew"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [{"r": 15, "pos": [100, -20]}, {"d": "M80,-10 L120,-30", "bbox": [80, -10, 120, -30]}],
+			"prerun": true
+		}, 
+		"12": {
+			"names": ["squad"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [{"pos": [100, 30], "r": 9, "fill": true, "stroke": false}],
+			"prerun": true
+		},
+		"13": {
+			"names": ["section"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"pos": [85, 30], "r": 9, "fill": true, "stroke": false},
+				{"pos": [115, 30], "r": 9, "fill": true, "stroke": false}
+			],
+			"prerun": true
+		},
+		"14": {
+			"names": ["platoon", "detachment"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"pos": [70, 30], "r": 9, "fill": true, "stroke": false},
+				{"pos": [100, 30], "r": 9, "fill": true, "stroke": false},
+				{"pos": [130, 30], "r": 9, "fill": true, "stroke": false}
+			],
+			"prerun": true
+		},
+		"15": {
+			"names": ["company", "battery", "troop"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"strokewidth": 4, "d": "M100,40L100,15", "stroke": true, "fill": false, "bbox": [99, 15, 101, 40]}
+			],
+			"prerun": true
+		},
+		"16": {
+			"names": ["battalion", "squadron"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"strokewidth": 4, "d": "M90,40L90,15", "stroke": true, "fill": false, "bbox": [89, 14, 91, 40]},
+				{"strokewidth": 4, "d": "M110,40L110,15", "stroke": true, "fill": false, "bbox": [109, 15, 111, 40]}
+			],
+			"prerun": true
+		},
+		"17": {
+			"names": ["regiment", "group"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"strokewidth": 4, "d": "M100,40L100,15", "stroke": true, "fill": false, "bbox": [99, 15, 101, 40]},
+				{"strokewidth": 4, "d": "M120,40L120,15", "stroke": true, "fill": false, "bbox": [119, 15, 121, 40]},
+				{"strokewidth": 4, "d": "M80,40L80,15", "stroke": true, "fill": false, "bbox": [79, 15, 81, 40]}
+			],
+			"prerun": true
+		},
+		"18": {
+			"names": ["brigade"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"strokewidth": 4, "d": "M87.5,40 l25,-25 m0,25 l-25,-25", "stroke": true, "fill": false, "bbox": [87.5, 15, 112.5, 40]}
+			],
+			"prerun": true
+		},
+		"21": {
+			"names": ["division"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{"strokewidth": 4, "d": "M70,40 l25,-25 m0,25 l-25,-25   M105,40 l25,-25 m0,25 l-25,-25", "stroke": true, "fill": false, "bbox": [70, 15, 130, 40]}
+			],
+			"prerun": true
+		},
+		"22": {
+			"names": ["corps", "MEB"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [
+				{
+					"strokewidth": 4, "d": "M52.5,40 l25,-25 m0,25 l-25,-25    M87.5,40 l25,-25 m0,25 l-25,-25    M122.5,40 l25,-25 m0,25 l-25,-25", 
+					"stroke": true, "fill": false, "bbox": [52.5, 15, 147.5, 40]
+				}
+			],
+			"prerun": true
+		},
+		"23": {
+			"names": ["army"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [{
+				"d": "M35,40 l25,-25 m0,25 l-25,-25   M70,40 l25,-25 m0,25 l-25,-25   M105,40 l25,-25 m0,25 l-25,-25    M140,40 l25,-25 m0,25 l-25,-25",
+				"strokewidth": 4, "stroke": true, "fill": true, "bbox": [35, 15, 165, 40]
+			}],
+			"prerun": true
+		},
+		"24": {
+			"names": ["army group", "front"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [{
+				"d": "M17.5,40 l25,-25 m0,25 l-25,-25    M52.5,40 l25,-25 m0,25 l-25,-25    M87.5,40 l25,-25 m0,25 l-25,-25    M122.5,40 l25,-25 m0,25 l-25,-25       M157.5,40 l25,-25 m0,25 l-25,-25",
+				"strokewidth": 4, "stroke": true, "fill": true, "bbox": [17.5, 15, 165, 40]
+			}],
+			"prerun": true
+		},
+		"25": {
+			"names": ["region", "theater"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [{
+				"d": "M0,40 l25,-25 m0,25 l-25,-25   M35,40 l25,-25 m0,25 l-25,-25   M70,40 l25,-25 m0,25 l-25,-25   M105,40 l25,-25 m0,25 l-25,-25    M140,40 l25,-25 m0,25 l-25,-25     M175,40 l25,-25 m0,25 l-25,-25",
+				"strokewidth": 4, "stroke": true, "fill": true, "bbox": [0, 15, 200, 40]
+			}],
+			"prerun": true
+		},
+		"26": {
+			"names": ["command"], 
+			"type": "echelon", 
+			"applies to": ["land unit"],
+			"icon side": "top",
+			"icon": [{
+				"d": "M70,27.5 l25,0 m-12.5,12.5 l0,-25   M105,27.5 l25,0 m-12.5,12.5 l0,-25",
+				"strokewidth": 4, "stroke": true, "fill": true, "bbox": [40, 15, 130, 40]
+			}],
+			"prerun": true
+		},
+
+		"31": {
+			"names": ["wheeled", "wheeled limited cross country"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 53,155 l 94,0"}, 
+				{"r": 8, "pos": [58, 163]},
+				{"r": 8, "pos": [142, 163]}
+			]
+		},
+		"32": {
+			"names": ["wheeled cross country", "cross country wheeled", "wheeled x"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 53,155 l 94,0"}, 
+				{"r": 8, "pos": [58, 163]},
+				{"r": 8, "pos": [100, 163]},
+				{"r": 8, "pos": [142, 163]}
+			]
+		},
+		"33": {
+			"names": ["tracked"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{
+					"d": "M 48.2,159.9 H 151.8 C 153.8,159.9 155.7,160.8 157.1,162.1 158.4,163.5 159.2,165.3 159.2,167.4 159.2,169.5 158.4,171.4 157.1,172.7 155.7,174.1 153.8,174.9 151.8,174.9 H 48.2 C 44.1,174.9 40.8,171.6 40.8,167.4 40.8,163.3 44.1,159.9 48.2,159.9 Z",
+					"bbox": [38, 158, 161, 177]}
+			]
+		},
+		"34": {
+			"names": ["wheeled and tracked", "tracked and wheeled"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 83,156 l 70,0 c15,0 15,15 0,15 l -70,0 c-15,0 -15,-15 0,-15"},
+				{"r": 8, "pos": [58, 163]}
+			]
+		},
+		"35": {
+			"names": ["towed"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 63,161 l 74,0"},
+				{"r": 8, "pos": [58, 163]},
+				{"r": 8, "pos": [142, 163]}
+			]
+		},
+		"36": {
+			"names": ["rail"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 53,161 l 96,0"},
+				{"r": 8, "pos": [58, 168]},
+				{"r": 8, "pos": [73, 168]},
+				{"r": 8, "pos": [127, 168]},
+				{"r": 8, "pos": [142, 168]}
+			]
+		},
+		"37": {
+			"names": ["pack animals"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 80,190 l 10,-20 10,20 10,-20 10,20", "bbox": [80, 170, 120, 190]}
+			]
+		},
+
+		"41": {
+			"names": ["over snow", "prime mover"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 50,151 l10,10 90,0", "bbox": [50, 151, 150, 161]}
+			]
+		},
+		"42": {
+			"names": ["sled"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [{
+				"friend": [{"d": "M 145,148 C 160,148 160,163 145,163 H 55 C 40,163 40,148 55,148", "bbox": [41, 146, 158, 165]}],
+				"hostile": [{"d": "M 145,148 C 160,148 160,163 145,163 H 55 C 40,163 40,148 55,148", "bbox": [41, 146, 158, 165]}],
+				"unknown": [{"d": "M 145,145 C 160,145 160,160 145,160 H 55 C 40,160 40,145 55,145", "bbox": [41, 143, 158, 162]}],
+				"neutral": [{"d": "M 145,158 C 160,158 160,173 145,173 H 55 C 40,173 40,158 55,158", "bbox": [41, 156, 158, 175]}]
+			}]
+		},
+
+		"51": {
+			"names": ["barge"], "type": "mobility", "applies to": ["land equipment"], 
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 50,161 l 100,0 c0,10 -100,10 -100,0", "bbox": [50, 161, 150, 171]}
+			]
+		},
+		"52": {
+			"names": ["amphibious"], "type": "mobility", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{
+					"d": "M 65,170 C 65,160 75,160 75,170 75,180 85,180 85,170 85,160 95,160 95,170 95,180 105,180 105,170 105,160 115,160 115,170 115,180 125,180 125,170 125,160 135,160 135,170", 
+					"bbox": [63, 160, 137, 179]
+				}
+			]
+		},
+
+		"61": {
+			"names": ["short towed array"], "type": "naval towed array", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 50,170 l 100,0 M50,165 l10,0 0,10 -10,0 z M150,165 l-10,0 0,10 10,0 z M100,165 l5,5 -5,5 -5,-5 z", "fill": true, "stroke": true, "bbox": [48, 162, 152, 178]}
+			]
+		},
+		"62": {
+			"names": ["long towed array"], "type": "naval towed array", "applies to": ["land equipment"],
+			"icon side": "bottom",
+			"icon": [
+				{"d": "M 50,170 l 100,0 M50,165 l10,0 0,10 -10,0 z M150,165 l-10,0 0,10 10,0 z M105,165 l-10,0 0,10 10,0 z M75,165 l5,5 -5,5 -5,-5 z  M125,165 l5,5 -5,5 -5,-5 z", "fill": true, "stroke": true, "bbox": [48, 162, 152, 178]}
+			]
+		},
+
+		"71": {
+			"names": ["leader", "leadership"], 
+			"type": "dismounted individual leadership", "applies to": ["dismounted individual"],
+			"icon side": "top",
+			"icon": [{
+				"unknown": [{"d": "m 50,60 10,-20 80,0 10,20", "bbox": [50, 40, 150, 60]}],
+				"friend": [{"d": "m 45,60 55,-25 55,25", "bbox": [45, 35, 155, 60]}],
+				"hostile": [{"d": "M 30,82 100,28 170,82", "bbox": [30, 28, 170, 82]}],
+				"neutral": [{"d": "M 45,36 100,-5 155,36", "bbox": [45, -5, 155, 36]}]
+			}]
+		}
+	}
+}
+

@@ -1,0 +1,348 @@
+{
+	"set": "05",
+	"name": "space",
+	"dimension": "space",
+	"IC": {
+		"110000": {
+			"names": ["military space platform", "military"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "MIL"}]
+		},
+		"110100": {
+			"names": ["military space vehicle", "space vehicle"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "SV"}]
+		},
+		"110200": {
+			"names": ["military re-entry vehicle", "re-entry vehicle"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "RV"}]
+		},
+		"110300": {
+			"names": ["planet lander", "military planet lander", "planetary lander"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "PL"}]
+		},
+		"110400": {
+			"names": ["orbiter shuttle"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 89,115 6,-25 c 3,-12 7,-12 10,0 l 6,25 -10,0 -1,5 -1,-5 z"}]
+		},
+		"110500": {
+			"names": ["capsule"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 85,115 c -2,5 32,5 30,0 l -5,-30 c -1,-5 -19,-5 -20,0 z"}]
+		},
+		"110600": {
+			"names": ["general satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "SAT"}]
+		},
+		"110700": {
+			"names": ["satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 110,100 10,0 m -40,0 10,0 m -10,-10 -25,0 0,20 25,0 z m 40,0 0,20 25,0 0,-20 z m -30,0 0,20 20,0 0,-20 z"}]
+		},
+		"110800": {
+			"names": ["anti-satellite weapon", "antisatellite weapon"],
+			"modcats": ["capability", "antisatellite capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 100,110 0,9 m 0,-34 0,5 m 0,-9 -2,4 4,0 z m -10,9 0,20 20,0 0,-20 z m 25,0 0,20 25,0 0,-20 z m -30,0 -25,0 0,20 25,0 z m 0,10 5,0 m 20,0 5,0"}]
+		},
+		"110900": {
+			"names": ["astronomical satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 97,90 -1,-9 8,0 -1,9 m -5,20 1,9 2,0 1,-9 m 8,-10 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"}]
+		},
+		"111000": {
+			"names": ["biosatellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 100,89 c 0,4.4 -3.6,8 -8,8 -4.4,0 -8,-3.6 -8,-8 0,-4.4 3.6,-8 8,-8 4.4,0 8,3.6 8,8 z m -10,10 0,20 20,0 0,-20 z m 25,0 0,20 25,0 0,-20 z m -30,0 -25,0 0,20 25,0 z m 0,10 5,0 m 20,0 5,0 m -17,-25 17,10 -1,2 -14,-7"}]
+		},
+		"111100": {
+			"names": ["communications satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": true, "d": "m 110,109 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"},
+				{"d": "m 100,90 0,9 M 75,81 c 16,12 34,12 50,0"}
+			]
+		},
+		"111200": {
+			"names": ["earth observation satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": true, "d": "m 107,113 c 0,3.9 -3.1,7 -7,7 -3.9,0 -7,-3.1 -7,-7 0,-3.9 3.1,-7 7,-7 3.9,0 7,3.1 7,7 z m -17,-33 0,20 20,0 0,-20 z m 25,0 0,20 25,0 0,-20 z m -30,0 -25,0 0,20 25,0 z m 0,10 5,0 m 20,0 5,0"},
+				{"d": "m 88,107 c 8,-9 16,-9 24,0"}
+			]
+		},
+		"111300": {
+			"names": ["miniaturized satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": true, "d": "m 91.1,92 0,16 17.8,0 0,-16 z m 22.2,0 0,16 22.2,0 0,-16 z m -26.6,0 -22.2,0 0,16 22.2,0 z m 0,8 4.4,0 m 17.8,0 4.4,0"},
+				{"d": "m 90,119 10,-9 10,9 m -20,-38 10,9 10,-9 m 35,9 -10,10 10,10 M 55,90 65,100 55,110"}
+			]
+		},
+		"111400": {
+			"names": ["navigational satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": true, "d": "m 110,109 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"},
+				{"d": "m 88,87 c 8,6 16,6 24,0 m -20,8 8,-14 8,14"}
+			]
+		},
+		"111500": {
+			"names": ["reconnaissance satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": true, "d": "m 106,100 9,20 m -21,-20 -9,20 m 17,-20 3,20 m -7,-20 -3,20 m 15,-30 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"}
+			]
+		},
+		"111600": {
+			"names": ["space station"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 97.5,112.5 0,7.5 5,0 0,-7.5 z m 0,-32.5 5,0 0,26.4 -5,0 z m -0.3,7.6 C 83.3,88.2 72.5,93.5 72.5,100 c 0,6.9 12.3,12.5 27.5,12.5 15.2,0 27.5,-5.6 27.5,-12.5 0,-6.5 -11,-11.9 -25,-12.4 l 0,5.6 c 9.9,0.4 17.5,3.2 17.5,6.6 0,3.7 -8.9,6.7 -19.8,6.7 -10.9,0 -19.8,-3 -19.8,-6.7 0,-3.4 7.4,-6.1 17.1,-6.6 l 0,-5.6 c -0.1,0 -0.2,-0 -0.3,0 z"}]
+		},
+		"111700": {
+			"names": ["tethered satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": true, "d": "m 120,87 -20,12 m 33,-12 c 0,3.6 -2.9,6.5 -6.5,6.5 -3.6,0 -6.5,-2.9 -6.5,-6.5 0,-3.6 2.9,-6.5 6.5,-6.5 3.6,0 6.5,2.9 6.5,6.5 z m -23,22 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"}]
+		},
+		"111800": {
+			"names": ["weather satellite"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": true, "d": "m 110,109 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"},
+				{"text": "WX", "pos": [100, 100], "fontsize": 25}
+			]
+		},
+		"111900": {
+			"names": ["space-launched vehicle", "space launched vehicle", "SLV"],
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "SLV"}]
+		},
+
+		"120000": {
+			"names": ["civilian space"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "CIV", "fill": "white", "stroke": true}]
+		},
+		"120100": {
+			"names": ["civilian orbiter shuttle"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": "white", "d": "m 89,115 6,-25 c 3,-12 7,-12 10,0 l 6,25 -10,0 -1,5 -1,-5 z"}]
+		},
+		"120200": {
+			"names": ["civilian capsule"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": "white", "d": "m 85,115 c -2,5 32,5 30,0 l -5,-30 c -1,-5 -19,-5 -20,0 z"}]
+		},
+		"120300": {
+			"names": ["civilian satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": "white", "d": "m 110,100 10,0 m -40,0 10,0 m -10,-10 -25,0 0,20 25,0 z m 40,0 0,20 25,0 0,-20 z m -30,0 0,20 20,0 0,-20 z"}]
+		},
+		"120400": {
+			"names": ["civilian astronomical satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": "white", "d": "m 97,90 -1,-9 8,0 -1,9 m -5,20 1,9 2,0 1,-9 m 8,-10 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"}]
+		},
+		"120500": {
+			"names": ["civilian biosatellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"fill": "white", "d": "m 100,89 c 0,4.4 -3.6,8 -8,8 -4.4,0 -8,-3.6 -8,-8 0,-4.4 3.6,-8 8,-8 4.4,0 8,3.6 8,8 z m -10,10 0,20 20,0 0,-20 z m 25,0 0,20 25,0 0,-20 z m -30,0 -25,0 0,20 25,0 z m 0,10 5,0 m 20,0 5,0 m -17,-25 17,10 -1,2 -14,-7"}]
+		},
+		"120600": {
+			"names": ["civilian communications satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 110,109 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"},
+				{"d": "m 100,90 0,9 M 75,81 c 16,12 34,12 50,0"}
+			]
+		},
+		"120700": {
+			"names": ["civilian earth observation satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 107,113 c 0,3.9 -3.1,7 -7,7 -3.9,0 -7,-3.1 -7,-7 0,-3.9 3.1,-7 7,-7 3.9,0 7,3.1 7,7 z m -17,-33 0,20 20,0 0,-20 z m 25,0 0,20 25,0 0,-20 z m -30,0 -25,0 0,20 25,0 z m 0,10 5,0 m 20,0 5,0"},
+				{"d": "m 88,107 c 8,-9 16,-9 24,0"}
+			]
+		},
+		"120800": {
+			"names": ["civilian miniaturized satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 91.1,92 0,16 17.8,0 0,-16 z m 22.2,0 0,16 22.2,0 0,-16 z m -26.6,0 -22.2,0 0,16 22.2,0 z m 0,8 4.4,0 m 17.8,0 4.4,0"},
+				{"d": "m 90,119 10,-9 10,9 m -20,-38 10,9 10,-9 m 35,9 -10,10 10,10 M 55,90 65,100 55,110"}
+			]
+		},
+		"120900": {
+			"names": ["civilian navigational satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 110,109 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"},
+				{"d": "m 88,87 c 8,6 16,6 24,0 m -20,8 8,-14 8,14"}
+			]
+		},
+		"121000": {
+			"names": ["civilian space station"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 97.5,112.5 0,7.5 5,0 0,-7.5 z m 0,-32.5 5,0 0,26.4 -5,0 z m -0.3,7.6 C 83.3,88.2 72.5,93.5 72.5,100 c 0,6.9 12.3,12.5 27.5,12.5 15.2,0 27.5,-5.6 27.5,-12.5 0,-6.5 -11,-11.9 -25,-12.4 l 0,5.6 c 9.9,0.4 17.5,3.2 17.5,6.6 0,3.7 -8.9,6.7 -19.8,6.7 -10.9,0 -19.8,-3 -19.8,-6.7 0,-3.4 7.4,-6.1 17.1,-6.6 l 0,-5.6 c -0.1,0 -0.2,-0 -0.3,0 z"}
+			]
+		},
+		"121100": {
+			"names": ["civilian tethered satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 120,87 -20,12 m 33,-12 c 0,3.6 -2.9,6.5 -6.5,6.5 -3.6,0 -6.5,-2.9 -6.5,-6.5 0,-3.6 2.9,-6.5 6.5,-6.5 3.6,0 6.5,2.9 6.5,6.5 z m -23,22 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"}
+			]
+		},
+		"121200": {
+			"names": ["civilian weather satellite"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [
+				{"fill": "white", "d": "m 110,109 5,0 m -30,0 5,0 m -5,-10 -25,0 0,20 25,0 z m 30,0 0,20 25,0 0,-20 z m -25,0 0,20 20,0 0,-20 z"},
+				{"text": "WX", "pos": [100, 100], "fontsize": 25}
+			]
+		},
+
+		"121300": {
+			"names": ["civilian planetary lander"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "PL", "fill": "white", "stroke": true}]
+		},
+		"121300": {
+			"names": ["civilian space vehicle"],
+			"civ": true,
+			"modcats": ["capability", "orbit", "sensor"],
+			"icon": [{"text": "SV", "fill": "white", "stroke": true}]
+		},
+
+		"130000": {
+			"names": ["manual track"],
+			"icon": [{"text": "MAN"}]
+		}
+
+	},
+	"M1": {
+		"01": {
+			"names": ["low earth orbit", "LEO"],
+			"cat": "orbit",
+			"icon": [{"textm1": "LEO"}]
+		},
+		"02": {
+			"names": ["medium earth orbit", "MEO"],
+			"cat": "orbit",
+			"icon": [{"textm1": "MEO"}]
+		},
+		"03": {
+			"names": ["high earth orbit", "HEO"],
+			"cat": "orbit",
+			"icon": [{"textm1": "HEO"}]
+		},
+		"04": {
+			"names": ["geosynchronous orbit", "GSO"],
+			"cat": "orbit",
+			"icon": [{"textm1": "GSO"}]
+		},
+		"05": {
+			"names": ["geostationary orbit", "GO"],
+			"cat": "orbit",
+			"icon": [{"textm1": "GO"}]
+		},
+		"06": {
+			"names": ["Molniya orbit", "MO"],
+			"cat": "orbit",
+			"icon": [{"textm1": "MO"}]
+		},
+		"07": {
+			"names": ["cyberspace", "cyber"],
+			"cat": "capability",
+			"icon": [{"textm1": "CYB"}],
+			"new": "C-1-115"
+		}
+	}, 
+	"M2": {
+		"01": {
+			"names": ["optical"],
+			"cat": "sensor",
+			"icon": [{"textm2": "O"}]
+		},
+		"02": {
+			"names": ["infrared"],
+			"cat": "sensor",
+			"icon": [{"textm2": "IR"}]
+		},
+		"03": {
+			"names": ["radar"],
+			"cat": "sensor",
+			"icon": [{"textm2": "R"}]
+		},
+		"04": {
+			"names": ["signals intelligence"],
+			"cat": "sensor",
+			"icon": [{"textm2": "SI"}]
+		},
+		"05": {
+			"names": ["cyberspace", "cyber"],
+			"cat": "capability",
+			"new": "C-2-122",
+			"icon": [{"textm2": "CYB"}]
+		},
+		"06": {
+			"names": ["electromagnetic warfare ASAT", "EW ASAT"],
+			"cat": "capability",
+			"icon": [{"textm2": "EW"}]
+		},
+		"07": {
+			"names": ["high power microwave ASAT", "HPM ASAT"],
+			"cat": "capability",
+			"icon": [{"textm2": "EW"}]
+		},
+		"08": {
+			"names": ["laser ASAT", "HPM ASAT"],
+			"cat": "antisatellite capability",
+			"icon": [{"d": "m 130,129 h -17 l -3,7 -3,-13 -4,13 -3.1,-13 -3.4,6 h -9.9 l -3.3,7 -3.3,-13 -3.3,13 -3.3,-13 -3.3,13  m 52.9,-13 7,6 -7,7"}]
+		},
+		"09": {
+			"names": ["maintenance"],
+			"cat": "antisatellite capability",
+			"icon": [{"d": "M75,125 c8,0 8,16 0,16 m8,-8 l35,0 m8,-8 c-8,0 -8,16 0,16"}]
+		},
+		"10": {
+			"names": ["mine"],
+			"cat": "capability",
+			"icon": [
+				{
+					"d": "m 111,133 c 0,4 -5,6 -11,6 -6.3,0 -11.4,-2 -11.4,-6 0,-2 5.1,-5 11.4,-5 6,0 11,3 11,5 z  m -2,-11 -17.5,23  m 0,-23 17.5,23  m -9,-23 v 23",
+					"fill": true
+				}
+			]
+		},
+		"11": {
+			"names": ["refuel", "refueling"],
+			"cat": "capability",
+			"icon": [{"textm2": "K"}]
+		},
+		"12": {
+			"names": ["tug"],
+			"cat": "capability",
+			"icon": [{"textm2": "tug"}]
+		}
+	}
+}
+

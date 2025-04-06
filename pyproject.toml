@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "military-symbol"
-version = "1.2.3"
+version = "2.0.0"
 authors = [
   { name="Nicholas Royer", email="nick.w.royer@protonmail.com" },
 ]
@@ -26,7 +26,8 @@ license-files = ["LICEN[CS]E*"]
 dependencies = [
 	"lxml", 
 	"svgpathtools", 
-	"thefuzz"
+	"thefuzz",
+  "freetype"
 ]
 
 [project.scripts]
@@ -35,3 +36,11 @@ military-symbol = "military_symbol.command_line:command_line_main"
 [project.urls]
 Homepage = "https://github.com/nwroyer/Python-Military-Symbols"
 Issues = "https://github.com/nwroyer/Python-Military-Symbols/issues"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "test",
+  "src/test",
+  "src/military_symbol/test",
+  "*.svg"
+]

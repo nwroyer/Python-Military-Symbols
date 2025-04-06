@@ -1,0 +1,1646 @@
+{
+	"set": "15",
+	"name": "land equipment",
+	"dimension": "land equipment",
+	"modcats": ["capability", "mobility", "crime"],
+	"IC": {
+		".light": {
+			"names": [".light"],
+			"icon": [{"d": "m 85,100 30,0"}]
+		},
+		".medium": {
+			"names": [".medium"],
+			"icon": [{"d": "m 85,105 30,0 m -30,-10 30,0"}]
+		},
+		".heavy": {
+			"names": [".heavy"],
+			"icon": [{"d": "m 85,110 30,0 m -30,-20 30,0 m -30,10 30,0"}]
+		},
+
+
+		"110000": {
+			"names": ["weapon"],
+			"icon": [{"d": "m 100,60 0,80"}]
+		},
+		"110100": {
+			"names": ["rifle"],
+			"icon": [{"d": "m 100,60 0,80 M 85,75 100,60 115,75"}]
+		},
+		"110101": {
+			"names": ["single shot rifle"],
+			"icon": [{"icon": "110100"}, {"icon": ".light"}]
+		},
+		"110102": {
+			"names": ["semiautomatic rifle"],
+			"icon": [{"icon": "110100"}, {"icon": ".medium"}]
+		},
+		"110103": {
+			"names": ["automatic rifle"],
+			"icon": [{"icon": "110100"}, {"icon": ".heavy"}]
+		},
+		"110200": {
+			"names": ["machine gun"],
+			"icon": [{"d": "m 100,60 0,80 M 85,75 100,60 115,75 M 80,140 120,140"}]
+		},
+		"110201": {
+			"names": ["light machine gun"],
+			"icon": [{"icon": "110200"}, {"icon": ".light"}]
+		},
+		"110202": {
+			"names": ["medium machine gun"],
+			"icon": [{"icon": "110200"}, {"icon": ".medium"}]
+		},
+		"110203": {
+			"names": ["heavy machine gun"],
+			"icon": [{"icon": "110200"}, {"icon": ".heavy"}]
+		},
+		"110300": {
+			"names": ["grenade launcher"],
+			"icon": [
+				{"icon": "110100"},
+				{"r": 15, "pos": [100, 90]}
+			]
+		},
+		"110301": {
+			"names": ["light grenade launcher"],
+			"icon": [{"icon": "110300"}, {"translate": [0, 20], "items": [
+				{"icon": ".light"}
+			]}]
+		},
+		"110302": {
+			"names": ["medium grenade launcher"],
+			"icon": [{"icon": "110300"}, {"translate": [0, 20], "items": [
+				{"icon": ".medium"}
+			]}]
+		},
+		"110303": {
+			"names": ["heavy grenade launcher"],
+			"icon": [{"icon": "110300"}, {"translate": [0, 20], "items": [
+				{"icon": ".heavy"}
+			]}]
+		},
+		"110400": {
+			"names": ["flame thrower", "flamethrower"],
+			"icon": [{"d": "m 90,135 0,-70 c 0,-15 20,-15 20,0"}]
+		},
+		"110500": {
+			"names": ["air defense gun"],
+			"icon": [{"d": "m 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-80 0,65 m 15,-45 0,40 m -30,-40 0,40"}]
+		},
+		"110501": {
+			"names": ["light air defense gun"],
+			"icon": [
+				{"icon": "110500"},
+				{"icon": ".light"}
+			]
+		},
+		"110501": {
+			"names": ["medium air defense gun"],
+			"icon": [
+				{"icon": "110500"},
+				{"icon": ".medium"}
+			]
+		},
+		"110501": {
+			"names": ["heavy air defense gun"],
+			"icon": [
+				{"icon": "110500"},
+				{"icon": ".heavy"}
+			]
+		},
+		"110600": {
+			"names": ["anti-tank gun", "antitank gun"],
+			"icon": [{"d": "m 85,140 15,-15 15,15 m -15,-80 0,65 m -15,-45 0,40 m 30,-40 0,40"}]
+		},
+		"110601": {
+			"names": ["light anti-tank gun", "light antitank gun"],
+			"icon": [{"icon": "110600"}, {"icon": ".light"}]
+		},
+		"110602": {
+			"names": ["medium anti-tank gun", "medium antitank gun"],
+			"icon": [{"icon": "110600"}, {"icon": ".medium"}]
+		},
+		"110603": {
+			"names": ["heavy anti-tank gun", "heavy antitank gun"],
+			"icon": [{"icon": "110600"}, {"icon": ".heavy"}]
+		},
+		"110700": {
+			"names": ["direct fire gun"],
+			"icon": [{"d": "m 100,60 0,80 m 15,-60 0,40 m -30,-40 0,40"}]
+		},
+		"110701": {
+			"names": ["light direct fire gun"],
+			"icon": [{"icon": "110700"}, {"icon": ".light"}]
+		},
+		"110702": {
+			"names": ["medium direct fire gun"],
+			"icon": [{"icon": "110700"}, {"icon": ".medium"}]
+		},
+		"110703": {
+			"names": ["heavy direct fire gun"],
+			"icon": [{"icon": "110700"}, {"icon": ".heavy"}]
+		},
+		"110800": {
+			"names": ["recoilless gun"],
+			"icon": [{"d": "m 85,75 15,-15 15,15 m 0,5 0,40 m -30,-40 0,40 m 15,-60 0,80"}]
+		},
+		"110801": {
+			"names": ["light recoilless gun"],
+			"icon": [{"icon": "110800"}, {"icon": ".light"}]
+		},
+		"110802": {
+			"names": ["medium recoilless gun"],
+			"icon": [{"icon": "110800"}, {"icon": ".medium"}]
+		},
+		"110803": {
+			"names": ["heavy recoilless gun"],
+			"icon": [{"icon": "110800"}, {"icon": ".heavy"}]
+		},
+		"110900": {
+			"names": ["howitzer"],
+			"icon": [
+				{"r": 10, "pos": [100, 130]},
+				{"d": "m 115,80 0,40 m -30,-40 0,40 m 15,-60 0,60"}
+			]
+		},
+		"110901": {
+			"names": ["light howitzer"],
+			"icon": [{"icon": "110900"}, {"icon": ".light"}]
+		},
+		"110902": {
+			"names": ["medium howitzer"],
+			"icon": [{"icon": "110900"}, {"icon": ".medium"}]
+		},
+		"110903": {
+			"names": ["heavy howitzer"],
+			"icon": [{"icon": "110900"}, {"icon": ".heavy"}]
+		},
+		"111000": {
+			"names": ["missile launcher"],
+			"icon": [{"d": "m 100,140 0,-80 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65"}]
+		},
+		"111001": {
+			"names": ["light missile launcher"],
+			"icon": [{"icon": "111000"}, {"icon": ".light"}]
+		},
+		"111002": {
+			"names": ["medium missile launcher"],
+			"icon": [{"icon": "111000"}, {"icon": ".medium"}]
+		},
+		"111003": {
+			"names": ["heavy missile launcher"],
+			"icon": [{"icon": "111000"}, {"icon": ".heavy"}]
+		},
+		"111100": {
+			"names": ["air defense missile launcher"],
+			"icon": [{"d": "m 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-15 0,-65 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65"}]
+		},
+		"111101": {
+			"names": ["light air defense missile launcher"],
+			"icon": [{"icon": "111100"}, {"icon": ".light"}]
+		},
+
+		".TLAR": {
+			"names": [".TLAR"],
+			"icon": [{"text": "R", "pos": [132, 110], "fontsize": 25}]
+		},
+
+		".TELAR": {
+			"names": [".TELAR"],
+			"icon": [
+				{"text": "R", "pos": [132, 110], "fontsize": 25},
+				{"text": "E", "pos": [68, 110], "fontsize": 25}
+			]
+		},
+
+		"111102": {
+			"names": ["light air defense missile launcher TLAR"],
+			"icon": [
+				{"icon": "111100"}, 
+				{"icon": ".light"},
+				{"icon": ".TLAR"}
+			]
+		},
+		"111103": {
+			"names": ["light air defense missile launcher TELAR"],
+			"icon": [
+				{"icon": "111100"}, 
+				{"icon": ".light"},
+				{"icon": ".TELAR"}
+			]
+		},		
+
+		"111104": {
+			"names": ["medium air defense missile launcher"],
+			"icon": [{"icon": "111100"}, {"icon": ".medium"}]
+		},
+
+		"111105": {
+			"names": ["medium air defense missile launcher TLAR"],
+			"icon": [
+				{"icon": "111100"}, 
+				{"icon": ".medium"},
+				{"icon": ".TLAR"}
+			]
+		},
+		"111106": {
+			"names": ["medium air defense missile launcher TELAR"],
+			"icon": [
+				{"icon": "111100"}, 
+				{"icon": ".medium"},
+				{"icon": ".TELAR"}
+			]
+		},	
+
+		"111107": {
+			"names": ["heavy air defense missile launcher"],
+			"icon": [{"icon": "111100"}, {"icon": ".heavy"}]
+		},
+		"111108": {
+			"names": ["heavy air defense missile launcher TLAR"],
+			"icon": [
+				{"icon": "111100"}, 
+				{"icon": ".heavy"},
+				{"icon": ".TLAR"}
+			]
+		},
+		"111109": {
+			"names": ["heavy air defense missile launcher TELAR"],
+			"icon": [
+				{"icon": "111100"}, 
+				{"icon": ".heavy"},
+				{"icon": ".TELAR"}
+			]
+		},
+		"111200": {
+			"names": ["anti-tank missile launcher"],
+			"icon": [{"d": "m 85,140 15,-15 15,15 M 85,120 85,75 c 0,-20 30,-20 30,0 l 0,45 m -15,5 0,-65"}]
+		},
+		"111201": {
+			"names": ["light anti-tank missile launcher"],
+			"icon": [{"icon": "111200"}, {"icon": ".light"}]
+		},
+		"111202": {
+			"names": ["medium anti-tank missile launcher"],
+			"icon": [{"icon": "111200"}, {"icon": ".medium"}]
+		},
+		"111203": {
+			"names": ["heavy anti-tank missile launcher"],
+			"icon": [{"icon": "111200"}, {"icon": ".heavy"}]
+		},		
+		"111300": {
+			"names": ["surface-to-surface missile launcher"],
+			"icon": [{"d": "m 100,140 0,-80 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65 m 85,140 l 30,0"}]
+		},
+		"111301": {
+			"names": ["light surface-to-surface missile launcher"],
+			"icon": [{"icon": "111300"}, {"icon": ".light"}]
+		},
+		"111302": {
+			"names": ["medium surface-to-surface missile launcher"],
+			"icon": [{"icon": "111300"}, {"icon": ".medium"}]
+		},
+		"111303": {
+			"names": ["heavy surface-to-surface missile launcher"],
+			"icon": [{"icon": "111300"}, {"icon": ".heavy"}]
+		},
+		"111400": {
+			"names": ["mortar"],
+			"icon": [
+				{"d": "m 100,60 0,60 M 85,75 100,60 115,75"},
+				{"r": 10, "pos": [100, 130]}
+			]
+		},
+		"111401": {
+			"names": ["light mortar"],
+			"icon": [{"icon": "111400"}, {"icon": ".light"}]
+		},
+		"111402": {
+			"names": ["medium mortar"],
+			"icon": [{"icon": "111400"}, {"icon": ".medium"}]
+		},
+		"111403": {
+			"names": ["heavy mortar"],
+			"icon": [{"icon": "111400"}, {"icon": ".heavy"}]
+		},
+		"111500": {
+			"names": ["single rocket launcher"],
+			"icon": [{"d": "m 85,75 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85"}]
+		},
+		"111501": {
+			"names": ["light single rocket launcher"],
+			"icon": [{"icon": "111500"}, {"icon": ".light"}]
+		},
+		"111502": {
+			"names": ["medium single rocket launcher"],
+			"icon": [{"icon": "111500"}, {"icon": ".medium"}]
+		},
+		"111503": {
+			"names": ["heavy single rocket launcher"],
+			"icon": [{"icon": "111500"}, {"icon": ".heavy"}]
+		},
+		"111600": {
+			"names": ["multiple rocket launcher"],
+			"icon": [{"d": "m 115,90 0,40 m -30,-40 0,40 m 0,-55 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85"}]
+		},
+		"111601": {
+			"names": ["light multiple rocket launcher"],
+			"icon": [{"icon": "111600"}, {"icon": ".light"}]
+		},
+		"111602": {
+			"names": ["medium multiple rocket launcher"],
+			"icon": [{"icon": "111600"}, {"icon": ".medium"}]
+		},
+		"111603": {
+			"names": ["heavy multiple rocket launcher"],
+			"icon": [{"icon": "111600"}, {"icon": ".heavy"}]
+		},
+		"111700": {
+			"names": ["anti-tank rocket launcher"],
+			"icon": [{"d": "m 85,140 15,-15 15,15 M 85,85 100,70 115,85 m -15,-15 0,55 M 85,75 100,60 115,75"}]
+		},		
+		"111701": {
+			"names": ["light anti-tank rocket launcher"],
+			"icon": [{"icon": "111700"}, {"icon": ".light"}]
+		},
+		"111702": {
+			"names": ["medium anti-tank rocket launcher"],
+			"icon": [{"icon": "111700"}, {"icon": ".medium"}]
+		},
+		"111703": {
+			"names": ["heavy anti-tank rocket launcher"],
+			"icon": [{"icon": "111700"}, {"icon": ".heavy"}]
+		},
+		"111800": {
+			"names": ["nonlethal weapon"],
+			"icon": [{"d": "m 100,60 0,80 M 80,60 l40,0"}]
+		},
+		"111900": {
+			"names": ["taser"],
+			"icon": [{"icon": "111800"}, {"text": "Z"}]
+		},
+		"112000": {
+			"names": ["water cannon"],
+			"icon": [{"icon": "111800"}, {"text": "W"}]
+		},
+
+
+		".wheeled_limited": {
+			"names": [".wheeled_limited"],
+			"icon": [
+				{"d": "m 70,130 60,0"},
+				{"r": 5, "pos": [70, 125]},
+				{"r": 5, "pos": [130, 125]}
+			]
+		},
+
+		".cross_country": {
+			"names": [".cross_country"],
+			"icon": [
+				{"d": "m 70,130 l 60,0"},
+				{"r": 5, "pos": [70, 135]},
+				{"r": 5, "pos": [100, 135]},
+				{"r": 5, "pos": [130, 135]}
+			]
+		},
+
+		"120000": {
+			"names": ["military vehicle", "vehicle"],
+			"icon": [
+				{"d": "m 60,120 80,0 M 120,80 c 25,0.2 25,40 0,40 l -40,0 C 55,120 55,80 80,80 Z"},
+				{"icon": ".wheeled_limited"}
+			]
+		},
+		"120100": {
+			"names": ["armored vehicle"],
+			"icon": [{"icon": "120000"}, {"text": "A"}]
+		},
+		"120101": {
+			"names": ["armored fighting vehicle", "AFV"],
+			"icon": [{"d": "m 70,100 30,-30 30,30 -30,30 z m 60,-30 0,60 m -60,-60 0,60 0,0"}]
+		},
+		"120102": {
+			"names": ["armored fighting vehicle command and control", "AFV C2", "C2 AFV"],
+			"icon": [
+				{"icon": "120101"}, {"text": "C2", "pos": [100, 110], "fontsize": 30}			
+			]
+		},
+		"120103": {
+			"names": ["armored personnel carrier", "APC"],
+			"icon": [{"d": "m 70,80 30,-10 30,10 m -60,-10 0,60 60,0 0,-60"}]
+		},
+
+		".medevac": {
+			"names": [".medevac"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 95,85 10,0 0,10 10,0 0,10 -10,0 0,10 -10,0 0,-10 -10,0 0,-10 10,0 z"}]
+		},
+
+		".tank_recovery": {
+			"names": [".tank_recovery"],
+			"icon": [{"d": "m 85,100 30,0 m 10,-10 c -13.1,0 -12.4,20 0,20 M 75,90 c 12.7,0.3 12.7,20.3 0,20"}]
+		},
+		".light_tank": {
+			"names": [".light_tank"],
+			"icon": [{"d": "m 100,80 0,40"}]
+		},
+		".medium_tank": {
+			"names": [".medium_tank"],
+			"icon": [{"d": "m 105,80 0,40 m -10,-40 0,40"}]
+		},
+		".heavy_tank": {
+			"names": [".heavy_tank"],
+			"icon": [{"d": "m 110,80 0,40 m -20,-40 0,40 m 10,-40 0,40"}]
+		},
+
+
+		"120104": {
+			"names": ["armored personnel carrier ambulance", "APC ambulance"],
+			"icon": [{"icon": "120103"}, {"icon": ".medevac"}]
+		},
+		"120105": {
+			"names": ["armored protected vehicle"],
+			"icon": [{"d": "M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z"}]
+		},
+		"120106": {
+			"names": ["armored protected vehicle recovery"],
+			"icon": [{"icon": "120105"}, {"icon": ".tank_recovery"}]
+		},
+		"120107": {
+			"names": ["armored protected vehicle medical evacuation"],
+			"icon": [{"icon": "120105"}, {"icon": ".medevac"}]
+		},
+		"120108": {
+			"names": ["armored personnel carrier recovery"],
+			"icon": [{"icon": "120103"}, {"icon": ".tank_recovery"}]
+		},
+		"120109": {
+			"names": ["combat service support vehicle"], 
+			"icon": [{"icon": "120103"}, {"d": "M 70,120 130,120"}]
+		},
+		"120110": {
+			"names": ["light armored wheeled vehicle"],
+			"icon": [{"icon": "120101"}, {"icon": ".cross_country"}]
+		},
+
+		".reconnaissance_equipment": {
+			"names": [".reconnaissance_equipment"],
+			"icon": [{
+				"unknown": [{"d": "M50,135L150,65"}],
+				"friend": [{"d": "M 50.6 132.9 L 149.3 67"}],
+				"neutral": [{"d": "M45,155L155,45"}],
+				"hostile": [{"d": "M60,130L140,70"}]
+			}]
+		},
+
+		"120111": {
+			"names": ["light armored reconnaissance"],
+			"icon": [
+				{"icon": "120110"},
+				{"icon": ".reconnaissance_equipment"}
+			]
+		},
+		"120200": {
+			"names": ["tank"],
+			"match weight": 0,
+			"icon": [{"d": "m 70,80 60,0 m -60,40 60,0 m -60,-50 0,60 0,0 m 60,-60 0,60"}]
+		},
+		"120201": {
+			"names": ["light tank"],
+			"icon": [{"icon": "120200"}, {"icon": ".light_tank"}]
+		},
+		"120202": {
+			"names": ["medium tank"],
+			"icon": [{"icon": "120200"}, {"icon": ".medium_tank"}]
+		},
+		"120203": {
+			"names": ["heavy tank"],
+			"icon": [{"icon": "120200"}, {"icon": ".heavy_tank"}]
+		},
+		"120300": {
+			"names": ["tank recovery vehicle"],
+			"until": "2525E",
+			"icon": [{"icon": "120200"}, {"icon": ".tank_recovery"}]
+		},
+		"120301": {
+			"names": ["light tank recovery vehicle"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "120200"}, 
+				{"icon": ".tank_recovery"},
+				{"d": "m 100,80 0,40"}
+			]
+		},
+		"120301": {
+			"names": ["light tank recovery vehicle"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "120200"}, 
+				{"icon": ".tank_recovery"},
+				{"icon": ".light_tank"}
+			]
+		},
+		"120302": {
+			"names": ["medium tank recovery vehicle"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "120200"}, 
+				{"icon": ".tank_recovery"},
+				{"icon": ".medium_tank"}
+			]
+		},
+		"120303": {
+			"names": ["heavy tank recovery vehicle"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "120200"}, 
+				{"icon": ".tank_recovery"},
+				{"icon": ".heavy_tank"}
+			]
+		}				,
+		"130000": {
+			"names": ["engineer vehicle and equipment"],
+			"icon": [
+				{"d": "m 60,120 80,0 M 120,80 c 25,0.2 25,40 0,40 l -40,0 C 55,120 55,80 80,80 Z"},
+				{"r": 7, "pos": [80, 130]},
+				{"r": 7, "pos": [120, 130]},
+				{"translate": [30, 30], "items": [
+					{"scale": "0.7", "items": [
+						{"d": "M60,120 L60,80 140,80 140,120 M100,80 L100,110"}
+					]}
+				]}
+			]
+		},
+		"130100": {
+			"names": ["bridge"],
+			"icon": [{"d": "m 70,115 10,-10 40,0 10,10 m -60,-30 10,10 40,0 10,-10"}]
+		},
+		"130200": {
+			"names": ["bridge mounted on utility vehicle"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "140100"},
+				{"scale": 0.8, "items": [{"icon": "130100"}]}
+			]
+		},
+		"130300": {
+			"names": ["fixed bridge"],
+			"icon": [{"icon": "130100"}, {"d": "M 100,70 100,130"}]
+		},
+		"130400": {
+			"names": ["floating bridge"],
+			"icon": [{"icon": "130100"}, {"d": "m 80,125 c 0,10 40,10 40,0 z"}]
+		},
+		"130500": {
+			"names": ["folding girder bridge"],
+			"icon": [{"icon": "130100"}, {"d": "M 110, 80 90,80 90,120 110,120"}]
+		},
+		"130600": {
+			"names": ["hollow deck bridge"],
+			"icon": [{"icon": "130100"}, {"d": "M 110, 80 90,80 90,120 110,120 z"}]
+		},
+		"130700": {
+			"names": ["drill"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 85,80 5,40 20,0 5,-40 z"}]
+		},
+		"130701": {
+			"names": ["drill mounted on utility vehicle"],
+			"icon": [
+				{"icon": "140100"},
+				{"scale": 0.8, "items": [{"icon": "130700"}]}
+			]
+		},
+		"130800": {
+			"names": ["earthmover", "dozer", "bulldozer"],
+			"icon": [{"d": "m 100,60 0,20 m -25,-15 5,-5 40,0 5,5 m -55,15 60,0 m -60,40 60,0 m 0,-50 0,60 m -60,-60 0,60 0,0"}]
+		},
+		"130801": {
+			"names": ["multifunctional earthmover/digger", "multifunctional earthmover", "multifunctional bulldozer"],
+			"icon": [{"icon": "130800"}, {"text": "MF"}]
+		},
+		"130900": {
+			"names": ["mine clearing equipment"],
+			"icon": [{"d": "m 100,80 0,15 -30,25 60,0 -30,-25"}]
+		},
+		"130901": {
+			"names": ["trailer-mounted mine clearing equipment"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "130900"}, 
+				{"translate": [0, -10], "items": [{"icon": ".wheeled_limited"}]}]
+		},
+		"130902": {
+			"names": ["mine clearing equipment on tank chassis"],
+			"icon": [{"icon": "120202"}, {"icon": "130900"}]
+		},
+		"130903": {
+			"names": ["assault breacher vehicle with combat dozer blade"],
+			"icon": [{"d": "m 100,95 30,25 m -30,-60 0,35 -30,25 m 10,-60 40,0 m -50,20 60,0 m -60,40 60,0 m -60,-50 0,60 0,0 m 60,-60 0,60"}]
+		},
+		"130904": {
+			"names": ["medium capability equipment"],
+			"icon": [
+				{"textm1": "RRC"},
+				{"d": "m 100,100 0,10 m -15,5 0,-15 30,0 0,15 M 70,80 c 0,15 60,15 60,0 l 0,40 -60,0 z"},
+				{"textm2": "M"}
+			]
+		},
+		"130905": {
+			"names": ["heavy capability equipment"],
+			"icon": [
+				{"textm1": "RRC"},
+				{"d": "m 100,100 0,10 m -15,5 0,-15 30,0 0,15 M 70,80 c 0,15 60,15 60,0 l 0,40 -60,0 z"},
+				{"textm2": "H"}
+			]
+		},
+		"131000": {
+			"names": ["mine laying equipment"],
+			"icon": [
+				{"d": "m 120,100 c 0,5.5 -9,10 -20,10 -11,0 -20,-4.5 -20,-10 0,-5.5 9,-10 20,-10 11,0 20,4.5 20,10 z m -5,-20 -30,40 m 0,-40 30,40 m -15,-40 0,40", "fill": true, "stroke": false},
+				{"d": "m 80,65 0,10 40,0 0,-10 z", "fill": "icon", "stroke": false}
+			]
+		},
+		"131001": {
+			"names": ["mine laying equipment on utility vehicle"],
+			"icon": [
+				{"icon": "140100"},
+				{"translate": [0, 10], "items": [
+					{"scale": 0.7, "items": [{"icon": "131000"}]}
+				]}
+			]
+		},
+		"131002": {
+			"names": ["armored carrier with Volcano"],
+			"icon": [{"icon": "120103"}, {"text": "V"}]
+		},
+		"131003": {
+			"names": ["truck mounted with Volcano"],
+			"icon": [
+				{"icon": "140100"}, 
+				{"icon": ".wheeled_limited"},
+				{"text": "V"}
+			]
+		},
+		"131100": {
+			"names": ["dozer tank chassis", "bulldozer tank chassis"],
+			"icon": [{"d": "m 90,60 20,0 m -10,0 0,20 m -30,0 60,0 m -60,-10 0,60 0,0 m 60,-60 0,60 m -60,-10 60,0"}]
+		},
+		"131101": {
+			"names": ["armored dozer", "armored bulldozer"],
+			"icon": [{"d": "m 70,130 60,0 m -30,-70 0,10 m -30,10 30,-10 30,10 m 0,-10 0,60 m -60,-60 0,60 0,0 m 20,-70 20,0"}]
+		},
+
+		".engineer": {
+			"names": [".engineer"],
+			"icon": [{"d": "M60,120 L60,80 140,80 140,120 M100,80 L100,110"}]
+		},
+
+		"131200": {
+			"names": ["armored assault"],
+			"icon": [
+				{"icon": "120103"}, 
+				{"scale": 0.6, "items": [{"icon": ".engineer"}]}
+			]
+		},
+		"131300": {
+			"names": ["armored engineer recon vehicle", "AERV"],
+			"icon": [
+				{"icon": "120103"}, 
+				{"scale": 0.6, "items": [{"icon": ".engineer"}]},
+				{"d": "M 130,80 70,130"}
+			]
+		},
+		"131400": {
+			"names": ["backhoe"],
+			"icon": [
+				{"icon": "140100"},
+				{"icon": ".wheeled_limited"},
+				{"d": "M 130,130 100,80 75,95 75,95"},
+				{"fill": true, "d": "M 75,105 85,95 75,95 z"}
+			]
+		},
+		"131500": {
+			"names": ["construction vehicle"],
+			"icon": [
+				{"icon": "140100"},
+				{"icon": ".wheeled_limited"},
+				{"scale": 0.6, "items": [{"icon": ".engineer"}]}				
+			]
+		},
+		"131600": {
+			"names": ["ferry transporter"],
+			"icon": [
+				{"icon": "140100"},
+				{"icon": ".cross_country"},
+				{"d": "m 75,100 c 15,15 35,15 50,0 z"}				
+			]
+		},
+
+
+
+
+		"140000": {
+			"names": ["utility vehicle"],
+			"icon": []
+		},
+		"140100": {
+			"names": ["vehicle", "vehicle (generic)", "utility vehicle"],
+			"icon": [{"d": "m 70,65 c 0,15 60,15 60,0 l 0,65 -60,0 z"}]
+		},
+		"140200": {
+			"names": ["medical vehicle"],
+			"icon": [{"icon": "140100"}, {"d": "m 70,100 l 60,0 M 100,78.3 100,130"}]
+		},
+		"140300": {
+			"names": ["medical evacuation vehicle"],
+			"icon": [{"icon": "140100"}, {"icon": ".medevac"}]
+		},
+		"140400": {
+			"names": ["mobile emergency physician"],
+			"icon": [
+				{"icon": "140100"}, 
+				{"d": "m 70,100 l 60,0 M 100,78.3 100,130"},
+				{"d": "m 70,100 l 60,0 M 100,78.3 100,130 M 85,85 115,85"}				
+			]
+		},
+		"140500": {
+			"names": ["bus"],
+			"icon": [
+				{"icon": "140100"},
+				{"text": "B"}
+			]
+		},
+		"140600": {
+			"names": ["semi trailer and truck"],
+			"icon": [
+				{"icon": "140100"},
+				{"d": "m 140,90 0,20 m -10,-10 10,0"},
+				{"r": 5, "pos": [75, 135]},
+				{"r": 5, "pos": [85, 135]},
+				{"r": 5, "pos": [125, 135]}
+			]
+		},
+
+		".light_utility_vehicle": {
+			"names": [".light_utility_vehicle"],
+			"icon": [{"d": "M 100,78.3 100,130"}]
+		},
+		".medium_utility_vehicle": {
+			"names": [".medium_utility_vehicle"],
+			"icon": [{"d": "m 105,130 0,-52 M 95,130 l0,-52"}]
+		},
+		".heavy_utility_vehicle": {
+			"names": [".heavy_utility_vehicle"],
+			"icon": [{"d": "m 110,130 0,-53 m -20,50 0,-53 m 10,1.3 0,52"}]
+		},
+
+		"140601": {
+			"names": ["light semi-trailer and truck"],
+			"icon": [{"icon": "140600"}, {"icon": ".light_utility_vehicle"}]
+		},
+		"140602": {
+			"names": ["medium semi-trailer and truck"],
+			"icon": [{"icon": "140600"}, {"icon": ".medium_utility_vehicle"}]
+		},
+		"140603": {
+			"names": ["heavy semi-trailer and truck"],
+			"icon": [{"icon": "140600"}, {"icon": ".heavy_utility_vehicle"}]
+		},
+
+		"140700": {
+			"names": ["limited cross-country truck", "truck"],
+			"icon": [{"icon": "140100"}, {"icon": ".wheeled_limited"}]
+		},
+		"140800": {
+			"names": ["cross-country truck"],
+			"icon": [{"icon": "140100"}, {"icon": ".cross_country"}]
+		},
+		"140900": {
+			"names": ["petroleum, oil, and lubricant vehicle", "POL vehicle"],
+			"icon": [
+				{"icon": "140100"},
+				{"scale": 0.8, "items": [{"d": "m 100,120 0,-20 -15,-20 30,0 -15,20 "}]}
+			]
+		},
+		"141000": {
+			"names": ["water vehicle"],
+			"icon": [
+				{"icon": "140100"},
+				{"scale": 0.7, "items": [{"d": "m 65,90 50,0 c 10,0 20,10 20,20 m -40,-30 20,0 m -10,0 0,10"}]}
+			]
+		},
+		"141100": {
+			"names": ["amphibious utility wheeled vehicle"],
+			"icon": [
+				{"icon": "140100"},
+				{"d": "m 70,95 c 10,0 0,10 10,10 10,0 0,-10 10,-10 10,0 0,10 10,10 10,0 0,-10 10,-10 10,0 0,10 10,10 10,0 0,-10 10,-10"},
+				{"r": 5, "pos": [75, 135]},
+				{"r": 5, "pos": [125, 135]}
+			]
+		},
+		"141200": {
+			"names": ["tow truck"],
+			"icon": [
+				{"icon": "140100"},
+				{"d": "m 130,130 -40,-40 0,25 c 0,5 -10,5 -10,0"}
+			]
+		},
+		"141201": {
+			"names": ["light tow truck"],
+			"icon": [
+				{"icon": "141200"},
+				{"d": "m 105,115 10,-10"}
+			]
+		},
+		"141202": {
+			"names": ["heavy tow truck"],
+			"icon": [
+				{"icon": "141200"},
+				{"d": "m 120,110 -10,10 m -10,-10 10,-10 m -5,15 10,-10"}	
+			]
+		},
+
+
+		"150000": {
+			"names": ["train"],
+			"icon": []
+		},
+		"150100": {
+			"names": ["locomotive"],
+			"icon": [{"d": "m 70,70 0,60 60,0 0,-30 -30,0 0,-30 z"}]
+		},
+		"150200": {
+			"names": ["railcar"],
+			"until": "2525E",
+			"icon": [
+				{"icon": "140100"},
+				{"r": 5, "pos": [75, 135]},
+				{"r": 5, "pos": [85, 135]},
+				{"r": 5, "pos": [115, 135]},
+				{"r": 5, "pos": [125, 135]}
+			]
+		},
+
+
+
+		"160000": {
+			"names": ["civilian vehicle"],
+			"civ": true,
+			"icon": []
+		},
+		"160100": {
+			"names": ["automobile", "car"],
+			"civ": true,
+			"icon": [
+				{"fill" : "white", "d": "m 90,125 20,0 m -20,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 35,0 5,0 0,-20 -20,0 0,-20 -20,0 0,20 -20,0 0,20 5,0 m 50,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z"},
+				{"strokewidth": 2, "d": "m 95,90 0,15 10,0 0,-15 z"}
+			]
+		},
+
+		".civ_vic_light": {
+			"names": [".civ_vic_light"],
+			"icon": [{"d": "m 100,125 0,-20"}]
+		},
+		".civ_vic_medium": {
+			"names": [".civ_vic_medium"],
+			"icon": [{"d": "m 103,105 0,20 m -6,-20 0,20"}]
+		},
+		".civ_vic_heavy": {
+			"names": [".civ_vic_heavy"],
+			"icon": [{"d": "m 106,105 0,20 m -12,-20 0,20 m 6,-20 0,20"}]
+		},
+
+		"160101": {
+			"names": ["compact car"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160100"}, {"icon": ".civ_vic_light"}]
+		},
+		"160102": {
+			"names": ["midsize car"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160100"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160103": {
+			"names": ["sedan", "heavy car"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160100"}, {"icon": ".civ_vic_heavy"}]
+		},
+
+		"160200": {
+			"names": ["open-bed truck"],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "d": "m 90,125 20,0 m -20,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 35,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 0,0 5,0 0,-20 -20,0 -20,0 0,-20 -20,0 0,20 0,20 5,0"},
+				{"strokewidth": 2, "d": "m 75,90 0,15 10,0 0,-15 z"}
+			]
+		},
+		"160201": {
+			"names": ["pickup truck", "light truck"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160200"}, {"icon": ".civ_vic_light"}]
+		},
+		"160202": {
+			"names": ["small truck"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160200"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160203": {
+			"names": ["large truck"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160200"}, {"icon": ".civ_vic_heavy"}]
+		},
+		"160300": {
+			"names": ["multiple passenger vehicle"],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "d": "m 90,125 20,0 m -20,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 35,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 0,0 5,0 0,-20 0,-20 -20,0 -20,0 -20,0 0,20 0,20 5,0"},
+				{"strokewidth": 2, "d": "m 115,90 0,15 10,0 0,-15 z m -20,0 0,15 10,0 0,-15 z m -20,0 0,15 10,0 0,-15 z"}
+			]
+		},
+		"160301": {
+			"names": ["van"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160300"}, {"icon": ".civ_vic_light"}]
+		},
+		"160302": {
+			"names": ["small bus"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160300"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160303": {
+			"names": ["large bus"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160300"}, {"icon": ".civ_vic_heavy"}]
+		},
+
+		"160400": {
+			"names": ["civilian utility vehicle", "utility vehicle"],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "d": "m 90,125 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 35,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m -35,0 20,0 m 15,0 5,0 0,-20 0,-20 -20,0 -20,0 0,20 -20,0 0,20 5,0"},
+				{"strokewidth": 2, "d": "m 95,90 0,15 10,0 0,-15 z"}
+			]
+		},
+		"160401": {
+			"names": ["sport utility vehicle", "SUV"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160400"}, {"icon": ".civ_vic_light"}]
+		},
+		"160402": {
+			"names": ["small box truck"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160400"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160403": {
+			"names": ["large box truck"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160400"}, {"icon": ".civ_vic_heavy"}]
+		},
+
+		"160500": {
+			"names": ["jeep type vehicle"],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "d": "m 90,125 20,0 m -20,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 35,0 c 0,-4.1 -3.4,-7.5 -7.5,-7.5 -4.1,0 -7.5,3.4 -7.5,7.5 0,4.1 3.4,7.5 7.5,7.5 4.1,0 7.5,-3.4 7.5,-7.5 z m 0,0 5,0 0,-20 -60,0 0,20 5,0 m 15,-20 5,-15"}		
+			]
+		},
+
+		"160501": {
+			"names": ["light jeep type vehicle", "small jeep type vehicle"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160500"}, {"icon": ".civ_vic_light"}]
+		},
+		"160502": {
+			"names": ["medium jeep type vehicle"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160500"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160503": {
+			"names": ["heavy jeep type vehicle", "large jeep type vehicle"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160500"}, {"icon": ".civ_vic_heavy"}]
+		},
+
+		".civ_trailer": {
+			"names": [".civ_trailer"],
+			"icon": [{"d": "m 140,105 0,20 m -10,-10 10,0"}]
+		},
+
+		"160600": {
+			"names": ["tractor trailer truck with box"],
+			"civ": true,
+			"icon": [
+				{"icon": "160400"},
+				{"icon": ".civ_trailer"}
+			]
+		},
+		"160601": {
+			"names": [
+				"light tractor trailer truck with box",
+				"small tractor trailer truck with box"
+			],
+			"civ": true,
+			"until": "2525E",
+			"icon": [{"icon": "160600"}, {"icon": ".civ_vic_light"}]
+		},
+		"160602": {
+			"names": ["medium tractor trailer truck with box"],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160600"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160603": {
+			"names": [
+				"heavy tractor trailer truck with box",
+				"large tractor trailer truck with box"
+			],
+			"until": "2525E",
+			"civ": true,
+			"icon": [{"icon": "160600"}, {"icon": ".civ_vic_heavy"}]
+		},
+
+		"160700": {
+			"names": ["tractor trailer truck with flatbed"],
+			"civ": true,
+			"icon": [
+				{"icon": "160200"},
+				{"icon": ".civ_trailer"}
+			]
+		},
+		"160701": {
+			"names": [
+				"light tractor trailer truck with flatbed",
+				"small tractor trailer truck with flatbed"
+			],
+			"civ": true,
+			"until": "2525E",
+			"icon": [{"icon": "160700"}, {"icon": ".civ_vic_light"}]
+		},
+		"160702": {
+			"names": ["medium tractor trailer truck with flatbed"],
+			"civ": true,
+			"until": "2525E",
+			"icon": [{"icon": "160700"}, {"icon": ".civ_vic_medium"}]
+		},
+		"160703": {
+			"names": [
+				"heavy tractor trailer truck with flatbed",
+				"large tractor trailer truck with flatbed"
+			],
+			"civ": true,
+			"until": "2525E",
+			"icon": [{"icon": "160700"}, {"icon": ".civ_vic_heavy"}]
+		},
+
+		"160800": {
+			"names": ["known insurgent vehicle"],
+			"civ": true,
+			"icon": [{"d": "m 65,95 70,0 m 0,10 c 0,5.5 -4.5,10 -10,10 -5.5,0 -10,-4.5 -10,-10 0,-5.5 4.5,-10 10,-10 5.5,0 10,4.5 10,10 z m -50,0 c 0,5.5 -4.5,10 -10,10 -5.5,0 -10,-4.5 -10,-10 0,-5.5 4.5,-10 10,-10 5.5,0 10,4.5 10,10 z"}]
+		},
+
+		"160900": {
+			"names": ["drug vehicle"],
+			"civ": true,
+			"icon": [{"icon": "160800"}, {"textm1": "DRUG"}]
+		},
+
+		"170000": {
+			"names": ["law enforcement"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 99.6,51 c -2.8,0 -5,2.3 -5,5.3 0,2.1 1.2,3.9 2.8,4.7 L 87.8,78.3 69.5,78.4 c -0.1,-2.8 -2.3,-5.1 -5,-5.1 -2.8,0 -5,2.3 -5,5.3 0,2.9 2.2,5.3 5,5.3 0.7,0 1.4,-0.2 2,-0.4 l 9.2,16.8 -9.4,17.2 c -0.6,-0.2 -1.2,-0.4 -1.8,-0.4 -2.8,0 -5,2.4 -5,5.3 0,2.9 2.2,5.3 5,5.3 2.8,0 5,-2.3 5,-5.3 0,-0.1 -0,-0.2 -0,-0.3 l 18.3,0.1 9.5,17.1 c -1.6,0.9 -2.7,2.6 -2.7,4.6 0,2.9 2.3,5.3 5,5.3 2.8,0 5,-2.3 5,-5.3 0,-1.9 -0.9,-3.5 -2.3,-4.4 l 9.6,-17.3 18.7,-0.1 c -0,0.1 -0,0.2 -0,0.3 0,2.9 2.3,5.3 5,5.3 2.8,0 5,-2.3 5,-5.3 0,-2.9 -2.2,-5.3 -5,-5.3 -0.8,0 -1.5,0.2 -2.1,0.5 l -9.5,-17.4 9.5,-17.4 c 0.6,0.3 1.4,0.5 2.1,0.5 2.8,0 5,-2.4 5,-5.3 0,-2.9 -2.2,-5.3 -5,-5.3 -2.8,0 -5,2.3 -5,5.3 0,0.1 0,0.2 0,0.3 L 111.8,78.3 102.1,60.8 c 1.5,-0.9 2.5,-2.6 2.5,-4.5 0,-2.9 -2.2,-5.3 -5,-5.3 z"}]
+		},
+		"170100": {
+			"names": ["Bureau of Alcohol, Tobacco, Firearms and Explosives", "ATF"],
+			"icon": [{"text": "ATF"}]
+		},
+		"170200": {
+			"names": ["border patrol"],
+			"icon": [
+				{"stroke": false, "fill": "icon", "d": "M 122.8 66.8 C 119.9 66.8 117.4 68.6 117.4 71.6 L 117.4 73.1 L 128.7 73.1 L 128.7 72.4 C 128.7 68.8 126.5 66.8 122.8 66.8 z M 108.6 74.8 L 108.6 76 L 117.6 76 L 117.5 77.5 L 118 80.8 C 119.1 81.5 118.9 82.5 120.8 83.5 C 122.1 84.1 124 84 125.2 83.4 C 127.5 82.4 129 79.2 128.3 76 L 137.5 76 L 137.5 74.8 L 108.6 74.8 z M 94.8 82.1 C 93.3 82.1 92 83.5 92 85 L 92 85.2 C 92 86.6 96 91.3 97 92.6 C 98.2 94.3 100.8 98.8 103.2 98.8 C 104.5 98.8 111.1 93.7 112.6 92.8 L 112.6 106.2 L 126.4 85.6 C 123 85.6 114.9 85.2 112.2 85.9 C 110.2 86.4 105 91.6 103.6 91.7 C 103.4 91 100.6 87.5 100 86.5 C 99.2 85.4 97.2 82.1 95.6 82.1 L 94.8 82.1 z M 130.4 85.6 C 129.6 85.6 117.5 104.1 116.3 106.2 L 128.1 106.2 L 128.1 110.6 L 112.5 110.6 L 112.5 133.2 L 120.7 133.2 L 122 117.5 L 124.3 117.5 L 125.6 133.2 L 133.5 133.2 L 133.5 87.9 C 133.5 87.2 131.2 85.6 130.4 85.6 z M 66.9 90.7 C 66.5 91.4 62.5 96.9 62.5 96.9 C 62.5 97.8 76.7 107.2 78.5 108.3 C 81.4 110.2 83.9 112.1 86.7 114 C 88.2 115 89.4 115.9 90.8 116.8 C 92.1 117.7 94.1 118.5 94.1 120.4 L 94.1 133.2 L 105.5 133.2 L 105.5 121.7 C 105.5 120.6 107.2 119 107.2 118.8 C 107.2 117.6 106.1 118.6 105.6 116.9 C 105.2 115.4 105.4 115.6 104.5 114.5 C 103.5 113.1 101.9 112 99.8 112 C 96.8 112 97.6 111.8 95.3 110.3 C 93.9 109.3 92.5 108.4 91.2 107.4 C 88.7 105.5 85.8 103.5 83.2 101.8 C 80.9 100.3 68.2 91 66.9 90.7 z M 67.9 92.6 L 72.7 95.7 L 72.8 103 L 67.9 99.9 L 67.9 92.6 z M 77.8 99.3 L 82.6 102.6 L 82.6 110 L 77.8 106.6 L 77.8 99.3 z M 87.4 106.2 L 92.5 109.5 L 92.4 116.9 L 87.4 113.5 L 87.4 106.2 z"},
+				{"stroke": false, "fill": "white", "d": "M 117.4 73.1 L 117.4 74.8 L 128.7 74.8 L 128.7 73.1 L 117.4 73.1 z M 126.4 85.6 L 112.6 106.2 L 112.6 110.6 L 128.1 110.6 L 128.1 106.2 L 116.4 106.2 C 117.5 104.1 129.6 85.6 130.4 85.6 L 126.4 85.6 z M 67.9 92.6 L 67.9 99.9 L 72.8 103 L 72.7 95.7 L 67.9 92.6 z M 77.8 99.3 L 77.8 106.6 L 82.6 110 L 82.6 102.6 L 77.8 99.3 z M 87.4 106.2 L 87.4 113.5 L 92.4 116.9 L 92.5 109.5 L 87.4 106.2 z "}
+			]			
+		},
+		"170300": {
+			"names": ["customs service"],
+			"icon": [
+				{"stroke": false, "fill": true, "d": "M 115.5 69.8 C 115.8 70.4 116.9 72.9 117.5 72.9 L 128.3 72.9 L 128.3 69.8 L 115.5 69.8 z M 117.3 74.7 C 116.8 74.7 116 75.7 115.8 76.1 L 117.2 76.1 L 117.2 76.8 C 117.2 79.6 119.8 81.8 122.8 81.8 C 126.5 81.8 128.3 78.6 128.3 74.7 L 117.3 74.7 z M 111.3 83.6 C 110.5 83.6 99.4 91.8 97.8 92.9 C 95.6 94.4 93 96.1 91 97.7 C 89.1 99.2 85.4 100.5 85.4 103.6 L 85.4 104 C 85.4 104.7 87.1 106.7 88.2 106.7 L 88.8 106.7 C 90.2 106.7 108 93.4 111.3 91.7 L 111.3 105.3 L 126 83.6 L 111.3 83.6 z M 75.3 83.6 C 74.5 83.6 73.4 84.4 73.4 85 L 73.4 108.9 C 73.4 109.8 73.9 110.2 74.4 110.5 L 78.5 110.5 L 78.5 83.6 L 75.3 83.6 z M 78.5 110.5 L 78.5 135.2 L 105.6 135.2 L 105.6 110.5 L 78.5 110.5 z M 130.5 83.6 C 129.6 83.6 123.8 92.9 122.9 94.2 C 121.9 95.7 115.7 104.5 115.5 105.3 L 127.6 105.3 L 127.6 110.3 L 111.5 110.3 L 111.5 134.8 L 119.6 134.8 C 120.6 134.8 121.1 127.9 121.3 126.6 C 121.7 123.9 122.4 120.4 122.6 117.8 L 122.9 117.8 L 125.4 134.8 L 133.9 134.8 L 133.9 86.7 C 133.9 85.6 131.9 83.6 130.7 83.6 L 130.5 83.6"},
+				{"stroke": false, "fill": "white", "d": "M 117.5 72.9 L 117.3 74.7 L 128.3 74.7 L 128.3 72.9 L 117.5 72.9 z M 126 83.7 L 111.3 105.3 L 111.5 110.3 L 127.7 110.3 L 127.7 105.3 L 115.5 105.3 C 115.7 104.5 121.9 95.7 122.9 94.3 C 123.8 92.9 129.6 83.7 130.5 83.7 L 126 83.7 z "}
+			]
+		},
+		"170400": {
+			"names": ["drug enforcement administration", "DEA"],
+			"icon": [{"text": "DEA"}]			
+		},
+		"170500": {
+			"names": ["Department of Justice", "DOJ"],
+			"icon": [{"stroke": false, "fill": true, "d": "M 100.2 62.3 C 100.1 63.2 99 66.3 98.7 67.4 C 97.8 69.9 99.4 70 99.4 72.3 L 99.4 73 C 99.4 73.7 98.9 73.5 98.3 73.8 C 96.6 72.4 94.2 71 91.3 71 L 90 71 C 84.2 71 80 75.5 74.6 75.5 L 73.9 75.5 C 72.3 75.5 71.5 74.1 71.3 75.8 L 74.3 77.2 C 71.8 82.4 69.9 89.7 67.5 95.5 C 66.3 98.6 65.3 101.6 64.1 104.7 C 63.5 106.3 63.1 107.7 62.5 109.3 C 62 110.5 61.8 113.1 60.2 113.2 C 62.4 116.4 68 120.5 73.3 120.5 L 76 120.5 C 81.6 120.5 87.3 116.6 89.5 113.2 L 88.2 113.2 L 75.4 77.2 L 74.5 77.2 L 74.5 77 L 75.4 77.2 L 78.6 77.7 L 79.3 77.7 L 89.3 76.2 L 90.4 76.3 C 93.7 76.3 93.8 80.2 94.7 80.2 L 97.7 80.2 L 97.7 129.2 L 86.1 129.2 L 86.1 131.5 L 81.4 131.5 L 81.4 134.1 L 77.5 134.1 L 77.5 138.2 L 123.3 138.2 L 123.3 133.9 L 119.3 133.9 L 119.3 131.6 L 114.5 131.6 L 114.5 129.2 L 102.6 129.2 L 102.6 80.2 L 106 80.2 C 107 80.2 106.6 76.4 110.7 76.4 L 111.3 76.4 L 121.2 77.7 L 122.2 77.7 L 125.4 77.3 C 124.3 79.7 123.1 83.8 122.1 86.4 C 120.9 89.6 119.9 92.6 118.7 95.8 C 117.5 98.9 116.6 101.9 115.4 105 C 114.9 106.4 114.2 108.1 113.7 109.6 C 113.4 110.4 113.1 111.1 112.9 111.9 C 112.5 113.2 112.8 113.2 111.2 113.2 C 113.3 116.4 119.2 120.5 124.6 120.5 L 127.2 120.5 C 132.6 120.5 138.8 116.4 140.9 113.2 L 139.8 113.2 L 126.4 77.1 C 127.4 76.9 129.3 76.2 129.3 75.3 C 129.3 74.5 127.8 75.5 126.7 75.5 L 126.3 75.5 C 120.8 75.5 116.6 71 110.9 71 L 109.6 71 C 106.7 71 104.2 72.4 102.6 73.8 C 101.8 73.4 101.3 73.6 101.3 72.3 C 101.3 71.9 102.4 68.8 102.5 68.5 L 100.6 62.3 L 100.2 62.3 z M 126.1 80.8 L 137.8 113.2 L 114.1 113.2 L 126.1 80.8 z M 74.8 80.8 L 86.5 113.2 L 63.1 113.1 L 74.8 80.8 z"}]			
+		},
+		"170600": {
+			"names": ["Federal Bureau of Investigation", "FBI"],
+			"icon": [{"text": "FBI"}]			
+		},
+		"170700": {
+			"names": ["police"],
+			"icon": [{"d": "M 100,140 C 53.7465,122.654 71.0916,95.6737 65.3099,70.6197 c 11.5634,13.4906 23.1267,13.4906 34.6901,0 11.564,13.4906 23.126,13.4906 34.69,0 C 128.908,95.6737 146.254,122.654 100,140 Z"}]			
+		},
+		"170800": {
+			"names": ["United States Secret Service", "Secret Service"],
+			"icon": [{"text": "USSS"}]			
+		},
+		"170900": {
+			"names": ["Transportation Security Administration", "TSA"],
+			"icon": [{"text": "TSA"}]			
+		},
+		"171000": {
+			"names": ["coast guard"],
+			"icon": [
+				{"fill": "white", "d": "m 75,100 0,-35 50,0 0,35 20,0 -15,35 -60,0 -15,-35 z"},
+				{"d": "m 135,100 -15,35 -10,0 15,-35 z", "fill": "icon"}
+			]			
+		},
+		"171100": {
+			"names": ["US Marshals Service"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 100,70 7.1,20.3 21.5,0.4 -17.1,13 6.2,20.6 L 100,112 82.4,124.3 88.6,103.7 71.5,90.7 92.9,90.3 z m 0,-5 c -19.3,0 -35,15.7 -35,35 0,19.3 15.7,35 35,35 19.3,0 35,-15.7 35,-35 0,-19.3 -15.7,-35 -35,-35 z m 0,5 c 16.6,0 30,13.4 30,30 0,16.6 -13.4,30 -30,30 -16.6,0 -30,-13.4 -30,-30 0,-16.6 13.4,-30 30,-30 z"}]			
+		},
+
+
+		"180000": {
+			"names": ["pack animals"],
+			"icon": [{"d": "m 70,125 15,-50 15,50 15,-50 15,50 "}]
+		},
+		"190000": {
+			"names": ["missile support"],
+			"icon": [
+				{"icon": "120000"},
+				{"text": "MSL", "pos": [100, 100], "fontsize": 20},
+				{"text": "SPT", "pos": [100, 115], "fontsize": 20}
+			]
+		},
+		"190100": {
+			"names": ["transloader"],
+			"icon": [
+				{"icon": "120000"},
+				{"text": "MSL", "pos": [100, 110], "fontsize": 30},
+				{"d": "m 75,70 50,0 m -25,10 c 0,-5 0,-10 0,-10"}
+			]
+		},
+		"190200": {
+			"names": ["transporter"],
+			"icon": [
+				{"icon": "120000"},
+				{"text": "MSL", "pos": [100, 110], "fontsize": 30},
+				{"d": "m 55,85 90,0"}
+			]
+		},
+		"190300": {
+			"names": ["crane", "loading device"],
+			"icon": [
+				{"icon": "120000"},
+				{"text": "MSL", "pos": [100, 110], "fontsize": 30},
+				{"d": "m 75,80 25,-20 c 0,0 0,15 0,15 l 5,0 0,-5"}
+			]
+		},
+		"190400": {
+			"names": ["propellant transporter"],
+			"icon": [
+				{"icon": "120000"},
+				{"text": "MSL", "pos": [90, 110], "fontsize": 20},
+				{"d": "m 120,115 0,-15 -10,-10 20,0 -10,10"}
+			]
+		},
+		"190500": {
+			"names": ["warhead transporter"],
+			"icon": [
+				{"icon": "120000"},
+				{"text": "MSL", "pos": [100, 100], "fontsize": 20},
+				{"text": "WHD", "pos": [100, 115], "fontsize": 20}
+			]
+		},
+
+
+
+
+		"200000": {
+			"names": ["other equipment"],
+			"icon": []
+		},
+		"200100": {
+			"names": ["antennae", "antenna"],
+			"icon": [{"d": "m 80,60 20,20 20,-20 m -20,0 0,80"}]
+		},
+		"200200": {
+			"names": ["bomb"],
+			"icon": [{"text": "BOMB"}]
+		},
+		"200300": {
+			"names": ["booby trap"],
+			"icon": [{"d": "m 85,105 15,-25 15,25 m -35,5 c 0,-10 40,-10 40,0 0,10 -40,10 -40,0 z"}]
+		},
+		"200400": {
+			"names": ["CBRN equipment"],
+			"icon": [
+				{"d": "M80,140 c0,-20 10,-60 50,-63 m-10,63 c0,-20 -10,-60 -50,-63 "},
+				{"r": 8, "pos": [70, 85], "fill": true, "stroke": true},
+				{"r": 8, "pos": [130, 85], "fill": true, "stroke": true}
+			]
+		},
+		"200500": {
+			"names": ["computer system"],
+			"icon": [
+				{"d": "m 100,132 0,-10 -35,0 0,-50 70,0 0,50 -35,0 m -25,10 50,0"}
+			]
+		},
+		"200600": {
+			"names": ["command launch equipment", "CLE"],
+			"icon": [{"text": "CLE"}]
+		},
+		"200700": {
+			"names": ["generator set", "generator"],
+			"icon": [{"text": "G"}]
+		},
+		"200800": {
+			"names": ["ground-based midcourse defense fire control center"],
+			"icon": [{"text": "GFC"}]
+		},
+		"200900": {
+			"names": ["in-flight interceptor communications system data terminal"],
+			"icon": [{"d": "m 80,82.4 45,-2 -4,37 m -6,-1 0,-35 -34,9 m 12,21 0,8 M 80,82.4 c 0,25 16,35 41,35"}]
+		},
+		"201000": {
+			"names": ["laser", "directed energy"],
+			"icon": [{"d": "m 100,55 0,25 10,5 -20,5 20,5 -20,5 10,5 0,15 10,5 -20,5 20,5 -20,5 20,5 M 90,65 100,55 110,65"}]
+		},
+		"201100": {
+			"names": ["military information support operations", "MISO", "PSYOP"],
+			"icon": [{"fill": "white", "d": "m 110,95 10,0 m -10,10 10,0 m -10,10 10,0 m -10,-30 10,0 m -10,-5 -10,10 -30,0 0,20 30,0 10,10 z"}]
+		},
+		"201200": {
+			"names": ["sustainment shipments"],
+			"icon": [{"text": "SUST"}]
+		},
+		"201300": {
+			"names": ["tent"],
+			"icon": [{"d": "m 65,124.4 10,-37 25,-10 25,10 10,37 z"}]
+		},
+		"201301": {
+			"names": ["civilian tent"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 75,120 10,-30 15,-10 15,10 10,30 z"}]
+		},
+		"201302": {
+			"names": ["military tent"],
+			"icon": [{"fill": true, "d": "m 75,120 10,-30 15,-10 15,10 10,30 z"}]
+		},
+		"201400": {
+			"names": ["unit deployment shipments"],
+			"icon": [{"text": "DPLY"}]
+		},
+		"201500": {
+			"names": ["emergency medical operation"],
+			"icon": [{"fill": true, "d": "m 90,60 0,22.7 -19.7,-11.3 -10,17.3 L 80,100 l -19.7,11.3 10,17.3 L 90,117.3 90,140 l 20,0 0,-22.7 19.7,11.3 10,-17.3 L 120,100 l 19.7,-11.3 -10,-17.3 L 110,82.7 110,60 90,60 z"}]
+		},
+		"201501": {
+			"names": ["medical evacuation helicopter"],
+			"until": "2525E",
+			"icon": [{"fill": true, "d": "M60,85 l40,15 40,-15 0,30 -40,-15 -40,15 z M95.5,80 l9,0 0,-9 9,0 0,-9 -9,0 0,-9 -9,0 0,9 -9,0 0,9 9,0 Z"}]
+		},
+
+
+
+
+		"210000": {
+			"names": ["land mines"],
+			"match weight": -1,
+			"icon": [{"r": 22, "pos": [100, 100]}]
+		},
+		"210100": {
+			"names": ["land mine"],
+			"icon": [{"r": 22, "pos": [100, 100]}]
+		},
+		"210200": {
+			"names": ["anti-personnel land mine"],
+			"icon": [
+				{"r": 22, "pos": [100, 100], "fill": true},
+				{"fill": true, "stroke": false, "d": "M117,82 l20,-18 -18,25z M83,82 l-20,-18 18,25z"}
+			]
+		},
+		"210300": {
+			"names": ["anti-tank mine"],
+			"icon": [{"r": 22, "pos": [100, 100], "fill": true}]
+		},
+		"210400": {
+			"names": ["improvised explosive device", "IED"],
+			"icon": [{"text": "IED"}]
+		},
+		"210500": {
+			"names": ["less than lethal mine"],
+			"icon": [
+				{"r": 22, "pos": [100, 100], "fill": false},
+				{"fill": true, "stroke": false, "d": "M117,82 l20,-18 -18,25z M83,82 l-20,-18 18,25z"}
+			]
+		},
+
+
+
+		"220000": {
+			"names": ["sensors"],
+			"icon": [],
+			"match weight": -1
+		},
+		"220100": {
+			"names": ["sensor"],
+			"icon": [{"fill": true, "d": "m 100,60 c 0,15 25,40 40,40 -15,0 -40,25 -40,40 0,-15 -25,-40 -40,-40 15,0 40,-25 40,-40 z"}]
+		},
+		"220200": {
+			"names": ["sensor emplaced"],
+			"icon": [
+				{"scale": 0.75, "items": [{"icon": "220100"}]},
+				{"d": "m 70,75 10,-15 10,15 10,-15 10,15 10,-15 10,15"}
+			]
+		},
+		"220300": {
+			"names": ["radar"],
+			"icon": [{"d": "M72,95 l30,-25 0,25 30,-25 M70,70 c0,35 15,50 50,50"}]
+		},
+
+
+
+
+		"230000": {
+			"names": ["emergency operation"],
+			"icon": [
+				{"fill": true, "d": "M 100 65 L 115.2 91.3 L 130.3 117.5 C 133.3 112.4 135 106.4 135 100 C 135 80.7 119.3 65 100 65 z M 100 65 C 80.7 65 65 80.7 65 100 C 65 106.4 66.7 112.4 69.7 117.5 L 84.8 91.3 L 100 65 z M 69.7 117.5 C 75.7 128 87 135 100 135 C 113 135 124.3 128 130.3 117.5 L 100 117.5 L 69.7 117.5 z"},
+				{"fill": "white", "stroke": false, "d": "M 69.7,117.5 100,65 l 30.3,52.5 z"}
+			]
+		},
+		"230100": {
+			"names": ["ambulance"],
+			"icon": [
+				{"icon": "160400"},
+				{"stroke": false, "fill": true, "d": "M95.5,80 l9,0 0,-9 9,0 0,-9 -9,0 0,-9 -9,0 0,9 -9,0 0,9 9,0 Z"}
+			]
+		},
+		"230200": {
+			"names": ["fire fighting", "fire protection", "firefighting"],
+			"icon": [{"d": "m 120,90 -5,5 -10,-10 5,-5 -20,0 5,5 -10,10 -5,-5 0,20 5,-5 10,10 -5,5 20,0 -5,-5 10,-10 5,5 z", "fill": true}]
+		},
+		"240000": {
+			"names": ["manual track"],
+			"icon": [{"text": "MAN"}]
+		},
+		"250000": {
+			"names": ["rotary wing"],
+			"icon": [{"fill": true, "d": "M60,85 l40,15 40,-15 0,30 -40,-15 -40,15 z"}]
+		}
+	},
+	"M1": {
+		"01": {
+			"names": ["biological"],
+			"cat": "sensor type",
+			"icon": [{"textm1": "B"}]
+		},
+		"02": {
+			"names": ["chemical"],
+			"cat": "sensor type",
+			"until": "2525E",
+			"new": "C-1-138",
+			"icon": [{"textm1": "C"}]
+		},
+		"03": {
+			"names": ["early warning radar"],
+			"cat": "sensor type",
+			"icon": [{"textm1": "EWR"}]
+		},
+		"04": {
+			"names": ["intrusion"],
+			"cat": "sensor type",
+			"icon": [{"textm1": "I"}]
+		},
+		"05": {
+			"names": ["nuclear"],
+			"cat": "sensor type",
+			"until": "2525E",
+			"new": "C-1-141",			
+			"icon": [{"textm1": "N"}]
+		},
+		"06": {
+			"names": ["radiological"],
+			"cat": "sensor type",
+			"until": "2525E",
+			"new": "C-1-140",				
+			"icon": [{"textm1": "RAD"}]
+		},
+		"07": {
+			"names": ["upgraded early warning radar"],
+			"cat": "sensor type",
+			"icon": [{"textm1": "UEW"}]
+		},
+		"08": {
+			"names": ["hijacking/hijacked"],
+			"cat": "crime",
+			"until": "2525E",
+			"new": "C-1-150",
+			"icon": [{"textm1": "H"}]
+		},
+		"09": {
+			"names": ["civilian"],
+			"civ": true,
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-143",
+			"icon": [{"textm1": "CIV"}]
+		},
+		"10": {
+			"names": ["tilt-rotor"],
+			"cat": "mobility",
+			"until": "2525E",
+			"new": "C-1-104",			
+			"icon": [{"textm1": "TR"}]
+		},
+		"11": {
+			"names": ["[reserved]"],
+			"icon": []
+		},
+		"12": {
+			"names": ["multi-purpose blade"],
+			"icon": [{"d": "m 80,65 20,-10 20,10 m -20,15 0,-25"}]
+		},
+		"13": {
+			"names": ["tank-width mine plow"],
+			"icon": [{"d": "m 80,65 5,-2.5 m 5,-2.5 5,-2.5 m 10,0 5,2.5 m 5,2.5 5,2.5 m -20,15 0,-20"}]
+		},
+		"14": {
+			"names": ["bridge"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-109",
+			"icon": [{"d": "m 80,80 5,-5 30,0 5,5 m -40,-20 5,5 30,0 5,-5"}]
+		},
+		"15": {
+			"names": ["cyberspace"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-115",			
+			"icon": [{"textm1": "CYB"}]
+		},
+		"16": {
+			"names": ["armored"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-107",
+			"icon": [{"d": "m 90,60 20,0 c 10,0 10,15 0,15 L 90,75 C 80,75 80,60 90,60"}]
+		},
+		"17": {
+			"names": ["attack"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-106",
+			"icon": [{"textm1": "A"}]
+		},
+		"18": {
+			"names": ["cargo"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-110",
+			"icon": [{"d": "m 100,60 0,15 -15,0 0,-15 30,0 0,15 -15,0"}]
+		},
+		"19": {
+			"names": ["maintenance"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-126",
+			"icon": [{"d": "m 84,70 32,0 m 4,-5 c -5,0 -5,10 0,10 M 80,65 c 5,0 5,10 0,10"}]
+		},
+		"20": {
+			"names": ["medevac"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-127",
+			"icon": [{"stroke": false, "fill": true, "d": "M95.5,80 l9,0 0,-9 9,0 0,-9 -9,0 0,-9 -9,0 0,9 -9,0 0,9 9,0 Z"}]
+		},
+		"21": {
+			"names": ["petroleum, oil, and lubricants", "POL"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-135",
+			"icon": [{"d": "m 100,75 0,-10 -6,-10 12,0 -6,10"}]
+		},
+		"22": {
+			"names": ["utility"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-111",
+			"icon": [{"textm1": "U"}]
+		},
+		"23": {
+			"names": ["water"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-136",
+			"icon": [{"d": "m 90,55 20,0 m -10,10 0,-10 m -25,10 40,0 c 10,0 15,5 15,10"}]
+		},
+		"23": {
+			"names": ["robotic"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-101",
+			"icon": [{"fill": true, "stroke": false, "d": "m 100,52.7 14.9,14.8 c 0.4,-0.3 0.9,-0.4 1.4,-0.4 1.5,0 2.7,1.2 2.7,2.7 0,1.4 -1.2,2.7 -2.7,2.7 -1.5,0 -2.7,-1.3 -2.7,-2.7 0,-0.4 0.1,-0.7 0.2,-1 l -10.4,-5.2 -2.5,8.6 c 0.2,0.1 0.4,0.2 0.6,0.3 0.7,0.5 1.2,1.3 1.2,2.3 0,1.5 -1.2,2.7 -2.7,2.7 -0.55,0 -1.06,-0.2 -1.49,-0.5 -0.73,-0.4 -1.22,-1.3 -1.22,-2.2 0,-1.2 0.77,-2.2 1.85,-2.6 l -2.53,-8.6 -10.42,5.2 c 0.12,0.3 0.18,0.6 0.18,1 0,1.5 -1.21,2.7 -2.7,2.7 -1.49,0 -2.7,-1.2 -2.7,-2.7 0,-1.5 1.21,-2.7 2.7,-2.7 0.52,0 1.01,0.1 1.42,0.4 l 14.9,-14.8 0,0 0,0 z"}]
+		}
+	},
+	"M2": {
+		"01": {
+			"names": ["cyberspace"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-122",
+			"icon": [{"textm2": "CYB"}]
+		},
+		"02": {
+			"names": ["light"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-121",
+			"icon": [{"textm2": "L"}]
+		},
+		"03": {
+			"names": ["medium"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-119",
+			"icon": [{"textm2": "M"}]
+		},
+		"04": {
+			"names": ["railway"],
+			"cat": "mobility",
+			"until": "2525E",
+			"new": "C-1-102",
+			"icon": [
+				{"d": "M60,120 l80,0"},
+				{"r": 5, "pos": [65, 125]},
+				{"r": 5, "pos": [75, 125]},
+				{"r": 5, "pos": [125, 125]},
+				{"r": 5, "pos": [135, 125]}
+			]
+		},
+		"05": {
+			"names": ["tracked"],
+			"cat": "mobility",
+			"until": "2525E",
+			"new": "C-1-104",
+			"icon": [{"d": "M 70,120 l 60,0 c10,0 10,10 0,10 l -60,0 c-10,0 -10,-10 0,-10"}]
+		},
+		"06": {
+			"names": ["tractor trailer"],
+			"cat": "mobility",
+			"icon": [
+				{"d": "M60,120 l80,0"},
+				{"r": 5, "pos": [65, 125]},
+				{"r": 5, "pos": [75, 125]},
+				{"r": 5, "pos": [135, 125]}
+			]
+		},
+		"07": {
+			"names": ["wheeled LTD", "wheeled limited cross country"],
+			"cat": "mobility",
+			"until": "2525E",
+			"new": "C-1-105",
+			"icon": [
+				{"r": 5, "pos": [65, 125]},
+				{"r": 5, "pos": [135, 125]}				
+			]
+		},
+		"08": {
+			"names": ["wheeled X", "wheeled cross country"],
+			"cat": "mobility",
+			"until": "2525E",
+			"new": "C-1-106",
+			"icon": [
+				{"r": 5, "pos": [65, 125]},
+				{"r": 5, "pos": [100, 125]},
+				{"r": 5, "pos": [135, 125]}				
+			]
+		},
+		"09": {
+			"names": ["robotic"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-109",
+			"icon": [
+				{"stroke": false, "fill": true, "d": "M100,121.68L114.895,136.459C115.309,136.201 115.798,136.052 116.321,136.052C117.812,136.052 119.022,137.262 119.022,138.753C119.022,140.243 117.812,141.454 116.321,141.454C114.831,141.454 113.62,140.243 113.62,138.753C113.62,138.407 113.686,138.076 113.805,137.772L103.378,132.6L100.851,141.224C101.072,141.298 101.28,141.4 101.471,141.526C102.211,142.008 102.701,142.843 102.701,143.791C102.701,145.281 101.491,146.492 100,146.492C99.451,146.492 98.939,146.327 98.512,146.045C97.776,145.562 97.29,144.73 97.29,143.785C97.29,142.592 98.064,141.579 99.138,141.222L96.613,132.606L86.186,137.778C86.305,138.082 86.37,138.413 86.37,138.759C86.37,140.25 85.16,141.46 83.669,141.46C82.179,141.46 80.969,140.25 80.969,138.759C80.969,137.268 82.179,136.058 83.669,136.058C84.193,136.058 84.681,136.207 85.095,136.465L99.991,121.671L100,121.662L100,121.68Z"}
+			]
+		}		
+	}
+}

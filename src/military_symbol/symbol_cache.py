@@ -1,7 +1,11 @@
+import sys
+import os
 
-from .individual_symbol import MilitarySymbol
-from . import name_to_sidc
-from .symbol_schema import SymbolSchema
+sys.path.append(os.path.dirname(__file__))
+from symbol import Symbol
+import name_to_sidc
+from schema import Schema
+from output_style import OutputStyle
 
 class SymbolCache:
 
@@ -56,7 +60,7 @@ class SymbolCache:
             # print('Symbol cache hit')
             return symbol_cache_entry
 
-    def get_symbol_from_sidc(self, sidc:str, create_if_missing:bool=True, verbose:bool=False) -> MilitarySymbol:
+    def get_symbol_from_sidc(self, sidc:str, create_if_missing:bool=True, verbose:bool=False) -> Symbol:
         ret = self._get_symbol_cache_from_sidc(sidc, create_if_missing, verbose=verbose)
         return ret[0] if ret is not None else None
 
@@ -64,8 +68,8 @@ class SymbolCache:
         sidc:str = self.name_to_sidc_string_map.get(name, '')
         if sidc == '':
             if create_if_missing:
-                symbol:MilitarySymbol = name_to_sidc.name_to_symbol(name, self.symbol_schema, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
-                sidc = symbol.get_sidc()
+                symbol:Symbol = name_to_sidc.name_to_symbol(name, self.symbol_schema, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
+                sidc = symbol.to_sidc()
                 cache_entry:tuple = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = cache_entry
                 self.name_to_sidc_string_map[name] = sidc
@@ -76,7 +80,7 @@ class SymbolCache:
             # print('Cache hit on symbol cache to name')
             return self.sidc_to_symbol_map[sidc]
 
-    def get_symbol_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None) -> MilitarySymbol:
+    def get_symbol_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None) -> Symbol:
         cache_entry:tuple = self._get_symbol_cache_from_name(name, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
         return cache_entry[0] if cache_entry is not None else None
 
@@ -104,8 +108,12 @@ class SymbolCache:
         svg_string: str = svg_map.get(key_string, '')
         if svg_string == '':
             if create_if_missing:
-                svg_string = symbol.get_svg(style=style, pixel_padding=padding, use_variants=use_variants, use_background=use_background, 
-                    background_color=background_color, force_all_elements=force_all_elements)
+                output_style = OutputStyle()
+                output_style.padding = padding
+                output_style.use_alternate_icons = use_variants
+                output_style.use_background = False
+
+                svg_string = symbol.get_svg(output_style=output_style)
                 svg_map[key_string] = svg_string
                 return symbol, svg_string
             else:

@@ -1,0 +1,558 @@
+{
+	"set": "27",
+	"name": "dismounted individual",
+	"dimension": "dismounted individual",
+	"modcats": ["capability", "crime", "CBRN", "command level", "mobility"],
+	"match weight": -1,
+	"IC": {
+		"110201": {
+			"names": ["explosive ordnance disposal", "EOD"],
+			"icon": [{"text": "EOD"}]
+		},
+		"110202": {
+			"names": ["field artillery observer", "artillery observer"],
+			"icon": [
+				{"r": 3, "pos": [100, 68], "fill": true, "stroke": true},
+				{"d": "M 100,53.1 85.8,75.9 H 114 Z"}
+			]
+		},
+		"110203": {
+			"names": ["joint fire support"],
+			"icon": [{"text": "JFS"}]
+		},
+		"110204": {
+			"names": ["liaison"],
+			"icon": [{"text": "LO"}]
+		},
+		"110205": {
+			"names": ["messenger"],
+			"icon": [{"text": "M"}]
+		},
+		"110206": {
+			"names": ["military police", "MP"],
+			"icon": [{"text": "MP"}]
+		},
+		"110207": {
+			"names": ["observer"],
+			"icon": [{"d": "M 100,53.1 85.8,75.9 H 114 Z"}]
+		},
+		"110208": {
+			"names": ["security"],
+			"icon": [{"text": "SEC"}]
+		},
+		"110209": {
+			"names": ["sniper"],
+			"icon": [{"d": "M 60 85 L 90 85 L 60 85 z M 110 85 L 140 85 L 110 85 z M 100 90 L 100 115 L 100 90 z"}]
+		},
+		"110210": {
+			"names": ["special operations forces", "SOF"],
+			"icon": [{"text": "SOF"}]		
+		},
+		"110211": {
+			"names": ["designated marksman", "DM", "DMR"],
+			"icon": [{"text": "DM"}]		
+		},
+		"110212": {
+			"names": ["medic", "corpsman"],
+			"icon": [{"fill": true, "stroke": false, "d": "M93,83 l14,0 0,10 10,0 0,14 -10,0 0,10 -14,0 0,-10 -10,0 0,-14 10,0 Z"}]		
+		},
+		"110213": {
+			"names": ["signaler", "radioman", "radio operator"],
+			"icon": [{"d": "M 52,66.8 100,110 l 0,-20 47.9,43.1"}]
+		},
+		"110214": {
+			"names": ["reconnaissance", "recon", "scout"],
+			"icon": [{
+				"friend":  [{"d": "M 45,130 155,70"}],
+				"hostile": [{"d": "M60,130L140,70"}],
+				"neutral": [{"d": "M45,155L155,45"}],
+				"unknown": [{"d": "M50,135L150,65"}]
+			}]
+		},
+		"110215": {
+			"names": ["infantry"],
+			"icon": [{
+				"friend":  [{"d": "m 45,70 110,60 M 45,130 155,70"}],
+				"hostile": [{"d": "M60,70L140,130M60,130L140,70"}],
+				"neutral": [{"d": "M45,45L155,155M45,155L155,45"}],
+				"unknown": [{"d": "M50,65L150,135M50,135L150,65"}]
+			}]
+		},
+		"110216": {
+			"names": ["close protection"],
+			"icon": [{"text": "CLP"}]
+		},
+		"110217": {
+			"names": ["crowd and riot control", "crowd control", "riot control"],
+			"icon": [{"text": "CRC"}]
+		},		
+		"110218": {
+			"names": ["special weapons and tactics", "SWAT"],
+			"icon": [{"text": "SWAT"}]
+		},
+		"110219": {
+			"names": ["demolition"],
+			"icon": [{"text": "DEM"}]
+		},
+		"110220": {
+			"names": ["commander"],
+			"icon": [{"text": "CDR"}]
+		},
+		"110221": {
+			"names": ["second in command"],
+			"icon": [{"text": "SIC"}]
+		},
+
+		"110300": {
+			"names": ["lethal weapons"],
+			"icon": []
+		},
+
+		".light": {
+			"names": [".light"],
+			"icon": [{"d": "m 85,100 30,0"}]
+		},
+		".medium": {
+			"names": [".medium"],
+			"icon": [{"d": "m 85,105 30,0 m -30,-10 30,0"}]
+		},
+		".heavy": {
+			"names": [".heavy"],
+			"icon": [{"d": "m 85,110 30,0 m -30,-20 30,0 m -30,10 30,0"}]
+		},
+
+		"110301": {
+			"names": ["rifle"],
+			"icon": [{"d": "m 100,60 0,80 M 85,75 100,60 115,75"}]
+		},
+		"110302": {
+			"names": ["single shot rifle"],
+			"icon": [{"icon": "110301"}, {"icon": ".light"}]
+		},				
+		"110303": {
+			"names": ["semiautomatic rifle"],
+			"icon": [{"icon": "110301"}, {"icon": ".medium"}]
+		},
+		"110304": {
+			"names": ["automatic rifle"],
+			"icon": [{"icon": "110301"}, {"icon": ".light"}]
+		},
+		"110305": {
+			"names": ["machine gun"],
+			"icon": [{"d": "m 100,60 0,80 M 85,75 100,60 115,75 M 80,140 120,140"}]
+		},
+		"110306": {
+			"names": ["light machine gun"],
+			"icon": [{"icon": "110305"}, {"icon": ".light"}]
+		},
+		"110307": {
+			"names": ["medium machine gun"],
+			"icon": [{"icon": "110305"}, {"icon": ".medium"}]
+		},
+		"110308": {
+			"names": ["heavy machine gun"],
+			"icon": [{"icon": "110305"}, {"icon": ".heavy"}]
+		},
+
+		"110309": {
+			"names": ["grenade launcher"],
+			"icon": [
+				{"icon": "110301"},
+				{"r": 15, "pos": [100, 90]}
+			]
+		},
+		"110310": {
+			"names": ["light grenade launcher"],
+			"icon": [{"icon": "110309"}, {"translate": [0, 20], "items": [
+				{"icon": ".light"}
+			]}]
+		},
+		"110311": {
+			"names": ["medium grenade launcher"],
+			"icon": [{"icon": "110309"}, {"translate": [0, 20], "items": [
+				{"icon": ".medium"}
+			]}]
+		},
+		"110312": {
+			"names": ["heavy grenade launcher"],
+			"icon": [{"icon": "110309"}, {"translate": [0, 20], "items": [
+				{"icon": ".heavy"}
+			]}]
+		},
+
+		"110313": {
+			"names": ["flame thrower", "flamethrower"],
+			"icon": [{"d": "m 90,135 0,-70 c 0,-15 20,-15 20,0"}]
+		},
+		"110314": {
+			"names": ["mortar"],
+			"icon": [
+				{"d": "m 100,60 0,60 M 85,75 100,60 115,75"},
+				{"r": 10, "pos": [100, 130]}
+			]			
+		},
+		"110315": {
+			"names": ["single rocket launcher"],
+			"icon": [{"d": "m 85,75 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85"}]			
+		},
+		"110316": {
+			"names": ["anti-tank rocket launcher", "antitank rocket launcher"],
+			"icon": [{"d": "m 85,140 15,-15 15,15 M 85,85 100,70 115,85 m -15,-15 0,55 M 85,75 100,60 115,75"}]
+		},
+
+		"110400": {
+			"names": ["nonlethal weapons"],
+			"match weight": -1,
+			"icon": []
+		},
+		"110401": {
+			"names": ["nonlethal weapon"],
+			"icon": [{"d": "m 100,60 0,80 M 80,60 l40,0"}]
+		},
+		"110402": {
+			"names": ["nonlethal grenade launcher"],
+			"icon": [
+				{"icon": "110401"},
+				{"r": 10, "pos": [100, 130]}
+			]
+		},
+		"110403": {
+			"names": ["taser"],
+			"icon": [
+				{"icon": "110401"},
+				{"text": "Z"}
+			]
+		}
+	},
+	"M1": {
+		"07": {
+			"names": ["non-governmental organization", "non-government organizaton", "NGO"],
+			"cat": "capability",
+			"icon": [{"textm1": "NGO"}]
+		},
+		"11": {
+			"names": ["field artillery observer", "artillery observer"],
+			"cat": "capability",
+			"icon": [
+				{"r": 3, "fill": true, "stroke": true, "pos": [100, 68]},
+				{"d": "M 100,53.1 85.8,75.9 H 114 Z"}
+			]
+		},
+		"12": {
+			"names": ["joint fire support"],
+			"cat": "capability",
+			"icon": [{"textm1": "JFS"}]
+		},
+		"13": {
+			"names": ["liaison"],
+			"cat": "capability",
+			"icon": [{"textm1": "LO"}]
+		},
+		"14": {
+			"names": ["messenger"],
+			"cat": "capability",
+			"icon": [{"textm1": "MSG"}]
+		},
+		"15": {
+			"names": ["military police", "MP"],
+			"cat": "capability",
+			"icon": [{"textm1": "NP"}]
+		},
+		"16": {
+			"names": ["observer"],
+			"cat": "capability",
+			"icon": [
+				{"d": "M 100,53.1 85.8,75.9 H 114 Z"}
+			]
+		},
+		"17": {
+			"names": ["designated marksman"],
+			"cat": "capability",
+			"icon": [{"textm1": "DM"}]
+		},
+		"20": {
+			"names": ["signaler"],
+			"cat": "capability",
+			"icon": [{"textm1": "SIG"}]
+		},
+		"21": {
+			"names": ["reconnaissance", "recon", "scout"],
+			"cat": "capability",
+			"icon": [{"textm1": "REC"}]
+		},
+		"22": {
+			"names": ["infantry"],
+			"cat": "capability",
+			"icon": [{"textm1": "IN"}]
+		},
+		"23": {
+			"names": ["commander"],
+			"cat": "capability",
+			"icon": [{"textm1": "CDR"}]
+		},
+		"24": {
+			"names": ["second in command"],
+			"cat": "capability",
+			"icon": [{"textm1": "SIC"}]
+		},
+		"25": {
+			"names": ["demolition"],
+			"cat": "capability",
+			"icon": [{"textm1": "DEM"}]
+		},
+		"26": {
+			"names": ["police"],
+			"cat": "capability",
+			"icon": [{"d": "m 100,77.4 c 13,-4.9 8,-12.6 10,-19.6 -3,3.8 -7,3.8 -10,0 -3.2,3.8 -6.5,3.8 -9.7,0 1.6,7 -3.4,14.7 9.7,19.6 z"}]
+		},
+
+		"46": {
+			"names": ["individual"],
+			"cat": "support level",
+			"icon": [{"d": "M85,65 l30,0"}]
+		},
+
+		"47": {
+			"names": ["team", "crew"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [{"r": 10, "pos": [100, 65]}, {"d": "m 90,75 l20,-20"}]
+		},
+		"48": {
+			"names": ["squad"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [{"r": 8, "fill": true, "stroke": false, "pos": [100, 68]}]
+		},
+		"49": {
+			"names": ["section"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [
+				{"r": 8, "fill": true, "stroke": false, "pos": [90, 68]},
+				{"r": 8, "fill": true, "stroke": false, "pos": [110, 68]}
+			]
+		},
+		"50": {
+			"names": ["platoon", "detachment"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [
+				{"r": 8, "fill": true, "stroke": false, "pos": [80, 68]},
+				{"r": 8, "fill": true, "stroke": false, "pos": [100, 68]},
+				{"r": 8, "fill": true, "stroke": false, "pos": [120, 68]}
+			]
+		},
+		"51": {
+			"names": ["company", "battery"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [{"d": "M 100,59.6 V 78"}]
+		},
+		"52": {
+			"names": ["battalion", "squadron"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [{"d": "m 105,60 v 18 0  M 95,60 v 18"}]
+		},
+		"53": {
+			"names": ["regiment", "group"],
+			"cat": "support level",
+			"until": "2525E",
+			"icon": [{"d": "m 110,60 v 18 0  M 90,60 v 18  m 10,-18 v 18"}]
+		}
+	},
+	"M2": {	
+		"03": {
+			"names": ["combat camera", "video imagery"],
+			"cat": "capability",
+			"icon": [{"d": "m 120,126 h -11  m 11,10 h -14  m 4,-14 H 80 v 18 h 25 z  m 10,2 v 14"}]
+		},
+		"04": {
+			"names": ["functional staff area J-1", "G-1", "S-1"],
+			"cat": "capability",
+			"icon": [{"textm2": "J1"}]
+		},
+		"05": {
+			"names": ["functional staff area J-2", "G-2", "S-2"],
+			"cat": "capability",
+			"icon": [{"textm2": "J2"}]
+		},
+		"06": {
+			"names": ["functional staff area J-3", "G-3", "S-3"],
+			"cat": "capability",
+			"icon": [{"textm2": "J3"}]
+		},
+		"07": {
+			"names": ["functional staff area J-4", "G-4", "S-4"],
+			"cat": "capability",
+			"icon": [{"textm2": "J4"}]
+		},
+		"08": {
+			"names": ["functional staff area J-5", "G-5", "S-5"],
+			"cat": "capability",
+			"icon": [{"textm2": "J5"}]
+		},
+		"09": {
+			"names": ["functional staff area J-6", "G-6", "S-6"],
+			"cat": "capability",
+			"icon": [{"textm2": "J6"}]
+		},
+		"10": {
+			"names": ["functional staff area J-7", "G-7", "S-7"],
+			"cat": "capability",
+			"icon": [{"textm2": "J7"}]
+		},
+		"11": {
+			"names": ["functional staff area J-8", "G-8", "S-8"],
+			"cat": "capability",
+			"icon": [{"textm2": "J8"}]
+		},
+		"12": {
+			"names": ["functional staff area J-9", "G-9", "S-9"],
+			"cat": "capability",
+			"icon": [{"textm2": "J9"}]
+		},
+
+
+		"14": {
+			"names": ["rank O-1/O-2", "O-1/O-2", "O-1", "O-2", "OF-1", "rank OF-1"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-3"}],
+			"alt icon": [{"textm2": "OF-2"}]
+		},
+		"15": {
+			"names": ["rank O-3", "O-3", "OF-2", "rank OF-2"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-3"}],
+			"alt icon": [{"textm2": "OF-2"}]
+		},
+		"16": {
+			"names": ["rank O-4", "O-4", "OF-3", "rank OF-3"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-4"}],
+			"alt icon": [{"textm2": "OF-3"}]
+		},
+		"17": {
+			"names": ["rank O-5", "O-5", "OF-4", "rank OF-4"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-5"}],
+			"alt icon": [{"textm2": "OF-4"}]
+		},
+		"18": {
+			"names": ["rank O-6", "O-6", "OF-5", "rank OF-5"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-6"}],
+			"alt icon": [{"textm2": "OF-5"}]
+		},
+		"19": {
+			"names": ["rank O-7", "O-7", "OF-6", "rank OF-6"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-7"}],
+			"alt icon": [{"textm2": "OF-6"}]
+		},
+		"20": {
+			"names": ["rank O-8", "O-8", "OF-7", "rank OF-7"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-8"}],
+			"alt icon": [{"textm2": "OF-7"}]
+		},
+		"21": {
+			"names": ["rank O-9", "O-9", "OF-8", "rank OF-8"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-9"}],
+			"alt icon": [{"textm2": "OF-8"}]
+		},
+		"22": {
+			"names": ["rank O-10", "O-10", "OF-9", "rank OF-9"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-10"}],
+			"alt icon": [{"textm2": "OF-9"}]
+		},
+		"23": {
+			"names": ["rank O-11", "O-11", "OF-10", "rank OF-10"],
+			"cat": "command level",
+			"icon": [{"textm2": "O-11"}],
+			"alt icon": [{"textm2": "OF-10"}]
+		},
+		"25": {
+			"names": ["rank E-1", "E-1", "OR-1", "rank OR-1"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-1"}],
+			"alt icon": [{"textm2": "OR-1"}]
+		},
+		"26": {
+			"names": ["rank E-2", "E-2", "OR-2", "rank OR-2"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-2"}],
+			"alt icon": [{"textm2": "OR-2"}]
+		},
+		"27": {
+			"names": ["rank E-3", "E-3", "OR-3", "rank OR-3"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-3"}],
+			"alt icon": [{"textm2": "OR-3"}]
+		},
+		"28": {
+			"names": ["rank E-4", "E-4", "OR-4", "rank OR-4"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-4"}],
+			"alt icon": [{"textm2": "OR-4"}]
+		},
+		"29": {
+			"names": ["rank E-5", "E-5", "OR-5", "rank OR-5"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-5"}],
+			"alt icon": [{"textm2": "OR-5"}]
+		},
+		"30": {
+			"names": ["rank E-6", "E-6", "OR-6", "rank OR-6"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-6"}],
+			"alt icon": [{"textm2": "OR-6"}]
+		},
+		"31": {
+			"names": ["rank E-7", "E-7", "OR-7", "rank OR-7"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-7"}],
+			"alt icon": [{"textm2": "OR-7"}]
+		},
+		"32": {
+			"names": ["rank E-8", "E-8", "OR-8", "rank OR-8"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-8"}],
+			"alt icon": [{"textm2": "OR-8"}]
+		},
+		"33": {
+			"names": ["rank E-9", "E-9", "OR-9", "rank OR-9"],
+			"cat": "command level",
+			"icon": [{"textm2": "E-9"}],
+			"alt icon": [{"textm2": "OR-9"}]
+		},
+		"34": {
+			"names": ["rank WO-1", "W-1", "rank W-1", "WO-1"],
+			"cat": "capability",
+			"icon": [{"textm2": "WO-1"}]
+		},
+		"35": {
+			"names": ["rank WO-2", "W-2", "rank W-2", "WO-2"],
+			"cat": "capability",
+			"icon": [{"textm2": "WO-2"}]
+		},
+		"36": {
+			"names": ["rank WO-3", "W-3", "rank W-3", "WO-3"],
+			"cat": "capability",
+			"icon": [{"textm2": "WO-3"}]
+		},
+		"37": {
+			"names": ["rank WO-4", "W-4", "rank W-4", "WO-4"],
+			"cat": "capability",
+			"icon": [{"textm2": "WO-4"}]
+		},
+		"38": {
+			"names": ["rank WO-5", "W-5", "rank W-5", "WO-5"],
+			"cat": "capability",
+			"icon": [{"textm2": "WO-5"}]
+		}
+	}
+}

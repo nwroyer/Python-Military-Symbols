@@ -1,0 +1,165 @@
+{
+	"set": "06",
+	"name": "space missile",
+	"dimension": "space",
+	"IC": {
+		"110000": {
+			"names": ["missile", "space missile"],
+			"modcats": ["launch origin", "missile class", "missile range", "missile type"],
+			"icon": [
+				{"d": "M90,135 l0,-10 5,-5 0,-55 5,-5 5,5 0,55 5,5 0,10 -10,-10 z", "fill": "yellow"}
+			]
+		}
+	},
+	"M1": {
+		"01": {
+			"names": ["ballistic"],
+			"cat": "launch origin",
+			"icon": [{"text": "B", "pos": [68, 110], "fontsize": 30}]
+		},
+		"02": {
+			"names": ["space"],
+			"cat": "launch origin",
+			"icon": [
+				{"text": "S", "pos": [68, 95], "fontsize": 30},
+				{"text": "P", "pos": [68, 125], "fontsize": 30}
+			]
+		},
+		"03": {
+			"names": ["interceptor"],
+			"cat": "missile class",
+			"icon": [
+				{"text": "H", "pos": [68, 95], "fontsize": 30},
+				{"text": "V", "pos": [68, 125], "fontsize": 30}
+			]
+		},
+		"04": {
+			"names": ["hypersonic"],
+			"cat": "missile class",
+			"since": "2525E",
+			"icon": [{"text": "I", "pos": [68, 110], "fontsize": 30}]
+		}
+	}, 
+	"M2": {
+		"01": {
+			"names": ["short range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"02": {
+			"names": ["medium range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "M", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]
+		},		
+		"03": {
+			"names": ["intermediate range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "I", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"04": {
+			"names": ["long range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "L", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"05": {
+			"names": ["intercontinental"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "I", "pos": [132, 95], "fontsize": 30},
+				{"text": "C", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"06": {
+			"names": ["Arrow"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "A", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]
+		},		
+		"07": {
+			"names": ["ground-based interceptor", "GBI"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "G", "pos": [132, 110], "fontsize": 30}
+			]
+		},		
+		"08": {
+			"names": ["Patriot"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "P", "pos": [132, 110], "fontsize": 30}
+			]
+		},		
+		"09": {
+			"names": ["standard missile - terminal phase", "SM-T"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "T", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"10": {
+			"names": ["standard missile - 3", "SM-3"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "3", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"11": {
+			"names": ["terminal high-altitude area defense", "THAAD"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "T", "pos": [132, 110], "fontsize": 30}
+			]
+		},	
+		"12": {
+			"names": ["space"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "P", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+
+		"13": {
+			"names": ["close range"],
+			"since": "2525E",
+			"cat": "missile type",
+			"icon": [
+				{"text": "C", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"13": {
+			"names": ["debris"],
+			"since": "2525E",
+			"cat": "missile type",
+			"icon": [
+				{"text": "D", "pos": [132, 95], "fontsize": 30},
+				{"text": "B", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"08": {
+			"names": ["unknown"],
+			"since": "2525E",
+			"cat": "missile type",
+			"icon": [
+				{"text": "U", "pos": [132, 110], "fontsize": 30}
+			]
+		}
+	}
+}

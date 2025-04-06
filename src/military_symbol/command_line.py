@@ -3,18 +3,19 @@ import os
 import os.path
 import sys
 
-from . import name_to_sidc
+sys.path.append(os.path.dirname(__file__))
+import name_to_sidc
 
-from .individual_symbol import MilitarySymbol
-from .symbol_schema import SymbolSchema
-from .symbol_template import SymbolTemplateSet
-from .symbol_cache import SymbolCache
+from symbol import Symbol
+from schema import Schema
+# from symbol_template import SymbolTemplateSet
+from symbol_cache import SymbolCache
 
 VERSION = "1.2.3"
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
 
 # Load the symbol schema from its default location; don't
-sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
+sym_schema: Schema = Schema.load_from_directory()
 if sym_schema is None:
     print("Error loading symbol schema; exiting", file=sys.stderr)
 
@@ -65,7 +66,7 @@ def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose
                           limit_to_symbol_sets=limit_to_symbol_sets)
 
 
-def get_symbol_class(originator, is_sidc=True, verbose=False, limit_to_symbol_sets=None) -> MilitarySymbol:
+def get_symbol_class(originator, is_sidc=True, verbose=False, limit_to_symbol_sets=None) -> Symbol:
     """
     Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
     guess, or SIDC, depending on inputs
@@ -77,7 +78,7 @@ def get_symbol_class(originator, is_sidc=True, verbose=False, limit_to_symbol_se
     return symbol_cache.get_symbol(originator, is_sidc=is_sidc, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
 
 
-def get_symbol_class_from_name(name, verbose=False, limit_to_symbol_sets=None) -> MilitarySymbol:
+def get_symbol_class_from_name(name, verbose=False, limit_to_symbol_sets=None) -> Symbol:
     """
     Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
     guess
@@ -88,7 +89,7 @@ def get_symbol_class_from_name(name, verbose=False, limit_to_symbol_sets=None) -
     return get_symbol_class(name, is_sidc=False, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
 
 
-def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
+def get_symbol_class_from_sidc(sidc, verbose=False) -> Symbol:
     """
     Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given SIDC
     :param sidc: The SIDC to construct the MilitarySymbol from
