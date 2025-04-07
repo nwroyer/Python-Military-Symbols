@@ -154,7 +154,7 @@ class Symbol():
 
 		frame_commands = []
 
-		SVG_NAMESPACE:str = "http://w3.org/2000/svg";
+		SVG_NAMESPACE:str = "http://www.w3.org/2000/svg";
 		if self.is_frame_dashed():
 			base_frame = frame_to_use.frames[self.affiliation.frame_id]
 			if output_style.fill_style != 'unfilled':
@@ -276,7 +276,7 @@ class Symbol():
 		if output_style.background_width > 0.01:
 			ret_bbox.expand(padding=output_style.background_width)
 
-		svg_content = f'<svg width="{ret_bbox.width()}" height="{ret_bbox.height()}" ' + \
+		svg_content = f'<svg xmlns="{SVG_NAMESPACE}" width="{ret_bbox.width()}" height="{ret_bbox.height()}" ' + \
 			f'viewBox="{ret_bbox.x_min} {ret_bbox.y_min} {ret_bbox.width()} {ret_bbox.height()}">\n' + \
 			'\n'.join(elements) + \
 			'\n</svg>'
