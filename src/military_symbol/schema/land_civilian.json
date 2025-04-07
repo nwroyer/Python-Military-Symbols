@@ -5,7 +5,7 @@
 	"modcats": ["capability", "crime", "organization", "composite loss"],
 	"IC": {
 		"110000": {
-			"names": "civilian",
+			"names": ["civilian"],
 			"civ": true,
 			"icon": [{"text": "CIV", "fill": "white", "stroke": true}]
 		},

@@ -110,7 +110,9 @@ class SymbolCache:
                 output_style = OutputStyle()
                 output_style.padding = padding
                 output_style.use_alternate_icons = use_variants
-                output_style.use_background = False
+                output_style.use_background = use_background
+                output_style.background_color = background_color
+                output_style.fill_style = style
 
                 svg_string = symbol.get_svg(output_style=output_style)
                 svg_map[key_string] = svg_string

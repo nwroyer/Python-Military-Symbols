@@ -6,8 +6,8 @@ from drawing_items import BBox
 import math
 
 class Symbol():
-	def __init__(self):
-		self.schema:Schema = None
+	def __init__(self, schema=None):
+		self.schema = schema
 		self.context:Context = None
 		self.affiliation:Affiliation = None
 		self.status:Status = None
@@ -39,16 +39,16 @@ class Symbol():
 		ret = ', '.join([
 			'Symbol',
 			f'context = {self.context.names[0]}',
-			f'affiliation = {self.affiliation.names[0]} [{self.affiliation.id_code}]',
-			f'symbol set = {self.symbol_set.names[0]} [{self.symbol_set.id_code}]',
+			f'affiliation = {self.affiliation.names[0] if self.affiliation else 'none'} [{self.affiliation.id_code if self.affiliation else 'none'}]',
+			f'symbol set = {self.symbol_set.names[0] if self.symbol_set else 'none'} [{self.symbol_set.id_code if self.symbol_set else 'none'}]',
 			
-			f'dimension = {self.symbol_set.dimension.names[0]} [{self.symbol_set.dimension.id_code}]',
-			f'frame shape = {self.symbol_set.dimension.frame_shape.names[0]} [{self.symbol_set.dimension.frame_shape.id_code}]',
+			f'dimension = {self.symbol_set.dimension.names[0] if self.symbol_set and self.symbol_set.dimension else 'none'} [{self.symbol_set.dimension.id_code if self.symbol_set and self.symbol_set.dimension else 'none'}]',
+			f'frame shape = {self.symbol_set.dimension.frame_shape.names[0] if self.symbol_set else 'none'} [{self.symbol_set.dimension.frame_shape.id_code if self.symbol_set else 'none'}]',
 			f'entity = {self.entity.names[0]} [{self.entity.id_code}]' if self.entity is not None else 'entity = none',
 		] 
 			+ ([] if self.frame_shape_override is None else [f'frame shape override = {self.frame_shape_override.names[0]}'])
-			+ (['m1 = none'] if self.modifier_1 is None else [f'm1 = {self.modifier_1.names[0]}'])
-			+ (['m2 = none'] if self.modifier_2 is None else [f'm2 = {self.modifier_2.names[0]}'])
+			+ ([] if self.modifier_1 is None else [f'm1 = {self.modifier_1.names[0]}'])
+			+ ([] if self.modifier_2 is None else [f'm2 = {self.modifier_2.names[0]}'])
 			+ ([f'status = {self.status.names[0]} [{self.status.id_code}]'] if self.status is not None else [])
 			+ ([f'HQTFD = {self.hqtfd.names[0]} [{self.hqtfd.id_code}]'] if self.hqtfd is not None else [])
 			+ ([f'amplifier = {self.amplifier.names[0]} [{self.amplifier.id_code}]'] if self.amplifier is not None else [])
@@ -76,6 +76,8 @@ class Symbol():
 
 	@classmethod
 	def from_sidc(cls, sidc:str, schema:Schema):
+		sidc = re.sub(r'\s+', '', sidc)
+
 		if len(sidc) < 20:
 			raise Exception(f'SIDC "{sidc}" must be at least 20 characters')
 		if schema is None:
@@ -104,7 +106,7 @@ class Symbol():
 		# Digits 4-5 are the symbol set
 		ret.symbol_set = schema.symbol_sets.get(sidc[4:6], None)
 		if ret.symbol_set is None:
-			print(f'Unknown symbol set \"{sidc[4:6]}\"')
+			print(f'Unknown symbol set \"{sidc[4:6]}\"', file=sys.stderr)
 			return ret
 
 		# Digits 10-15 are the 

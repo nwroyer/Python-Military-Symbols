@@ -356,10 +356,10 @@ class Amplifier:
 		self.match_name:bool = True
 
 	def applies_to_dimension(self, dimension) -> bool:
-		if symbol_set is None:
+		if dimension is None:
 			return False
 
-		return dimension in self.applies_to
+		return dimension.id_code in [dim.id_code for dim in self.applies_to]
 
 	def applies_to_symbol_set(self, symbol_set) -> bool:
 		if symbol_set is None or symbol_set.dimension is None:
@@ -406,16 +406,6 @@ class Amplifier:
 
 		return amplifier
 
-	def applies_to_dimension(self, dimension) -> bool:
-		if dimension is None:
-			return False
-		return dimension in self.applies_to
-
-	def applies_to_symbol_set(self, symbol_set) -> bool:
-		if symbol_set is None or symbol_set.dimension is None:
-			return False
-		return self.applies_to_dimension(dimension=symbol_set.dimension)
-
 	def applies_to_any_in_symbol_sets(self, symbol_sets) -> bool:
 		for symbol_set in symbol_sets:
 			if self.applies_to_symbol_set(symbol_set=symbol_set):
@@ -435,14 +425,14 @@ class Amplifier:
 A full symbol component (e.g. an entity or modifier)
 """
 class SymbolLayer:
-	def __init__(self):
+	def __init__(self, symbol_set=None):
 		self.id_code:str = '' # A six (for entities) or two-digit hex code
 		self.names:str = [] # Human-readable names
 		self.elements:list = [] # the symbol elements
 		self.civilian:bool = False # Whether this entity renders something a civilian item
 		self.icon:list = []
 		self.alt_icon:list = []
-		self.symbol_set = None
+		self.symbol_set = symbol_set
 		self.match_name:bool = True
 		pass
 
@@ -527,6 +517,9 @@ class SymbolSet:
 
 		return int(self.id_code) < int(other.id_code)
 
+	def __repr__(self) -> str:
+		return f'{self.names[0]} ({self.id_code})'
+
 	@classmethod
 	def parse_from_file(cls, filepath:str, schema, verbose:bool=False):
 		"""
@@ -582,6 +575,7 @@ class SymbolSet:
 
 				new_symbol_layer = ItemTypeClass.parse_from_dict(id_code=item_code, json=item, full_items=json_dict[item_type], schema=schema, symbol_set=ret_set)
 				if new_symbol_layer is not None:
+					new_symbol_layer.symbol_set = ret_set
 					ret[item_type][item_code] = new_symbol_layer
 				else:
 					print(f'Unable to process item {json_dict["set"]}:{item_type}:{item_code}: {item["names"]}', file=sys.stderr)
@@ -625,6 +619,14 @@ class Schema:
 		## A mapping of [symbol set ID : symbol set object]
 		self.symbol_sets:dict = {}
 
+		self.templates:list = []
+
+	def add_templates(self, templates:list):
+		for temp in templates:
+			if temp is not None:
+				self.templates.append(temp)
+
+		self.templates = list(set(self.templates))
 
 	def print_constants(self):
 		print("Constants set")
@@ -767,3 +769,7 @@ class Schema:
 
 			schema.symbol_sets[symbol_set.id_code] = symbol_set		
 		return schema
+
+	@classmethod
+	def load(cls, verbose:bool=False):
+		return Schema.load_from_directory(verbose=verbose)

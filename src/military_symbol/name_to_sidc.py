@@ -5,11 +5,12 @@ import copy
 
 sys.path.append(os.path.dirname(__file__))
 
-from symbol import Symbol
-from schema import Schema, SymbolSet
 from thefuzz import fuzz
 from functools import cmp_to_key
 
+from symbol import Symbol
+from schema import Schema, SymbolSet
+from template import Template
 
 def split_into_words(in_str:str) -> list:
     """
@@ -41,7 +42,7 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
 
     # Step 1: calculate the number of words in candidate_list_of_lists
     matches = []  # Set of (candidate, weight) pairs
-    candidate_name_list = [(name.lower().strip(), candidate) for candidate in candidate_list for name in candidate.names if candidate.match_name]
+    candidate_name_list = [(name.lower().strip(), candidate) for candidate in candidate_list for name in candidate.names if (not hasattr(candidate, 'match_name') or candidate.match_name)]
 
     print_candidates = False
     if len(name_string) < 1:
@@ -117,7 +118,7 @@ def symbol_set_from_name(schema, item, verbose:bool=False) -> SymbolSet:
     return sym_set
 
 
-def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_symbol_sets=[]) -> Symbol:
+def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_symbol_sets:list=[], templates:list=[]) -> Symbol:
     """
     Function to return a NATOSymbol object from the provided name, using a best guess
     :param name: The string representing the name to construct a best-guess symbol from, e.g. "Friendly infantry platoon"
@@ -127,9 +128,17 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
     :return:
     """
 
+    if not Schema:
+        print('Schema must be provided for name_to_symbol', file=sys.stderr)
+        return None
+
+    templates_to_use = schema.templates + templates
+
     limit_to_symbol_sets = copy.copy(limit_to_symbol_sets)
 
     proc_name_string = name
+    if verbose:
+        print(f'Matching "{name}"')
 
     # Handle symbol categories
     symbol_set_tags = re.findall(r"\[([\w\d\s]+)\]", proc_name_string)
@@ -162,26 +171,25 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
     if verbose:
         print(f'\tMatching "{proc_name_string}"')
 
-#     # Step 0: Check for templates
-#     template: symbol_template.SymbolTemplate = None
-#     template, new_name_string = fuzzy_match(symbol_schema, proc_name_string, symbol_schema.get_template_list())
-#     ret_symbol: Symbol = None
+    # Step 0: Check for templates
+    template: template.Template = None
+    template, new_name_string = fuzzy_match(schema, proc_name_string, templates_to_use, print_candidates=True)
+    ret_symbol: Symbol = None
 
-#     if template is not None:
-#         proc_name_string = new_name_string
-#         if verbose:
-#             print(f"\tMatches template \"{template.names[0]}\" leaving \"{proc_name_string}\"; standard identity is {'not ' if not template.standard_identity_fixed else ''}fixed")
+    if template is not None:
+        proc_name_string = new_name_string
+        if verbose:
+            print(f"\tMatches template \"{template.names[0]}\" leaving \"{proc_name_string}\"; affiliation is {'not ' if template.affiliation_is_flexible else ''}fixed: {template.symbol}")
 
-#         ret_symbol = template.symbol
-#     else:
-#         ret_symbol = Symbol(symbol_schema)
+        ret_symbol = copy.copy(template.symbol)
+        ret_symbol.symbol_set = template.symbol.symbol_set
+    else:
+        ret_symbol = Symbol()
 
-    template = None
-    ret_symbol = Symbol()
     ret_symbol.schema = schema
 
     # Step 1: Detect standard identity
-    if template is None or not template.standard_identity_fixed:
+    if template is None or template.affiliation_is_flexible:
         affiliation, new_name_string = fuzzy_match(schema, proc_name_string.lower(), schema.affiliations.values(), match_longest=True)
 
         if affiliation is None:
@@ -201,7 +209,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
     # Amplifier
     prerun_amplifier = False
 
-    if template is None or not template.amplifier_fixed:
+    if template is None or template.amplifier_is_flexible:
         candidate_amplifiers = [amp for amp in schema.amplifiers.values() if amp.prerun]
 
         # Limit to given symbol sets
@@ -219,7 +227,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
 
 
     # Entity type
-    if template is None or not template.entity_fixed:
+    if template is None or template.entity_is_flexible:
         candidates = schema.get_flat_entities()
 
         # Limit to symbol sets
@@ -256,7 +264,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
                     f'from symbol set "{entity_type.symbol_set.names[0]}" leaving \"{proc_name_string}\"')
 
     # Amplifier post-run
-    if (template is None or not template.amplifier_fixed) and not prerun_amplifier:
+    if (template is None or template.amplifier_is_flexible) and not prerun_amplifier:
         ret_symbol.amplifier = None
         candidate_amplifiers = [amp for amp in schema.amplifiers.values() if amp.applies_to_entity(ret_symbol.entity)]
         amplifier, new_name_string = fuzzy_match(schema, proc_name_string, candidate_amplifiers, match_longest=True)
@@ -266,7 +274,11 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
 
     # Double-check amplifier
     if prerun_amplifier and ret_symbol.amplifier is not None and not ret_symbol.amplifier.applies_to_symbol_set(ret_symbol.symbol_set):
-        print(f'Removing amplifier "{ret_symbol.amplifier}" due to mismatch with entity')
+        if not ret_symbol.amplifier.applies_to_symbol_set(ret_symbol.symbol_set):
+            print('No symset apply')
+        if not ret_symbol.amplifier.applies_to_dimension(ret_symbol.symbol_set.dimension):
+            print(f'No dimension {ret_symbol.amplifier.applies_to}')
+        print(f'Removing amplifier "{ret_symbol.amplifier.names[0]}" due to mismatch with symbol set {ret_symbol.symbol_set}')
         ret_symbol.amplifier = None
 
     if verbose:
@@ -276,7 +288,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
             print('\tNo modifier assigned')
 
     # Find task force / headquarters / dummy
-    if template is None or not template.hqtfd_fixed:
+    if template is None or template.hqtfd_is_flexible:
 
         candidates = [hc for hc in schema.hqtfds.values() if not hc.matches_blacklist(proc_name_string) and hc.applies_to_symbol_set(ret_symbol.symbol_set)]
 
@@ -291,7 +303,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
         ret_symbol.hqtfd = hqtfd
 
     # Find status code
-    if template is None or not template.status_fixed:
+    if template is None or template.status_is_flexible:
         # print([status.names for status in symbol_schema.statuses.values()])
         status_code, new_name_string = fuzzy_match(schema, proc_name_string,
                                                    [code for code in schema.statuses.values()],
@@ -305,7 +317,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
 
     # Find modifiers
     for mod_set in [1, 2]:
-        if template is None or not template.modifiers_fixed[mod_set - 1]:
+        if template is None or getattr(template, f'modifier_{mod_set}_is_flexible'):
 
             modifier_candidates = list(getattr(symbol_set, f'm{mod_set}').values())
 
@@ -344,9 +356,11 @@ if __name__ == '__main__':
     test_dir = os.path.join(os.path.dirname(__file__), '..', 'test')
     os.makedirs(test_dir, exist_ok=True)
 
+    template_list = Template.load_from_file('example_template.yml', schema=schema)
+
     for name in TEST_NAMES:
         print(f'Testing "{name}"')
-        symbol = name_to_symbol(name=name, schema=schema, verbose=True)       
+        symbol = name_to_symbol(name=name, schema=schema, verbose=True, templates=template_list)       
         svg = symbol.get_svg()
 
         with open(os.path.join(test_dir, f'{name}.svg'), 'w') as out_file:

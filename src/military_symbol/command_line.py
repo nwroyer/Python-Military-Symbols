@@ -8,6 +8,7 @@ import name_to_sidc
 
 from symbol import Symbol
 from schema import Schema
+from template import Template
 # from symbol_template import SymbolTemplateSet
 from symbol_cache import SymbolCache
 
@@ -21,13 +22,17 @@ if sym_schema is None:
 
 symbol_cache: SymbolCache = SymbolCache(sym_schema)
 
-def add_symbol_template_set(template_filename):
+def add_templates_from_file(template_filename:str):
     """
     Add a symbol template to allow easier generation of symbols by name for specific situation.
     :param template_filename: The filename for the template file is structured as shown in the example_template.json file
     """
-    symbol_temp: SymbolTemplateSet = SymbolTemplateSet(sym_schema).load_from_file(template_filename)
-    sym_schema.add_template_set(symbol_temp)
+    try:
+        templates = Template.load_from_file(template_filename)
+        sym_schema.add_templates(templates)
+    except Exception as ex:
+        print(f'Error adding templates from "{template_filename}: {ex}')
+        return
 
 
 def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False, use_variants=False, style='light', 
