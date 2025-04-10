@@ -78,11 +78,18 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
         ent_a = a[1]
         ent_b = b[1]
 
+        def calc_match_weight(obj) -> bool:
+            op = getattr(obj, 'get_match_weight', None)
+            if callable(op):
+                return obj.get_match_weight()
+            else:
+                return 0.0
+
         sym_set_a = a[1].symbol_set if hasattr(a[1], 'symbol_set') else None
         sym_set_b = b[1].symbol_set if hasattr(b[1], 'symbol_set') else None
 
-        match_weight_a = 0 #sym_set_a.match_weight + ent_a.match_weight if sym_set_a else ent_a.match_weight
-        match_weight_b = 0 #sym_set_b.match_weight + ent_b.match_weight if sym_set_b else ent_b.match_weight
+        match_weight_a = calc_match_weight(ent_a)
+        match_weight_b = calc_match_weight(ent_b)
 
         if score_a == score_b:
             if match_weight_a > match_weight_b:
@@ -98,7 +105,7 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
 
     matches = sorted(matches, key=cmp_to_key(sort_func))
     if verbose and 'symbol_set' in dir(matches[0][1]):
-        print('\tMatches ' + f"{[f'{entity.names[0]} ({entity.symbol_set}-{entity.id_code}) (score {score})' for (name, entity, score) in matches]}")
+        print('\tMatches ' + f"{[f'{entity.names[0]} ({entity.symbol_set}-{entity.id_code}) (score {score}, match weight {entity.get_match_weight()})' for (name, entity, score) in matches]}")
 
     return matches[0][1], name_string.replace(matches[0][0], '').strip().replace('  ', ' ')
 

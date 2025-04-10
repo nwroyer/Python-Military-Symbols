@@ -49,11 +49,11 @@
 		},
 
 		"120300": {
-			"names": ["amphibious warfare ship"],
+			"names": ["amphibious warfare ship", "amphib", "amphibious ship"],
 			"icon": [{"fill": true, "d": "m 100,120 20,0 m -20,0 -20,-20 10,0 0,-20 20,0 0,20 10,0 z"}]
 		},
 		"120301": {
-			"names": ["amphibious command ship"],
+			"names": ["amphibious command ship", "LCC"],
 			"icon": [{"text": "LCC"}]
 		},
 		"120302": {
@@ -154,35 +154,35 @@
 			"icon": [{"fill": false, "stroke": true, "d": "m 110,80 15,15 0,25 M 90,80 75,95 l 0,25"}]
 		},
 		"121000": {
-			"names": ["navy task organization"],
+			"names": ["navy task organization", "naval task organization", "naval task org"],
 			"icon": [
 				{"fill": false, "stroke": true, "d": "m 110,80 15,15 0,25 M 90,80 75,95 l 0,25"},
 				{"fill": true, "d": "m 100,80 -15,15 0,25 30,0 0,-25 -15,-15"}
 			]
 		},
 		"121001": {
-			"names": ["navy task element"],
+			"names": ["navy task element", "naval task element"],
 			"icon": [
 				{"icon": ".task_org"},
 				{"text": "TE", "pos": [100, 150], "fontsize": 30}
 			]
 		},
 		"121002": {
-			"names": ["navy task force"],
+			"names": ["navy task force", "naval task force"],
 			"icon": [
 				{"icon": ".task_org"},
 				{"text": "TF", "pos": [100, 150], "fontsize": 30}
 			]
 		},
 		"121003": {
-			"names": ["navy task group"],
+			"names": ["navy task group", "naval task group"],
 			"icon": [
 				{"icon": ".task_org"},
 				{"text": "TG", "pos": [100, 150], "fontsize": 30}
 			]
 		},
 		"121004": {
-			"names": ["navy task unit"],
+			"names": ["navy task unit", "naval task unit"],
 			"icon": [
 				{"icon": ".task_org"},
 				{"text": "TU", "pos": [100, 150], "fontsize": 30}

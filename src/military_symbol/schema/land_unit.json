@@ -89,7 +89,7 @@
 			]
 		},
 		"111000": {
-			"names": ["signal"],
+			"names": ["signal", "communications", "communication", "S-6", "G-6", "comm"],
 			"icon": [{
 					"unknown": [{"d": "M50,65 100,110 100,90 150,135"}],
 					"friend": [{"d": "M25,50 100,110 100,90 175,150"}],
@@ -192,7 +192,7 @@
 			"icon": [{"d": "M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z"}]
 		},
 		"120501": {
-			"names": ["armored reconnaissance", "armored scout", "armored recon", "mechanized scout", "mechanized reconnaissance", "mechanized recon"],
+			"names": ["armored reconnaissance", "armored scout", "armored recon", "mechanized scout", "mechanized reconnaissance", "mechanized recon", "armored cavalry", "mechanized cavalry"],
 			"icon": [{"icon": "120500"}, {"icon": "121300"}]
 		},
 		"120502": {
@@ -279,7 +279,7 @@
 			}]
 		},
 		"121301": {
-			"names": ["reconnaissance surveillance", "recon surveillance", "scout surveillance"],
+			"names": ["reconnaissance surveillance", "recon surveillance", "scout surveillance", "reconnaissance and surveillance"],
 			"icon": [{"icon": "121300"}, {"icon": "121600"}]
 		},
 		"121302": {
@@ -388,6 +388,7 @@
 		},
 		"130300": {
 			"names": ["field artillery", "artillery"],
+			"match weight": 2,
 			"icon": [{"r": 15, "pos": [100, 100], "fill": true}]
 		},
 		"130301": {
@@ -597,6 +598,7 @@
 		},
 		"141700": {
 			"names": ["security"],
+			"match weight": 1.2,
 			"icon": [{"text": "SEC"}]
 		},
 		"141701": {
@@ -1736,7 +1738,7 @@
 
 	"M2": {
 		"01": {
-			"names": ["airborne"],
+			"names": ["airborne", "air mobile", "airmobile"],
 			"until": "2525E",
 			"new": "C-2-100",
 			"cat": "mobility",
@@ -2026,9 +2028,9 @@
 			"new": "C-2-105",
 			"cat": "mobility",
 			"icon": [
-				{"r": 5, "pos": [70, 125]},
-				{"r": 5, "pos": [100, 125]},
-				{"r": 5, "pos": [130, 125]}				
+				{"r": 7, "pos": [70, 130]},
+				{"r": 7, "pos": [100, 130]},
+				{"r": 7, "pos": [130, 130]}				
 			]
 		},
 		"52": {

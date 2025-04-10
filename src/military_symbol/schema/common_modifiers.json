@@ -140,7 +140,7 @@
 	},
 
 	"M2": {
-		"100": {"names": ["airborne"], "cat": "mobility", "icon": [{"d": "M75,140 C75,125 100,125 100,140 C100,125 125,125 125,140"}]},
+		"100": {"names": ["airborne", "airmobile", "air mobile"], "cat": "mobility", "icon": [{"d": "M75,140 C75,125 100,125 100,140 C100,125 125,125 125,140"}]},
 		"101": {"names": ["bicycle equipped", "bicycle"], "cat": "mobility", "icon": [{"r": 11, "pos": [100, 132]}]},
 		"102": {"names": ["railroad", "railway"], "cat": "mobility", "icon": [
 			{"d": "M65,125 l70,0"},
@@ -152,7 +152,9 @@
 			{"r": 7, "pos": [80, 130]}, {"r": 7, "pos": [120, 130]}
 		]},
 		"106": {"names": ["wheeled cross country", "cross country", "wheeled x"], "cat": "mobility", "icon": [
-			{"r": 7, "pos": [75, 130]}, {"r": 7, "pos": [100, 130]}, {"r": 7, "pos": [125, 130]}
+			{"r": 7, "pos": [75, 130]}, 
+			{"r": 7, "pos": [100, 130]}, 
+			{"r": 7, "pos": [125, 130]}
 		]},
 		"107": {"names": ["fixed-wing", "fixed wing", "FW"], "cat": "mobility", "icon": [{"fill": true, "stroke": true, "d": "m 100,130 22,-9 c 11,0 11,18 0,18 l -22,-9 -22,9 c -10.9,0 -10.9,-18 0,-18 z"}]},
 		"108": {"names": ["rotary-wing", "rotary wing", "RW"], "cat": "mobility", "icon": [{"fill": true, "stroke": true, "d": "m 75,122 v 15 l 50,-15 v 15 z"}]},

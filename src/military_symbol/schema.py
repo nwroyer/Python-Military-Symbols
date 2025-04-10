@@ -359,13 +359,24 @@ class Amplifier:
 		if dimension is None:
 			return False
 
+		if not isinstance(dimension, Dimension):
+			raise Exception(f"Dimension {dimension} for amplifier {self.names} is not a Dimension object")
+
 		return dimension.id_code in [dim.id_code for dim in self.applies_to]
 
 	def applies_to_symbol_set(self, symbol_set) -> bool:
-		if symbol_set is None or symbol_set.dimension is None:
-			return False
+		if symbol_set is None:
+			return False 
+		if symbol_set.common:
+			return True
 
-		return self.applies_to_dimension(symbol_set.dimension)
+		if symbol_set.dimension is None:
+			return False
+		try:
+			return self.applies_to_dimension(symbol_set.dimension)
+		except Exception as ex:
+			raise Exception(f"Error checking dimension application of [{self}] to symbol set \"{symbol_set}\": {ex}")
+			return False
 
 	def applies_to_entity(self, entity) -> bool:
 		if entity is None or entity.symbol_set is None:
@@ -394,6 +405,7 @@ class Amplifier:
 			if apt not in schema.dimensions:
 				print(f"Bad applies to dimension \"{apt}\" for amplifier {amplifier.id_code}", file=sys.stderr)
 				return None
+
 			amplifier.applies_to.append(schema.dimensions[apt])
 
 		amplifier.icon_side = json.get('icon side', 'middle')
@@ -434,7 +446,15 @@ class SymbolLayer:
 		self.alt_icon:list = []
 		self.symbol_set = symbol_set
 		self.match_name:bool = True
+		self.match_weight:float = None
 		pass
+
+	def get_match_weight(self) -> float:
+		if self.match_weight is None:
+			return self.symbol_set.match_weight if self.symbol_set is not None else 0
+
+		return self.match_weight
+
 
 	def __repr__(self):
 		return '{{{}}} {} -> {}'.format(self.id_code, ' / '.join(self.names), self.elements)
@@ -468,6 +488,11 @@ class SymbolLayer:
 		symbol_layer.id_code = id_code
 		symbol_layer.names = json['names'] if 'names' in json else []
 		symbol_layer.civilian = json.get('civ', False)
+
+		if 'match weight' in json:
+			symbol_layer.match_weight = json['match weight']
+		else:
+			symbol_layer.match_weight = None
 
 		symbol_layer.icon = drawing_items.SymbolElement.parse_list_from_json(item=json['icon'], full_items=full_items, affiliations=schema.get_base_affiliation_dict())
 		symbol_layer.alt_icon = drawing_items.SymbolElement.parse_list_from_json(item=json.get('alt icon', []), full_items=full_items, affiliations=schema.get_base_affiliation_dict())
@@ -510,6 +535,7 @@ class SymbolSet:
 		self.m1:dict = {}
 		self.m2:dict = {}
 		self.match_name:bool = True
+		self.match_weight:float = 0.0
 		
 	def __lt__(self, other) -> bool:
 		if self.common != other.common:
@@ -585,6 +611,7 @@ class SymbolSet:
 		ret_set.entities = {item: ret['IC'][item] for item in ret['IC'].keys() if item[0] != '.'} # Ignore utility symbols
 		ret_set.m1 = ret['M1']
 		ret_set.m2 = ret['M2']
+		ret_set.match_weight = json_dict.get('match weight', 0.0)
 		ret_set.names = json_dict['names'] if 'names' in json_dict else [json_dict['name']]
 		ret_set.dimension = schema.dimensions[json_dict['dimension']] if not is_common else False
 		ret_set.common = is_common
