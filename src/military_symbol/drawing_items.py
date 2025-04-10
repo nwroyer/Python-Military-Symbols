@@ -541,7 +541,9 @@ class SymbolElement:
 			)
 
 		def svg(self, symbol, output_style=OutputStyle()) -> list:
-			return '<g transform=\"scale({})\">{}</g>'.format(
+			return '<g transform=\"translate({} {})\"><g transform=\"scale({})\">{}</g></g>'.format(
+				100 - (self.scale*100),
+				100 - (self.scale*100),
 				self.scale,
 				' '.join([item.svg(symbol=symbol, output_style=output_style) for item in self.items])
 			)

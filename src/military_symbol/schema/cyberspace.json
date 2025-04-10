@@ -3,6 +3,7 @@
 	"name": "cyberspace",
 	"dimension": "cyberspace",
 	"modcats": ["capability", "service", "origin"],
+	"match weight": -1,
 	"IC": {
 		"110000": {
 			"names": ["cyberspace unit"],

@@ -278,7 +278,7 @@ class Symbol():
 
 		svg_content = f'<svg xmlns="{SVG_NAMESPACE}" width="{ret_bbox.width()}" height="{ret_bbox.height()}" ' + \
 			f'viewBox="{ret_bbox.x_min} {ret_bbox.y_min} {ret_bbox.width()} {ret_bbox.height()}">\n' + \
-			'\n'.join(elements) + \
+			('\n'.join(elements) if elements is not None else '') + \
 			'\n</svg>'
 
 		# Determine proper coloration
