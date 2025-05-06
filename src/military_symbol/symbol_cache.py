@@ -111,6 +111,7 @@ class SymbolCache:
                 output_style.padding = padding
                 output_style.use_alternate_icons = use_variants
                 output_style.use_background = use_background
+                output_style.background_width = OutputStyle.DEFAULT_BACKGROUND_WIDTH if use_background else 0
                 output_style.background_color = background_color
                 output_style.fill_style = style
 

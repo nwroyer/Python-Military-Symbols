@@ -107,23 +107,26 @@ class SymbolElement:
 			self.stroke_color:str = "icon"
 			self.stroke_width:float = OutputStyle.DEFAULT_STROKE_WIDTH
 			self.stroke_dashed:bool = stroke_dashed
+			self.stroke_style:str = 'round' # ['butt', 'round', 'square']
 
-		def with_stroke(self, stroke_width=None, stroke_color=None, stroke_dashed=None):
+		def with_stroke(self, stroke_width=None, stroke_color=None, stroke_dashed=None, stroke_style=None):
 			if stroke_width is not None:
 				self.stroke_width = stroke_width
 			if stroke_color is not None:
 				self.stroke_color = stroke_color
 			if stroke_dashed is not None:
 				self.stroke_dashed = stroke_dashed
+			if stroke_style is not None:
+				self.stroke_style = stroke_style
 			return self
 
-		def copy_with_stroke(self, stroke_width=None, stroke_color=None, stroke_dashed=None):
+		def copy_with_stroke(self, stroke_width=None, stroke_color=None, stroke_dashed=None, stroke_style=None):
 			ret = copy.copy(self)
 			
 			if hasattr(self, 'items'):
-				setattr(ret, 'items', [e.copy_with_stroke(stroke_width=stroke_width, stroke_color=stroke_color, stroke_dashed=stroke_dashed) for e in getattr(ret, 'items')])
+				setattr(ret, 'items', [e.copy_with_stroke(stroke_width=stroke_width, stroke_color=stroke_color, stroke_dashed=stroke_dashed, stroke_style=stroke_style) for e in getattr(ret, 'items')])
 
-			return ret.with_stroke(stroke_width=stroke_width, stroke_color=stroke_color, stroke_dashed=stroke_dashed)
+			return ret.with_stroke(stroke_width=stroke_width, stroke_color=stroke_color, stroke_dashed=stroke_dashed, stroke_style=stroke_style)
 
 		def with_fill(self, fill_color=None):
 			self.fill_color = fill_color
@@ -134,11 +137,12 @@ class SymbolElement:
 			return ret.with_fill(fill_color=fill_color)
 
 		def base_params(self) -> str:
-			return 'fill="{}" stroke="{}"{}{}'.format(
+			return 'fill="{}" stroke="{}"{}{}{}'.format(
 				self.fill_color if self.fill_color is not None and self.fill_color != '' else 'none',
 				self.stroke_color if self.stroke_color is not None and self.fill_color != '' else 'none',
 				f' stroke-width="{self.stroke_width}"' if self.stroke_color is not None and self.stroke_color != '' else '',
-				f' stroke-dasharray="8 8"' if self.stroke_dashed and self.stroke_color is not None else ''
+				f' stroke-dasharray="8 8"' if self.stroke_dashed and self.stroke_color is not None else '',
+				f' stroke-linecap="{self.stroke_style}"' if self.stroke_style is not None else ''
 			)
 
 		def element_to_color_type(self, element):

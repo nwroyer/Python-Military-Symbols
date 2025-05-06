@@ -155,6 +155,7 @@ class Symbol():
 		frame_commands = []
 
 		SVG_NAMESPACE:str = "http://www.w3.org/2000/svg";
+
 		if self.is_frame_dashed():
 			base_frame = frame_to_use.frames[self.affiliation.frame_id]
 			if output_style.fill_style != 'unfilled':
@@ -260,7 +261,7 @@ class Symbol():
 			if not bg_color.startswith('#'):
 				bg_color = f'#{bg_color}'
 
-			elements = [cmd.copy_with_stroke(stroke_color=f'{bg_color}', stroke_width=output_style.background_width*2).svg(symbol=self, output_style=output_style) for cmd in frame_commands] + elements
+			elements = [cmd.copy_with_stroke(stroke_color=f'{bg_color}', stroke_width=output_style.background_width*2, stroke_style='round').svg(symbol=self, output_style=output_style) for cmd in frame_commands] + elements
 
 		# Handle entities and modifiers
 		for entmod in [self.entity, self.modifier_1, self.modifier_2]:

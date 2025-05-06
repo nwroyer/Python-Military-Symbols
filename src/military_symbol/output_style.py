@@ -10,6 +10,7 @@ class OutputStyle:
 	DEFAULT_FILL_STYLE:str = 'light'
 	DEFAULT_FONT_FILE:str = os.path.join(os.path.dirname(__file__), 'Roboto.ttf')
 	DEFAULT_PADDING:float = 3.0
+	DEFAULT_BACKGROUND_WIDTH:float = 16.0
 
 	def __init__(self, use_text_paths:bool = False):
 		self.use_text_paths:bool = use_text_paths

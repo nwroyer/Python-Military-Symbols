@@ -12,7 +12,7 @@ from template import Template
 # from symbol_template import SymbolTemplateSet
 from symbol_cache import SymbolCache
 
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
 
 # Load the symbol schema from its default location; don't
@@ -119,8 +119,10 @@ def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=
     :return: A string containing the SVG for the constructed symbol.
     """
     return symbol_cache.get_svg_string(creator_var, is_sidc, padding=pixel_padding, style=style,
-                                       use_variants=use_variants, use_background=use_background,
-                                       background_color=background_color, create_if_missing=True, verbose=verbose,
+                                       use_variants=use_variants, 
+                                       use_background=use_background,
+                                       background_color=background_color, 
+                                       create_if_missing=True, verbose=verbose,
                                        force_all_elements=force_all_elements, 
                                        limit_to_symbol_sets=limit_to_symbol_sets)
 

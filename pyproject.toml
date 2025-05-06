@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "military-symbol"
-version = "2.0.0"
+version = "2.0.1"
 authors = [
   { name="Nicholas Royer", email="nick.w.royer@protonmail.com" },
 ]
