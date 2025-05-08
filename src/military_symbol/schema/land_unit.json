@@ -27,11 +27,12 @@
 		},
 
 		"000000": {
-			"names": ["unspecified command and control"],
+			"names": ["unspecified command and control", "unspecified", "undefined"],
+			"match weight": 3,
 			"icon": []
 		},
 		"110000": {
-			"names": ["command and control"],
+			"names": ["command and control", "C2"],
 			"icon": [{"text": "C2"}]
 		},
 		"110100": {
@@ -146,7 +147,7 @@
 			"icon": []
 		},
 		"120100": {
-			"names": ["air assault", "air assault with organic lift"],
+			"names": ["air assault with organic lift", "air assault unit"],
 			"icon": [{
 					"unknown": [{"d": "M35,120 L 90,120 l10,10 10,-10 L165,120"}],
 					"friend": [{"d": "M25,120 L 90,120 l10,10 10,-10 L175,120"}],
@@ -171,7 +172,7 @@
 			}]
 		},
 		"120400": {
-			"names": ["antitank", "anti-armor", "antitank/anti-armor", "anti tank", "anti armor", "AT"],
+			"names": ["antitank", "anti-armor", "antitank/anti-armor", "anti tank", "anti armor", "AT", "anti-tank"],
 			"icon": [{
 				"unknown": [{"d": "M55,135 L100,33 145,135"}],
 				"friend": [{"d": "M25,150 L100,52 175,150"}],
@@ -193,6 +194,7 @@
 		},
 		"120501": {
 			"names": ["armored reconnaissance", "armored scout", "armored recon", "mechanized scout", "mechanized reconnaissance", "mechanized recon", "armored cavalry", "mechanized cavalry"],
+			"match weight": 2.2,
 			"icon": [{"icon": "120500"}, {"icon": "121300"}]
 		},
 		"120502": {
@@ -525,7 +527,7 @@
 			"icon": [{"fill": "white", "d": "M 114.3,94 C 114.3,102.3 107.9,109 100,109 c -7.9,0 -14.2,-6.7 -14.2,-15 0,-8.3 6.4,-15 14.2,-15 7.9,0 14.3,6.7 14.3,15 z m 0,27 14.3,15 -57,0 14.3,-15 M 125.7,79 l 14.3,0 0,30 -14.3,0 m -51.3,0 -14.3,0 0,-30 14.3,0 m 54.2,15 c 0,16.6 -12.8,30 -28.5,30 -15.7,0 -28.5,-13.4 -28.5,-30 C 71.5,77.4 84.3,64 100,64 115.7,64 128.5,77.4 128.5,94 z"}]
 		},
 		"140500": {
-			"names": ["dog"],
+			"names": ["dog", "canine", "K9", "K-9"],
 			"icon": [{"text": "DOG"}]
 		},
 		"140600": {
@@ -1276,7 +1278,7 @@
 			"icon": [{"textm1": "XX"}]
 		},
 		"20": {
-			"names": ["dog"],
+			"names": ["dog", "K9", "K-9"],
 			"cat": "capability",
 			"icon": [{"textm1": "DOG"}]
 		},
@@ -1303,8 +1305,9 @@
 			"icon": [{"textm1": "EOD"}]
 		},
 		"25": {
-			"names": ["fire direction center", "FDC"],
+			"names": ["fire direction center", "FDC", "fire direction"],
 			"cat": "capability",
+			"match weight": 2.1,
 			"icon": [{"textm1": "FDC"}]
 		},
 		"26": {
@@ -1508,7 +1511,7 @@
 			"until": "2525E",
 			"new": "C-1-130",
 			"cat": "capability",
-			"icon": [{"textm1": "M75,60 l20,0 M100,76 l0,-18 M125,60 l-20,0"}]
+			"icon": [{"d": "M75,60 l20,0 M100,76 l0,-18 M125,60 l-20,0"}]
 		},
 		"62": {
 			"names": ["sound ranging"],
@@ -1738,7 +1741,7 @@
 
 	"M2": {
 		"01": {
-			"names": ["airborne", "air mobile", "airmobile"],
+			"names": ["airborne"],
 			"until": "2525E",
 			"new": "C-2-100",
 			"cat": "mobility",
@@ -2069,7 +2072,8 @@
 			"icon": [{"textm2": "G"}]
 		},
 		"59": {
-			"names": ["air assault"],
+			"names": ["air assault", "airmobile", "air mobile"],
+			"match weight": 2.1,
 			"cat": "mobility",
 			"icon": [{"d": "m 85,125 15,20 15,-20"}]
 		},

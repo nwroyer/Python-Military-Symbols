@@ -49,12 +49,13 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
         return None, None
 
     if print_candidates:
-        print(f'Searching for \"{name_string}\"')
+        print(f'Searching for \"{name_string}\" in {candidate_name_list}')
 
-    # Check for exact matches    
-    name_string_words = split_into_words(name_string)
     # Return matching candidates
     matches = [(name, candidate) for (name, candidate) in candidate_name_list if name in name_string]
+
+    if print_candidates:
+        print(matches)
 
     # Handle exact matches
     for match in matches:
@@ -62,6 +63,10 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
             matches = [(name, cand) for (name, cand) in matches if exact_match(name, name_string)]
             break
     
+            if print_candidates:
+                print('An exact match was found')
+                print(matches)
+
     # Handle 0 and 1-match weights
     if len(matches) < 1:
         return None, None
@@ -70,6 +75,8 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
 
     # Apply fuzzy match score
     matches = [(name, cand, fuzz.partial_ratio(name, name_string)) for (name, cand) in matches]
+    if print_candidates:
+        print([(n, r) for (n, c, r) in matches])
 
     def sort_func(a, b):
         score_a = fuzz.partial_ratio(a[0], name_string)
@@ -99,6 +106,7 @@ def fuzzy_match(schema, name_string, candidate_list, match_longest=True, verbose
 
             if len(a[0]) == len(b[0]):
                 return 0
+
             return 1 if len(a[0]) < len(b[0]) else -1
 
         return 1 if score_a > score_b else -1
@@ -323,24 +331,34 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
         ret_symbol.status = status_code
 
     # Find modifiers
+
+    # Assemble options
+    modifier_candidates = []
+    mod_candidate_sets = {}
     for mod_set in [1, 2]:
         if template is None or getattr(template, f'modifier_{mod_set}_is_flexible'):
-
-            modifier_candidates = list(getattr(symbol_set, f'm{mod_set}').values())
+            sym_set_mods = list(getattr(symbol_set, f'm{mod_set}').values())
+            modifier_candidates += sym_set_mods
+            for c in sym_set_mods:
+                mod_candidate_sets[c] = mod_set
 
             for extra_symbol_set in schema.symbol_sets.values():
                 if extra_symbol_set.common:
                     modifier_candidates += list(getattr(extra_symbol_set, f'm{mod_set}').values())
+                    for c in sym_set_mods:
+                        mod_candidate_sets[c] = mod_set
 
-            mod, new_name_string = fuzzy_match(schema, proc_name_string, modifier_candidates, match_longest=True, print_candidates=True)
+    # Pick the modifier
+    mod, new_name_string = fuzzy_match(schema, proc_name_string, modifier_candidates, match_longest=True, print_candidates=True)
 
-            if mod is not None:
-                proc_name_string = new_name_string
+    if mod is not None:
+        proc_name_string = new_name_string
+        mod_set = mod_candidate_sets[mod]
 
-                if verbose:
-                    print(f'\tAssuming modifier {mod_set} "{mod.names[0]}" ({mod.id_code}) from "{mod.symbol_set.names[0]}" leaving "{proc_name_string}"')
+        if verbose:
+            print(f'\tAssuming modifier {mod_set} "{mod.names[0]}" ({mod.id_code}) from "{mod.symbol_set.names[0]}" leaving "{proc_name_string}"')
 
-                setattr(ret_symbol, f'modifier_{mod_set}', mod)
+        setattr(ret_symbol, f'modifier_{mod_set}', mod)
 
     return ret_symbol
 
