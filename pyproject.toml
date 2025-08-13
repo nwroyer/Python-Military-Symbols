@@ -4,15 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "military-symbol"
-version = "2.0.2"
+version = "2.0.3"
 authors = [
   { name="Nicholas Royer", email="nick.w.royer@protonmail.com" },
 ]
 description = "A lightweight library for producing SVGs of NATO standard military symbols from NATO sidcs or natural-language descriptions"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.13"
 classifiers = [
-	"Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -27,7 +27,8 @@ dependencies = [
 	"lxml", 
 	"svgpathtools", 
 	"thefuzz",
-  "freetype-py"
+  "freetype-py",
+  "pyyaml"
 ]
 
 [project.scripts]
