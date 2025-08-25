@@ -12,7 +12,7 @@ from template import Template
 # from symbol_template import SymbolTemplateSet
 from symbol_cache import SymbolCache
 
-VERSION = "2.0.2"
+VERSION = "2.0.4"
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
 
 # Load the symbol schema from its default location; don't
