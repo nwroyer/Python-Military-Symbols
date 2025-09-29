@@ -12,7 +12,7 @@ from template import Template
 # from symbol_template import SymbolTemplateSet
 from symbol_cache import SymbolCache
 
-VERSION = "2.0.4"
+VERSION = "2.0.7"
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
 
 # Load the symbol schema from its default location; don't
@@ -315,6 +315,8 @@ def command_line_main():
                 if symbol_class is None:
                     print(f'No symbol creatable for name \"{input_arg}\"; skipping', file=sys.stderr)
                 else:
+                    if arguments.verbose:
+                        print(f'{symbol_class}')
                     print(f'{input_arg} -> {symbol_class.get_sidc()}' if arguments.verbose else f'{symbol_class.get_sidc()}')
 
             elif output_dir:

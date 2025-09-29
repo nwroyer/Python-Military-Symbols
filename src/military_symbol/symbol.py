@@ -41,7 +41,6 @@ class Symbol():
 			f'context = {self.context.names[0]}',
 			f'affiliation = {self.affiliation.names[0] if self.affiliation else 'none'} [{self.affiliation.id_code if self.affiliation else 'none'}]',
 			f'symbol set = {self.symbol_set.names[0] if self.symbol_set else 'none'} [{self.symbol_set.id_code if self.symbol_set else 'none'}]',
-			
 			f'dimension = {self.symbol_set.dimension.names[0] if self.symbol_set and self.symbol_set.dimension else 'none'} [{self.symbol_set.dimension.id_code if self.symbol_set and self.symbol_set.dimension else 'none'}]',
 			f'frame shape = {self.symbol_set.dimension.frame_shape.names[0] if self.symbol_set else 'none'} [{self.symbol_set.dimension.frame_shape.id_code if self.symbol_set else 'none'}]',
 			f'entity = {self.entity.names[0]} [{self.entity.id_code}]' if self.entity is not None else 'entity = none',

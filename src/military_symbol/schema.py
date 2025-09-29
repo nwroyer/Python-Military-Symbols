@@ -586,6 +586,7 @@ class SymbolSet:
 
 		icon_set:str = json_dict['set']
 		ret_set = cls()
+		ret_set.id_code = icon_set
 
 		ret_set.match_name = json_dict.get('match name', True)
 

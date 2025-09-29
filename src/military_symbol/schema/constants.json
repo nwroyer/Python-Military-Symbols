@@ -381,7 +381,7 @@
 			"type": "echelon", 
 			"applies to": ["land unit"],
 			"icon side": "top",
-			"icon": [{"r": 15, "pos": [100, -20]}, {"d": "M80,-10 L120,-30", "bbox": [80, -10, 120, -30]}],
+			"icon": [{"r": 15, "pos": [100, 30]}, {"d": "M80,40 L120,20", "bbox": [80, 40, 120, 20]}],
 			"prerun": true
 		}, 
 		"12": {

@@ -290,7 +290,7 @@ def name_to_symbol(name: str, schema:Schema, verbose: bool = False, limit_to_sym
     # Double-check amplifier
     if prerun_amplifier and ret_symbol.amplifier is not None and not ret_symbol.amplifier.applies_to_symbol_set(ret_symbol.symbol_set):
         if not ret_symbol.amplifier.applies_to_symbol_set(ret_symbol.symbol_set):
-            print('No symset apply')
+            print('No symset applies')
         if not ret_symbol.amplifier.applies_to_dimension(ret_symbol.symbol_set.dimension):
             print(f'No dimension {ret_symbol.amplifier.applies_to}')
         print(f'Removing amplifier "{ret_symbol.amplifier.names[0]}" due to mismatch with symbol set {ret_symbol.symbol_set}')
