@@ -57,10 +57,10 @@ class Symbol():
 
 	def to_sidc(self) -> str:
 		return f'13{self.context.id_code if self.context else "0"}{self.affiliation.id_code if self.affiliation else '0'}' + \
+			f'{self.symbol_set.id_code if self.symbol_set else '00'}' + \
 			f'{self.status.id_code if self.status else '0'}' + \
 			f'{self.hqtfd.id_code if self.hqtfd else '0'}' + \
 			f'{self.amplifier.id_code if self.amplifier else '00'}' + \
-			f'{self.symbol_set.id_code if self.symbol_set else '00'}' + \
 			f'{self.entity.id_code if self.entity else '000000'}' + \
 			f'{self.modifier_1.id_code if self.modifier_1 else '00'}' + \
 			f'{self.modifier_2.id_code if self.modifier_2 else '00'}' + \
