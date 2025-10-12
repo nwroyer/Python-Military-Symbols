@@ -1,0 +1,187 @@
+{
+	"set": "02",
+	"name": "air missile",
+	"dimension": "air",
+	"IC": {
+		"110000": {
+			"names": ["missile"],
+			"modcats": ["launch origin", "missile class", "missile destination", "missile status", "missile type", "missile range"],
+			"icon": [
+				{"d": "M90,135 l0,-10 5,-5 0,-55 5,-5 5,5 0,55 5,5 0,10 -10,-10 z", "fill": "yellow"}
+			]
+		}
+	}, 
+	"M1": {
+		"01": {
+			"names": ["air"],
+			"cat": "launch origin",
+			"icon": [{"text": "A", "pos": [68, 110], "fontsize": 30}]
+		},
+		"02": {
+			"names": ["surface"],
+			"cat": "launch origin",
+			"icon": [{"text": "S", "pos": [68, 110], "fontsize": 30}]			
+		},
+		"03": {
+			"names": ["subsurface"],
+			"cat": "launch origin",
+			"icon": [
+				{"text": "S", "pos": [68, 95], "fontsize": 30},
+				{"text": "U", "pos": [68, 125], "fontsize": 30}
+			]
+		},
+		"04": {
+			"names": ["space"],
+			"cat": "launch origin",
+			"icon": [
+				{"text": "S", "pos": [68, 95], "fontsize": 30},
+				{"text": "P", "pos": [68, 125], "fontsize": 30}
+			]
+		},
+		"05": {
+			"names": ["anti-ballistic"],
+			"cat": "missile class",
+			"icon": [
+				{"text": "A", "pos": [68, 95], "fontsize": 30},
+				{"text": "B", "pos": [68, 125], "fontsize": 30}
+			]
+		},		
+		"06": {
+			"names": ["ballistic"],
+			"cat": "missile class",
+			"icon": [{"text": "B", "pos": [68, 110], "fontsize": 30}]			
+		},
+		"07": {
+			"names": ["cruise"],
+			"cat": "missile class",
+			"icon": [{"text": "C", "pos": [68, 110], "fontsize": 30}]				
+		},
+		"08": {
+			"names": ["interceptor"],
+			"cat": "missile class",
+			"icon": [{"text": "I", "pos": [68, 110], "fontsize": 30}]			
+		},
+		"08": {
+			"names": ["hypersonic"],
+			"cat": "missile class",
+			"since": "2525E",
+			"icon": [
+				{"text": "H", "pos": [68, 95], "fontsize": 30},
+				{"text": "V", "pos": [68, 125], "fontsize": 30}
+			]	
+		}
+	}, 
+	"M2": {
+		"01": {
+			"names": ["air"],
+			"cat": "missile destination",
+			"icon": [{"text": "A", "pos": [132, 110], "fontsize": 30}]
+		},
+		"02": {
+			"names": ["surface"],
+			"cat": "missile destination",
+			"icon": [{"text": "S", "pos": [132, 110], "fontsize": 30}]			
+		},
+		"03": {
+			"names": ["subsurface"],
+			"cat": "missile destination",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "U", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"04": {
+			"names": ["space"],
+			"cat": "missile destination",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "P", "pos": [132, 125], "fontsize": 30}
+			]
+		},
+		"05": {
+			"names": ["launched"],
+			"cat": "missile status",
+			"icon": [{"text": "L", "pos": [132, 110], "fontsize": 30}]			
+		},
+		"06": {
+			"names": ["missile"],
+			"until": "2525E",
+			"cat": "missile type",
+			"icon": [{"text": "M", "pos": [132, 110], "fontsize": 30}]			
+		},
+		"07": {
+			"names": ["Patriot"],
+			"cat": "missile type",
+			"icon": [{"text": "P", "pos": [132, 110], "fontsize": 30}]			
+		},
+		"08": {
+			"names": ["Standard Missile-2", "SM-2"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "2", "pos": [132, 125], "fontsize": 30}
+			]			
+		},
+		"09": {
+			"names": ["Standard Missile-6", "SM-6"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "6", "pos": [132, 125], "fontsize": 30}
+			]			
+		},
+		"10": {
+			"names": ["Evolved Sea Sparrow Missile", "Sea Sparrow", "ESSM"],
+			"cat": "missile type",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "S", "pos": [132, 125], "fontsize": 30}
+			]			
+		},
+		"11": {
+			"names": ["Rolling Airframe Missile", "RAM"],
+			"cat": "missile type",
+			"icon": [{"text": "R", "pos": [132, 110], "fontsize": 30}]			
+		},
+		"12": {
+			"names": ["short range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]			
+		},										
+		"13": {
+			"names": ["medium range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "M", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]			
+		},
+		"14": {
+			"names": ["intermediate range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "I", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]			
+		},
+		"15": {
+			"names": ["long range"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "S", "pos": [132, 95], "fontsize": 30},
+				{"text": "R", "pos": [132, 125], "fontsize": 30}
+			]			
+		},
+		"16": {
+			"names": ["intercontinental"],
+			"cat": "missile range",
+			"icon": [
+				{"text": "I", "pos": [132, 95], "fontsize": 30},
+				{"text": "C", "pos": [132, 125], "fontsize": 30}
+			]			
+		}
+	}
+}

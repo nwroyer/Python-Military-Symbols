@@ -3,30 +3,36 @@ import os
 import os.path
 import sys
 
-from . import name_to_sidc
+sys.path.append(os.path.dirname(__file__))
+import name_to_sidc
 
-from .individual_symbol import MilitarySymbol
-from .symbol_schema import SymbolSchema
-from .symbol_template import SymbolTemplateSet
-from .symbol_cache import SymbolCache
+from symbol import Symbol
+from schema import Schema
+from template import Template
+# from symbol_template import SymbolTemplateSet
+from symbol_cache import SymbolCache
 
-VERSION = "1.2.3"
+VERSION = "2.0.7"
 STYLE_CHOICES = ['light', 'medium', 'dark', 'unfilled']
 
 # Load the symbol schema from its default location; don't
-sym_schema: SymbolSchema = SymbolSchema.load_symbol_schema_from_file()
+sym_schema: Schema = Schema.load_from_directory()
 if sym_schema is None:
     print("Error loading symbol schema; exiting", file=sys.stderr)
 
 symbol_cache: SymbolCache = SymbolCache(sym_schema)
 
-def add_symbol_template_set(template_filename):
+def add_templates_from_file(template_filename:str):
     """
     Add a symbol template to allow easier generation of symbols by name for specific situation.
     :param template_filename: The filename for the template file is structured as shown in the example_template.json file
     """
-    symbol_temp: SymbolTemplateSet = SymbolTemplateSet(sym_schema).load_from_file(template_filename)
-    sym_schema.add_template_set(symbol_temp)
+    try:
+        templates = Template.load_from_file(template_filename)
+        sym_schema.add_templates(templates)
+    except Exception as ex:
+        print(f'Error adding templates from "{template_filename}: {ex}')
+        return
 
 
 def get_symbol_svg_string_from_sidc(sidc, bounding_padding=4, verbose=False, use_variants=False, style='light', 
@@ -65,9 +71,9 @@ def get_symbol_svg_string_from_name(name_string:str, bounding_padding=4, verbose
                           limit_to_symbol_sets=limit_to_symbol_sets)
 
 
-def get_symbol_class(originator, is_sidc=True, verbose=False, limit_to_symbol_sets=None) -> MilitarySymbol:
+def get_symbol_class(originator, is_sidc=True, verbose=False, limit_to_symbol_sets=None) -> Symbol:
     """
-    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
+    Returns an symbol.Symbol object representing a symbol constructed from the given name, as a best
     guess, or SIDC, depending on inputs
     :param originator: The variable to construct from, whether name or SIDC
     :param is_sidc: Whether the originator is a SIDC (true) or name (false)
@@ -77,23 +83,23 @@ def get_symbol_class(originator, is_sidc=True, verbose=False, limit_to_symbol_se
     return symbol_cache.get_symbol(originator, is_sidc=is_sidc, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
 
 
-def get_symbol_class_from_name(name, verbose=False, limit_to_symbol_sets=None) -> MilitarySymbol:
+def get_symbol_class_from_name(name, verbose=False, limit_to_symbol_sets=None) -> Symbol:
     """
-    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given name, as a best
+    Returns a symbol.Symbol object representing a symbol constructed from the given name, as a best
     guess
-    :param name: The name to construct the MilitarySymbol from using a best-guess algorithm
+    :param name: The name to construct the Symbol from using a best-guess algorithm
     :param verbose: Whether to print ancillary information
-    :return: An individual_symbol.MilitarySymbol object
+    :return: An symbol.Symbol object
     """
     return get_symbol_class(name, is_sidc=False, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
 
 
-def get_symbol_class_from_sidc(sidc, verbose=False) -> MilitarySymbol:
+def get_symbol_class_from_sidc(sidc, verbose=False) -> Symbol:
     """
-    Returns an individual_symbol.MilitarySymbol object representing a symbol constructed from the given SIDC
-    :param sidc: The SIDC to construct the MilitarySymbol from
+    Returns an symbol.Symbol object representing a symbol constructed from the given SIDC
+    :param sidc: The SIDC to construct the Symbol from
     :param verbose: Whether to print ancillary information
-    :return: An individual_symbol.MilitarySymbol object
+    :return: An symbol.Symbol object
     """
     return get_symbol_class(sidc, is_sidc=True, verbose=verbose)
 
@@ -113,8 +119,10 @@ def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=
     :return: A string containing the SVG for the constructed symbol.
     """
     return symbol_cache.get_svg_string(creator_var, is_sidc, padding=pixel_padding, style=style,
-                                       use_variants=use_variants, use_background=use_background,
-                                       background_color=background_color, create_if_missing=True, verbose=verbose,
+                                       use_variants=use_variants, 
+                                       use_background=use_background,
+                                       background_color=background_color, 
+                                       create_if_missing=True, verbose=verbose,
                                        force_all_elements=force_all_elements, 
                                        limit_to_symbol_sets=limit_to_symbol_sets)
 
@@ -122,7 +130,7 @@ def get_svg_string(creator_var:str, is_sidc:bool, pixel_padding=4, use_variants=
 def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, style:str='light', use_variants:bool=False, use_background=False, background_color='#ffffff',
                               verbose=False, force_all_elements=False, limit_to_symbol_sets=None) -> tuple:
     """
-    Returns a (MilitarySymbol, str) tuple containing the symbol and SVG string for the given creator value and style elements
+    Returns a (Symbol, str) tuple containing the symbol and SVG string for the given creator value and style elements
     :param creator_var: The SIDC or name to construct the symbol from
     :param is_sidc: Whether the creator value is a SIDC (true) or name (false)
     :param padding: The padding around the symbol, in pixels, to maintain when cropping. Values less than 0 will result in no cropping being performed. The default value is 4 pixels.
@@ -131,7 +139,7 @@ def get_symbol_and_svg_string(creator_var:str, is_sidc:bool, padding:int=4, styl
     :param use_background: Whether to use a colored background around the symbol
     :param background_color: Background color to use, if it's used
     :param verbose: Whether to print ancillary information while processing, defaulting to false.
-    :return: A (MilitarySymbol, str) tuple containing the symbol and SVG for the constructed symbol.
+    :return: A (Symbol, str) tuple containing the symbol and SVG for the constructed symbol.
     """
     return symbol_cache.get_symbol_and_svg_string(creator_var, is_sidc, padding, style, use_variants, use_background=use_background, 
         background_color=background_color, verbose=verbose, force_all_elements=force_all_elements, limit_to_symbol_sets=limit_to_symbol_sets)
@@ -208,12 +216,18 @@ def write_symbol_svg_string_from_name(name_string, out_filepath, bounding_paddin
         limit_to_symbol_sets=limit_to_symbol_sets)
 
 
+class MyParser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
+
 def command_line_main():
     # Get current working directory
     style_choices_args = STYLE_CHOICES.copy()
     style_choices_args.extend([i[0] for i in style_choices_args])
 
-    parser = argparse.ArgumentParser(prog='military-symbol', description=f"Military symbol generator per NATO APP-6D standards, v{VERSION}")
+    parser = MyParser(prog='military-symbol', description=f"Military symbol generator per NATO APP-6B (E) / MIL-STD-2525E standards, v{VERSION}")
     parser.add_argument('-o', '--output-dir', dest='output_dir', default='',
                         help="Chooses an output directory (or file if not auto-naming exports)")
     parser.add_argument('-n', '--by-name', dest='by_name', action='store_const', const=True, default=False,
@@ -241,9 +255,18 @@ def command_line_main():
     parser.add_argument('-e', '--limit-to', dest='limit_to_symbol_sets', action='append', default=[],
                         help='Limits to a specific symbol set for name guessing, like air, ground, surface, etc. Has no effect when using SIDCs. ' + 
                              'Multiple symbol sets to choose from can be specified.')
-    parser.add_argument('inputs', nargs='+', default=[])
+    parser.add_argument('--version', dest='show_version', action='store_const', const=True, default=False, help="Show the version and exit.")
+    parser.add_argument('inputs', nargs='*', default=[])
 
     arguments = parser.parse_args()
+
+    if arguments.show_version:
+        print(VERSION)
+        return
+
+    if len(arguments.inputs) < 1:
+        parser.print_help()
+        sys.exit(2)
 
     if arguments.by_name and arguments.verbose:
         print('\tParsing by name; results may not be exact', file=sys.stderr)
@@ -292,6 +315,8 @@ def command_line_main():
                 if symbol_class is None:
                     print(f'No symbol creatable for name \"{input_arg}\"; skipping', file=sys.stderr)
                 else:
+                    if arguments.verbose:
+                        print(f'{symbol_class}')
                     print(f'{input_arg} -> {symbol_class.get_sidc()}' if arguments.verbose else f'{symbol_class.get_sidc()}')
 
             elif output_dir:

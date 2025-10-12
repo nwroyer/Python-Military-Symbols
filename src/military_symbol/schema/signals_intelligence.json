@@ -1,0 +1,359 @@
+{
+	"set": "50",
+	"name": "signals intelligence",
+	"dimension": "space",
+	"IC": {
+		"110000": {
+			"names": ["signal intercept"],
+			"match weight": -1,
+			"icon": []
+		},
+		"110100": {
+			"names": ["comunications"],
+			"modcats": ["land communications", "space communications", "air communications", "surface communications", "surface communications"],
+			"icon": [
+				{"strokewidth": 4, "d": "M 100,30 C 90,30 80,35 68.65625,50 l 62.6875,0 C 120,35 110,30 100,30"},
+				{"d": "m 93,120 14,0 0,0 m -7,-27 0,27 m 2,-25 8,2 -5,5 13,3 m -20,-10 -8,2 5,5 -14,3 m 21,-13 8,-2 -5,-5 13,-3 m -37,0 14,3 -5,5 8,2"}
+			]
+		},
+		"110200": {
+			"names": ["jammer"],
+			"modcats": ["land jammer", "space jammer", "air jammer", "surface jammer", "surface jammer"],
+			"icon": [{"text": "J"}]
+		},
+		"110300": {
+			"names": ["radar"],
+			"modcats": ["land radar", "space radar", "air radar", "surface radar", "surface radar"],
+			"icon": [
+				{"strokewidth": 4, "d": "M 100,30 C 90,30 80,35 68.65625,50 l 62.6875,0 C 120,35 110,30 100,30"},
+				{"d": "m 115,90 -15,15 0,-15 -15,15 M 80,85 c 0,25 15,35 35,35"}
+			]
+		}
+
+	},
+	"M1": {
+		"01": {
+			"names": ["anti-aircraft fire control"],
+			"cats": ["air radar", "land radar"],
+			"icon": [{"textm1": "AA"}]
+		},
+		"02": {
+			"names": ["airborne search and bombing"],
+			"cat": "air radar",
+			"icon": [{"textm1": "AB"}]
+		},
+		"03": {
+			"names": ["airborne intercept"],
+			"cat": "air radar",
+			"icon": [{"textm1": "AI"}]
+		},
+		"04": {
+			"names": ["altimeter"],
+			"cat": "air radar",
+			"icon": [{"textm1": "AL"}]
+		},
+		"05": {
+			"names": ["airborne reconnaissance and mapping"],
+			"cat": "air radar",
+			"icon": [{"textm1": "AM"}]
+		},
+		"06": {
+			"names": ["air traffic control", "ATC"],
+			"cats": ["air radar", "land radar", "surface radar"],
+			"icon": [{"textm1": "AT"}]
+		},
+		"07": {
+			"names": ["beacon transponder not IFF"],
+			"cats": ["air radar", "land radar", "surface radar", "subsurface radar"],
+			"icon": [{"textm1": "BN"}]
+		},
+		"08": {
+			"names": ["battlefield surveillance"],
+			"cats": ["air radar", "land radar"],
+			"icon": [{"textm1": "BN"}]
+		},
+		"09": {
+			"names": ["controlled approach"],
+			"cats": ["land radar", "surface radar"],
+			"icon": [{"textm1": "CA"}]
+		},
+		"10": {
+			"names": ["controlled intercept"],
+			"cats": ["air radar", "land radar", "surface radar"],
+			"icon": [{"textm1": "CI"}]
+		},
+		"11": {
+			"names": ["cellular", "mobile"],
+			"cats": ["land radar", "surface radar", "subsurface", "air radar"],
+			"icon": [{"textm1": "CM"}]
+		},
+		"12": {
+			"names": ["coastal surveillance"],
+			"cats": ["land radar"],
+			"icon": [{"textm1": "CS"}]
+		},
+		"13": {
+			"names": ["decoy", "mimic"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar"],
+			"icon": [{"textm1": "DC"}]
+		},
+		"14": {
+			"names": ["data transmission"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "DT"}]
+		},
+		"15": {
+			"names": ["earth surveillance"],
+			"cats": ["space radar"],
+			"icon": [{"textm1": "ES"}]
+		},
+		"16": {
+			"names": ["early warning"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar"],
+			"icon": [{"textm1": "DT"}]
+		},
+		"17": {
+			"names": ["fire control"],
+			"cats": ["land radar", "surface radar", "air radar"],
+			"icon": [{"textm1": "FC"}]			
+		},
+		"18": {
+			"names": ["ground mapping"],
+			"cats": ["air radar"],
+			"icon": [{"textm1": "GM"}]
+		},
+		"19": {
+			"names": ["height finding"],
+			"cats": ["land radar", "surface radar"],
+			"icon": [{"textm1": "HF"}]
+		},
+		"20": {
+			"names": ["harbor surveillance"],
+			"cats": ["land radar"],
+			"icon": [{"textm1": "HS"}]
+		},
+		"21": {
+			"names": ["IFF interrogator", "identification friend or foe interrogator"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "IF"}]
+		},
+		"22": {
+			"names": ["instrument landing system"],
+			"cats": ["land radar", "surface radar"],
+			"icon": [{"textm1": "IL"}]
+		},
+		"23": {
+			"names": ["ionospheric sounding"],
+			"cats": ["land radar", "air radar"],
+			"icon": [{"textm1": "IS"}]
+		},
+		"24": {
+			"names": ["IFF transponder", "identification friend or foe transponder"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "IT"}]
+		},
+		"25": {
+			"names": ["barrage jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JB"}]
+		},
+		"26": {
+			"names": ["click jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JC"}]
+		},
+		"27": {
+			"names": ["deceptive jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JD"}]
+		},
+		"28": {
+			"names": ["frequency swept jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JF"}]
+		},
+		"29": {
+			"names": ["jammer", "general jammer", "jammer general"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JG"}]
+		},
+		"30": {
+			"names": ["noise jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JN"}]
+		},
+		"31": {
+			"names": ["pulsed jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JP"}]
+		},
+		"32": {
+			"names": ["repeater jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JR"}]
+		},
+		"33": {
+			"names": ["spot noise jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JS"}]
+		},
+		"34": {
+			"names": ["transponder jammer"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JT"}]
+		},
+		"35": {
+			"names": ["missile acquisition"],
+			"cats": ["air radar", "surface radar", "land radar"],
+			"icon": [{"textm1": "JN"}]
+		},
+		"36": {
+			"names": ["missile control"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "MC"}]
+		},
+		"37": {
+			"names": ["missile downlink"],
+			"cats": ["air radar"],
+			"icon": [{"textm1": "MD"}]
+		},
+		"38": {
+			"names": ["meteorological"],
+			"cats": ["land radar", "surface radar", "air radar"],
+			"icon": [{"textm1": "ME"}]
+		},
+		"39": {
+			"names": ["multifunction", "multi-function", "multi function"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "JT"}]
+		},
+		"40": {
+			"names": ["missile guidance"],
+			"cats": ["land radar", "surface radar", "air radar"],
+			"icon": [{"textm1": "MG"}]
+		},
+		"41": {
+			"names": ["missile homing"],
+			"cats": ["land radar", "surface radar", "air radar"],
+			"icon": [{"textm1": "MH"}]
+		},
+		"42": {
+			"names": ["missile tracking"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "MT"}]
+		},
+		"43": {
+			"names": ["navigational", "navigational general"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "NA"}]
+		},
+		"44": {
+			"names": ["navigational distance measuring", "distance measuring"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "ND"}]
+		},
+		"45": {
+			"names": ["navigational terrain following", "terrain following"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "NT"}]
+		},
+		"46": {
+			"names": ["navigational weather avoidance", "weather avoidance"],
+			"cats": ["land jammer", "surface jammer", "air jammer", "subsurface jammer", "space jammer"],
+			"icon": [{"textm1": "NW"}]
+		},
+
+
+		"47": {
+			"names": ["omni line of sight", "omni LOS"],
+			"cats": ["land communications", "surface communications", "air communications", "subsurface communications", "space communications"],
+			"icon": [{"textm1": "OL"}]
+		},
+		"48": {
+			"names": ["proximity fuse"],
+			"cats": ["air radar"],
+			"icon": [{"textm1": "PF"}]
+		},
+		"49": {
+			"names": ["point to point line of sight", "point to point LOS"],
+			"cats": ["land communications", "surface communications", "air communications", "subsurface communications", "space communications"],
+			"icon": [{"textm1": "PP"}]
+		},
+		"50": {
+			"names": ["instrumentation"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "RI"}]
+		},
+		"51": {
+			"names": ["range only"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "RO"}]
+		},
+		"52": {
+			"names": ["sonobuoy"],
+			"cats": ["surface radar", "subsurface radar"],
+			"icon": [{"textm1": "SB"}]
+		},
+		"53": {
+			"names": ["satellite downlink"],
+			"cats": ["space communications"],
+			"icon": [{"textm1": "SD"}]
+		},
+		"54": {
+			"names": ["space"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "SP"}]
+		},
+		"55": {
+			"names": ["surface search"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "SS"}]
+		},
+		"56": {
+			"names": ["shell tracking"],
+			"cats": ["land radar"],
+			"icon": [{"textm1": "ST"}]
+		},
+		"57": {
+			"names": ["satellite uplink"],
+			"cats": ["land communications", "surface communications", "air communications", "subsurface communications"],
+			"icon": [{"textm1": "PP"}]
+		},
+		"58": {
+			"names": ["target acquisition"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "TA"}]
+		},
+		"59": {
+			"names": ["target illumination"],
+			"cats": ["land radar", "surface radar", "air radar"],
+			"icon": [{"textm1": "TI"}]
+		},
+		"60": {
+			"names": ["tropospheric scatter"],
+			"cats": ["land communications"],
+			"icon": [{"textm1": "TS"}]
+		},
+		"61": {
+			"names": ["target tracking"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "TT"}]
+		},
+		"62": {
+			"names": ["unknown"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "?"}]
+		},
+		"63": {
+			"names": ["video remoting"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "VR"}]
+		},
+		"64": {
+			"names": ["experimental"],
+			"cats": ["land radar", "surface radar", "air radar", "subsurface radar", "space radar"],
+			"icon": [{"textm1": "TA"}]
+		}
+	}
+}
+
