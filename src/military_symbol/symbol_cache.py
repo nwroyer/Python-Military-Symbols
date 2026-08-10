@@ -22,7 +22,8 @@ class SymbolCache:
         self.symbol_schema = symbol_schema
 
     @classmethod
-    def options_string_encode(cls, padding:int, style:str, use_variants:bool, use_background:bool, background_color:str):
+    def options_string_encode(cls, padding:int, style:str, use_variants:bool, use_background:bool, background_color:str,
+                              unique_designation:str=None, higher_formation:str=None):
         """
         Encodes options into a three-character string for string caching, with character 1 indicating padding as
         an int (X for values less than 0), one-character indicating style from options ['light', 'medium', 'dark',
@@ -32,15 +33,22 @@ class SymbolCache:
         :param use_variants: Boolean indicating whether to use variant symbols if they exist
         :param use_background: Boolean indicating whether to use the background "halo"
         :param background_color: Background color
+        :param unique_designation: Optional Field T text amplifier
+        :param higher_formation: Optional Field M text amplifier
         :return: Three-character string of encoded options
         """
-        return '{}{}{}{}{}'.format(
+        base = '{}{}{}{}{}'.format(
             'X' if padding < 0 else padding,
             style[0].lower(),
             '1' if use_variants else '0',
             '1' if use_background else '0',
             background_color
         )
+        unique_designation = unique_designation or ''
+        higher_formation = higher_formation or ''
+        if not unique_designation and not higher_formation:
+            return base
+        return base + repr((unique_designation, higher_formation))
 
     def _get_symbol_cache_from_sidc(self, sidc, create_if_missing:bool=True, verbose:bool=False) -> tuple:
         symbol_cache_entry:tuple = self.sidc_to_symbol_map.get(sidc, ())
@@ -91,7 +99,7 @@ class SymbolCache:
 
     def get_symbol_and_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, 
         use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
-        limit_to_symbol_sets=None) -> tuple:
+        limit_to_symbol_sets=None, unique_designation:str=None, higher_formation:str=None) -> tuple:
 
         cache_entry_tuple: tuple = self._get_symbol_cache_from_sidc(creator_val,
                                                                     create_if_missing) if is_sidc else self._get_symbol_cache_from_name(
@@ -103,7 +111,11 @@ class SymbolCache:
         symbol: Symbol = cache_entry_tuple[0]
         svg_map: dict = cache_entry_tuple[1]
 
-        key_string: str = self.options_string_encode(padding, style, use_variants, use_background, background_color)
+        unique_designation = Symbol._normalize_text_amplifier(unique_designation, 'unique_designation')
+        higher_formation = Symbol._normalize_text_amplifier(higher_formation, 'higher_formation')
+
+        key_string: str = self.options_string_encode(padding, style, use_variants, use_background, background_color,
+                                                     unique_designation=unique_designation, higher_formation=higher_formation)
         svg_string: str = svg_map.get(key_string, '')
         if svg_string == '':
             if create_if_missing:
@@ -115,7 +127,9 @@ class SymbolCache:
                 output_style.background_color = background_color
                 output_style.fill_style = style
 
-                svg_string = symbol.get_svg(output_style=output_style)
+                svg_string = symbol.get_svg(output_style=output_style,
+                                            unique_designation=unique_designation,
+                                            higher_formation=higher_formation)
                 svg_map[key_string] = svg_string
                 return symbol, svg_string
             else:
@@ -125,20 +139,25 @@ class SymbolCache:
 
     def get_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, use_background:bool=True, 
         background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
-        limit_to_symbol_sets=None):
+        limit_to_symbol_sets=None, unique_designation:str=None, higher_formation:str=None):
 
         return self.get_symbol_and_svg_string(creator_val, is_sidc, padding, style, use_variants, use_background, 
-            background_color, create_if_missing, verbose=verbose, force_all_elements=force_all_elements)[1]
+            background_color, create_if_missing, verbose=verbose, force_all_elements=force_all_elements,
+            limit_to_symbol_sets=limit_to_symbol_sets, unique_designation=unique_designation,
+            higher_formation=higher_formation)[1]
 
     def get_svg_string_from_name(self, name, padding:int, style:str, use_variants:bool=False, use_background:bool=True, 
         background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
-        limit_to_symbol_sets=None):
+        limit_to_symbol_sets=None, unique_designation:str=None, higher_formation:str=None):
 
         return self.get_svg_string(name, False, padding, style, use_variants, use_background, background_color, create_if_missing, 
-            verbose=verbose, force_all_elements=force_all_elements)
+            verbose=verbose, force_all_elements=force_all_elements, limit_to_symbol_sets=limit_to_symbol_sets,
+            unique_designation=unique_designation, higher_formation=higher_formation)
 
     def get_svg_string_from_sidc(self, sidc, padding:int, style:str, use_variants:bool=False, use_background:bool=True, 
-        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False):
+        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
+        unique_designation:str=None, higher_formation:str=None):
 
         return self.get_svg_string(sidc, True, padding, style, use_variants, use_background, background_color, create_if_missing, 
-            verbose=verbose, force_all_elements=force_all_elements)
+            verbose=verbose, force_all_elements=force_all_elements, unique_designation=unique_designation,
+            higher_formation=higher_formation)
