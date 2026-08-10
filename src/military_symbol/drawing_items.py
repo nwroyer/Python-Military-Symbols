@@ -2,6 +2,7 @@ import re
 import sys
 import os
 import copy
+from html import escape
 
 sys.path.append(os.path.dirname(__file__))
 import font_rendering
@@ -342,7 +343,7 @@ class SymbolElement:
 			# self.text_type = 'manual' # ['normal', 'm1', 'm2', 'manual']
 
 		def __repr__(self):
-			return f'<text x="{self.pos[0]}" y="{self.pos[1]}" font-size="{self.font_size}" text-anchor="{self.align}" {self.base_params()}>{self.text}</text>'
+			return f'<text x="{self.pos[0]}" y="{self.pos[1]}" font-size="{self.font_size}" text-anchor="{self.align}" {self.base_params()}>{escape(self.text)}</text>'
 
 		def svg(self, symbol, output_style=OutputStyle()) -> list:
 			if output_style.use_text_paths:
