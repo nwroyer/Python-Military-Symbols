@@ -3,6 +3,7 @@
 This is a lightweight Python module, including a command-line script, to generate NATO APP-6(E) compliant military symbol icons in SVG format. These SVGs can be generated from inputs formatted as NATO SIDCs (Symbol identification codes) or as natural-language names for symbols, i.e. "friendly infantry platoon" or "enemy mortar section." Features supported include:
 
 - Headquarters, task force, mobility, and echelon indicators
+- Optional text amplifiers for Field T (unique designation) and Field M (higher formation)
 - Automatic checking of modifier and entity types for congruence
 - Symbol sets to indicate land units and installations, air, space, sea surface, subsurface, signals intelligence, and cyber units, tracks, and activities
 - Status indicators in both standard and alternate forms
@@ -23,6 +24,10 @@ military_symbol --use-variants --by-name -o . "Friendly artillery company" "Dest
 # Create a single symbol at the designated path by name
 military_symbol -o platoon.svg -n "Friendly infantry platoon"
 
+# Add Field T / Field M text amplifiers (max 30 characters)
+military_symbol -o . 13031000211211000000000000000 \
+  --unique-designation "1 DPLeg" --higher-formation "Wyszków"
+
 # Print a set of symbols by name, in unfilled style, to STDOUT
 military_symbol -s unfilled -n "Friendly infantry platoon" "Enemy anti-air battery"
 
@@ -40,6 +45,14 @@ import military_symbol
 if __name__ == '__main__':
     # Print symbol generated from a name to STDOUT
     print(military_symbol.get_symbol_svg_string_from_name("enemy infantry platoon"))
+
+    # Optional Field T / Field M text amplifiers
+    print(military_symbol.get_symbol_svg_string_from_sidc(
+        "13031000211211000000000000000",
+        unique_designation="1 DPLeg",
+        higher_formation="Wyszków",
+    ))
+    # Field T/M strings are limited to 30 characters (longer values are truncated).
 
     # Add a symbol template and write it to a file adjacent to this script
     example_template_directory = os.path.dirname(__file__)
