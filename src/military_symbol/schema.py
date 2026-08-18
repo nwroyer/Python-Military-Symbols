@@ -618,6 +618,37 @@ class SymbolSet:
 		ret_set.common = is_common
 		return ret_set
 
+class Field:
+	"""
+	Represents a (usually text) field defined in APP-6E / MIL-STD-2525E
+	"""
+
+	def __init__(self):
+		## The unique code for this field (e.g. A, B, AQ, etc.)
+		self.id_code = None
+
+		## The human-readable names for this field
+		self.names:list = []
+
+		## The symbol sets this field can apply to
+		self.symbol_sets:list = []
+
+		## The regex (if any) applied to this field in strict mode
+		self.regex:str = None
+
+		## Whether this can have multiple entries, e.g. A1, A2, etc. Not yet implemented.
+		self.can_stack:bool = False
+
+	@staticmethod
+	def from_dict(id_code:str, json:dict):
+		field = Field()
+		field.id_code = id_code
+		field.names = json.get('names', [])
+		field.symbol_sets = json.get('symbol_sets', [])
+		field.regex = json.get('regex', None)
+		field.can_stack = bool(json.get('can_stack', False))
+		return field
+
 class Schema:
 	"""
 	Represents a full symbol schema
@@ -646,7 +677,10 @@ class Schema:
 		self.amplifiers:dict = {}
 		## A mapping of [symbol set ID : symbol set object]
 		self.symbol_sets:dict = {}
+		## A mapping of [field ID: field object]
+		self.fields:dict = {}
 
+		## Templates for complex symbol definitions
 		self.templates:list = []
 
 	def add_templates(self, templates:list):
@@ -659,7 +693,7 @@ class Schema:
 	def print_constants(self):
 		print("Constants set")
 
-		for item_set in ['contexts', 'dimensions', 'color_modes', 'contexts', 'affiliations', 'statuses', 'hqtfds']:
+		for item_set in ['contexts', 'dimensions', 'color_modes', 'contexts', 'affiliations', 'statuses', 'hqtfds', 'fields']:
 			print(f'\t{item_set.capitalize()}:')
 			if isinstance(vars(self)[item_set], list):
 				for item in vars(self)[item_set]:
@@ -753,10 +787,17 @@ class Schema:
 			if amplifier is not None:
 				self.amplifiers[amplifier.id_code] = amplifier
 
+		# Load HQTFDs
 		for hqtfd_id, hqtfd_dict in json_dict.get("hqtfds", {}).items():
 			hqtfd = HQTFD.from_dict(hqtfd_id, hqtfd_dict)
 			if hqtfd is not None:
 				self.hqtfds[hqtfd.id_code] = hqtfd
+
+		# Load fields
+		for field_id, field_dict in json_dict.get('fields', {}).items():
+			field = Field.from_dict(field_id, field_dict)
+			if field is not None:
+				self.fields[field.id_code] = field
 
 		if verbose:
 			self.print_constants()

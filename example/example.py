@@ -4,7 +4,14 @@ command line
 """
 
 import os
+import sys
 import inspect
+from pathlib import Path
+
+current_dir = Path(__file__).resolve().parent
+module_dir = current_dir.parent / 'src'
+if str(module_dir) not in sys.path:
+    sys.path.insert(0, str(module_dir))
 
 import military_symbol
 

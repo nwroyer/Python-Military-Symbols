@@ -63,7 +63,7 @@ class SymbolCache:
         ret = self._get_symbol_cache_from_sidc(sidc, create_if_missing, verbose=verbose)
         return ret[0] if ret is not None else None
 
-    def _get_symbol_cache_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None) -> tuple:
+    def _get_symbol_cache_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False) -> tuple:
         sidc:str = self.name_to_sidc_string_map.get(name, '')
         if sidc == '':
             if create_if_missing:
@@ -79,7 +79,7 @@ class SymbolCache:
             # print('Cache hit on symbol cache to name')
             return self.sidc_to_symbol_map[sidc]
 
-    def get_symbol_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None) -> Symbol:
+    def get_symbol_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False) -> Symbol:
         cache_entry:tuple = self._get_symbol_cache_from_name(name, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
         return cache_entry[0] if cache_entry is not None else None
 
@@ -91,7 +91,7 @@ class SymbolCache:
 
     def get_symbol_and_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, 
         use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
-        limit_to_symbol_sets=None) -> tuple:
+        limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False) -> tuple:
 
         cache_entry_tuple: tuple = self._get_symbol_cache_from_sidc(creator_val,
                                                                     create_if_missing) if is_sidc else self._get_symbol_cache_from_name(
@@ -125,20 +125,24 @@ class SymbolCache:
 
     def get_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, use_background:bool=True, 
         background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
-        limit_to_symbol_sets=None):
+        limit_to_symbol_sets=None,
+        fields:dict={}, strict_fields:bool=False):
 
         return self.get_symbol_and_svg_string(creator_val, is_sidc, padding, style, use_variants, use_background, 
-            background_color, create_if_missing, verbose=verbose, force_all_elements=force_all_elements)[1]
+            background_color, create_if_missing, verbose=verbose, force_all_elements=force_all_elements, fields=fields,
+            strict_fields=strict_fields)[1]
 
     def get_svg_string_from_name(self, name, padding:int, style:str, use_variants:bool=False, use_background:bool=True, 
         background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
-        limit_to_symbol_sets=None):
+        limit_to_symbol_sets=None,
+        fields:dict={}, strict_fields:bool=False):
 
         return self.get_svg_string(name, False, padding, style, use_variants, use_background, background_color, create_if_missing, 
-            verbose=verbose, force_all_elements=force_all_elements)
+            verbose=verbose, force_all_elements=force_all_elements, fields=fields, strict_fields=strict_fields)
 
     def get_svg_string_from_sidc(self, sidc, padding:int, style:str, use_variants:bool=False, use_background:bool=True, 
-        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False):
+        background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
+        fields:dict={}, strict_fields:bool=False):
 
         return self.get_svg_string(sidc, True, padding, style, use_variants, use_background, background_color, create_if_missing, 
-            verbose=verbose, force_all_elements=force_all_elements)
+            verbose=verbose, force_all_elements=force_all_elements, fields=fields, strict_fields=strict_fields)

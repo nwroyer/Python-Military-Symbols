@@ -652,6 +652,280 @@
 				"neutral": [{"d": "M 45,36 100,-5 155,36", "bbox": [45, -5, 155, 36]}]
 			}]
 		}
+	},
+
+	"fields": {
+		"A": {
+			"names": ["symbol", "icon"],
+			"symbol_sets": "all",
+			"ignored": true
+		},
+		"B": {
+			"names": ["echelon"],
+			"symbol_sets": "all",
+			"ignored": true
+		},
+		"C": {
+			"names": ["quantity"],
+			"symbol_sets": [10, 11, 15, 25, 27, 60],
+			"min_length": 1,
+			"max_length": 19,
+			"ignored": true
+		},
+		"D": {
+			"names": ["task force", "taskforce"],
+			"ignored": true,
+			"symbol_sets": [10]
+		},
+		"F": {
+			"names": ["reinforced", "reduced"],
+			"symbol_sets": [10],
+			"ignored": true
+		},
+		"G": {
+			"names": ["staff comments", "comments", "notes"],
+			"symbol_sets": [1, 5, 10, 15, 20, 27, 30, 35, 40],
+			"regex": "^.{1,20}$"
+		},
+		"H": {
+			"names": ["additional information", "additional info", "information", "info"],
+			"symbol_sets": "all",
+			"regex": "^.{1,20}$"
+		},
+		"H1": {
+			"names": ["unlisted point information"],
+			"symbol_sets": [25],
+			"regex": "^[\\w- ]{1,3}$",
+			"ignored": true
+		},
+		"J": {
+			"names": ["evaluation rating", "evaluation"],
+			"symbol_sets": [10, 15, 20, 27, 40],
+			"all_caps": true,
+			"regex": "^[ABCDEF][123456]$"
+		},
+		"K": {
+			"names": ["combat effectiveness", "effectiveness"],
+			"symbol_sets": [10, 15, 27],
+			"all_caps": true,
+			"regex": "^FO|SO|MO|NO|UNK$"
+		},
+		"L": {
+			"names": ["signature equipment", "signature"],
+			"symbol_sets": [15],
+			"regex": "^!$"
+		},
+		"M": {
+			"names": ["higher formation", "higher", "parent", "parent unit", "higher unit"],
+			"symbol_sets": [10],
+			"regex": "^[\\w\\d -\\.]{1,21}$"
+		},
+		"N": {
+			"names": ["enemy", "hostile"],
+			"ignored": true,
+			"symbol_sets": [15, 25]
+		},
+		"P": {
+			"names": ["IFF", "SIF", "AIS"],
+			"all_caps": true,
+			"symbol_sets": [1, 10, 15, 27, 30, 35],
+			"regex": "^1:[0-7]{3}[0-3]|[23]:[0-7]{4}|5:[0-9A-Fa-f]{3}[0-3]|S:[A-Za-z\\d]{6}$"
+		},
+		"Q": {
+			"names": ["direction of movement", "movement", "direction"],
+			"ignored": true,
+			"symbol_sets": [10, 15, 20, 25, 27]
+		},
+		"R": {
+			"names": ["mobility", "mobility indicator"],
+			"ignored": true,
+			"symbol_sets": [10]
+		},
+		"R2": {
+			"names": ["signals intelligence mobility", "SIGINT mobility"],
+			"symbol_sets": [50, 51, 52, 53, 54],
+			"all_caps": true,
+			"regex": "^[MSU]$"
+		},
+		"S": {
+			"names": ["headquarters", "headquarters staff"],
+			"ignored": true,
+			"symbol_sets": [10, 20, 40]
+		},
+		"S2": {
+			"names": ["offset location indicator", "offset location"],
+			"ignored": true,
+			"symbol_sets": [10, 20, 25, 27, 40]
+		},
+		"T": {
+			"names": ["unique designation", "designation", "name"],
+			"regex": "^[\\w\\s-]{1,30}$",
+			"symbol_sets": "all"
+		},
+		"T1": {
+			"names": ["lines", "points"],
+			"ignored": true,
+			"symbol_sets": [25]
+		},
+		"T2": {
+			"names": ["controlling headquarters", "controlling HQ"],
+			"symbol_sets": [25],
+			"ignored": true
+		},
+		"V": {
+			"names": ["type"],
+			"symbol_sets": "all",
+			"regex": "^[\\w\\s-]{1,24}$"
+		},
+		"W": {
+			"names": ["date time group", "date", "time", "DTG"],
+			"symbol_sets": [10, 15, 20, 25, 27, 40, 45],
+			"regex": "^\\d{2}\\d{2}\\d{2}(?:\\d{2})?Z(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\\d{4}$"
+		},
+		"X": {
+			"names": ["altitude", "depth", "height"],
+			"symbol_sets": [14],
+			"regex": "^[\\w\\s-]{3,16}$"
+		},
+		"Y": {
+			"names": ["location", "position", "coordinates"],
+			"symbol_sets": [10, 15, 20, 25, 27, 30, 40],
+			"regex": "^[\\w\\s-]{3,16}"
+		},
+		"Z": {
+			"names": ["speed"],
+			"symbol_sets": [8],
+			"regex": "^\\d+ (?:KPH|KPS|MPH|NMH|KTS)$"
+		},
+		"AA": {
+			"names": ["special C2 headquarters"],
+			"symbol_sets": [10],
+			"blanks_icon": true,
+			"regex": "^[\\w\\s-]{1,9}$"
+		},
+		"AB": {
+			"names": ["feint", "dummy"],
+			"symbol_sets": [10, 15, 20, 27],
+			"ignored": true
+		},
+		"AD": {
+			"names": ["platform type", "platform"],
+			"symbol_sets": [10, 15],
+			"all_caps": true,
+			"regex": "^ELNOT|CENOT$"
+		},
+		"AE": {
+			"names": ["equipment teardown time", "teardown time"],
+			"symbol_sets": [15, 52],
+			"regex": "^\\d{1,3}$"
+		},
+		"AF": {
+			"names": ["common identifier", "common name"],
+			"symbol_sets": [10, 15, 27],
+			"regex": "^[\\w\\s-]{1,12}$"
+		},
+		"AG": {
+			"names": ["auxiliary equipment indicator"],
+			"symbol_sets": 35,
+			"ignored": true
+		},
+		"AH": {
+			"names": ["area of uncertainty"],
+			"symbol_sets": [1, 5, 10, 15, 20, 25, 27, 30, 35, 40],
+			"ignored": true
+		},
+		"AI": {
+			"names": ["dead reckoning trailer"],
+			"symbol_sets": [1, 5, 10, 15, 20, 25, 27, 30, 35, 40],
+			"ignored": true
+		},
+		"AJ": {
+			"names": ["speed leader"],
+			"symbol_sets": [1, 2, 30, 35],
+			"ignored": true
+		},
+		"AK": {
+			"names": ["pairing line"],
+			"symbol_sets": [],
+			"ignored": true
+		},
+		"AL": {
+			"names": ["operational condition"],
+			"ignored": true,
+			"symbol_sets": [1, 5, 10, 15, 20, 30, 35]
+		},
+		"AM": {
+			"names": ["distance"],
+			"symbol_sets": [25],
+			"regex": "^\\d{1,5} \\w+$",
+			"can_stack": true
+		},
+		"AN": {
+			"names": ["azimuth"],
+			"symbol_sets": [25],
+			"can_stack": true,
+			"all_caps": true,
+			"regex": "^\\d{3} DGT|\\d{4} MGT$"
+		},
+		"AO": {
+			"names": ["engagement bar", "engagement"],
+			"symbol_sets": [1, 5, 10, 30, 35],
+			"ignored": true,
+			"regex": "^[a-zA-Z\\d]:[a-zA-Z\\d]{3}-[a-zA-Z\\d]{2}$"
+		},
+		"AP": {
+			"names": ["target number", "target"],
+			"symbol_sets": [25],
+			"regex": "^[a-z-A-Z]{2}\\d{4}"
+		},
+		"AP1": {
+			"names": ["target number extension"],
+			"symbol_sets": [25],
+			"regex": "^-\\d{2}$"
+		},
+		"AQ": {
+			"names": ["guarded unit"],
+			"symbol_sets": [30],
+			"all_caps": true,
+			"regex": "^BG$"
+		},
+		"AR": {
+			"names": ["special designator"],
+			"symbol_sets": [10, 30, 35],
+			"all_caps": true,
+			"regex": "^NRT|SIG$"
+		},
+		"AS": {
+			"names": ["country", "nation", "state"],
+			"symbol_sets": "all",
+			"all_caps": true,
+			"regex": "^[A-Z]{3}$"
+		},
+		"AT": {
+			"names": ["capacity of installation", "installation capacity"],
+			"symbol_sets": [20],
+			"regex": "^\\d+ [\\w-]+$"
+		},
+		"AV": {
+			"names": ["leadership", "leader"],
+			"ignored": true,
+			"symbol_sets": [27]
+		},
+		"AW": {
+			"names": ["headquarters element"],
+			"symbol_sets": [10],
+			"regex": "^[\\w\\d -]{1,8}$"
+		},
+		"AX": {
+			"names": ["installation composition"],
+			"symbol_sets": [20],
+			"all_caps": true,
+			"regex": "^DEVELOP|RSRCH|PROD|SVC|STORE|UTIL$"
+		},
+		"AY": {
+			"names": ["network identifier"],
+			"symbol_sets": []
+		}
 	}
 }
 
