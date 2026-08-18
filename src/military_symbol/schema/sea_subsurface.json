@@ -1,0 +1,354 @@
+{
+	"set": "35",
+	"name": "sea subsurface",
+	"dimension": "sea subsurface",
+	"modcats": ["crime", "capability", "ship propulsion"],
+	"IC": {
+		"110000": {
+			"names": ["military"],
+			"icon": [{"text": "MIL"}]
+		},
+		"110100": {
+			"names": ["submarine"],
+			"icon": [{"fill": true, "d": "m 75,85 50,0 15,15 -15,15 -50,0 -15,-15 z"}]
+		},
+		"110101": {
+			"names": ["submarine, surfaced", "surfaced submarine"],
+			"icon": [
+				{"fill": true, "d": "m 75,80 50,0 15,15 -15,15 -50,0 -15,-15 z"},
+				{"d": "m 65,120 10,-10 10,10 10,-10 10,10 10,-10 10,10 10,-10"}
+			]
+		},
+		"110102": {
+			"names": ["submarine, snorkeling", "snorkeling submarine"],
+			"icon": [
+				{"fill": true, "d": "m 75,120 -10,-10 10,-10 20,0 0,-20 10,0 0,20 20,0 10,10 -10,10 z"},
+				{"d": "m 65,95 10,-10 10,10 10,-10 10,10 10,-10 10,10 10,-10"}
+			]
+		},
+		"110103": {
+			"names": ["submarine, bottomed", "bottomed submarine"],
+			"icon": [
+				{"fill": true, "d": "m 75,80 50,0 15,15 -15,15 -50,0 -15,-15 z"},
+				{"fill": true, "d": "m 70,120 0,-5 60,0 0,5 z"}
+			]
+		},
+		"110200": {
+			"names": ["other submersible"],
+			"icon": [{"fill": true, "d": "m 85,90 0,-10 30,0 0,10 m 20,10 c 0,5.5 -15.7,10 -35,10 -19.3,0 -35,-4.5 -35,-10 0,-5.5 15.7,-10 35,-10 19.3,0 35,4.5 35,10 z"}]
+		},
+		"110300": {
+			"names": ["non-submarine", "nonsubmarine"],
+			"icon": [
+				{"text": "NON", "pos": [100, 100], "fontsize": 25},
+				{"text": "SUB", "pos": [100, 120], "fontsize": 25}
+			]
+		},
+		"110400": {
+			"names": ["autonomous underwater vehicle", "unmanned underwater vehicle", "UUV", "AUV"],
+			"icon": [{"fill": true, "d": "m 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z"}]
+		},
+		"110500": {
+			"names": ["diver"],
+			"icon": [{"fill": true, "stroke": false, "d": "M 100 80 C 93.7 80 88.3 82.7 85.8 88.3 L 85.8 88.3 L 77.8 88.3 L 77.8 105 L 85.8 105 L 85.8 104.8 C 87.3 108.2 88.8 110 92 111.7 L 92.1 111.7 L 84.2 120 L 115.8 120 L 107.9 111.7 L 108 111.7 C 111.1 110 112.8 108.3 114.3 105 L 122.2 105 L 122.2 88.3 L 114.3 88.3 L 114.3 88.3 C 111.7 82.8 106.3 80 100 80 z M 100 86.6 C 105.4 86.6 109.8 91.1 109.8 96.6 C 109.8 102.1 105.4 106.6 100 106.6 C 94.6 106.6 90.1 102.1 90.1 96.6 C 90.1 91.1 94.6 86.6 100 86.6 z M 100 89.6 C 96.2 89.6 93.1 92.7 93.1 96.6 C 93.1 100.5 96.2 103.6 100 103.6 C 103.8 103.6 106.8 100.5 106.8 96.6 C 106.8 92.7 103.8 89.6 100 89.6 z"}]
+		},
+
+
+
+		"120000": {
+			"names": ["civilian"],
+			"civ": true,
+			"icon": [{"fill": "white", "stroke": true, "text": "CIV"}]
+		},
+		"120100": {
+			"names": ["submersible"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 85,90 0,-10 30,0 0,10 m 20,10 c 0,5.5 -15.7,10 -35,10 -19.3,0 -35,-4.5 -35,-10 0,-5.5 15.7,-10 35,-10 19.3,0 35,4.5 35,10 z"}]
+		},
+		"120200": {
+			"names": [
+				"civilian autonomous underwater vehicle", "civilian unmanned underwater vehicle", "civilian UUV", "civilian AUV",
+				"autonomous underwater vehicle", "unmanned underwater vehicle", "UUV", "AUV"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z"}]
+		},
+		"120300": {
+			"names": ["civilian diver", "diver"],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "d": "M 114.3,94 C 114.3,102.3 107.9,109 100,109 c -7.9,0 -14.2,-6.7 -14.2,-15 0,-8.3 6.4,-15 14.2,-15 7.9,0 14.3,6.7 14.3,15 z m 0,27 14.3,15 -57,0 14.3,-15 M 125.7,79 l 14.3,0 0,30 -14.3,0 m -51.3,0 -14.3,0 0,-30 14.3,0 m 54.2,15 c 0,16.6 -12.8,30 -28.5,30 -15.7,0 -28.5,-13.4 -28.5,-30 C 71.5,77.4 84.3,64 100,64 115.7,64 128.5,77.4 128.5,94 z"}
+			]
+		},
+
+
+
+		"130000": {
+			"names": ["weapon"],
+			"icon": [{"text": "WPN"}]
+		},
+		"130100": {
+			"names": ["torpedo"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 65,105 -5,-5 5,-5 60,0 c 0,0 5,5 5,5 l 5,-5 0,10 -5,-5 -5,5 z"}]
+		},
+		"130200": {
+			"names": ["improvised explosive device", "IED"],
+			"icon": [{"text": "IED"}]
+		},
+		"130300": {
+			"names": ["decoy"],
+			"icon": [{"fill": true, "stroke": false, "d": "M 85 81 L 65 98 L 85 119 L 85 81 z M 110 81 L 90 98 L 110 119 L 110 81 z M 135 81 L 115 98 L 135 119 L 135 81 z"}]
+		},
+		"140000": {
+			"names": ["echo tracker classifier", "ETC", "possible contact", "POSCON"],
+			"icon": [{"text": "?", "pos": [100, 130], "fontsize": 60}],
+			"force_pending": true
+		},
+		"150000": {
+			"names": ["fused track"],
+			"force_pending": true,
+			"icon": [
+				{"d": "m 70,65 10,35 -10,35 60,0 -10,-35 10,-35"},
+				{"text": "?"}
+			]
+		},
+		"160000": {
+			"names": ["manual track"],
+			"icon": [{"text": "MAN"}]
+		} 
+	},
+	"M1": {
+		"01": {
+			"names": ["antisubmarine warfare", "ASW"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-151",
+			"icon": [{"textm1": "ASW"}]
+		},
+		"02": {
+			"names": ["auxiliary"],
+			"cat": "mission area",
+			"icon": [{"textm1": "AUX"}]
+		},
+		"03": {
+			"names": ["command and control"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-122",
+			"icon": [{"textm1": "C2"}]
+		},
+		"04": {
+			"names": ["intelligence, surveillance, and reconnaissance"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-125",
+			"icon": [{"textm1": "ISR"}]
+		},
+		"05": {
+			"names": ["mine countermeasures"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-153",
+			"icon": [{"textm1": "MCM"}]
+		},
+		"06": {
+			"names": ["mine warfare"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-154",
+			"icon": [{"textm1": "MIW"}]
+		},
+		"07": {
+			"names": ["surface warfare"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-155",
+			"icon": [{"textm1": "SUW"}]
+		},
+		"08": {
+			"names": ["attack"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-106",
+			"icon": [{"textm1": "A"}]
+		},
+		"09": {
+			"names": ["ballistic missile"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-108",
+			"icon": [{"textm1": "B"}]
+		},
+		"10": {
+			"names": ["guided missile"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-133",
+			"icon": [{"textm1": "G"}]
+		},
+		"11": {
+			"names": ["other guided missile"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-134",
+			"icon": [{"textm1": "M"}]
+		},
+		"12": {
+			"names": ["special operations forces", "SOF"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-131",
+			"icon": [{"textm1": "SOF"}]
+		},
+		"13": {
+			"names": ["possible submarine low 1"],
+			"cat": "submarine confidence",
+			"icon": [{"textm1": "P1"}]
+		},
+		"14": {
+			"names": ["possible submarine low 2"],
+			"cat": "submarine confidence",
+			"icon": [{"textm1": "P2"}]
+		},
+		"15": {
+			"names": ["possible submarine high 3"],
+			"cat": "submarine confidence",
+			"icon": [{"textm1": "P3"}]
+		},
+		"16": {
+			"names": ["possible submarine high 4"],
+			"cat": "submarine confidence",
+			"icon": [{"textm1": "P4"}]
+		},
+		"17": {
+			"names": ["probable submarine"],
+			"cat": "submarine confidence",
+			"icon": [{"textm1": "PB"}]
+		},
+		"18": {
+			"names": ["certain submarine"],
+			"cat": "submarine confidence",
+			"icon": [{"textm1": "CT"}]
+		},
+		"19": {
+			"names": ["anti-torpedo torpedo"],
+			"cat": "capability",
+			"icon": [{"textm1": "ATT"}]
+		},
+		"20": {
+			"names": ["hijacking", "hijacked"],
+			"cat": "crime",
+			"until": "2525E",
+			"new": "C-1-150",
+			"icon": [{"textm1": "H"}]
+		},
+		"21": {
+			"names": ["hijacker"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-150",
+			"icon": [{"textm1": "HJ"}]
+		},
+		"22": {
+			"names": ["cyberspace", "cyber"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-115",
+			"icon": [{"textm1": "CYB"}]
+		}
+	}, 
+	"M2": {
+		"01": {
+			"names": ["air independent propulsion"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "AI"}]
+		},
+		"02": {
+			"names": ["diesel electric, general"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "D"}]
+		},
+		"03": {
+			"names": ["diesel type 1"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "D1"}]
+		},
+		"04": {
+			"names": ["diesel type 2"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "D2"}]
+		},
+		"05": {
+			"names": ["diesel type 3"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "D3"}]
+		},
+		"06": {
+			"names": ["nuclear powered, general", "nuclear"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N"}]
+		},
+		"07": {
+			"names": ["nuclear type 1"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N1"}]
+		},
+		"08": {
+			"names": ["nuclear type 2"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N2"}]
+		},
+		"09": {
+			"names": ["nuclear type 3"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N3"}]
+		},
+		"10": {
+			"names": ["nuclear type 4"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N4"}]
+		},
+		"11": {
+			"names": ["nuclear type 5"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N5"}]
+		},
+		"12": {
+			"names": ["nuclear type 6"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N6"}]
+		},
+		"13": {
+			"names": ["nuclear type 7"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N7"}]
+		},
+		"14": {
+			"names": ["autonomous control"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-110",
+			"icon": [{"textm2": "AUT"}]
+		},
+		"15": {
+			"names": ["remotely-piloted"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-111",
+			"icon": [{"textm2": "RP"}]
+		},
+		"16": {
+			"names": ["expendable"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-112",
+			"icon": [{"textm2": "EXP"}]
+		},
+		"17": {
+			"names": ["cyberspace", "cyber"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-122",
+			"icon": [{"textm2": "CYB"}]
+		}
+	}
+}

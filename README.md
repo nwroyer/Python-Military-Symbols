@@ -1,6 +1,6 @@
 # Python military symbols
 
-This is a lightweight Python module, including a command-line script, to generate NATO APP-6(D) compliant military symbol icons in SVG format. These SVGs can be generated from inputs formatted as NATO SIDCs (Symbol identification codes) or as natural-language names for symbols, i.e. "friendly infantry platoon" or "enemy mortar section." Features supported include:
+This is a lightweight Python module, including a command-line script, to generate NATO APP-6(E) compliant military symbol icons in SVG format. These SVGs can be generated from inputs formatted as NATO SIDCs (Symbol identification codes) or as natural-language names for symbols, i.e. "friendly infantry platoon" or "enemy mortar section." Features supported include:
 
 - Headquarters, task force, mobility, and echelon indicators
 - Automatic checking of modifier and entity types for congruence
@@ -10,7 +10,7 @@ This is a lightweight Python module, including a command-line script, to generat
 
 Control measure graphics are not yet implemented.
 
-Available as a [Python package](https://pypi.org/project/military-symbol/1.0.0/). 
+Available as a [Python package](https://pypi.org/project/military-symbol/). 
 
 ### Usage
 

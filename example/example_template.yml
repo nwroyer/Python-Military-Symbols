@@ -1,0 +1,8 @@
+HIMARS: 
+  sidc: 13 0* 10 0 0 ** 130300 41 06 01 00000***
+
+TOS-1:
+  symbol_set: 10
+  entity: 130300
+  modifier_1: 59
+  modifier_2: 104

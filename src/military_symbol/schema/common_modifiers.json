@@ -1,0 +1,182 @@
+{
+	"set": "C",
+	"name": "common modifiers",
+	"common": true,
+	"IC": {},
+	"match weight": -1,
+	"M1": {
+		"100": {
+			"names": ["uav", "unmanned aerial vehicle", "uas", "unmanned aerial system", "remotely piloted vehicle", "rpv"],
+			"cat": "mobility",
+			"icon": [{"d": "m 80,65 20,13 20,-13 0,-5 -20,10 -20,-10 z", "fill": true, "stroke": false}]
+		},
+		"101": {
+			"names": ["robotic", "robot"],
+			"cat": "mobility",
+			"icon": [{"fill": true, "stroke": false, "d": "m 100,52.7 14.9,14.8 c 0.4,-0.3 0.9,-0.4 1.4,-0.4 1.5,0 2.7,1.2 2.7,2.7 0,1.4 -1.2,2.7 -2.7,2.7 -1.5,0 -2.7,-1.3 -2.7,-2.7 0,-0.4 0.1,-0.7 0.2,-1 l -10.4,-5.2 -2.5,8.6 c 0.2,0.1 0.4,0.2 0.6,0.3 0.7,0.5 1.2,1.3 1.2,2.3 0,1.5 -1.2,2.7 -2.7,2.7 -0.55,0 -1.06,-0.2 -1.49,-0.5 -0.73,-0.4 -1.22,-1.3 -1.22,-2.2 0,-1.2 0.77,-2.2 1.85,-2.6 l -2.53,-8.6 -10.42,5.2 c 0.12,0.3 0.18,0.6 0.18,1 0,1.5 -1.21,2.7 -2.7,2.7 -1.49,0 -2.7,-1.2 -2.7,-2.7 0,-1.5 1.21,-2.7 2.7,-2.7 0.52,0 1.01,0.1 1.42,0.4 l 14.9,-14.8 0,0 0,0 z"}]
+		},
+		"102": {
+			"names": ["fixed wing", "FW"],
+			"cat": "mobility",
+			"icon": [{"stroke": true, "fill": true, "d": "m 100,70 22,-8.7 c 11,0 11,17.4 0,17.4 L 100,70 78,78.7 c -10.9,0 -10.9,-17.4 0,-17.4 z"}],
+			"notes": "Not used by USAF"
+		},
+		"103": {
+			"names": ["rotary wing", "RW"],
+			"cat": "mobility",
+			"icon": [{"stroke": true, "fill": true, "d": "m 75,60 0,15 50,-15 0,15 z"}]
+		},
+		"104": {
+			"names": ["tilt-rotor", "tiltrotor"],
+			"cat": "mobility",
+			"icon": [{"textm1": "TR"}]
+		},
+		"105": {
+			"names": ["VTOL", "vertical takeoff and landing", "vertical or short takeoff and landing", "VSTOL", "helicopter-equipped", "helicopter equipped"],
+			"cat": "capability",
+			"icon": [{"textm1": "VTOL"}]
+		},
+		"106": {
+			"names": ["attack", "strike"],
+			"cat": "capability",
+			"icon": [{"textm1": "A"}]
+		},
+		"107": {
+			"names": ["armored"],
+			"cat": "capability",
+			"icon": [{"d": "m 90,60 20,0 c 10,0 10,15 0,15 L 90,75 C 80,75 80,60 90,60"}]
+		},
+		"108": {
+			"names": ["ballistic missile", "ballistic missile defense"],
+			"cat": "capability",
+			"icon": [{"textm1": "BM"}]
+		},
+		"109": {
+			"names": ["bridge", "bridging"],
+			"cat": "capability",
+			"icon": [{"d": "m 121,78 -7,-6 H 86 l -7,6  m 42,-18 -7,7 H 86 l -7,-7"}]
+		},
+		"110": {
+			"names": ["cargo"],
+			"cat": "capability",
+			"icon": [{"d": "m 100,60 0,15 -15,0 0,-15 30,0 0,15 -15,0"}]
+		},
+		"111": {"names": ["utility"], "cat": "capability", "icon": [{"textm1": "U"}]},
+		"112": {"names": ["light"], "cat": "capability", "icon": [{"textm1": "L"}]},
+		"113": {"names": ["medium"], "cat": "capability", "icon": [{"textm1": "M"}]},
+		"114": {"names": ["heavy"], "cat": "capability", "icon": [{"textm1": "H"}]},
+		"115": {"names": ["cyberspace", "cyber"], "cat": "capability", "icon": [{"textm1": "CYB"}]},
+		"116": {"names": ["command post node", "CPN"], "cat": "capability", "icon": [{"textm1": "CPN"}]},
+		"117": {"names": ["joint network node", "JNN"], "cat": "capability", "icon": [{"textm1": "JNN"}]},
+		"118": {"names": ["retransmission site", "retrans site"], "cat": "capability", "icon": [{"textm1": "RTNS"}]},
+		"119": {"names": ["brigade"], "cat": "support level", "icon": [{"d": "m 107.5,62.5 -15,15  m 0,-15 15,15"}]},
+		"120": {"names": ["close protection"], "cat": "capability", "icon": [{"textm1": "CLP"}]},
+		
+		"121": {"names": ["combat"], "cat": "capability", "icon": [{"textm1": "CBT"}]},
+
+		"122": {"names": ["command and control", "C2"], "cat": "capability", "icon": [{"textm1": "C2"}]},
+		"123": {"names": ["crowd and riot control", "crowd control", "riot control"], "cat": "capability", "icon": [{"textm1": "CRC"}]},
+		"124": {"names": ["explosive ordnance disposal", "EOD"], "cat": "capability", "icon": [{"textm1": "EOD"}]},
+		"125": {"names": ["intelligence surveillance and reconnaissance", "ISR", "ISTAR"], "cat": "capability", "icon": [{"textm1": "ISR"}], "comment": "ISTAR isn't a separate item in the current standard."},
+		"126": {"names": ["maintenance"], "cat": "capability", "icon": [{"d": "m 83,70 h 34  m 8,-7 c -10,0 -10,14 0,14  M 75,63 c 10,0 10,14 0,14"}]},
+		"127": {"names": ["medevac", "medical", "medic", "corpsman"], "cat": "capability", "icon": [{"d": "m 95.3,55 h 9.7 v 6.8 h 7 v 9.4 h -7 V 78 h -9.7 v -6.8 h -6.8 v -9.4 h 6.8 z", "stroke": false, "fill": true}]},
+
+		"128": {"names": ["search and rescue", "SAR"], "cat": "capability", "icon": [{"textm1": "SAR"}]},
+		"129": {"names": ["security"], "cat": "capability", "icon": [{"textm1": "SEC"}]},
+		"130": {"names": ["sniper"], "cat": "capability", "icon": [{"d": "m 75,62 h 20  m 5,16 V 62.1  M 125,62 h -20"}]},
+
+		"131": {"names": ["special operations forces", "SOF"], "cat": "capability", "icon": [{"textm1": "SOF"}]},
+		"132": {"names": ["special weapons and tactics", "SWAT"], "cat": "capability", "icon": [{"textm1": "SWAT"}]},
+		"133": {"names": ["guided missile"], "cat": "capability", "icon": [{"textm1": "G"}]},
+		"134": {"names": ["other guided missile"], "cat": "capability", "icon": [{"textm1": "GM"}]},
+
+		"135": {"names": ["petroleum oil and lubricants", "petroleum", "POL"], "cat": "capability", "icon": [{"d": "M 100,79 V 69 L 91,57 h 18 l -9,12"}]},
+		"136": {"names": ["water"], "cat": "capability", "icon": [{"d": "m 92,59 h 16  m -8,9.7 V 59  M 75,69 h 40 c 10,0 15,5 15,10"}]},
+		"137": {"names": ["weapons"], "cat": "capability", "icon": [{"textm1": "WPN"}]},
+
+		"138": {"names": ["chemical"], "cat": "CBRN", "icon": [{"textm1": "C"}]},
+		"140": {"names": ["radiological"], "cat": "CBRN", "icon": [{"textm1": "R"}]},
+		"141": {"names": ["nuclear"], "cat": "CBRN", "icon": [{"textm1": "N"}]},
+		"142": {"names": ["decontamination", "decon"], "cat": "CBRN", "icon": [{"textm1": "D"}]},
+
+		"143": {"names": ["civilian"], "cat": "organization", "civ": true, "icon": [{"textm1": "CIV"}]},
+		"144": {"names": ["government organization", "government"], "cat": "organization", "icon": [{"textm1": "GO"}]},
+
+		"145": {"names": ["accident"], "cat": "composite loss", "icon": [{"textm1": "ACC"}]},
+
+		"146": {"names": ["assassination"], "cat": "crime", "icon": [{"textm1": "AS"}]},
+		"147": {"names": ["execution"], "cat": "crime", "icon": [{"textm1": "EX"}]},
+		"148": {"names": ["kidnapping", "kidnap"], "cat": "crime", "icon": [{"textm1": "KNA"}]},
+		"149": {"names": ["piracy"], "cat": "crime", "icon": [{"textm1": "PI"}]},
+		"150": {"names": ["rape"], "cat": "crime", "icon": [{"textm1": "RA"}]},
+
+		"151": {"names": ["anti-submarine warfare", "antisubmarine warfare", "ASW"], "cat": "mission area", "icon": [{"textm1": "ASW"}]},
+		"152": {"names": ["escort"], "cat": "mission area", "icon": [{"textm1": "E"}]},
+		"153": {"names": ["mine countermeasures"], "cat": "mission area", "icon": [{"textm1": "MCM"}]},
+		"154": {"names": ["mine warfare"], "cat": "mission area", "icon": [{"textm1": "MIW"}]},
+		"155": {"names": ["surface warfare"], "cat": "mission area", "icon": [{"textm1": "SUW"}]},
+
+		"156": {"names": ["command"], "cat": "support level", "icon": [{"d": "m 110,59 v 16  m -8,-8 h 16  M 90,59 v 16  m 8,-8 H 82"}]},
+		"157": {"names": ["company", "battery"], "cat": "support level", "icon": [{"d": "M 100,59.6 V 78"}]},
+		"158": {"names": ["platoon", "detachment"], "cat": "support level", "icon": [
+			{"pos": [80, 68], "r": 8, "fill": true, "stroke": false},
+			{"pos": [100, 68], "r": 8, "fill": true, "stroke": false},
+			{"pos": [120, 68], "r": 8, "fill": true, "stroke": false}
+		]},
+		"157": {"names": ["regiment", "group"], "cat": "support level", "icon": [{"d": "m 110,60 v 18 0  M 90,60 v 18  m 10,-18 v 18"}]},
+		"160": {"names": ["section"], "cat": "support level", "icon": [
+			{"pos": [90, 68], "r": 8, "fill": true, "stroke": false},
+			{"pos": [110, 68], "r": 8, "fill": true, "stroke": false}
+		]},
+		"161": {"names": ["squad"], "cat": "support level", "icon": [{"pos": [100, 68], "r": 8, "fill": true, "stroke": false}]},
+		"162": {"names": ["team", "crew"], "cat": "support level", "icon": [
+			{"pos": [100, 65], "r": 10},
+			{"d": "m 90,75 l20,-20"}
+		]},
+		"163": {"names": ["battalion", "squadron"], "cat": "support level", "icon": [{"d": "m 105,60 v 18 0  M 95,60 v 18"}]},
+
+		"164": {"names": ["directed energy", "laser"], "cat": "capability", "icon": [{"d": "M 132,70.8 H 114 L 110,78 108,63.6 104,78 100,63.6 96.5,70.8 H 85.7 L 82.1,78 78.5,63.6 74.9,78 71.3,63.6 67.7,78  m 56.3,-14.4 8,7.2 -8,7.2"}]},
+		"150": {"names": ["hijacker", "hijack", "hijacking"], "cat": "crime", "icon": [{"textm1": "HIJ"}]}
+	},
+
+	"M2": {
+		"100": {"names": ["airborne", "airmobile", "air mobile"], "cat": "mobility", "icon": [{"d": "M75,140 C75,125 100,125 100,140 C100,125 125,125 125,140"}]},
+		"101": {"names": ["bicycle equipped", "bicycle"], "cat": "mobility", "icon": [{"r": 11, "pos": [100, 132]}]},
+		"102": {"names": ["railroad", "railway"], "cat": "mobility", "icon": [
+			{"d": "M65,125 l70,0"},
+			{"r": 5, "pos": [70, 130]}, {"r": 5, "pos": [80, 130]}, {"r": 5, "pos": [120, 130]}, {"r": 5, "pos": [130, 130]}
+		]},
+		"103": {"names": ["ski"], "cat": "mobility", "icon": [{"d": "m 95,145 -9,-8 m 28,0 -9,8 m -15,-24 20,20 m 0,-20 -20,20"}]},
+		"104": {"names": ["tracked"], "cat": "mobility", "icon": [{"d": "m 90,125 h 20 c 10,0 10,15 0,15 H 90 c -10,0 -10,-15 0,-15"}]},
+		"105": {"names": ["wheeled limited cross country", "wheeled"], "cat": "mobility", "icon": [
+			{"r": 7, "pos": [80, 130]}, {"r": 7, "pos": [120, 130]}
+		]},
+		"106": {"names": ["wheeled cross country", "cross country", "wheeled x"], "cat": "mobility", "icon": [
+			{"r": 7, "pos": [75, 130]}, 
+			{"r": 7, "pos": [100, 130]}, 
+			{"r": 7, "pos": [125, 130]}
+		]},
+		"107": {"names": ["fixed-wing", "fixed wing", "FW"], "cat": "mobility", "icon": [{"fill": true, "stroke": true, "d": "m 100,130 22,-9 c 11,0 11,18 0,18 l -22,-9 -22,9 c -10.9,0 -10.9,-18 0,-18 z"}]},
+		"108": {"names": ["rotary-wing", "rotary wing", "RW"], "cat": "mobility", "icon": [{"fill": true, "stroke": true, "d": "m 75,122 v 15 l 50,-15 v 15 z"}]},
+		"109": {"names": ["robotic", "robot"], "cat": "mobility", "icon": [{"fill": true, "stroke": false, "d": "M100,121.68L114.895,136.459C115.309,136.201 115.798,136.052 116.321,136.052C117.812,136.052 119.022,137.262 119.022,138.753C119.022,140.243 117.812,141.454 116.321,141.454C114.831,141.454 113.62,140.243 113.62,138.753C113.62,138.407 113.686,138.076 113.805,137.772L103.378,132.6L100.851,141.224C101.072,141.298 101.28,141.4 101.471,141.526C102.211,142.008 102.701,142.843 102.701,143.791C102.701,145.281 101.491,146.492 100,146.492C99.451,146.492 98.939,146.327 98.512,146.045C97.776,145.562 97.29,144.73 97.29,143.785C97.29,142.592 98.064,141.579 99.138,141.222L96.613,132.606L86.186,137.778C86.305,138.082 86.37,138.413 86.37,138.759C86.37,140.25 85.16,141.46 83.669,141.46C82.179,141.46 80.969,140.25 80.969,138.759C80.969,137.268 82.179,136.058 83.669,136.058C84.193,136.058 84.681,136.207 85.095,136.465L99.991,121.671L100,121.662L100,121.68Z"}]},
+
+		"110": {"names": ["autonomous", "autonomous control"], "cat": "capability", "icon": [{"textm2": "AUT"}]},
+		"111": {"names": ["remotely piloted"], "cat": "capability", "icon": [{"textm2": "RP"}]},
+		"112": {"names": ["expendable"], "cat": "capability", "icon": [{"textm2": "EXP"}]},
+		"113": {"names": ["mountain"], "cat": "capability", "icon": [{"d": "m 87,142 10,-20 5,10 3,-5 8,15", "fill": true, "stroke": false}]},
+		"114": {"names": ["long range", "long-range"], "cat": "capability", "icon": [{"textm2": "LR"}]},
+		"115": {"names": ["medium range", "medium-range"], "cat": "capability", "icon": [{"textm2": "MR"}]},
+		"116": {"names": ["short range", "short-range"], "cat": "capability", "icon": [{"textm2": "SR"}]},
+		"117": {"names": ["close range", "close-range"], "cat": "capability", "icon": [{"textm2": "CR"}]},
+
+		"118": {"names": ["heavy"], "cat": "capability", "icon": [{"textm2": "H"}]},
+		"119": {"names": ["medium"], "cat": "capability", "icon": [{"textm2": "M"}]},
+		"120": {"names": ["light and medium", "medium and light"], "cat": "capability", "icon": [{"textm2": "L/M"}]},
+		"121": {"names": ["light"], "cat": "capability", "icon": [{"textm2": "L"}]},
+		"122": {"names": ["cyberspace", "cyber"], "cat": "capability", "icon": [{"textm2": "CYB"}]},
+		"123": {"names": ["security force assistance", "SFA"], "cat": "capability", "icon": [{"textm2": "SFA"}]},
+
+		"124": {"names": ["medical bed"], "cat": "capability", "icon": [{"d": "m 107,125 8,6  m 15,-7 v 13  m -23,-16 v 16  m 0,-6 h 23"}]},
+		"125": {"names": ["multifunctional", "multi-function", "multi-functional", "multifunction"], "cat": "capability", "icon": [{"textm2": "MF"}]}
+	}
+}

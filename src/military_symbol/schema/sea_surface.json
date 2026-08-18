@@ -1,0 +1,781 @@
+{
+	"set": "30",
+	"name": "sea surface",
+	"dimension": "sea surface",
+	"modcats": ["capability", "mobility", "cargo capacity", "ship propulsion", "crime"],
+	"IC": {
+		"110000": {
+			"names": ["military"],
+			"icon": [{"text": "MIL"}]
+		},
+		"120000": {
+			"names": ["military combatant"], 
+			"icon": [
+				{"fill": false, "stroke": true, "d": "m 86.9,110 c -3.6,2 -7.2,3.9 -10.8,5.9 2.1,2.9 6.7,3.9 10,2.1 2.6,-0.9 4.7,-3.8 3.1,-6.1 -0.8,-0.6 -1.5,-1.3 -2.3,-1.9 z m 26.3,0.1 c 3.6,2 7.2,3.9 10.8,5.9 -2.1,2.9 -6.7,3.9 -10,2.1 -2.6,-0.9 -4.7,-3.8 -3.1,-6.1 0.8,-0.6 1.5,-1.3 2.3,-1.9 z"},
+				{"fill": "white", "stroke": true, "strokewidth": 2, "d": "m 112.9,110 c -5.6,-4 -11.3,-7.9 -16.1,-12.5 -4.2,-4.5 -7,-9.8 -9.2,-15.1 -0.8,4.4 -0.9,9.3 2.4,13.2 3.6,4.5 8.6,8.1 13.5,11.8 2.3,1.7 4.7,3.3 7.1,4.8 0.8,-0.7 1.5,-1.5 2.3,-2.2 m -25.7,0 c 5.6,-4 11.3,-7.9 16.1,-12.5 4.2,-4.5 7,-9.8 9.2,-15.1 0.8,4.4 0.9,9.3 -2.4,13.2 -3.6,4.5 -8.6,8.1 -13.5,11.8 -2.3,1.7 -4.7,3.3 -7.1,4.8 -0.8,-0.7 -1.5,-1.5 -2.3,-2.2"}
+			]
+		},
+		"120100": {
+			"names": ["carrier", "aircraft carrier"],
+			"icon": [{"fill": true, "d": "m 80,100 20,20 20,-20 -20,0 0,-20 -20,0 z"}]
+		},
+		"120200": {
+			"names": ["surface combatant, line", "line surface combatant", "line combatant"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 100,120 -25,-17 15,2 0,-10 5,0 0,-5 -15,0 0,-5 15,0 0,-5 10,0 0,5 15,0 0,5 -15,0 0,5 5,0 0,10 15,-2 z"}]
+		},
+		"120201": {
+			"names": ["battleship"],
+			"icon": [{"text": "BB"}]
+		},
+		"120202": {
+			"names": ["cruiser"],
+			"icon": [{"text": "CG"}]
+		},
+		"120203": {
+			"names": ["destroyer"],
+			"icon": [{"text": "DD"}]
+		},
+		"121204": {
+			"names": ["frigate"],
+			"icon": [{"text": "FF"}]
+		},
+		"120205": {
+			"names": ["corvette"],
+			"icon": [{"text": "FS"}]
+		},
+		"120206": {
+			"names": ["littoral combat ship", "littoral combatant ship"],
+			"icon": [{"text": "LCS"}]
+		},
+
+		"120300": {
+			"names": ["amphibious warfare ship", "amphib", "amphibious ship"],
+			"icon": [{"fill": true, "d": "m 100,120 20,0 m -20,0 -20,-20 10,0 0,-20 20,0 0,20 10,0 z"}]
+		},
+		"120301": {
+			"names": ["amphibious command ship", "LCC"],
+			"icon": [{"text": "LCC"}]
+		},
+		"120302": {
+			"names": ["amphibious assault ship (unspecified)"],
+			"icon": [{"text": "LA"}]
+		},
+		"120303": {
+			"names": ["amphibious assault ship", "amphibious assault ship (general)", "LHA"],
+			"icon": [{"text": "LHA"}]
+		},
+		"120304": {
+			"names": ["amphibious assault ship (multipurpose)", "LHD"],
+			"icon": [{"text": "LHD"}]
+		},
+		"120305": {
+			"names": ["amphibious assault ship, helicopter", "LPH"],
+			"icon": [{"text": "LPH"}]
+		},
+		"120306": {
+			"names": ["amphibious transport dock", "LHD"],
+			"icon": [{"text": "LPD"}]
+		},
+		"120307": {
+			"names": ["landing ship"],
+			"icon": [{"text": "LS"}]
+		},
+		"120308": {
+			"names": ["landing craft"],
+			"icon": [{"text": "LC"}]
+		},
+		"120400": {
+			"names": ["mine warfare ship"],
+			"icon": [{"fill": true, "d": "m 98.3,81 0,4.1 c -2.4,0.3 -4.6,1.4 -6.4,2.9 l -3.5,-3.5 -2.4,2.4 3.6,3.6 c -0.9,1.3 -1.5,4.9 -1.8,6.5 l -10.8,0 0,3 3,0 20,20 20,-20 3,0 0,-3 -10,0 c -1,-1.7 -2,-5.3 -3,-6.7 l 4,-3.7 -2,-2.4 -4,3.6 c -2,-1.4 -4,-2.4 -6,-2.7 l 0,-4.1 z"}]
+		},
+		"120401": {
+			"names": ["mine layer", "minelayer"],
+			"icon": [{"text": "ML"}]
+		},
+		"120402": {
+			"names": ["mine sweeper", "minesweeper"],
+			"icon": [{"text": "MS"}]
+		},
+		"120403": {
+			"names": ["mine sweeper, drone", "drone mine sweeper", "drone minesweeper"],
+			"icon": [{"text": "MSD"}]
+		},
+		"120404": {
+			"names": ["mine hunter"],
+			"icon": [{"text": "MH"}]
+		},
+		"120405": {
+			"names": ["mine countermeasures"],
+			"icon": [{"text": "MCM"}]
+		},
+		"120406": {
+			"names": ["mine countermeasures support ship"],
+			"icon": [{"text": "MA"}]
+		},
+
+
+		"120500": {
+			"names": ["patrol boat"],
+			"icon": [{"fill": true, "d": "m 80,100 20,20 20,-20 -10,0 0,-20 -20,0 0,20 z"}]
+		},
+		"120501": {
+			"names": ["patrol craft, submarine chaser", "escort"],
+			"icon": [{"text": "PC"}]
+		},
+		"120502": {
+			"names": ["patrol ship, general"],
+			"icon": [{"text": "PG"}]
+		},
+		"120600": {
+			"names": ["decoy"],
+			"icon": [{"fill": true, "stroke": false, "d": "M 105,110 90,95 105,80 z M 85,110 70,95 85,80 z m 40,-30 -15,15 15,15 z m -55,40 0,-5 55,0 0,5 z"}]
+		},
+		"120700": {
+			"names": ["unmanned surface vehicle", "USV"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z"}]
+		},
+		"120800": {
+			"names": ["speedboat"],
+			"icon": [{"fill": true, "stroke": false, "d": "m 120,120 -40,0 -15,-25 15,0 5,-15 10,0 -5,15 45,0 z"}]
+		},
+		"120801": {
+			"names": ["rigid-hull inflatable boat", "RHIB"],
+			"icon": [
+				{"fill": true, "stroke": false, "d": "M 85 80 L 80 95 L 65 95 L 80 120 L 120 120 L 135 95 L 90 95 L 95 80 L 85 80 z M 87 100.7 L 93.1 100.7 C 94.6 100.7 95.7 100.8 96.4 101.1 C 97.1 101.3 97.7 101.8 98.1 102.4 C 98.5 103.1 98.7 103.8 98.7 104.7 C 98.7 105.8 98.4 106.7 97.8 107.4 C 97.1 108.1 96.2 108.5 94.9 108.7 C 95.6 109.1 96.1 109.4 96.5 109.9 C 96.9 110.3 97.4 111.1 98.1 112.2 L 99.9 115 L 96.4 115 L 94.3 111.9 C 93.6 110.8 93.1 110.1 92.8 109.8 C 92.5 109.5 92.2 109.3 91.9 109.2 C 91.6 109.1 91.2 109 90.5 109 L 89.9 109 L 89.9 115 L 87 115 L 87 100.7 z M 101.5 100.7 L 107.2 100.7 C 108.3 100.7 109.2 100.7 109.7 100.8 C 110.3 100.9 110.8 101.1 111.2 101.4 C 111.7 101.7 112 102.1 112.3 102.6 C 112.6 103.1 112.7 103.7 112.8 104.3 C 112.7 105 112.6 105.6 112.2 106.1 C 111.9 106.7 111.4 107.1 110.8 107.4 C 111.6 107.7 112.3 108.1 112.8 108.7 C 113.2 109.3 113.5 110 113.5 110.8 C 113.5 111.5 113.3 112.1 113 112.8 C 112.7 113.4 112.3 113.8 111.8 114.2 C 111.2 114.6 110.6 114.8 109.8 114.9 C 109.3 115 108.2 115 106.3 115 L 101.5 115 L 101.5 100.7 z M 104.3 103.1 L 104.3 106.4 L 106.3 106.4 C 107.4 106.4 108.1 106.3 108.3 106.3 C 108.8 106.3 109.2 106.1 109.5 105.8 C 109.8 105.5 109.9 105.1 109.9 104.7 C 109.9 104.2 109.8 103.9 109.6 103.6 C 109.3 103.3 109 103.2 108.5 103.1 C 108.2 103.1 107.4 103.1 106 103.1 L 104.3 103.1 z M 89.9 103.1 L 89.9 106.8 L 92 106.8 C 93.4 106.8 94.3 106.7 94.6 106.6 C 95 106.4 95.2 106.3 95.4 106 C 95.6 105.7 95.7 105.3 95.8 104.9 C 95.7 104.4 95.6 104 95.3 103.7 C 95.1 103.4 94.7 103.2 94.3 103.2 C 94 103.1 93.3 103.1 92.2 103.1 L 89.9 103.1 z M 104.3 108.8 L 104.3 112.6 L 107 112.6 C 108.1 112.6 108.7 112.6 109 112.5 C 109.4 112.4 109.8 112.2 110.1 111.9 C 110.3 111.6 110.5 111.2 110.5 110.7 C 110.5 110.3 110.4 109.9 110.2 109.6 C 109.9 109.3 109.6 109.1 109.3 109 C 108.9 108.8 108 108.8 106.7 108.8 L 104.3 108.8 z"},
+				{"fill": "icon_fill", "stroke": false, "text": "RB", "fontsize": 20, "pos": [100, 115]}
+			]
+		},
+		"120900": {
+			"names": ["jet ski", "jetski"],
+			"icon": [{"fill": true, "d": "m 135,105 0,15 -60,0 -10,-15 20,-25 10,0 0,10 -5,0 -5,15 z"}]
+		},
+		".task_org": {
+			"names": ["task org"],
+			"icon": [{"fill": false, "stroke": true, "d": "m 110,80 15,15 0,25 M 90,80 75,95 l 0,25"}]
+		},
+		"121000": {
+			"names": ["navy task organization", "naval task organization", "naval task org"],
+			"icon": [
+				{"fill": false, "stroke": true, "d": "m 110,80 15,15 0,25 M 90,80 75,95 l 0,25"},
+				{"fill": true, "d": "m 100,80 -15,15 0,25 30,0 0,-25 -15,-15"}
+			]
+		},
+		"121001": {
+			"names": ["navy task element", "naval task element"],
+			"icon": [
+				{"icon": ".task_org"},
+				{"text": "TE", "pos": [100, 150], "fontsize": 30}
+			]
+		},
+		"121002": {
+			"names": ["navy task force", "naval task force"],
+			"icon": [
+				{"icon": ".task_org"},
+				{"text": "TF", "pos": [100, 150], "fontsize": 30}
+			]
+		},
+		"121003": {
+			"names": ["navy task group", "naval task group"],
+			"icon": [
+				{"icon": ".task_org"},
+				{"text": "TG", "pos": [100, 150], "fontsize": 30}
+			]
+		},
+		"121004": {
+			"names": ["navy task unit", "naval task unit"],
+			"icon": [
+				{"icon": ".task_org"},
+				{"text": "TU", "pos": [100, 150], "fontsize": 30}
+			]
+		},
+		"121005": {
+			"names": ["convoy"],
+			"icon": [{"fill": true, "d": "m 80,115 -20,0 0,-35 80,0 0,35 -20,0 0,-20 -40,0 z"}]
+		},
+		"121100": {
+			"names": ["sea-based X-band radar", "SBX"],
+			"icon": [{"d": "M72,95 l30,-25 0,25 30,-25 M70,70 c0,35 15,50 50,50"}]
+		},
+
+
+
+		"130000": {
+			"names": ["military non-combatant"],
+			"icon": [{"fill": true, "d": "m 80,100 0,-20 40,0 0,20 15,0 0,20 -70,0 0,-20 z"}]
+		},
+		"130100": {
+			"names": ["auxiliary ship"],
+			"icon": [{"text": "AA"}]
+		},
+		"130101": {
+			"names": ["ammunition ship"],
+			"icon": [{"text": "AE"}]
+		},
+		"130102": {
+			"names": ["naval stores ship"],
+			"icon": [{"text": "AF"}]
+		},
+		"130103": {
+			"names": ["auxiliary flag ship"],
+			"icon": [{"text": "AGF"}]
+		},
+		"130104": {
+			"names": ["intelligence collector"],
+			"icon": [{"text": "AGI"}]
+		},
+		"130105": {
+			"names": ["oceanographic research ship"],
+			"icon": [{"text": "AGO"}]
+		},
+		"130106": {
+			"names": ["survey ship"],
+			"icon": [{"text": "AGS"}]
+		},
+
+		".white_ship": {
+			"names": [".white_ship"],
+			"icon": [{"fill": "white", "d": "m 75,100 0,-35 50,0 0,35 20,0 -15,35 -60,0 -15,-35 z"}]
+		},
+
+		"130107": {
+			"names": ["hospital ship"],
+			"icon": [{"text": "AH"}]
+		},
+		"130108": {
+			"names": ["naval cargo ship"],
+			"icon": [{"text": "AK"}]
+		},
+		"130109": {
+			"names": ["fast combat support ship", "combat support ship, fast"],
+			"icon": [{"text": "AOE"}]
+		},
+		"130110": {
+			"names": ["oiler, replenishment", "replenishment oiler"],
+			"icon": [{"text": "AO"}]
+		},
+		"130111": {
+			"names": ["repair ship"],
+			"icon": [{"text": "AR"}]
+		},
+		"130112": {
+			"names": ["submarine tender"],
+			"icon": [{"text": "AS"}]
+		},
+		"130113": {
+			"names": ["ocean-going tug", "tug, ocean-going"],
+			"icon": [{"text": "AT"}]
+		},
+		"130200": {
+			"names": ["service craft", "service yard"],
+			"icon": [{"text": "YY"}]
+		},
+		"130201": {
+			"names": ["barge, not self-propelled"],
+			"icon": [
+				{"text": "YB"}
+			]
+		},
+		"130202": {
+			"names": ["barge, self-propelled"],
+			"icon": [{"text": "YS"}]
+		},
+		"130203": {
+			"names": ["tug, harbor", "harbor tug"],
+			"icon": [{"text": "YT"}]
+		},
+		"130204": {
+			"names": ["launch"],
+			"icon": [{"text": "YFT"}]
+		},
+
+
+		"140000": {
+			"names": ["civilian"],
+			"civ": true,
+			"icon": [{"text": "CIV", "fill": "white", "stroke": true}]
+		},
+		"140100": {
+			"names": ["merchant ship"],
+			"civ": true,
+			"icon": [{"icon": ".white_ship"}]
+		},
+		"140101": {
+			"names": ["cargo ship"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "CA", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140102": {
+			"names": ["container ship"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "C", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140103": {
+			"names": ["dredge"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "D", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140104": {
+			"names": ["roll on/roll off", "RORO"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "RO", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140105": {
+			"names": ["ferry"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "FE", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140106": {
+			"names": ["heavy lift"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "H", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140107": {
+			"names": ["hovercraft"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "J", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140108": {
+			"names": ["lash carrier with barges", "lash carrier"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "L", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140109": {
+			"names": ["oiler", "tanker", "oiler/tanker"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "OT", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140110": {
+			"names": ["passenger"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "PA", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140111": {
+			"names": ["tug, ocean-going", "ocean-going tug"],
+			"match weight": -1,
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "TU", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140112": {
+			"names": ["tow"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "TW", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140113": {
+			"names": ["transport ship, hazardous material", "HAZMAT transport ship"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "CA", "pos": [100, 115], "fontsize": 30}
+			]
+		},
+		"140114": {
+			"names": ["junk", "dhow"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "QJ", "pos": [100, 115], "fontsize": 30}
+			]			
+		},
+		"140115": {
+			"names": ["civilian barge, not self-propelled", "barge, not self-propelled", "barge"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"text": "YB", "pos": [100, 115], "fontsize": 30}
+			]			
+		},
+		"140116": {
+			"names": ["civilian hospital ship", "hospital ship"],
+			"civ": true,
+			"icon": [
+				{"icon": ".white_ship"},
+				{"fill": true, "stroke": false, "d": "m 95,95 0,-15 10,0 0,15 15,0 0,10 -15,0 0,15 -10,0 0,-15 -15,0 0,-10 z"}
+			]
+		},
+
+
+
+		"140200": {
+			"names": ["fishing vessel", "fishing boat", "fisherman"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 75,100 0,-15 20,0 0,15 50,0 -15,35 -60,0 -15,-35 z M 105,57.4 105,100 m 30,-35 -30,35"}]
+		},
+		"140201": {
+			"names": ["drifter"],
+			"civ": true,
+			"icon": [
+				{"icon": "140200"},
+				{"text": "DF", "pos": [100, 125], "fontsize": 30}
+			]
+		},
+		"140202": {
+			"names": ["trawler"],
+			"civ": true,
+			"icon": [
+				{"icon": "140200"},
+				{"text": "TR", "pos": [100, 125], "fontsize": 30}
+			]
+		},
+		"140203": {
+			"names": ["dredger"],
+			"civ": true,
+			"icon": [
+				{"icon": "140200"},
+				{"text": "DR", "pos": [100, 125], "fontsize": 30}
+			]
+		},
+		"140300": {
+			"names": ["law enforcement vessel"],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "d": "m 75,100 0,-35 50,0 0,35 20,0 -15,35 -60,0 -15,-35 z"},
+				{"d": "m 135,100 -15,35 -10,0 15,-35 z", "fill": "icon"}
+			]
+		},
+		"140400": {
+			"names": ["leisure craft, sailing", "sailboat"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 105,55 0,40 35,0 z m -5,-5 0,50 m 45,0 -15,35 -60,0 -15,-35 z"}]
+		},
+		"140500": {
+			"names": ["leisure craft, motorized"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 70,97.4 15,-30 10,0 -15,30 65,0 -15,35 -60,0 -15,-35 z"}]
+		},
+		"140501": {
+			"names": ["civilian rigid-hull inflatable boat", "civilian RHIB", "rigid-hull inflatable boat", "RHIB"],
+			"civ": true,
+			"icon": [
+				{"icon": "140500"},
+				{"text": "RB", "pos": [100, 125], "fontsize": 30}
+			]
+		},
+		"140502": {
+			"names": ["speed boat", "speedboat"],
+			"civ": true,
+			"icon": [
+				{"icon": "140500"},
+				{"text": "SP", "pos": [100, 125], "fontsize": 30}
+			]
+		},
+		"140600": {
+			"names": ["civilian jet ski", "civilian jetski", "jet ski", "jetski"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 85,60 -30,45 10,15 75,0 0,-20 -60,0 10,-30 5,0 0,-10 z"}]
+		},
+		"140700": {
+			"names": ["unmanned surface water vehicle", "USV"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z"}]
+		},
+
+
+
+
+		"150000": {
+			"names": ["own ship"],
+			"icon": [{"text": "@TODO"}]
+		},
+		"160000": {
+			"names": ["fused track"],
+			"icon": [
+				{"d": "m 70,65 10,35 -10,35 60,0 -10,-35 10,-35 z"},
+				{"text": "?"}
+			],
+			"force_pending": true
+		},
+		"170000": {
+			"names": ["manual track"],
+			"icon": [{"text": "MAN"}]
+		}
+	},
+	"M1": {
+		"01": {
+			"names": ["own ship"],
+			"cat": "mission area",
+			"icon": [{"textm1": "OWN"}]
+		},
+		"02": {
+			"names": ["antiair warfare"],
+			"cat": "mission area",
+			"icon": [{"textm1": "AAW"}]
+		},
+		"03": {
+			"names": ["antisubmarine warfare"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-151",
+			"icon": [{"textm1": "ASW"}]
+		},
+		"04": {
+			"names": ["escort"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-152",
+			"icon": [{"textm1": "E"}]
+		},
+		"05": {
+			"names": ["electronic warfare"],
+			"cat": "mission area",
+			"icon": [{"textm1": "EW"}]
+		},
+		"06": {
+			"names": ["intelligence, surveillance, and reconnaissance"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-125",
+			"icon": [{"textm1": "IR"}]
+		},
+		"07": {
+			"names": ["mine countermeasures"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-153",
+			"icon": [{"textm1": "MCM"}]
+		},
+		"08": {
+			"names": ["missile defense"],
+			"icon": [{"textm1": "MD"}]
+		},
+		"09": {
+			"names": ["medical"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-127",
+			"icon": [{"textm1": "ME"}]
+		},
+		"10": {
+			"names": ["mine warfare"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-154",
+			"icon": [{"textm1": "MIW"}]
+		},
+		"11": {
+			"names": ["remote multi-mission vehicle"],
+			"icon": [{"textm1": "RMV"}]
+		},
+		"12": {
+			"names": ["special operations forces"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-131",
+			"icon": [{"textm1": "SOF"}]
+		},
+		"13": {
+			"names": ["surface warfare"],
+			"cat": "mission area",
+			"until": "2525E",
+			"new": "C-1-155",
+			"icon": [{"textm1": "SUW"}]
+		},
+		"14": {
+			"names": ["ballistic missile"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-108",
+			"icon": [{"textm1": "B"}]
+		},
+		"15": {
+			"names": ["guided missile"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-133",
+			"icon": [{"textm1": "G"}]
+		},
+		"16": {
+			"names": ["other guided missile"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-134",
+			"icon": [{"textm1": "M"}]
+		},
+		"17": {
+			"names": ["torpedo"],
+			"cat": "capability",
+			"icon": [{"textm1": "T"}]
+		},
+		"18": {
+			"names": ["drone-equipped"],
+			"cat": "capability",
+			"icon": [{"fill": true, "stroke": false, "d": "m 80,65 20,13 20,-13 0,-5 -20,10 -20,-10 z"}]
+		},
+		"19": {
+			"names": ["helicopter-equipped", "VSTOL equipped", "VSTOL capable"],
+			"cat": "capability",
+			"icon": [{"textm1": "H"}]
+		},
+		"20": {
+			"names": ["ballistic missile defense, shooter"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-108",
+			"icon": [{"textm1": "BM"}]
+		},
+		"21": {
+			"names": ["ballistic missile defense, long-range surveillance and track"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-108",
+			"icon": [{"textm1": "ST"}]
+		},
+		"22": {
+			"names": ["sea-based X-band"],
+			"cat": "capability",
+			"icon": [{"textm1": "SBX"}]
+		},
+		"23": {
+			"names": ["hijacking"],
+			"cat": "crime",
+			"until": "2525E",
+			"new": "C-1-150",
+			"icon": [{"textm1": "H"}]
+		},
+		"24": {
+			"names": ["hijacker"],
+			"cat": "crime",
+			"until": "2525E",
+			"new": "C-1-150",
+			"icon": [{"textm1": "HJ"}]
+		},
+		"25": {
+			"names": ["cyberspace"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-1-115",
+			"icon": [{"textm1": "CYB"}]
+		}
+	},
+	"M2": {
+		"01": {
+			"names": ["nuclear-powered"],
+			"cat": "ship propulsion",
+			"icon": [{"textm2": "N"}]
+		},
+		"02": {
+			"names": ["heavy"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-118",
+			"icon": [{"textm2": "H"}]
+		},
+		"03": {
+			"names": ["light"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-121",
+			"icon": [{"textm2": "L"}]
+		},
+		"04": {
+			"names": ["medium"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-119",
+			"icon": [{"textm2": "M"}]
+		},
+		"05": {
+			"names": ["dock"],
+			"cat": "cargo capacity",
+			"icon": [{"textm2": "D"}]
+		},
+		"06": {
+			"names": ["logistics"],
+			"cat": "cargo capacity",
+			"icon": [{"textm2": "LOG"}]
+		},
+		"07": {
+			"names": ["tank"],
+			"cat": "cargo capacity",
+			"icon": [{"textm2": "T"}]
+		},
+		"08": {
+			"names": ["vehicle"],
+			"cat": "cargo capacity",
+			"icon": [{"textm2": "V"}]
+		},
+		"09": {
+			"names": ["fast"],
+			"cat": "cargo capacity",
+			"icon": [{"textm2": "F"}]
+		},
+		"10": {
+			"names": ["air-cushioned (US)"],
+			"cat": "mobility",
+			"icon": [{"textm2": "AC"}]
+		},
+		"11": {
+			"names": ["air-cushioned (NATO)"],
+			"cat": "mobility",
+			"icon": [{"textm2": "J"}]
+		},
+		"12": {
+			"names": ["hydrofoil"],
+			"cat": "mobility",
+			"icon": [{"textm2": "K"}]
+		},
+		"13": {
+			"names": ["autonomous control"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-110",
+			"icon": [{"textm2": "AUT"}]
+		},
+		"14": {
+			"names": ["remotely-piloted"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-111",
+			"icon": [{"textm2": "RP"}]
+		},
+		"15": {
+			"names": ["expendable"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-112",
+			"icon": [{"textm2": "USV"}]
+		},
+		"16": {
+			"names": ["cyberspace"],
+			"cat": "capability",
+			"until": "2525E",
+			"new": "C-2-122",
+			"icon": [{"textm2": "CYB"}]
+		}
+	}
+}

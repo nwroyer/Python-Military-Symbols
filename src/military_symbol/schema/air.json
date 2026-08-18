@@ -1,0 +1,562 @@
+{
+	"set": "01",
+	"name": "air",
+	"dimension": "air",
+	"modcats": ["aircraft type", "mission area", "crime", "capability"],
+
+	"IC": {
+		"110000": {
+			"names": ["military"],
+			"icon": [{"text": "MIL"}]
+		},
+		"110100": {
+			"names": ["fixed wing"],
+			"icon": [{"fill": true, "d": "m 75.1,90.3 19.6,0 0,-6.5 10.5,0 0,6.5 19.6,0 0,9.7 -19.6,0 0,16.2 6.5,0 0,3.2 -23.6,0 0,-3.2 6.5,0 0,-16.2 -19.6,0 z m 21.6,-6.5 0,-3.2 6.5,0 0,3.2"}]
+		},
+		"110101": {
+			"names": ["medevac"],
+			"icon": [{"fill": true, "stroke": false, "d": "M93,83 l14,0 0,10 10,0 0,14 -10,0 0,10 -14,0 0,-10 -10,0 0,-14 10,0 Z"}]
+		},
+		"110102": {
+			"names": ["attack", "strike"],
+			"icon": [{"text": "A"}]
+		},
+		"110103": {
+			"names": ["bomber"],
+			"icon": [{"text": "B"}]
+		},
+		"110104": {
+			"names": ["fighter"],
+			"icon": [{"text": "F"}]
+		},
+		"110105": {
+			"names": ["fighter/bomber"],
+			"icon": [{"text": "F/B"}]
+		},
+		"110107": {
+			"names": ["cargo"],
+			"icon": [{"text": "C"}]
+		},
+		"110108": {
+			"names": ["electronic combat", "EC", "jammer"],
+			"icon": [{"text": "J"}]
+		},
+		"110109": {
+			"names": ["tanker"],
+			"icon": [{"text": "K"}],
+			"modcats": ["aircraft type", "mission area", "crime", "refueling capability"]
+		},
+		"110110": {
+			"names": ["patrol"],
+			"icon": [{"text": "P"}]
+		},
+		"110111": {
+			"names": ["reconnaissance", "recon"],
+			"icon": [{"text": "R"}]
+		},
+		"110112": {
+			"names": ["trainer"],
+			"icon": [{"text": "T"}]
+		},
+		"110113": {
+			"names": ["utility"],
+			"icon": [{"text": "U"}]
+		},
+		"110114": {
+			"names": ["vertical take-off and landing", "short take-off and landing", "STOL", "VTOL", "VSTOL"],
+			"icon": [{"text": "V"}]
+		},
+		"110115": {
+			"names": ["airborne command post", "ACP"],
+			"icon": [{"text": "ACP"}]
+		},
+		"110116": {
+			"names": ["airborne early warning", "AEW"],
+			"icon": [{"text": "AEW"}]
+		},
+		"110117": {
+			"names": ["anti-surface warfare", "ASUW"],
+			"icon": [{"text": "ASUW"}]
+		},
+		"110118": {
+			"names": ["anti-submarine warfare", "ASW"],
+			"icon": [{"text": "ASW"}]
+		},
+		"110119": {
+			"names": ["communications"],
+			"icon": [{"text": "COM"}]
+		},
+		"110120": {
+			"names": ["combat search and rescue", "CSAR"],
+			"icon": [{"text": "CSAR"}]
+		},
+		"110121": {
+			"names": ["electronic support"],
+			"icon": [{"text": "ES"}]
+		},
+		"110122": {
+			"names": ["government"],
+			"icon": [{"text": "GOV"}]
+		},
+		"110123": {
+			"names": ["mine countermeasures", "MCM"],
+			"icon": [{"text": "MCM"}]
+		},
+		"110124": {
+			"names": ["personnel recovery"],
+			"icon": [{"text": "PR"}]
+		},
+		"110125": {
+			"names": ["search and rescue"],
+			"icon": [{"text": "SAR"}]
+		},
+		"110126": {
+			"names": ["special operations forces", "SOF"],
+			"icon": [{"text": "SOF"}]
+		},
+		"110127": {
+			"names": ["ultralight", "ultra light", "ultra-light"],
+			"icon": [{"text": "UL"}]
+		},
+		"110128": {
+			"names": ["photographic reconnaissance", "photo recon"],
+			"icon": [{"text": "PH"}]
+		},
+		"110129": {
+			"names": ["very important person", "VIP"],
+			"icon": [{"text": "VIP"}]
+		},
+		"110130": {
+			"names": ["suppression of enemy air defense", "SEAD"],
+			"icon": [{"text": "SEAD"}]
+		},
+		"110131": {
+			"names": ["passenger"],
+			"icon": [{"text": "PX"}]
+		},
+		"110132": {
+			"names": ["escort"],
+			"icon": [{"text": "E"}]
+		},
+		"110133": {
+			"names": ["electronic attack"],
+			"icon": [{"text": "EA"}]
+		},
+
+
+		"110200": {
+			"names": ["rotary wing", "helicopter", "helo"],
+			"icon": [{"fill": true, "d": "M60,85 l40,15 40,-15 0,30 -40,-15 -40,15 z"}]
+		},
+		"110300": {
+			"names": [
+				"unmanned aerial vehicle", "UAV",
+				"unmanned aircraft system", "UAS",
+				"unmanned aircraft", "remotely piloted vehicle", "RPV"
+			],
+			"icon": [
+				{"fill": true, "stroke": false, "d": "m 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z"}
+			]
+		},
+		"110400": {
+			"names": ["vertical takeoff UAV"],
+			"icon": [
+				{"fill": true, "d": "m 70,85 30,10 30,-10 0,-5 -30,5 -30,-5 z m -10,5 40,15 40,-15 0,30 -40,-15 -40,15 z"}
+			]
+		},
+		"110500": {
+			"names": ["lighter than air", "balloon", "aerostat"],
+			"icon": [
+				{"r": 15, "pos": [100, 95], "fill": true},
+				{"fill": true, "d": "M95,110 l0,10 10,0 0,-10 z"}
+			]
+		},
+		"110600": {
+			"names": ["airship"],
+			"icon": [{"fill": true, "d": "m 110,110 10,10 10,0 -5,-15 m 0,-10 5,-15 -10,0 -10,10 m 17.2,10 c 0,6.1 -12.2,11.1 -27.2,11.1 -15,0 -27.2,-5 -27.2,-11.1 0,-6.1 12.2,-11.1 27.2,-11.1 15,0 27.2,5 27.2,11.1 z"}]
+		},
+		"110700": {
+			"names": ["tethered lighter than air", "tethered balloon"],
+			"icon": [{"fill": true, "d": "M 75,110 85,95 m -5,20 c 0,2.8 -2.2,5 -5,5 -2.8,0 -5,-2.2 -5,-5 0,-2.8 2.2,-5 5,-5 2.8,0 5,2.2 5,5 z m 15,-6 0,11 10,0 0,-11 m 10,-14 c 0,8.3 -6.7,15 -15,15 -8.3,0 -15,-6.7 -15,-15 0,-8.3 6.7,-15 15,-15 8.3,0 15,6.7 15,15 z"}]
+		},
+
+
+		"120000": {
+			"names": ["civilian"],
+			"civ": true,
+			"icon": [{"text": "CIV", "stroke": true, "fill": "white"}]
+		},
+		"120100": {
+			"names": ["civilian fixed wing"],
+			"civ": true,
+			"icon": [{"fill": "white", "stroke": true, "d": "m 75.1,90.3 19.6,0 0,-6.5 10.5,0 0,6.5 19.6,0 0,9.7 -19.6,0 0,16.2 6.5,0 0,3.2 -23.6,0 0,-3.2 6.5,0 0,-16.2 -19.6,0 z m 21.6,-6.5 0,-3.2 6.5,0 0,3.2"}]
+		},
+		"120200": {
+			"names": ["civilian rotary wing"],
+			"civ": true,
+			"icon": [{"fill": "white", "stroke": true, "d": "M60,85 l40,15 40,-15 0,30 -40,-15 -40,15 z"}]
+		},
+		"120300": {
+			"names": [
+				"civilian unmanned aerial vehicle", "civilian UAV",
+				"civilian unmanned aircraft system", "civilian UAS",
+				"civilian unmanned aircraft", "civilian remotely piloted vehicle", "civilian RPV"
+			],
+			"civ": true,
+			"icon": [
+				{"fill": "white", "stroke": true, "d": "m 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z"}
+			]
+		},
+		"120400": {
+			"names": ["civilian lighter than air", "civilian balloon", "civilian aerostat"],
+			"civ": true,
+			"icon": [
+				{"r": 15, "pos": [100, 95], "fill": "white"},
+				{"fill": "white", "d": "M95,110 l0,10 10,0 0,-10 z"}
+			]
+		},
+		"120500": {
+			"names": ["civilian airship"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "m 110,110 10,10 10,0 -5,-15 m 0,-10 5,-15 -10,0 -10,10 m 17.2,10 c 0,6.1 -12.2,11.1 -27.2,11.1 -15,0 -27.2,-5 -27.2,-11.1 0,-6.1 12.2,-11.1 27.2,-11.1 15,0 27.2,5 27.2,11.1 z"}]
+		},
+		"120600": {
+			"names": ["civilian tethered lighter than air", "civilian tethered balloon"],
+			"civ": true,
+			"icon": [{"fill": "white", "d": "M 75,110 85,95 m -5,20 c 0,2.8 -2.2,5 -5,5 -2.8,0 -5,-2.2 -5,-5 0,-2.8 2.2,-5 5,-5 2.8,0 5,2.2 5,5 z m 15,-6 0,11 10,0 0,-11 m 10,-14 c 0,8.3 -6.7,15 -15,15 -8.3,0 -15,-6.7 -15,-15 0,-8.3 6.7,-15 15,-15 8.3,0 15,6.7 15,15 z"}]
+		},
+
+		"130000": {
+			"names": ["weapon"],
+			"match weight": -1,
+			"icon": [{"text": "WPN"}]
+		},
+		"130100": {
+			"names": ["bomb"],
+			"icon": [{"text": "BOMB"}]
+		},
+		"130200": {
+			"names": ["decoy"],
+			"icon": [{"fill": true, "stroke": false, "d": "M 85 81 L 65 98 L 85 119 L 85 81 z M 110 81 L 90 98 L 110 119 L 110 81 z M 135 81 L 115 98 L 135 119 L 135 81 z"}]
+		},
+		"140000": {
+			"names": ["manual track"],
+			"icon": [{"text": "MAN"}]
+		}
+	},
+	"M1": {
+		"01": {
+			"names": ["attack"],
+			"until": "2525E",
+			"new": "C-1-106",
+			"cat": "aircraft type",
+			"icon": [{"textm1": "A"}]
+		},
+		"02": {
+			"names": ["bomber"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "B"}]
+		},
+		"03": {
+			"names": ["cargo"],
+			"until": "2525E",
+			"new": "C-1-110",
+			"cat": "aircraft type",
+			"icon": [{"textm1": "C"}]
+		},
+		"04": {
+			"names": ["fighter"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "D"}]
+		},
+		"05": {
+			"names": ["interceptor"],
+			"until": "2525E",
+			"cat": "aircraft type",
+			"icon": [{"textm1": "I"}]
+		},
+		"06": {
+			"names": ["tanker"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "K"}]
+		},
+		"07": {
+			"names": ["utility"],
+			"until": "2525E",
+			"new": "C-1-111",
+			"cat": "aircraft type",
+			"icon": [{"textm1": "U"}]
+		},
+		"08": {
+			"names": ["VTOL"],
+			"until": "2525E",
+			"new": "C-1-105",
+			"cat": "aircraft type",
+			"icon": [{"textm1": "V"}]
+		},
+		"09": {
+			"names": ["passenger"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "PX"}]
+		},
+		"10": {
+			"names": ["ultralight"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "UL"}]
+		},
+		"11": {
+			"names": ["airborne command post", "ACP"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "ACP"}]
+		},
+		"12": {
+			"names": ["airborne early warning", "AEW"],
+			"cat": "aircraft type",
+			"icon": [{"textm1": "AEW"}]
+		},
+		"13": {
+			"names": ["government"],
+			"until": "2525E",
+			"new": "C-1-144",
+			"cat": "mission area",
+			"icon": [{"textm1": "GOV"}]
+		},
+		"14": {
+			"names": ["medevac"],
+			"until": "2525E",
+			"new": "C-1-127",
+			"cat": "mission area",
+			"icon": [{"fill": true, "stroke": false, "d": "M95.5,80 l9,0 0,-9 9,0 0,-9 -9,0 0,-9 -9,0 0,9 -9,0 0,9 9,0 Z"}]
+		},
+		"15": {
+			"names": ["escort"],
+			"new": "C-1-152",
+			"until": "2525E",
+			"cat": "mission area",
+			"icon": [{"textm1": "E"}]
+		},
+		"16": {
+			"names": ["jammer", "electronic combat"],
+			"cat": "mission area",
+			"icon": [{"textm1": "J"}]
+		},
+		"17": {
+			"names": ["patrol"],
+			"cat": "mission area",
+			"icon": [{"textm1": "P"}]
+		},
+		"18": {
+			"names": ["reconnaissance", "recon"],
+			"cat": "mission area",
+			"icon": [{"textm1": "R"}]
+		},
+		"19": {
+			"names": ["trainer"],
+			"cat": "mission area",
+			"icon": [{"textm1": "T"}]
+		},
+		"20": {
+			"names": ["photographic reconnaissance", "photo"],
+			"cat": "mission area",
+			"icon": [{"textm1": "PH"}]
+		},
+		"21": {
+			"names": ["personnel recovery"],
+			"cat": "mission area",
+			"icon": [{"textm1": "PR"}]
+		},
+		"22": {
+			"names": ["anti-submarine warfare", "ASW"],
+			"cat": "mission area",
+			"icon": [{"textm1": "ASW"}]
+		},
+		"23": {
+			"names": ["communications"],
+			"cat": "mission area",
+			"icon": [{"textm1": "COM"}]
+		},
+		"24": {
+			"names": ["electronic support"],
+			"cat": "mission area",
+			"icon": [{"textm1": "ES"}]
+		},
+		"25": {
+			"names": ["mine countermeasures", "MCM"],
+			"until": "2525E",
+			"new": "C-1-153",
+			"cat": "mission area",
+			"icon": [{"textm1": "MCM"}]
+		},
+		"26": {
+			"names": ["search and rescue", "SAR"],
+			"until": "2525E",
+			"new": "C-1-128",
+			"cat": "mission area",
+			"icon": [{"textm1": "SAR"}]
+		},
+		"27": {
+			"names": ["special operations forces", "SOF"],
+			"until": "2525E",
+			"new": "C-1-131",
+			"cat": "mission area",
+			"icon": [{"textm1": "SOF"}]
+		},
+		"28": {
+			"names": ["surface warfare"],
+			"until": "2525E",
+			"new": "C-1-155",
+			"cat": "mission area",
+			"icon": [{"textm1": "SUW"}]
+		},
+		"29": {
+			"names": ["VIP transport", "very important person transport"],
+			"cat": "mission area",
+			"icon": [{"textm1": "VIP"}]
+		},
+		"30": {
+			"names": ["combat search and rescue", "CSAR"],
+			"cat": "mission area",
+			"icon": [{"textm1": "CSAR"}]
+		},
+		"31": {
+			"names": ["suppression of enemy air defense", "SEAD"],
+			"until": "2525E",
+			"cat": "mission area",
+			"icon": [{"textm1": "SEAD"}]
+		},
+		"32": {
+			"names": ["antisurface warfare"],
+			"cat": "mission area",
+			"icon": [{"textm1": "ASUW"}]
+		},
+		"33": {
+			"names": ["fighter/bomber"],
+			"cat": "mission area",
+			"icon": [{"textm1": "F/B"}]
+		},
+		"34": {
+			"names": ["intensive care"],
+			"cat": "mission area",
+			"icon": [{"textm1": "IC"}]
+		},
+		"35": {
+			"names": ["electronic attack", "EA", "electromagnetic attack"],
+			"cat": "mission area",
+			"icon": [{"textm1": "EA"}]
+		},
+		"36": {
+			"names": ["multi-mission"],
+			"cat": "mission area",
+			"icon": [{"textm1": "MM"}]
+		},
+		"37": {
+			"names": ["hijacking", "hijacked"],
+			"until": "2525E",
+			"new": "C-1-150",
+			"cat": "crime",
+			"icon": [{"textm1": "H"}]
+		},
+		"38": {
+			"names": ["ASW helo - LAMPS"],
+			"cat": "mission area",
+			"icon": [{"textm1": "LP"}]
+		},
+		"39": {
+			"names": ["ASW helo - SH-60R"],
+			"cat": "mission area",
+			"icon": [{"textm1": "60R"}]
+		},
+		"40": {
+			"names": ["hijacker"],
+			"until": "2525E",
+			"new": "C-1-150",
+			"cat": "capability",		
+			"icon": [{"textm1": "HJ"}]
+		},
+		"41": {
+			"names": ["cyberspace"],
+			"until": "2525E",
+			"new": "C-1-115",
+			"cat": "capability",			
+			"icon": [{"textm1": "CYB"}]
+		}
+	},
+	"M2": {
+		"01": {
+			"names": ["heavy"],
+			"until": "2525E",
+			"new": "C-2-118",
+			"cat": "capability",	
+			"icon": [{"textm2": "H"}]
+		},
+		"02": {
+			"names": ["medium"],
+			"until": "2525E",
+			"new": "C-2-119",
+			"cat": "capability",		
+			"icon": [{"textm2": "M"}]
+		},
+		"03": {
+			"names": ["light"],
+			"until": "2525E",
+			"new": "C-2-121",
+			"cat": "capability",			
+			"icon": [{"textm2": "L"}]
+		},
+		"04": {
+			"names": ["boom-only"],
+			"cat": "refueling capability",
+			"icon": [{"textm2": "B"}]
+		},
+		"05": {
+			"names": ["drogue-only"],
+			"cat": "refueling capability",
+			"icon": [{"textm2": "D"}]
+		},
+		"06": {
+			"names": ["boom and drogue"],
+			"cat": "refueling capability",
+			"icon": [{"textm2": "B/D"}]
+		},
+		"07": {
+			"names": ["close range"],
+			"until": "2525E",
+			"new": "C-2-117",
+			"cat": "capability",			
+			"icon": [{"textm2": "CR"}]
+		},
+		"08": {
+			"names": ["short range"],
+			"until": "2525E",
+			"new": "C-2-116",
+			"cat": "capability",		
+			"icon": [{"textm2": "SR"}]
+		},
+		"09": {
+			"names": ["medium range"],
+			"until": "2525E",
+			"new": "C-2-115",
+			"cat": "capability",			
+			"icon": [{"textm2": "MR"}]
+		},
+		"10": {
+			"names": ["long range"],
+			"until": "2525E",
+			"new": "C-2-114",
+			"cat": "capability",			
+			"icon": [{"textm2": "LR"}]
+		},
+		"11": {
+			"names": ["downlinked"],
+			"cat": "track link availability",
+			"icon": [{"textm2": "DL"}]
+		},
+		"12": {
+			"names": ["cyberspace"],
+			"until": "2525E",
+			"new": "C-2-122",
+			"cat": "capability",
+			"icon": [{"textm2": "CYB"}]
+		}
+	}
+}

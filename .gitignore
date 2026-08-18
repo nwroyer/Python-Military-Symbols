@@ -9,6 +9,13 @@
 /__pycache__/
 /Examples/
 /src/military_symbol/__pycache__/
+<<<<<<< HEAD
 /src/__pycache__/
 /src/test/
 /test/
+=======
+/test/
+/src/__pycache__/
+/src/test/
+*.svg
+>>>>>>> origin/master
