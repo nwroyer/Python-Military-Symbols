@@ -3,6 +3,7 @@ import re
 import json
 import sys
 import glob
+import name_to_sidc
 sys.path.append(os.path.dirname(__file__))
 
 import drawing_items
@@ -825,6 +826,22 @@ class Schema:
 		ret = []
 		for symbol_set in self.symbol_sets.values():
 			ret += list(symbol_set.entities.values())
+		return ret
+
+	def parse_fields(self, fields:dict, strict_fields:bool=False, verbose:bool=False) -> dict:
+		ret:dict = {}
+		for field_name, field_value in fields.items():
+			if field_name.upper() in self.fields:
+				ret[field_name.upper()] = field_value
+				continue
+
+			best_match, unmatched = name_to_sidc.fuzzy_match(self, field_name, self.fields.values(), verbose=verbose)
+			if best_match is None:
+				print(f'No match found for field \"{field_name}\"', file=sys.stderr)
+				continue
+
+			ret[best_match.id_code] = field_value
+
 		return ret
 
 	@classmethod

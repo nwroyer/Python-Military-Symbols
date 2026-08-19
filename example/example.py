@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # Generate a list of symbols from names and write them as SVG files in specific
     # styles, named according to a user-defined pattern and using variant symbols where available
     examples = [
-        ('hostile armor company', 'light', {'T': 'Armor Company', 'M': "Armor Battalion", "J": "C1", "F": "(+)", "G": "Example", "H": "Test", 'AO': "1223"}),
+        ('hostile armor platoon', 'light', {'name': '1', 'parent': "A", "J": "C1", "F": "(+)", "G": "Example", "H": "Test", 'AO': "1223"}),
         ("Dummy damaged neutral hospital", 'medium', {}),
         ("Friendly fighter", 'dark', {}),
         ("Destroyed neutral artillery task force headquarters", 'unfilled', {}),

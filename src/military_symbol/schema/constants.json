@@ -936,7 +936,7 @@
 			"symbol_sets": [10, 20, 25, 27, 40]
 		},
 		"T": {
-			"names": ["unique designation", "designation", "name"],
+			"names": ["unique designation", "designation", "name", "unit", "unique", "title"],
 			"regex": "^[\\w\\s-]{1,30}$",
 			"symbol_sets": "all"
 		},

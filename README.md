@@ -20,8 +20,8 @@ Command line usage examples:
 # Create a set of symbols by name, using variant symbols if available, in the current directory
 military_symbol --use-variants --by-name -o . "Friendly artillery company" "Destroyed Enemy PSYOP section"
 
-# Create a single symbol at the designated path by name
-military_symbol -o platoon.svg -n "Friendly infantry platoon"
+# Create a single symbol at the designated path by name, using optional text modifiers
+military_symbol -o platoon.svg -n "Friendly infantry platoon" -f M "1" -f -T
 
 # Print a set of symbols by name, in unfilled style, to STDOUT
 military_symbol -s unfilled -n "Friendly infantry platoon" "Enemy anti-air battery"

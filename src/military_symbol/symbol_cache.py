@@ -51,6 +51,7 @@ class SymbolCache:
                 symbol:Symbol = Symbol.from_sidc(sidc=sidc, schema=self.symbol_schema)
                 symbol_cache_entry = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = symbol_cache_entry
+                fields = self.symbol_schema.parse_fields(fields=fields, strict_fields=strict_fields)
                 symbol = symbol.with_fields(fields=fields, strict_fields=strict_fields)
                 return (symbol, {})
             else:
@@ -73,6 +74,7 @@ class SymbolCache:
                 cache_entry:tuple = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = cache_entry
                 self.name_to_sidc_string_map[name] = sidc
+                fields = self.symbol_schema.parse_fields(fields=fields, strict_fields=strict_fields)
                 symbol = symbol.with_fields(fields=fields, strict_fields=strict_fields)
                 return (symbol, {})
             else:
