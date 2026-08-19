@@ -220,43 +220,221 @@
 	"dimensions": {
 		"air": {
 			"names": ["air"],
-			"frame shape": "2"
+			"frame shape": "2",
+			"fields": {
+				"AO": null,
+				"AS": "R0",
+				"T": "R1",
+				"V": "R2",
+				"AF": "R2",
+				"X": "R3",
+				"Z": "R3",
+				"G": "R4",
+				"H": "R4"
+			}
 		},
 		"space": {
 			"names": ["space"],
-			"frame shape": "1"
+			"frame shape": "1",
+			"fields": {
+				"AO": null,
+				"AL": null,
+				"AS": "R0",
+				"T":  "R1",
+				"V":  "R2",
+				"X": "R3",
+				"Z": "R3",
+				"G": "R4",
+				"H": "R4"
+			}			
 		},
 		"land unit": {
 			"names": ["land unit"],
-			"frame shape": "3"
+			"frame shape": "3",
+			"fields": {
+				"A": null,
+				"B": null,
+				"D": null,
+				"AA": "C0",
+				"F": "R0",
+				"AS": "R0",
+				"G": "R1",
+				"AQ": "R1",
+				"H": "R2",
+				"AF": "R2",
+				"M": "R3",
+				"J": "R4",
+				"K": "R4",
+				"L": "R4",
+				"P": "R4",
+				"W": "L0",
+				"X": "L1",
+				"Y": "L1",
+				"V": "L2",
+				"AD": "L2",
+				"AE": "L2",
+				"T": "L3",
+				"Z": "L4",
+				"AO": "T0",
+				"R": null,
+				"AL": null,
+				"Q": null,
+				"S": null
+			}
 		},
 		"land equipment": {
 			"names": ["land equipment"],
-			"frame shape": "4"
+			"frame shape": "4",
+			"fields": {
+				"A": null,
+				"C": "T0",
+				"AS": "R0",
+				"G": "R1",
+				"AQ": "R1",
+				"H": "R2",
+				"AF": "R2",
+				"M": "R3",
+				"J": "R4",
+				"K": "R4",
+				"L": "R4",
+				"M": "R4",
+				"P": "R4",
+				"W": "L0",
+				"X": "L1",
+				"Y": "L1",
+				"V": "L2",
+				"AD": "L2",
+				"AE": "L2",
+				"T": "L3",
+				"Z": "L4",
+				"R": null,
+				"AG": null,
+				"Q": null 
+			}
 		},
 		"land installation": {
 			"names": ["land installation"],
-			"frame shape": "5"
+			"frame shape": "5",
+			"fields": {
+				"A": null,
+				"AA": "C0",
+				"W": "L0",
+				"X": "L1",
+				"Y": "L1",
+				"AE": "L2",
+				"T": "L3",
+				"AS": "R0",
+				"AQ": "R1",
+				"G": "R1",
+				"H": "R2",
+				"M": "R3",
+				"J": "R4",
+				"K": "R4",
+				"P": "R4"
+			}
 		},
 		"activities": {
 			"names": ["activities"],
-			"frame shape": "8"
+			"frame shape": "8",
+			"fields": {
+				"A": null,
+				"Q": null,
+				"S2": null,
+				"W": "L0",
+				"Y": "L1",
+				"AS": "R0",
+				"T": "R1",
+				"G": "R2",
+				"H": "R3",
+				"J": "R4"
+			}
 		},
 		"dismounted individual": {
 			"names": ["dismounted individual"],
-			"frame shape": "6"
+			"frame shape": "6",
+			"fields": {
+				"A": null,
+				"W": "L0",
+				"X": "L1",
+				"Y": "L1",
+				"V": "L2",
+				"AF": "L2",
+				"T": "L3",
+				"Z": "L4",
+				"AS": "R0",
+				"G": "R1",
+				"H": "R2",
+				"M": "R3",
+				"J": "R4",
+				"K": "R4",
+				"P": "R4"
+			}
 		},
 		"sea surface": {
 			"names": ["sea surface"],
-			"frame shape": "4"
+			"frame shape": "4",
+			"fields": {
+				"A": null,
+				"S2": null,
+				"AO": "T0",
+				"AG": null,
+				"AL": null,
+				"AQ": "L0",
+				"AR": "L0",
+				"Z": null,
+				"AS": "R0",
+				"T": "R1",
+				"V": "R2",
+				"P": "R3",
+				"G": "R4",
+				"H": "R4",
+				"Y": "R5",
+				"Z": "R5"
+			}
 		},
 		"sea subsurface": {
 			"names": ["sea subsurface"],
-			"frame shape": "7"
+			"frame shape": "7",
+			"fields": {
+				"A": null,
+				"Z": null,
+				"S2": null,
+				"AL": null,
+				"AG": null,
+				"AR": "L0",
+				"AO": "T0",
+				"AS": "R0",
+				"T": "R1",
+				"V": "R2",
+				"P": "R3",
+				"G": "R4",
+				"H": "R4",
+				"Y": "R5",
+				"Z": "R5"
+			}
 		},
 		"cyberspace": {
 			"names": ["cyberspace"],
-			"frame shape": "9"
+			"frame shape": "9",
+			"fields": {
+				"AO": "T0",
+				"B": null,
+				"D": null,
+				"A": null,
+				"W": "L0",
+				"Y": "L1",
+				"T": "L2",
+				"V": "L2",
+				"S": null,
+				"S2": null,
+				"F": "R0",
+				"AS": "R0",
+				"G": "R1",
+				"H": "R2",
+				"M": "R3",
+				"K": "R4",
+				"L": "R4"
+			}
 		},
 
 		"position marker": {
@@ -800,7 +978,7 @@
 		"AA": {
 			"names": ["special C2 headquarters"],
 			"symbol_sets": [10],
-			"blanks_icon": true,
+			"replaces_icon": true,
 			"regex": "^[\\w\\s-]{1,9}$"
 		},
 		"AB": {

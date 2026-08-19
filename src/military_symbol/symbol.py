@@ -4,6 +4,9 @@ import re
 import os
 from drawing_items import BBox
 import math
+import copy
+
+TEXT_FIELD_OFFSET:float = 8
 
 class Symbol():
 	def __init__(self, schema=None):
@@ -19,6 +22,7 @@ class Symbol():
 		self.modifier_2:Modifier = None
 
 		self.frame_shape_override = None
+		self.fields:dict = {}
 
 	def is_valid(self) -> bool:
 		return self.schema is not None
@@ -72,6 +76,11 @@ class Symbol():
 
 	def get_name(self) -> str:
 		return self.__repr__()
+
+	def with_fields(self, fields:dict, strict_fields:bool = False) -> Symbol:
+		ret = copy.copy(self)
+		ret.fields = fields
+		return ret
 
 	@classmethod
 	def from_sidc(cls, sidc:str, schema:Schema):
@@ -140,7 +149,32 @@ class Symbol():
 
 		return ret
 
-	def get_svg(self, output_style=OutputStyle()) -> str:
+	def get_drawable_fields(self, strict_fields:bool = False) -> dict:
+		if self.symbol_set is None or self.symbol_set.dimension is None:
+			return {}
+		dimension = self.symbol_set.dimension
+		ret = {}
+
+		for field_name, field_value in self.fields.items():
+			if field_name.upper() not in dimension.fields:
+				print(f'Symbol set "{self.symbol_set.names[0]}" has no field "{field_name.upper()}"', file=sys.stderr)
+				continue
+			positioning = dimension.fields[field_name.upper()]
+			if positioning is None:
+				print(f'Symbol set "{self.symbol_set.names[0]}" has a field "{field_name.upper()}" but it is not intended to be drawn as text', file=sys.stderr)
+				continue
+			if positioning in ret:
+				ret_list = ret[positioning]
+				ret_list.append(str(field_value))
+				ret[positioning] = ret_list
+			else:
+				ret[positioning] = [str(field_value)]
+
+		return {positioning: ' / '.join(values) for positioning, values in ret.items()}
+
+		# Parse the symbol set's 
+
+	def get_svg(self, output_style=OutputStyle(), strict_fields:bool=False) -> str:
 		if not self.is_valid():
 			return None
 
@@ -177,13 +211,6 @@ class Symbol():
 
 		frame_bbox = BBox.merge_all([e.get_bbox(symbol=self, output_style=output_style) for e in frame_to_use.frames[self.affiliation.frame_id]])
 		ret_bbox.merge(frame_bbox)
-
-		# Handle headquarters
-		if self.is_headquarters():
-			cmd = drawing_items.SymbolElement.Path(d=f"m {ret_bbox.x_min},100 l 0,100", bbox=BBox(ret_bbox.x_min, 100, ret_bbox.x_min, 200))
-			frame_commands += [cmd]
-			elements += [cmd.svg(symbol=self, output_style=output_style)]
-			ret_bbox.merge(cmd.get_bbox(symbol=self, output_style=output_style))
 
 		# Add amplfiiers
 		amplifier_bbox = BBox()
@@ -236,6 +263,13 @@ class Symbol():
 			amplifier_bbox.merge(cmd.get_bbox(symbol=self, output_style=output_style))
 			elements += [cmd.svg(symbol=self, output_style=output_style)]
 
+		# Handle headquarters
+		if self.is_headquarters():
+			cmd = drawing_items.SymbolElement.Path(d=f"m {ret_bbox.x_min},100 l 0,100", bbox=BBox(ret_bbox.x_min, 100, ret_bbox.x_min, 200))
+			frame_commands += [cmd]
+			elements += [cmd.svg(symbol=self, output_style=output_style)]
+			ret_bbox.merge(cmd.get_bbox(symbol=self, output_style=output_style))
+
 		# Add status
 		if self.status and self.status.icon:
 			use_alt:bool = output_style.use_alternate_icons and self.status.alt_icon
@@ -254,6 +288,60 @@ class Symbol():
 					frame_commands += [e for e in icon_to_use]
 					status_bbox = BBox.merge_all([e.get_bbox(symbol=self, output_style=output_style) for e in icon_to_use])
 					ret_bbox.merge(status_bbox)
+
+		# Add fields
+		drawable_fields = self.get_drawable_fields(strict_fields=strict_fields)
+		#print(drawable_fields)
+		for positioning, content in drawable_fields.items():
+			position_side = positioning[0]
+			position_order = int(positioning[1])
+
+			# Determine the spacing
+			direction = 'U' if position_side == 'T' else 'D'
+
+			def get_side_item_count(side) -> int:
+				return len([code for code in set(self.symbol_set.dimension.fields.values()) if code is not None and code[0] == side])
+
+			side_item_count = get_side_item_count(position_side)
+			text_height = frame_bbox.height() / max(get_side_item_count('L'), get_side_item_count('R')) 
+			#print(f'{positioning} is the {position_order + 1}th of {side_item_count} on side {position_side}; using text height {text_height}')
+			
+			text_offset = TEXT_FIELD_OFFSET + 0
+
+			def approximate_text_width(text:str, font_size:float) -> float:
+				if not text:
+					return 0
+				return max(len(text) * font_size * 0.6, font_size)
+
+			text_width = approximate_text_width(content, text_height)
+
+			if position_side == 'T':
+				amp_frame = BBox.merge_all([frame_bbox, amplifier_bbox])
+				base_pos = (100, amp_frame.y_min - text_offset + (-text_height * position_order) - (text_height * 0.5))
+				halign = 'middle'
+				valign = 'middle'
+				bbox = BBox(base_pos[0] - text_width / 2, base_pos[1] - text_height / 2, base_pos[0] + text_width / 2, base_pos[1] + text_height / 2)
+			elif position_side == 'B':
+				amp_frame = BBox.merge_all([frame_bbox, amplifier_bbox])
+				base_pos = (100, amp_frame.y_max + text_offset + (text_height * position_order) + (text_height * 0.5))
+				halign = 'middle'
+				valign = 'middle'
+				bbox = BBox(base_pos[0] - text_width / 2, base_pos[1] - text_height / 2, base_pos[0] + text_width / 2, base_pos[1] + text_height / 2)
+			elif position_side == 'L':
+				base_pos = (frame_bbox.x_min - text_offset, frame_bbox.y_min + (text_height * position_order) + (text_height * 0.5))
+				halign = 'right'
+				valign = 'middle'
+				bbox = BBox(base_pos[0] - text_width, base_pos[1] - text_height / 2, base_pos[0], base_pos[1] + text_height / 2)
+			else:
+				base_pos = (frame_bbox.x_max + text_offset, frame_bbox.y_min + (text_height * position_order) + (text_height * 0.5))
+				halign = 'left'
+				valign = 'middle'
+				bbox = BBox(base_pos[0], base_pos[1] - text_height / 2, base_pos[0] + text_width, base_pos[1] + text_height / 2)
+
+			cmd = drawing_items.SymbolElement.Text(text=content, text_type='manual', font_size=text_height, pos=base_pos, align=halign, valign=valign)
+			cmd.bbox = bbox
+			ret_bbox.merge(cmd.get_bbox(symbol=self, output_style=output_style))
+			elements += [cmd.svg(symbol=self, output_style=output_style)]
 
 		if output_style.background_width > 0.01:
 			bg_color = output_style.background_color

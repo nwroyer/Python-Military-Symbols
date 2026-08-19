@@ -207,6 +207,11 @@ class Dimension:
 		self.names:list = []   # Human readable names
 		self.frame_shape:FrameShape = None
 
+		## Field positioning in the form of a letter and a number, where the letter is T/B/L/R for the side (top/bottom/left/right)
+		## and the number is the order. Top counts from lowermost symbol up; the others count from the uppermost corner down. 
+		## Measurement is from the bounding box of the base symbol and any amplifiers.
+		self.fields:dict = {}
+
 	def __repr__(self):
 		return f'Dimension \"{self.id_code}\" {self.frame_shape}'
 
@@ -220,6 +225,10 @@ class Dimension:
 			raise Exception(f"No frame shape \"{frame_shape_code}\" in schema for dimension {dimension.names[0]}")
 			return None
 		dimension.frame_shape = schema.frame_shapes[frame_shape_code]
+
+		dimension.fields.clear()
+		for field_name, positioning in json.get('fields', {}).items():
+			dimension.fields[field_name.upper()] = positioning
 
 		return dimension
 
@@ -639,6 +648,14 @@ class Field:
 		## Whether this can have multiple entries, e.g. A1, A2, etc. Not yet implemented.
 		self.can_stack:bool = False
 
+		## Whether this replaces the icon in a unit if present
+		self.replaces_icon:bool = False
+
+		## The positioning takes the form of a two-letter code and then a digit.
+		## The letter codes are a combinaton of "T" for top, "B" for bottom, and "M" for middle for the vertical positioning,
+		## and "L", "R", "C" for left/right/center for vertical positioning. 
+		self.positioning:str = ''
+
 	@staticmethod
 	def from_dict(id_code:str, json:dict):
 		field = Field()
@@ -647,6 +664,7 @@ class Field:
 		field.symbol_sets = json.get('symbol_sets', [])
 		field.regex = json.get('regex', None)
 		field.can_stack = bool(json.get('can_stack', False))
+		field.replaces_icon = bool(json.get('replaces_icon', False))
 		return field
 
 class Schema:

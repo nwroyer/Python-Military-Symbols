@@ -28,23 +28,24 @@ if __name__ == '__main__':
     # Generate a list of symbols from names and write them as SVG files in specific
     # styles, named according to a user-defined pattern and using variant symbols where available
     examples = [
-        ('hostile armor company', 'light'),
-        ("Dummy damaged neutral hospital", 'medium'),
-        ("Friendly fighter", 'dark'),
-        ("Destroyed neutral artillery task force headquarters", 'unfilled'),
-        ("Suspected CBRN section", 'light'),
-        ('hostile TOS-1 battery', 'unfilled'),
-        ('friendly amphibious HIMARS battery', 'light'),
-        ('friendly amphibious HIMARS battery', 'medium')
+        ('hostile armor company', 'light', {'T': 'Armor Company', 'M': "Armor Battalion", "J": "C1", "F": "(+)", "G": "Example", "H": "Test", 'AO': "1223"}),
+        ("Dummy damaged neutral hospital", 'medium', {}),
+        ("Friendly fighter", 'dark', {}),
+        ("Destroyed neutral artillery task force headquarters", 'unfilled', {}),
+        ("Suspected CBRN section", 'light', {}),
+        ('hostile TOS-1 battery', 'unfilled', {}),
+        ('friendly amphibious HIMARS battery', 'light', {'T': 1, 'M': 12}),
+        ('friendly amphibious HIMARS battery', 'medium', {})
     ]
 
-    for example_name, example_style in examples:
+    for example_name, example_style, fields in examples:
         example_symbol, svg_string = military_symbol.get_symbol_and_svg_string(example_name, 
                                                                                is_sidc=False,
                                                                                style=example_style,
                                                                                padding=4,
                                                                                use_variants=True,
-                                                                               use_background=True)
+                                                                               use_background=True,
+                                                                               fields=fields)
 
         # print('\tExporting symbol "{}"'.format(example_symbol.get_name()))
 

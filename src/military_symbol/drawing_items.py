@@ -329,20 +329,38 @@ class SymbolElement:
 	Represents a text command
 	"""
 	class Text(Base):
-		def __init__(self):
+		def __init__(self, text='', pos:tuple = (100, 100), font_size:float = 12, align='middle', text_type='auto', valign='middle'):
 			super().__init__()
-			self.text:str = '' # The actual rendered text
-			self.pos:tuple = (100, 100) # Text origin
-			self.font_size:int = 12
+			self.text:str = text # The actual rendered text
+			self.pos:tuple = pos # Text origin
+			self.font_size:int = font_size
 			self.font_family:str = 'Arial'
-			self.align:str = 'middle' # Can be ['left', 'middle', 'right']
+			self.align:str = align # Can be ['left', 'middle', 'right']
+			self.valign:str = valign # Can be ['top', 'middle', 'bottom']
 			self.text_type:str = 'auto' # ['auto', 'manual', 'm1', 'm2']
 			self.fill_color = 'icon' # Default to filled text
 			self.stroke_color = None # Default to no stroke
+			self.bbox = BBox()
 			# self.text_type = 'manual' # ['normal', 'm1', 'm2', 'manual']
 
+		def get_text_baseline(self) -> str:
+			if self.valign in ['start', 'top']:
+				return 'text-top'
+			elif self.valign in ['middle', 'center']:
+				return 'middle'
+			else:
+				return 'text-bottom'
+
+		def get_text_anchor(self) -> str:
+			if self.align in ['left', 'start']:
+				return 'start'
+			elif self.align in ['right', 'end']:
+				return 'end'
+			else:
+				return 'middle'
+
 		def __repr__(self):
-			return f'<text x="{self.pos[0]}" y="{self.pos[1]}" font-size="{self.font_size}" text-anchor="{self.align}" {self.base_params()}>{self.text}</text>'
+			return f'<text x="{self.pos[0]}" y="{self.pos[1]}" font-size="{self.font_size}" text-anchor="{self.get_text_anchor()}" dominant-baseline="{self.get_text_baseline()}" {self.base_params()}>{self.text}</text>'
 
 		def svg(self, symbol, output_style=OutputStyle()) -> list:
 			if output_style.use_text_paths:
@@ -352,7 +370,8 @@ class SymbolElement:
 					text = self.text, 
 					pos = self.pos,
 					fontsize = int(self.font_size),
-					align = self.align)
+					align = self.align,
+					valign = self.valign)
 				
 				ret_path = ' '.join(paths)
 				path_el = SymbolElement.Path()
@@ -364,7 +383,7 @@ class SymbolElement:
 			return self.__repr__()
 
 		def get_bbox(self, symbol, output_style=OutputStyle()) -> BBox:
-			return BBox()
+			return self.bbox
 
 		@classmethod
 		def get_used_pos_and_size(cls, text:str, text_type:str = 'normal'):

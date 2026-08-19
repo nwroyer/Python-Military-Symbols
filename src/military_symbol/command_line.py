@@ -296,10 +296,12 @@ def command_line_main():
                         help='Whether to force using all elements even if they would overlap in a way that conflicts with the standard')
     parser.add_argument('-m', '--template', dest='template_filename', action='store', default='',
                         help='A template JSON file; see example folder for details')
+    parser.add_argument('-f', '--field', action='append', nargs=2, dest='fields',
+                        help='Optional text fields, specified with two arguments. The first is the field code (e.g. A, AE, etc.) and the second is the value.')
     parser.add_argument('-e', '--limit-to', dest='limit_to_symbol_sets', action='append', default=[],
                         help='Limits to a specific symbol set for name guessing, like air, ground, surface, etc. Has no effect when using SIDCs. ' + 
                              'Multiple symbol sets to choose from can be specified.')
-    parser.add_argument('', '--strict-fields', dest='strict_fields', action='store_const', const=True, default=False,
+    parser.add_argument('--strict-fields', dest='strict_fields', action='store_const', const=True, default=False,
                         help='Whether to check provided fields against MIL-STD-2525E. Off by default.')
     parser.add_argument('--version', dest='show_version', action='store_const', const=True, default=False, help="Show the version and exit.")
     parser.add_argument('inputs', nargs='*', default=[])
@@ -349,7 +351,11 @@ def command_line_main():
         limit_to_symbol_sets = None
 
 
-    # Loop through remaining inputs and process t hem
+    fields = {}
+    for field_code, field_value in arguments.fields:
+        fields[field_code.strip().upper()] = field_value
+
+    # Loop through remaining inputs and process them
     for input_arg in arguments.inputs:
         if arguments.verbose:
             print(f'\tParsing "{input_arg}": {arguments.verbose}', file=sys.stderr)
@@ -377,7 +383,9 @@ def command_line_main():
                                                   use_background=arguments.use_background,
                                                   background_color=arguments.background_color,
                                                   force_all_elements=arguments.force_all_elements,
-                                                  limit_to_symbol_sets=limit_to_symbol_sets)
+                                                  limit_to_symbol_sets=limit_to_symbol_sets,
+                                                  fields=fields,
+                                                  strict_fields=arguments.strict_fields)
             else:
                 # Write SVG strings to stdout
                 print(get_symbol_svg_string_from_name(input_arg, 
@@ -388,7 +396,9 @@ def command_line_main():
                                                       use_background=arguments.use_background,
                                                       background_color=arguments.background_color,
                                                       force_all_elements=arguments.force_all_elements,
-                                                      limit_to_symbol_sets=limit_to_symbol_sets))
+                                                      limit_to_symbol_sets=limit_to_symbol_sets,
+                                                      fields=fields,
+                                                      strict_fields=arguments.strict_fields))
         else:  # Construct from SIDC
             if output_dir != '':
                 write_symbol_svg_string_from_sidc(input_arg, 
@@ -400,7 +410,9 @@ def command_line_main():
                                                   style=style_name,
                                                   use_background=arguments.use_background,
                                                   background_color=arguments.background_color,
-                                                  force_all_elements=arguments.force_all_elements)
+                                                  force_all_elements=arguments.force_all_elements,
+                                                  fields=fields,
+                                                  strict_fields=arguments.strict_fields)
             else:
                 print(get_symbol_svg_string_from_sidc(input_arg, bounding_padding=arguments.padding,
                                                       verbose=arguments.verbose,
@@ -408,7 +420,9 @@ def command_line_main():
                                                       style=style_name,
                                                       use_background=arguments.use_background,
                                                       background_color=arguments.background_color,
-                                                      force_all_elements=arguments.force_all_elements))
+                                                      force_all_elements=arguments.force_all_elements,
+                                                      fields=fields,
+                                                      strict_fields=arguments.strict_fields))
 
 if __name__ == '__main__':
     command_line_main()

@@ -42,7 +42,7 @@ class SymbolCache:
             background_color
         )
 
-    def _get_symbol_cache_from_sidc(self, sidc, create_if_missing:bool=True, verbose:bool=False) -> tuple:
+    def _get_symbol_cache_from_sidc(self, sidc, create_if_missing:bool=True, verbose:bool=False, fields:dict={}, strict_fields:bool=False) -> tuple:
         symbol_cache_entry:tuple = self.sidc_to_symbol_map.get(sidc, ())
         if len(symbol_cache_entry) < 1:
             # Entry doesn't exist
@@ -51,16 +51,17 @@ class SymbolCache:
                 symbol:Symbol = Symbol.from_sidc(sidc=sidc, schema=self.symbol_schema)
                 symbol_cache_entry = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = symbol_cache_entry
-
-                return symbol_cache_entry
+                symbol = symbol.with_fields(fields=fields, strict_fields=strict_fields)
+                return (symbol, {})
             else:
                 return None
         else:
             # print('Symbol cache hit')
-            return symbol_cache_entry
+            (cached_symbol, symbol_dict) = self.sidc_to_symbol_map[sidc]
+            return (cached_symbol.with_fields(fields=fields, strict_fields=strict_fields), symbol_dict)
 
-    def get_symbol_from_sidc(self, sidc:str, create_if_missing:bool=True, verbose:bool=False) -> Symbol:
-        ret = self._get_symbol_cache_from_sidc(sidc, create_if_missing, verbose=verbose)
+    def get_symbol_from_sidc(self, sidc:str, create_if_missing:bool=True, verbose:bool=False, fields:dict={}, strict_fields:bool=False) -> Symbol:
+        ret = self._get_symbol_cache_from_sidc(sidc, create_if_missing, verbose=verbose, fields=fields, strict_fields=strict_fields)
         return ret[0] if ret is not None else None
 
     def _get_symbol_cache_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False) -> tuple:
@@ -72,30 +73,33 @@ class SymbolCache:
                 cache_entry:tuple = (symbol, {})
                 self.sidc_to_symbol_map[sidc] = cache_entry
                 self.name_to_sidc_string_map[name] = sidc
-                return cache_entry
+                symbol = symbol.with_fields(fields=fields, strict_fields=strict_fields)
+                return (symbol, {})
             else:
                 return None
         else:
             # print('Cache hit on symbol cache to name')
-            return self.sidc_to_symbol_map[sidc]
+            (cached_symbol, symbol_dict) = self.sidc_to_symbol_map[sidc]
+            return (cached_symbol.with_fields(fields=fields, strict_fields=strict_fields), symbol_dict)
 
     def get_symbol_from_name(self, name, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False) -> Symbol:
-        cache_entry:tuple = self._get_symbol_cache_from_name(name, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
+        cache_entry:tuple = self._get_symbol_cache_from_name(name, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets, fields=fields, strict_fields=strict_fields)
         return cache_entry[0] if cache_entry is not None else None
 
-    def get_symbol(self, creator_var:str, is_sidc:bool, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None):
+    def get_symbol(self, creator_var:str, is_sidc:bool, create_if_missing:bool=True, verbose:bool=False, limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False):
         if is_sidc:
-            return self.get_symbol_from_sidc(creator_var, create_if_missing, verbose=verbose)
+            return self.get_symbol_from_sidc(creator_var, create_if_missing, verbose=verbose, fields=fields, strict_fields=strict_fields)
         else:
-            return self.get_symbol_from_name(creator_var, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
+            return self.get_symbol_from_name(creator_var, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets, fields=fields, strict_fields=strict_fields)
 
     def get_symbol_and_svg_string(self, creator_val:str, is_sidc:bool, padding:int, style:str, use_variants:bool, 
         use_background:bool=True, background_color:str='#ffffff', create_if_missing:bool=True, verbose:bool=False, force_all_elements:bool=False,
         limit_to_symbol_sets=None, fields:dict={}, strict_fields:bool=False) -> tuple:
 
         cache_entry_tuple: tuple = self._get_symbol_cache_from_sidc(creator_val,
-                                                                    create_if_missing) if is_sidc else self._get_symbol_cache_from_name(
-            creator_val, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets)
+            create_if_missing, fields=fields, strict_fields=strict_fields) if is_sidc else self._get_symbol_cache_from_name(
+            creator_val, create_if_missing, verbose=verbose, limit_to_symbol_sets=limit_to_symbol_sets, 
+            fields=fields, strict_fields=strict_fields)
 
         if cache_entry_tuple is None:
             return None, ''

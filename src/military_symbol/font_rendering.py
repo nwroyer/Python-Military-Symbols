@@ -12,33 +12,33 @@ def move_to(a, ctx):
 	scale_factor = BASE_HEIGHT # ctx[2] / BASE_HEIGHT
 	ctx[0].append("M {},{}".format(
 		ctx[3][0] + (ctx[1] + a.x) / SCALING * scale_factor, 
-		ctx[3][1] + (-a.y / SCALING) * scale_factor))
+		ctx[3][1] + ctx[4] + (-a.y / SCALING) * scale_factor))
 
 def line_to(a, ctx):
 	scale_factor = BASE_HEIGHT # ctx[2] / BASE_HEIGHT
 	ctx[0].append("L {},{}".format(
 		ctx[3][0] + (ctx[1] + a.x) / SCALING * scale_factor, 
-		ctx[3][1] + -a.y / SCALING * scale_factor
+		ctx[3][1] + ctx[4] +  -a.y / SCALING * scale_factor
 	))
 
 def conic_to(a, b, ctx):
 	scale_factor = BASE_HEIGHT # ctx[2] / BASE_HEIGHT
 	ctx[0].append("Q {},{} {},{}".format(
 		ctx[3][0] + (ctx[1] + a.x) / SCALING * scale_factor, 
-		ctx[3][1] + -a.y / SCALING * scale_factor, 
+		ctx[3][1] + ctx[4] + -a.y / SCALING * scale_factor, 
 		ctx[3][0] + (ctx[1] + b.x) / SCALING * scale_factor, 
-		ctx[3][1] + -b.y / SCALING * scale_factor
+		ctx[3][1] + ctx[4] + -b.y / SCALING * scale_factor
 	))
 
 def cubic_to(a, b, c, ctx):
 	scale_factor = BASE_HEIGHT # ctx[2] / BASE_HEIGHT
 	ctx[0].append("C {},{} {},{} {},{}".format(
 		ctx[3][0] + (ctx[1] + a.x) / SCALING * scale_factor, 
-		ctx[3][1] + -a.y / SCALING * scale_factor, 
+		ctx[3][1] + ctx[4] + -a.y / SCALING * scale_factor, 
 		ctx[3][0] + (ctx[1] + b.x) / SCALING * scale_factor, 
-		ctx[3][1] + -b.y / SCALING * scale_factor, 
+		ctx[3][1] + ctx[4] + -b.y / SCALING * scale_factor, 
 		ctx[3][0] + (ctx[1] + c.x) / SCALING * scale_factor, 
-		ctx[3][1] + -c.y / SCALING * scale_factor
+		ctx[3][1] + ctx[4] + -c.y / SCALING * scale_factor
 	))
 
 """
@@ -52,13 +52,15 @@ class Font(object):
 	# Align is ['middle', 'start', 'end'].
 	# Returns a list of SVG paths (but without SVG formatting or XML elements,just
 	# the content of the "d" attribute)
-	def render_text(self, text, pos = (0, 0), fontsize = 30, align='middle') -> str:		
+	def render_text(self, text, pos = (0, 0), fontsize = 30, align='middle', valign='middle') -> str:		
 		# Determine text width
 		text_width = 0.0
+		text_height = 0.0
 		for char_index, char in enumerate(text):
 			self.face.set_char_size(fontsize * int(SCALING)) # Freetype uses a height of 64 by default
 			self.face.load_char(char, freetype.FT_LOAD_DEFAULT | freetype.FT_LOAD_NO_BITMAP)
 			text_width += self.face.glyph.advance.x
+			text_height += self.face.glyph.advance.y
 
 		if align == 'start' or align == 'left':
 			x_offset:float = 0.0 
@@ -67,10 +69,18 @@ class Font(object):
 		else:
 			x_offset:float = -text_width / 2
 
+		if valign in ['start', 'top']:
+			y_offset:float = 0.0
+		elif valign in ['end', 'bottom']:
+			y_offset:float = -text_height
+		else:
+			y_offset:float = -text_height / 2
+
 		paths = []
+		print(y_offset)
 
 		for char_index, char in enumerate(text):
-			ctx = ([], x_offset, fontsize, pos)
+			ctx = ([], x_offset, fontsize, pos, y_offset)
 			self.face.set_char_size(fontsize * int(SCALING)) # Freetype uses a height of 64 by default
 			self.face.load_char(char, freetype.FT_LOAD_DEFAULT | freetype.FT_LOAD_NO_BITMAP)
 			self.face.glyph.outline.decompose(ctx, 
