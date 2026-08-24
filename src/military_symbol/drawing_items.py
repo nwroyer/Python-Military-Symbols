@@ -320,7 +320,7 @@ class SymbolElement:
 				ret += '.with_stroke({})'.format(color_type_to_cpp(self.stroke_color))
 			if self.stroke_width != OutputStyle.DEFAULT_STROKE_WIDTH and self.stroke_color is not None:
 				ret += '.with_stroke_width({})'.format(self.stroke_width)
-			if self.stroke_dashed is not None:
+			if self.stroke_dashed:
 				ret += '.with_stroke_style(StrokeStyle::DASHED)'			
 			return ret
 
@@ -468,7 +468,7 @@ class SymbolElement:
 				ret += '.with_stroke({})'.format(color_type_to_cpp(self.stroke_color))
 			if self.stroke_width != OutputStyle.DEFAULT_STROKE_WIDTH and self.stroke_color is not None:
 				ret += '.with_stroke_width({})'.format(self.stroke_width)
-			if self.stroke_dashed is not None:
+			if self.stroke_dashed:
 				ret += '.with_stroke_style(StrokeStyle::DASHED)'				
 
 			return ret
