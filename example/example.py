@@ -44,3 +44,15 @@ if __name__ == '__main__':
         output_filename = os.path.join(os.getcwd(), '{} {} ({}).svg'.format(example_name, example_symbol.get_sidc(), example_style))
         with open(output_filename, 'w') as output_file:
             output_file.write(svg_string)
+
+    # Field T / Field M text amplifiers (unique designation / higher formation)
+    _, text_amp_svg = military_symbol.get_symbol_and_svg_string(
+        '13031000211211000000000000000',
+        is_sidc=True,
+        style='light',
+        padding=4,
+        unique_designation='1 DPLeg',
+        higher_formation='Wyszków',
+    )
+    with open(os.path.join(os.getcwd(), 'friendly_infantry_division_text_amplifiers.svg'), 'w') as output_file:
+        output_file.write(text_amp_svg)

@@ -2,10 +2,16 @@ from schema import *
 from output_style import OutputStyle
 import re
 import os
+import sys
+import drawing_items
 from drawing_items import BBox
 import math
 
 class Symbol():
+	TEXT_AMPLIFIER_FONT_SIZE = 30
+	TEXT_AMPLIFIER_GAP = 20
+	TEXT_AMPLIFIER_MAX_CHARS = 30
+
 	def __init__(self, schema=None):
 		self.schema = schema
 		self.context:Context = None
@@ -140,7 +146,33 @@ class Symbol():
 
 		return ret
 
-	def get_svg(self, output_style=OutputStyle()) -> str:
+	@staticmethod
+	def _approximate_text_width(text:str, font_size:float) -> float:
+		if not text:
+			return 0
+		return max(len(text) * font_size * 0.6, font_size)
+
+	@staticmethod
+	def _normalize_text_amplifier(text, field_name:str):
+		if not text:
+			return None
+		text = str(text)
+		if len(text) > Symbol.TEXT_AMPLIFIER_MAX_CHARS:
+			print(f'Text amplifier {field_name} exceeds {Symbol.TEXT_AMPLIFIER_MAX_CHARS} characters; truncating',
+				  file=sys.stderr)
+			text = text[:Symbol.TEXT_AMPLIFIER_MAX_CHARS]
+		return text
+
+	@staticmethod
+	def _make_text_amplifier(text:str, pos:tuple, align:str, font_size:float):
+		text_el = drawing_items.SymbolElement.Text()
+		text_el.text = text
+		text_el.pos = pos
+		text_el.align = align
+		text_el.font_size = font_size
+		return text_el
+
+	def get_svg(self, output_style=OutputStyle(), unique_designation=None, higher_formation=None) -> str:
 		if not self.is_valid():
 			return None
 
@@ -269,6 +301,38 @@ class Symbol():
 			icon_to_use = entmod.alt_icon if output_style.use_alternate_icons and entmod.alt_icon else entmod.icon
 			#print(f'{type(entmod).__name__} {entmod.names[0]}: {entmod.icon}')
 			elements += [e.svg(symbol=self, output_style=output_style) for e in icon_to_use]
+
+		unique_designation = Symbol._normalize_text_amplifier(unique_designation, 'unique_designation')
+		higher_formation = Symbol._normalize_text_amplifier(higher_formation, 'higher_formation')
+		if unique_designation or higher_formation:
+			font_size = Symbol.TEXT_AMPLIFIER_FONT_SIZE
+			gap = Symbol.TEXT_AMPLIFIER_GAP
+			frame_center_y = (frame_bbox.y_min + frame_bbox.y_max) / 2
+			label_y = frame_center_y + 1.5 * font_size
+
+			if unique_designation:
+				pos = (frame_bbox.x_min - gap, label_y)
+				text_el = Symbol._make_text_amplifier(unique_designation, pos, 'end', font_size)
+				elements += [text_el.svg(symbol=self, output_style=output_style)]
+				width = Symbol._approximate_text_width(unique_designation, font_size)
+				ret_bbox.merge(BBox(
+					x_min=pos[0] - width,
+					y_min=label_y - font_size,
+					x_max=pos[0],
+					y_max=label_y + font_size * 0.25
+				))
+
+			if higher_formation:
+				pos = (frame_bbox.x_max + gap, label_y)
+				text_el = Symbol._make_text_amplifier(higher_formation, pos, 'start', font_size)
+				elements += [text_el.svg(symbol=self, output_style=output_style)]
+				width = Symbol._approximate_text_width(higher_formation, font_size)
+				ret_bbox.merge(BBox(
+					x_min=pos[0],
+					y_min=label_y - font_size,
+					x_max=pos[0] + width,
+					y_max=label_y + font_size * 0.25
+				))
 
 		# Create the SVGs
 		ret_bbox.expand(padding=output_style.padding)
